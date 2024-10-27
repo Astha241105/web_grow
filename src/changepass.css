@@ -1,0 +1,56 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;}
+html{
+    background-image: url(./assets/background.png);
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+
+}
+#container{
+    text-align: left !important; 
+    box-sizing:border-box;
+    position:absolute;
+    height:500px;
+    width:500px;
+    left:900px;
+    top:20%;
+}
+h1{
+    font-size:40px;
+    margin-bottom:15px;
+}
+p{
+    margin-bottom:40px;
+}
+.label{
+    font-size:20px;
+    margin-bottom:10px;
+}
+.cpass{
+    height:40px;
+    width:350px;
+    margin-right:20px;
+    border:none;
+    border-radius:5px;
+    margin-bottom:30px;
+    background-color:#999999;
+    z-index:1;
+}
+#cont{
+    margin-top:30px;
+    color:white;
+    margin-bottom:20px;
+    background-color:black;
+    width:360px;
+}
+#gradient{                   
+    background: linear-gradient(45deg, #d70000, #ff2323);
+    -webkit-background-clip: text;       
+    -webkit-text-fill-color: transparent; 
+    background-clip: text;               
+    
+}
