@@ -26,14 +26,14 @@ const Login = () => {
   return (
     <div className="login">
       <img
-        src="../../public/assets/Rectangle2.png"
+        src="../../public/assets1/Rectangle2.png"
         className="white-bg"
         alt="background"
       />
       <div className="container">
         <div className="image-section">
           <img
-            src="../../public/assets/side1.png"
+            src="../../public/assets1/side1.png"
             alt="logo"
             className="logo"
           />
