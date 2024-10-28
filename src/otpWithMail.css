@@ -1,0 +1,72 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;}
+html{
+    background-image: url(./assets/side1.png),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E");
+    background-color: #008080;
+    background-repeat: no-repeat ; 
+    background-attachment: fixed; 
+    background-position: 10% 50%,right;
+}
+#container1{
+    text-align: center;
+    box-sizing:border-box;
+    position:absolute;
+    height:339px;
+    width:415px;
+    left:865px;
+    top:198px;
+    padding: 0;
+}
+#codemail{
+    margin-top:0;
+    height: 51px;
+    font-weight: 600;
+    font-size:42px;
+    margin-bottom:16px;
+}
+#mess1{
+    height: 60px;
+    margin-bottom:40px;
+    font-weight: 400;
+    font-size:16px;
+    line-height:19.5px;
+    margin-bottom:51px;
+
+}
+.boxes{
+    height:67px;
+    width:60px;
+    margin:0px 10px 51px 10px;
+    border:none;
+    border-radius:10px;
+    background-color: #D9D9D9;
+    padding:21px 10px;
+    margin-bottom:51px;
+}
+.verify1{
+    color:white;
+    background-color:black;
+    width:389px;
+    height:40px;
+    padding:10px 170px;
+    border-radius:10px;}
+.didnt1{
+    height: 20px;
+    width:392px;
+    margin-top:19px;
+    font-weight:500;
+    font-size:16px;
+}
+#gradient1{                   
+    background: linear-gradient(45deg, #d70000, #ff2323);
+    -webkit-background-clip: text;       
+    -webkit-text-fill-color: transparent; 
+    background-clip: text;               
+}
