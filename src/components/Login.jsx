@@ -32,7 +32,11 @@ const Login = () => {
       />
       <div className="container">
         <div className="image-section">
-          <img src="../src/assets/side1.png" alt="logo" className="logo" />
+          <img
+            src="../../public/assets/side1.png"
+            alt="logo"
+            className="logo"
+          />
         </div>
         <div className="form-section">
           <h3>Welcome Back!</h3>
