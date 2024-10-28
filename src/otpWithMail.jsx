@@ -3,9 +3,9 @@ import './otpWithMail.css'
 
 const OtpWithMail = () => {
   return (
-      <div id="container1">
-      <div id="codemail">Enter the code</div>
-    <p id="mess1">Enter the OTP we have sent to<br></br> abc@gmail.com.<br></br> Be careful not to share the code with anyone.</p>
+       <div id="container1">
+        <div id="codemail">Enter the code</div>
+       <p id="mess1">Enter the OTP we have sent to<br></br> abc@gmail.com.<br></br> Be careful not to share the code with anyone.</p>
       <input className="boxes"></input>
       <input className="boxes"></input>
       <input className="boxes"></input>
