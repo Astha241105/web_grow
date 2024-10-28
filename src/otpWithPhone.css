@@ -14,35 +14,52 @@ html{
     text-align: center;
     box-sizing:border-box;
     position:absolute;
-    height:500px;
-    width:500px;
-    left:900px;
-    top:20%;
+    height:339px;
+    width:415px;
+    left:865px;
+    top:198px;
+    padding: 0;
 }
-h1{
-    font-size:40px;
-    margin-bottom:15px;
-}
-p{
+#codephone{
+    margin-top:0;
+    height: 51px;
+    font-weight: 600;
+    font-size:42px;
+    margin-bottom:16px;}
+#mess2{
+    height: 60px;
     margin-bottom:40px;
+    font-weight: 400;
+    font-size:16px;
+    line-height:19.5px;
+    margin-bottom:51px;
 }
-input{
-    height:60px;
+.boxes2{
+    height:67px;
     width:60px;
-    margin-right:20px;
+    margin:0px 10px 51px 10px;
     border:none;
-    border-radius:5px;
-    background-color:#999999;
-    z-index:1;
+    border-radius:10px;
+    background-color: #D9D9D9;
+    padding:21px 10px;
+    margin-bottom:51px;
 }
-button{
-    margin-top:50px;
+#verify2{
     color:white;
-    margin-bottom:20px;
     background-color:black;
-    width:360px;
+    width:389px;
+    height:40px;
+    padding:10px 170px;
+    border-radius:10px;
 }
-#gradient{                   
+.didnt2{
+    height: 20px;
+    width:392px;
+    margin-top:19px;
+    font-weight:500;
+    font-size:16px;
+}
+#gradient2{                   
     background: linear-gradient(45deg, #d70000, #ff2323);
     -webkit-background-clip: text;       
     -webkit-text-fill-color: transparent; 
