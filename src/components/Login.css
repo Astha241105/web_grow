@@ -67,7 +67,7 @@ html{
     position: absolute;
     width: 392px;
     height: 283px;
-    right: 15%; 
+    right: 6%; 
     top: 162px;
     z-index: 1; 
 }
@@ -102,40 +102,41 @@ h3 {
   }
  
   label {
-     /* display: block;
-     font-size: 14px;
-     color: #333;
-     margin-bottom: 8px; /
-     / Username: */
- 
- width: 392px;
- height: 22px;
- 
- /* subheadings /
- font-family: 'Montserrat';
- font-style: normal;
- font-weight: 500;
- font-size: 18px;
- line-height: 22px;
- / identical to box height */
- 
- color: #000000;
- 
- /* Inside auto layout */
- flex: none;
- order: 0;
- align-self: stretch;
- flex-grow: 0;
- 
+width: 392px;
+height: 22px;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 22px;
+color: #000000;
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
   }
  
-  input {
-     width: 100%;
+  .input-box {
+      /* width: 100%;
      padding: 10px;
      border: 1px solid #ddd;
      border-radius: 5px;
      font-size: 14px;
-     box-sizing: border-box;
+     box-sizing: border-box;  */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 15px 246px 15px 14px;
+gap: 10px;
+width: 392px;
+height: 50px;
+background: rgba(217, 217, 217, 0.5);
+border-radius: 10px;
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+border: 0px;
   }
  
   input:focus {

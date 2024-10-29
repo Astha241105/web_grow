@@ -24,14 +24,10 @@ const Login = () => {
 
   return (
     <div className="login">
-      <img
-        src="../../public/Rectangle2.png"
-        className="white-bg"
-        alt="background"
-      />
+      <img src="/Rectangle2.png" className="white-bg" alt="background" />
       <div className="container">
         <div className="image-section">
-          <img src="../../public/side1.png" alt="logo" className="logo" />
+          <img src="/side1.png" alt="logo" className="logo" />
         </div>
         <div className="form-section">
           <h3>Welcome Back!</h3>
@@ -39,6 +35,7 @@ const Login = () => {
             <div className="form-group">
               <label>Username:</label>
               <input
+                className="input-box"
                 type="text"
                 name="username"
                 placeholder="Enter username"
@@ -50,6 +47,7 @@ const Login = () => {
             <div className="form-group">
               <label>Password:</label>
               <input
+                className="input-box"
                 type="password"
                 name="password"
                 placeholder="Enter password"
