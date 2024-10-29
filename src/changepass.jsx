@@ -3,7 +3,8 @@ import './changepass.css'
 
 const Changepass = () => {
   return (
-    <div id="container">
+    <div id="contout3">
+    <div id="container4">
         <h1 id="change">
             Change Password</h1>
         <div className="label">
@@ -19,7 +20,7 @@ const Changepass = () => {
         <button id="cont">
                Continue</button>
       
-    </div>
+    </div></div>
   )
 }
 
