@@ -143,24 +143,36 @@ border: 0px;
      outline: none;
      border-color: #0B4C54;
   }
+
+  input::placeholder {
+    color: black;
+  }
  
   .forgot-password {
      text-align: right;
      margin-bottom: 20px;
+     /* Forgot Password? */
+
   }
  
   button {
      width: 100%;
      padding: 12px;
      background-color: #000;
-     color: white;
      border: none;
-     border-radius: 5px;
+     border-radius: 10px;
      font-size: 16px;
      cursor: pointer;
      transition: background-color 0.3s;
+     font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+color: #FFFFFF;
   }
- 
+
+
   button:hover {
      background-color: #333;
   }
@@ -168,13 +180,27 @@ border: 0px;
   .signup-link {
      text-align: center;
      font-size: 14px;
-     color: #777;
+     color: #000000;
      margin-top: 20px;
+     font-weight: 500;
+     font-family: 'Montserrat';
+     font-style: normal;
+  }
+  
+  .create-account{
+    background: linear-gradient(90.42deg, #DC0808 79.9%, #AE0E8E 99.64%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 500;
+    font-family: 'Montserrat';
+font-style: normal;
   }
  
   a {
-     color: #ff4d4d;
      text-decoration: none;
+     font-family: 'Montserrat';
+     color: #000000;
   }
  
   a:hover {
