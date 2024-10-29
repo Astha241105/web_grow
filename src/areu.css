@@ -1,0 +1,77 @@
+#container3 {
+    position: absolute;
+    left: 623px;
+    width: 817px;
+    height: 736px;
+    text-align: center;
+}
+
+#inside {
+    position: absolute;
+    top: 195px;
+    left: 350px;
+    height: 51px;
+    width: 209px;
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.radio-group {
+    position: absolute;
+    top: 324px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    display: flex; 
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+.radio-label {
+    display: flex;
+    position:relative;
+    left:60px;
+    align-items: center; 
+    font-size: 24px; 
+    font-weight: 500;
+    margin-bottom: 50px; 
+}
+.radioo{
+    width:20px;
+    height:13px;
+    transform: scale(3); 
+    margin-right: 30px; 
+}
+#cont3{
+    position: relative;
+    top: 537px;
+    width:451px;
+    left:65px;
+
+}
+@media (max-width: 1274px) {
+    html {   
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E") !important;
+        background-position: right !important; 
+    }
+}
+@media (max-width: 820px){
+    
+#container1 {
+    text-align: center;
+    box-sizing: border-box;
+    position: absolute;
+    height: 339px;
+    width: 415px;
+    left: calc(100% - 400px);
+    top: 198px;
+    padding: 0;
+}}
+@media (max-width: 357px){
+    html {
+        background-image:  url(./assets/side1.png),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='357' height='800' viewBox='0 0 357 800' fill='none'%3E%3Cpath d='M251.53 240.285C256.649 208.842 267.202 178.173 284.317 151.305C299.269 127.832 316.306 100.389 323 87C336 61 357 0 357 0V800H0C0 553.648 198.76 564.408 251.53 240.285Z' fill='white'/%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat;
+        background-position: 60px 75px,top !important;
+        background-size: 267px 228px, cover !important;
+        display:flex;
+        justify-content: center;
+    }}

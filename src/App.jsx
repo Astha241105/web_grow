@@ -3,6 +3,7 @@ import Login from "./components/Login.jsx";
 import OtpWithMail from "./otpWithMail.jsx";
 import OtpWithPhone from "./otpWithphone.jsx";
 import Changepass from "./changepass.jsx";
+import Areu from "./areu.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   {
     path: "/changepass",
     element: <Changepass />,
-  },
+  },{
+    path: "/areu",
+    element:<Areu/>
+  }
+
 ]);
 
 function App() {
