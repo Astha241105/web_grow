@@ -3,6 +3,7 @@ import Login from "./components/Login.jsx";
 import OtpWithMail from "./otpWithMail.jsx";
 import OtpWithPhone from "./otpWithphone.jsx";
 import Changepass from "./changepass.jsx";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
