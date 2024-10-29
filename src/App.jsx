@@ -4,12 +4,17 @@ import ForgotPassword from "./components/ForgotPassword.jsx";
 import OtpWithMail from "./otpWithMail.jsx";
 import OtpWithPhone from "./otpWithphone.jsx";
 import Changepass from "./changepass.jsx";
+import CreateAccount from "./components/CreateAccount.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/create-account",
+    element: <CreateAccount />,
   },
   {
     path: "/forgot-password",
@@ -30,11 +35,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

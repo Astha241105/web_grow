@@ -22,25 +22,31 @@ const Login = () => {
     navigate("/otpWithMail");
   };
 
-  const handleForgotPassword = (e) => {
-    e.preventDefault();
-    navigate("/forgot-password");
-  };
-
   return (
     <div className="login">
-      <img src="/Rectangle2.png" className="white-bg" alt="background" />
+      <img
+        src="/Rectangle2.png"
+        className="white-bg hidden md:block"
+        alt="background"
+      />
+      <img
+        src="/bgMobile.png"
+        className="block md:hidden  white-bgMobile "
+        alt="background"
+      />
       <div className="container">
         <div className="image-section">
-          <img src="/side1.png" alt="logo" className="logo" />
+          <img src="/side1.png" alt="logo" className="logo  " />
         </div>
-        <div className="form-section">
-          <h3>Welcome Back!</h3>
+
+        <div className="form-section ">
+          <img src="/cross.svg" alt="cross" className="cross hidden md:block" />
+          <h3 className="heading w-[300px] md:w-[392px]">Welcome Back!</h3>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Username:</label>
+              <label className="label">Username:</label>
               <input
-                className="input-box"
+                className="username-input"
                 type="text"
                 name="username"
                 placeholder="Enter username"
@@ -49,25 +55,31 @@ const Login = () => {
               />
             </div>
 
-            <div className="form-group">
-              <label>Password:</label>
+            <div className="form-group relative">
+              <label className="label">Password:</label>
+
               <input
-                className="input-box"
+                className="password-input"
                 type="password"
                 name="password"
                 placeholder="Enter password"
                 value={formData.password}
                 onChange={handleChange}
               />
+              <img
+                src="/eye.svg"
+                alt="eye"
+                className="absolute bottom-[20%] right-[4%]"
+              />
             </div>
 
             <div className="forgot-password">
-              <a href="/changepass" onClick={handleForgotPassword}>
-                Forgot Password?
-              </a>
+              <a href="/changepass">Forgot Password?</a>
             </div>
 
-            <button type="submit">Log In</button>
+            <button className="btn" type="submit">
+              Log In
+            </button>
 
             <p className="signup-link">
               Don't have an account?{" "}
