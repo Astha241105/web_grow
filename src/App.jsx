@@ -1,13 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.jsx";
+import ForgotPassword from "./components/ForgotPassword.jsx";
 import OtpWithMail from "./otpWithMail.jsx";
 import OtpWithPhone from "./otpWithphone.jsx";
 import Changepass from "./changepass.jsx";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
   {
     path: "/otpWithMail",

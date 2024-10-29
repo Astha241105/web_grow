@@ -22,6 +22,11 @@ const Login = () => {
     navigate("/otpWithMail");
   };
 
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    navigate("/forgot-password");
+  };
+
   return (
     <div className="login">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
@@ -57,7 +62,9 @@ const Login = () => {
             </div>
 
             <div className="forgot-password">
-              <a href="/changepass">Forgot Password?</a>
+              <a href="/changepass" onClick={handleForgotPassword}>
+                Forgot Password?
+              </a>
             </div>
 
             <button type="submit">Log In</button>
