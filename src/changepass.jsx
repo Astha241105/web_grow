@@ -1,5 +1,5 @@
-import React from 'react'
-import './changepass.css'
+import React from "react";
+import "./changepass.css";
 
 const Changepass = () => {
   return (
