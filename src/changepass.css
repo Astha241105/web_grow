@@ -89,6 +89,7 @@ html{
                 background-size: 267px 228px, cover !important;
                 display:flex;
                 justify-content: center;
+                height:100%vh !important;
             }
             #container {
                 text-align: center !important;
