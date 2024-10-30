@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
-import OtpWithMail from "./otpWithMail.jsx";
-import OtpWithPhone from "./otpWithphone.jsx";
-import Changepass from "./changepass.jsx";
+import OtpWithMail from "./components/otpwithmmail/otpWithMail.jsx";
+import OtpWithPhone from "./components/otpwithphone/otpWithphone.jsx";
+import Changepass from "./components/changepass/changepass.jsx";
 import CreateAccount from "./components/CreateAccount.jsx";
+import Areu from "./components/areu/areu.jsx"
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     element: <Changepass />,
   },{
     path: "/areu",
-    element:<Areu/>
+    element:<Areu />
   }
 
 ]);
