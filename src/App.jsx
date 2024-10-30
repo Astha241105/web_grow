@@ -1,5 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Login, CreateAccountP, ForgotPassword } from "./components";
+import {
+  Login,
+  CreateAccountP,
+  ForgotPassword,
+  CreateAccountH,
+} from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
 import Changepass from "./components/changepass/CP.jsx";
@@ -12,9 +17,15 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/create-accountp",
+    path: "/create-account-participant",
     element: <CreateAccountP />,
   },
+
+  {
+    path: "/create-account-host",
+    element: <CreateAccountH />,
+  },
+
   {
     path: "/forgot-password",
     element: <ForgotPassword />,
