@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login, CreateAccount, ForgotPassword } from "./components";
 import OtpWithMail from "./otpWithMail";
-import OtpWithPhone from "./otpWithPhone";
+import OtpWithPhone from "./otpWithphone";
 import Changepass from "./changepass";
 import "./index.css";
 
