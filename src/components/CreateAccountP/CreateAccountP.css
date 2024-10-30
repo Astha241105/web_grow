@@ -1,0 +1,105 @@
+.cn-home{
+    position:absolute;
+    left: -67px;
+    top: -67px;
+}
+
+.cnhead{
+font-size: 42px;
+font-style: normal;
+font-weight: 600;
+align-self: stretch;
+width: 439px;
+height: 51px;
+font-family: 'Montserrat';
+font-size: 42px;
+line-height: 51px;
+color: #000000;
+flex: none;
+order: 0;
+flex-grow: 0;
+margin-bottom: 28px;
+}
+
+.cnform {
+    margin-bottom: 28px;
+    position: relative;
+    width: 100%;
+ }
+
+ .cnform label{
+    color:#000;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+width: 100%;
+height: auto;
+ }
+
+ .cnform input{
+    border-radius: 10px;
+background: #D9D9D9;
+display: flex;
+padding: 15px 246px 15px 14px;
+align-items: center;
+gap: 10px;
+align-self: stretch;
+width: 438px;
+height:50px;
+margin-bottom: 28px;
+ }
+ 
+ .cn-continue{
+display: flex;
+width: 438px;
+height: 44px;
+padding: 12px 177px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+margin-top: 30px;
+border-radius: 10px;
+background: #000;
+color: #FFF;
+font-family: 'Montserrat';
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+ }
+
+ .form-section1{
+    position: relative;
+   width: 392px;
+   max-width: 100%;
+   padding: 2rem;
+   margin-left: auto;
+   margin-right: 11%;
+   z-index: 1;
+ }
+
+ .signin-link {
+    text-align: center;
+    font-size: 16px;
+    color: #000000;
+    margin-top: 1.25rem;
+    font-weight: 500;
+    right: 6%;
+    position: absolute;
+ }
+
+ .sign-in{
+    color: #008080;
+text-align: center;
+font-family: 'Montserrat';
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+text-decoration-line: underline;
+height:20px;
+width:56px;
+ }
