@@ -6,6 +6,7 @@ import {
   CreateAccountH,
   Org_Des,
   CreatePass,
+  CreatePassP,
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
@@ -31,6 +32,11 @@ const router = createBrowserRouter([
   {
     path: "/create-pass-host",
     element: <CreatePass />,
+  },
+
+  {
+    path: "/create-pass-participant",
+    element: <CreatePassP />,
   },
 
   {
