@@ -1,5 +1,5 @@
 import React from 'react'
-import './OtpWithPhone.css'
+import './otpWithPhone.css'
 
 const OtpWithPhone = () => {
   return (
