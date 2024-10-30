@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.jsx";
 import ForgotPassword from "./components/ForgotPassword.jsx";
-import OtpWithMail from "./components/otpwithmmail/otpWithMail.jsx";
-import OtpWithPhone from "./components/otpwithphone/otpWithphone.jsx";
-import Changepass from "./components/changepass/changepass.jsx";
+import OtpWithMail from "./components/otpwithmail/OWM.jsx";
+import OtpWithPhone from "./components/otpwithphone/OtpWithphone.jsx";
+import Changepass from "./components/changepass/Changepass.jsx";
 import CreateAccount from "./components/CreateAccount.jsx";
-import Areu from "./components/areu/areu.jsx"
+import Areu from "./components/areu/Are.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([

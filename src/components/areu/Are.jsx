@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './areu.css';
+import './Areu.css';
 
 import hostImage from '../../assets/host.png'; 
 import participantImage from '../../assets/part.png'; 
