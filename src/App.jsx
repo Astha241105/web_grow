@@ -4,6 +4,7 @@ import {
   CreateAccountP,
   ForgotPassword,
   CreateAccountH,
+  Org_Des,
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/create-account-host",
     element: <CreateAccountH />,
+  },
+
+  {
+    path: "/create-account-host-options",
+    element: <Org_Des />,
   },
 
   {

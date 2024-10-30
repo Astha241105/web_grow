@@ -1,13 +1,13 @@
 import React from "react";
 
-const CreateAccountP = () => {
+const CreateAccountH = () => {
   return (
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
       <div className="container">
         <div className="image-section">
-          <img src="/createnew.svg" alt="logo" className="logo" />
-          <img src="cah.svg" className="cn-home" />
+          <img src="/cah.svg" alt="logo" className="logo" />
+          <img src="home.svg" className="cn-home" />
         </div>
         <div className="form-section1">
           <h3 className="cnhead">Create your account</h3>
@@ -44,4 +44,4 @@ const CreateAccountP = () => {
     </div>
   );
 };
-export default CreateAccountP;
+export default CreateAccountH;
