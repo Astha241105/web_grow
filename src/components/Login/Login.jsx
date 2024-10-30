@@ -22,6 +22,11 @@ const Login = () => {
     navigate("/otpWithMail");
   };
 
+  const handleforgot = (e) => {
+    e.preventDefault();
+    navigate("/forgot-password");
+  };
+
   return (
     <div className="login">
       <img
@@ -74,7 +79,9 @@ const Login = () => {
             </div>
 
             <div className="forgot-password">
-              <a href="/changepass">Forgot Password?</a>
+              <a href="#" onClick={handleforgot}>
+                Forgot Password?
+              </a>
             </div>
 
             <button className="btn" type="submit">
