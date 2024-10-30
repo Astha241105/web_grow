@@ -1,0 +1,277 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;}
+    
+    #contout5{
+        height:100vh;
+    width:100vw;
+    position:relative;
+    min-height: 100vh;
+    position: relative;
+    background: #008080;
+    box-sizing: border-box;
+    overflow: hidden; 
+    background-image: url(../../assets/areu.png), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E") ;
+    background-color: #008080;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 10% 50%, right;
+    background-size: auto, auto 100vh ;
+
+    }
+    
+#container3 {
+    text-align: center;
+    box-sizing: border-box;
+    position: absolute;
+    height: 736px;
+    width: 817px;
+    left: calc(100% - 817px);
+    padding: 0;
+}
+
+#inside {
+    position: absolute;
+    top: 195px;
+    left: 350px;
+    height: 51px;
+    width: 209px;
+    font-size: 42px;
+    font-weight: 600;
+}
+.radio-group{
+    display:flex;
+    width:460px;
+    height:250px;
+    position: absolute;
+    top: 284px; 
+    left: 460px; 
+    transform: translateX(-50%); 
+    justify-content: space-between;
+
+}
+.op{
+    width: 45%;
+    padding:10px;
+    display:flex;
+    flex-direction:column-reverse;
+    border:black solid 1px;
+    border-radius:10px;
+    text-align:center;
+}
+
+
+.radio-label {
+    display: flex;
+    position:relative;
+    align-items: center; 
+    font-size: 24px; 
+    font-weight: 500;
+    margin-top:10px;
+    justify-content: center;
+
+}
+.radioo{
+    width:20px;
+    height:13px;
+    transform: scale(3); 
+    margin-right: 30px; 
+} 
+#cont3{
+    color: white;
+    background-color: black;
+    width: 389px;
+    height: 40px;
+    padding: 10px 170px;
+    border-radius: 10px;
+    position:absolute;
+    top:560px;
+    left:265px;
+
+}
+@media (max-width: 1274px) {
+    #contout5 {   
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E");
+            background-position: right ; 
+            background-size: auto 100vh ;
+    }
+}
+@media (max-width: 820px){
+    
+#container1 {
+    text-align: center;
+    box-sizing: border-box;
+    position: absolute;
+    height: 339px;
+    width: 415px;
+    left: calc(100% - 400px);
+    top: 198px;
+    padding: 0;
+}}
+@media(max-width:630px){
+    #container3 {
+        text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 736px;
+        width: 817px;
+        left: calc(100% - 700px);
+        padding: 0;
+    }
+}
+@media(max-width:490px){
+    #container3 {
+        text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 736px;
+        width: 480px;
+        left: calc(100% - 700px);
+        padding: 0;
+    }
+    #inside {
+        position: absolute;
+        top: 195px;
+        left: 350px;
+        height: 51px;
+        width: 209px;
+        font-size: 42px;
+        font-weight: 600;
+    }
+    .radio-group{
+        display:flex;
+        width:400px;
+        height:250px;
+        position: absolute;
+        top: 284px; 
+        flex-direction:column;
+        left: 460px; }
+    .option-image{
+        display:none;
+    }
+     .op{
+        display:flex;
+        width: 100%;
+        display:flex;
+        flex-direction:column-reverse;
+        border:none;
+        border-radius:10px;
+        padding-left:100px;
+        
+    } 
+    
+     .radio-label {
+        width:200px;
+        font-size: 24px; 
+        font-weight: 500;
+        margin-top:10px;
+        display:flex;
+        justify-content:left;
+    
+    }
+    .radioo{
+        width:20px;
+        height:13px;
+        transform: scale(3); 
+        
+    }  
+    #cont3{
+        color: white;
+        background-color: black;
+        width: 200px;
+        height: 40px;
+        padding: 10px 170px;
+        border-radius: 10px;
+        position:absolute;
+        top:560px;
+        left:265px;
+    
+    }
+
+}
+@media (max-width: 357px){
+       #contout5 {
+        background-image:  url(../../assets/areu.png),url(../../assets/s.png);
+        background-repeat: no-repeat;
+        background-position: 47px 75px,bottom ;
+        background-size: 267px 228px, auto;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+    }
+    #container3 {
+        text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        top:180px;
+        height: 360px;
+        width: 360px;
+        left: calc(100% - 610px);
+        padding: 0;
+        
+    }
+    #inside {
+        position: relative;
+        top:378;
+        left: 350px;
+        height: 39px;
+        width: 156px;
+        font-size: 32px;
+        font-weight: 600;
+    }
+    .radio-group{
+        display:flex;
+        width:263px;
+        height:129px;
+        position: absolute;
+        top: 284px; 
+        flex-direction:column;
+        left: 330px; }
+
+    .option-image{
+        display:none;
+    }
+     .op{
+        display:flex;
+        width: 100%;
+        display:flex;
+        flex-direction:column-reverse;
+        border:none;
+        border-radius:10px;
+        padding-left:100px;
+        
+    } 
+    
+     .radio-label {
+        width:200px;
+        font-size: 24px; 
+        font-weight: 500;
+        margin-top:10px;
+        display:flex;
+        justify-content:left;
+    
+    }
+    .radioo{
+        width:20px;
+        height:13px;
+        transform: scale(3); 
+        
+    }  
+    #cont3{
+        color: white;
+        background-color: black;
+        width: 200px;
+        height: 40px;
+        padding: 10px 200px 10px 140px;
+        border-radius: 10px;
+        position:absolute;
+        top:450px;
+        left:265px;
+    }
+    }

@@ -17,7 +17,7 @@
     background: #008080;
     box-sizing: border-box;
     overflow: hidden; 
-    background-image: url(./assets/side1.png), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E") ;
+    background-image: url(../../assets/otp.png), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E") ;
     background-color: #008080;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -65,9 +65,9 @@
     margin-bottom: 51px;
 }
 
-.verify2 {
+#verify2 {
     color: white;
-    background-color: black;
+    background-color: black !important;
     width: 389px;
     height: 40px;
     padding: 10px 170px;
@@ -135,7 +135,7 @@
 
 @media (max-width: 357px){
     #contout2{
-        background-image:  url(./assets/side1.png),url(./assets/s.png);
+        background-image:  url(../../assets/otp.png),url(../../assets/s.png);
         background-repeat: no-repeat;
         background-position: 47px 75px,bottom ;
         background-size: 267px 228px, auto;
@@ -185,9 +185,9 @@
         margin-bottom: 51px;
     }
     
-    .verify2{
+    #verify2{
         color: white;
-        background-color: black;
+        background-color: black !important;
         width: 338px;
         height: 40px;
         text-align:center;

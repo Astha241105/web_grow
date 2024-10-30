@@ -1,5 +1,5 @@
 import React from 'react'
-import './otpWithMail.css'
+import './OtpWithMail.css'
 
 const OtpWithMail = () => {
   return (
