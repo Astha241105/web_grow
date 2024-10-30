@@ -1,10 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/Login.jsx";
-import ForgotPassword from "./components/ForgotPassword.jsx";
+import { Login ,CreateAccount,ForgotPassword} from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
 import Changepass from "./components/changepass/CP.jsx";
-import CreateAccount from "./components/CreateAccount.jsx";
 import Areu from "./components/areu/Are.jsx";
 import "./index.css";
 
