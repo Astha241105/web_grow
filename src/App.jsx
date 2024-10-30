@@ -1,10 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/Login.jsx";
-import ForgotPassword from "./components/ForgotPassword.jsx";
-import OtpWithMail from "./otpWithMail.jsx";
-import OtpWithPhone from "./otpWithphone.jsx";
-import Changepass from "./changepass.jsx";
-import CreateAccount from "./components/CreateAccount.jsx";
+import { Login, CreateAccount, ForgotPassword } from "./components";
+import OtpWithMail from "./otpWithMail";
+import OtpWithPhone from "./otpWithPhone";
+import Changepass from "./changepass";
 import "./index.css";
 
 const router = createBrowserRouter([
