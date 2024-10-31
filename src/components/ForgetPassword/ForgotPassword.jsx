@@ -19,16 +19,17 @@ const ForgotPassword = () => {
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
       <div className="container">
+        <img className="fpback" src="back.svg" />
         <div className="image-section">
-          <img src="/side1.png" alt="logo" className="logo" />
+          <img src="/fpass.svg" alt="logo" className="logo" />
         </div>
         <div className="form-section">
-          <h1>Forgot Password</h1>
-          <p>Enter your registered email or phone number</p>
+          <h3 className="fphead">Forgot Password</h3>
+          <p className="fpp">Enter your registered email or phone number</p>
 
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="contact">Email / Phone number:</label>
+            <div className="fpform">
+              <label For="contact">Email / Phone number:</label>
               <input
                 type="text"
                 id="contact"
@@ -37,7 +38,7 @@ const ForgotPassword = () => {
               />
             </div>
 
-            <button type="submit" className="submit-btn">
+            <button type="submit" className="fpsubmit-btn">
               Get OTP
             </button>
           </form>

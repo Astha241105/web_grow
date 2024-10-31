@@ -1,10 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/Login.jsx";
-import ForgotPassword from "./components/ForgotPassword.jsx";
+import {
+  Login,
+  CreateAccountP,
+  ForgotPassword,
+  CreateAccountH,
+  Org_Des,
+  CreatePass,
+  CreatePassP,
+} from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
-import OtpWithPhone from "./components/otpwithphone/OtpWithphone.jsx";
-import Changepass from "./components/changepass/Changepass.jsx";
-import CreateAccount from "./components/CreateAccount.jsx";
+import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
+import Changepass from "./components/changepass/CP.jsx";
 import Areu from "./components/areu/Are.jsx";
 import "./index.css";
 
@@ -14,9 +20,30 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/create-account",
-    element: <CreateAccount />,
+    path: "/create-account-participant",
+    element: <CreateAccountP />,
   },
+
+  {
+    path: "/create-account-host",
+    element: <CreateAccountH />,
+  },
+
+  {
+    path: "/create-pass-host",
+    element: <CreatePass />,
+  },
+
+  {
+    path: "/create-pass-participant",
+    element: <CreatePassP />,
+  },
+
+  {
+    path: "/create-account-host-options",
+    element: <Org_Des />,
+  },
+
   {
     path: "/forgot-password",
     element: <ForgotPassword />,
@@ -32,11 +59,11 @@ const router = createBrowserRouter([
   {
     path: "/changepass",
     element: <Changepass />,
-  },{
+  },
+  {
     path: "/areu",
-    element:<Areu />
-  }
-
+    element: <Areu />,
+  },
 ]);
 
 function App() {
