@@ -6,3 +6,4 @@ export { default as CreateAccountH } from "./CreateAccountH/CreateAccountH";
 export { default as Org_Des } from "./CreateAccountH/Org_Des";
 export { default as CreatePass } from "./CreateAccountH/CreatePass";
 export { default as CreatePassP } from "./CreateAccountP/CreatePassP";
+export { store } from './store/store';

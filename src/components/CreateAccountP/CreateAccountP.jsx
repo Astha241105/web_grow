@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setPersonalDetails } from "../store/slices/accountslice";
+import { useNavigate } from "react-router-dom";
 import "./CreateAccountP.css";
 
 const CreateAccountP = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+   
+    const [firstName, ...lastNameParts] = name.trim().split(" ");
+    const lastName = lastNameParts.join(" ");
+
+    
+    dispatch(setPersonalDetails({ firstName, lastName, email, phone }));
+
+
+    navigate("/create-pass-participant");
+  };
+
   return (
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
@@ -12,22 +35,43 @@ const CreateAccountP = () => {
         </div>
         <div className="form-section1">
           <h3 className="cnhead">Create your account</h3>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="cnform">
-              <label For="name" className="block mb-1">
+              <label htmlFor="name" className="block mb-1">
                 Name:
               </label>
-              <input type="text" id="name" placeholder="Enter name" />
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
 
-              <label For="email" className="block mb-1">
+              <label htmlFor="email" className="block mb-1">
                 Email:
               </label>
-              <input type="email" id="email" placeholder="Enter email" />
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
 
-              <label For="phone" className="block mb-1">
+              <label htmlFor="phone" className="block mb-1">
                 Phone number:
               </label>
-              <input type="tel" id="phone" placeholder="Enter phone number" />
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
             </div>
             <button type="submit" className="cn-continue">
               Continue
@@ -45,4 +89,5 @@ const CreateAccountP = () => {
     </div>
   );
 };
+
 export default CreateAccountP;

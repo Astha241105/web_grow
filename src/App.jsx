@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./components/store/store.js"; 
 import {
   Login,
   CreateAccountP,
@@ -23,27 +25,22 @@ const router = createBrowserRouter([
     path: "/create-account-participant",
     element: <CreateAccountP />,
   },
-
   {
     path: "/create-account-host",
     element: <CreateAccountH />,
   },
-
   {
     path: "/create-pass-host",
     element: <CreatePass />,
   },
-
   {
     path: "/create-pass-participant",
     element: <CreatePassP />,
   },
-
   {
     path: "/create-account-host-options",
     element: <Org_Des />,
   },
-
   {
     path: "/forgot-password",
     element: <ForgotPassword />,
@@ -67,7 +64,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;
