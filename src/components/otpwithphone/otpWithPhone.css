@@ -63,6 +63,8 @@
     background-color: #D9D9D9;
     padding: 21px 10px;
     margin-bottom: 51px;
+    text-align: center;
+    font-size:21px;
 }
 
 #verify2 {
@@ -133,12 +135,12 @@
         padding: 0;}
 }
 
-@media (max-width: 357px){
+@media (max-width: 400px){
     #contout2{
         background-image:  url(../../assets/otp.png),url(../../assets/s.png);
         background-repeat: no-repeat;
         background-position: 47px 75px,bottom ;
-        background-size: 267px 228px, auto;
+        background-size: 267px 228px, 400px 450px;
         display:flex;
         justify-content: center;
         align-items:center;
