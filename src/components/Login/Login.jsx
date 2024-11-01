@@ -97,9 +97,9 @@ const Login = () => {
                 onChange={handleChange}
               />
               <img
-                src="/eye.svg"
+                src={showPassword ? "/eye-open.svg" : "/eye-cross.svg"}
                 alt={showPassword ? "Hide password" : "Show password"}
-                className="absolute bottom-[20%] right-[4%] cursor-pointer"
+                className="absolute bottom-[20%] right-[4%] cursor-pointer hover:opacity-70 transition-opacity"
                 onClick={togglePasswordVisibility}
               />
             </div>
