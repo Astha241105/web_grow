@@ -175,7 +175,7 @@
         position: absolute;
         height: 736px;
         width: 480px;
-        left: calc(100% - 700px);
+        left: calc(100% - 750px);
         padding: 0;
     }
     #inside {
@@ -237,12 +237,12 @@
         left:350px;
     }
 }
-@media (max-width: 357px){
+@media (max-width: 430px){
        #contout5 {
         background-image:  url(../../assets/areu.png),url(../../assets/s.png);
         background-repeat: no-repeat;
-        background-position: 47px 75px,bottom ;
-        background-size: 267px 228px, auto;
+        background-position: 50% 10%,bottom ;
+        background-size: 300px 300px, 100vw 60%;
         display:flex;
         justify-content: center;
         align-items:center;
@@ -254,7 +254,7 @@
         top:180px;
         height: 360px;
         width: 360px;
-        left: calc(100% - 610px);
+        left: calc(100% - 630px);
         padding: 0;
         
     }
@@ -317,3 +317,24 @@
         left:265px;
     }
     }
+    @media (max-width: 380px){
+        #contout5 {
+         background-image:  url(../../assets/areu.png),url(../../assets/s.png);
+         background-repeat: no-repeat;
+         background-position: 50% 10%,bottom ;
+         background-size: 300px 300px, 100vw 60%;
+         display:flex;
+         justify-content: center;
+         align-items:center;
+     }
+     #container3 {
+         text-align: center;
+         box-sizing: border-box;
+         position: absolute;
+         top:180px;
+         height: 360px;
+         width: 360px;
+         left: calc(100% - 620px);
+         padding: 0;
+         
+     }}
