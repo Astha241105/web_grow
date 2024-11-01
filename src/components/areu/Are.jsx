@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./areu.css";
 
 import hostImage from "../../assets/host.png";
@@ -6,9 +7,18 @@ import participantImage from "../../assets/part.png";
 
 const Areu = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const navigate = useNavigate();
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+  };
+
+  const handleContinue = () => {
+    if (selectedOption === "Participant") {
+      navigate("/create-account-participant");
+    } else if (selectedOption === "Host") {
+      console.log("Host");
+    }
   };
 
   return (
@@ -50,7 +60,9 @@ const Areu = () => {
           </div>
         </div>
 
-        <button id="cont3">Continue</button>
+        <button id="cont3" onClick={handleContinue}>
+          Continue
+        </button>
       </div>
     </div>
   );
