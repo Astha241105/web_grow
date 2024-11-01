@@ -28,7 +28,7 @@ const CreatePassP = () => {
     dispatch(createAccount({ firstName, lastName, email, phone, password }))
       .then(() => {
         
-        navigate("/otpWithMail");
+        navigate("/otpWithMail"); 
       })
       .catch((err) => setError("Failed to register. Try again."));
   };
