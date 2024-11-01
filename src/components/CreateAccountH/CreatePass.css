@@ -21,6 +21,8 @@ height: 45px;
 width: 418px;
 right: -6%;
 position: relative;
+flex: 1;
+margin: 0;
 }
 
 .pass-para span{
@@ -58,6 +60,8 @@ width:87px; */
 .square{
     width: 18px;
 height: 18px;
+display: flex;
+align-items: flex-start;
 flex-shrink: 0;
 position: absolute;
 top: 68%;

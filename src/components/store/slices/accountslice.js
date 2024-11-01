@@ -5,16 +5,19 @@ export const createAccount = createAsyncThunk(
   "account/createAccount",
   async (accountDetails, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(accountDetails),
-      });
-      
+      const response = await fetch(
+        "https://webgrowproject.onrender.com/api/v1/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(accountDetails),
+        }
+      );
+
       if (!response.ok) {
         throw new Error("Failed to create account");
       }
-      
+
       return await response.json();
     } catch (error) {
       return rejectWithValue(error.message);
