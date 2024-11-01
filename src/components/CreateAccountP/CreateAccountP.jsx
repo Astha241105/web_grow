@@ -14,14 +14,14 @@ const CreateAccountP = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-   
+    
     const [firstName, ...lastNameParts] = name.trim().split(" ");
     const lastName = lastNameParts.join(" ");
 
-    
+ 
     dispatch(setPersonalDetails({ firstName, lastName, email, phone }));
 
-
+    
     navigate("/create-pass-participant");
   };
 
