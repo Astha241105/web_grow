@@ -59,7 +59,7 @@ const ForgotPassword = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="fpform">
-              <label htmlFor="contact">Email / Phone number:</label>
+              <label For="contact">Email / Phone number:</label>
               <input
                 type="text"
                 id="contact"
