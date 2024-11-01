@@ -16,7 +16,6 @@ import {
   Home,
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
-import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
 import Changepass from "./components/changepass/CP.jsx";
 import Areu from "./components/areu/Are.jsx";
 import "./index.css";
@@ -70,10 +69,6 @@ const router = createBrowserRouter([
   {
     path: "/otpWithMail",
     element: <OtpWithMail />,
-  },
-  {
-    path: "/otpWithPhone",
-    element: <OtpWithPhone />,
   },
   {
     path: "/changepass",
