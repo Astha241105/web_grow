@@ -14,7 +14,8 @@ export const validateOtp = createAsyncThunk(
         throw new Error("OTP validation failed");
       }
 
-      return await response.json();
+      const data = await response.json();
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -34,8 +35,12 @@ const otpSlice = createSlice({
         state.status = "loading";
         state.error = null;
       })
-      .addCase(validateOtp.fulfilled, (state) => {
+      .addCase(validateOtp.fulfilled, (state, action) => {
         state.status = "success";
+     
+        if (action.payload.token) {
+          localStorage.setItem("token", action.payload.token);
+        }
       })
       .addCase(validateOtp.rejected, (state, action) => {
         state.status = "failed";
