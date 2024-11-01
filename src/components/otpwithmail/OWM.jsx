@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { validateOtp } from '../store/slices/otpslice'; 
 import './OtpWithMail.css';
 
 const OtpWithMail = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const dispatch = useDispatch();
-
-  // Access the email from the Redux store
+  const navigate = useNavigate();
+  
   const email = useSelector((state) => state.account.email);
   const { status, error } = useSelector((state) => state.otp);
 
@@ -35,6 +36,13 @@ const OtpWithMail = () => {
     const otpValue = otp.join("");
     dispatch(validateOtp({ email, otp: otpValue }));
   };
+
+ 
+  useEffect(() => {
+    if (status === "success") {
+      navigate("/home");
+    }
+  }, [status, navigate]);
 
   return (
     <div id="contout">
