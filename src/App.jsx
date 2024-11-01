@@ -1,6 +1,10 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./components/store/store.js"; 
+import { store } from "./components/store/store.js";
 import {
   Login,
   CreateAccountP,
@@ -9,12 +13,22 @@ import {
   Org_Des,
   CreatePass,
   CreatePassP,
+  Home,
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
 import Changepass from "./components/changepass/CP.jsx";
 import Areu from "./components/areu/Are.jsx";
 import "./index.css";
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
 
 const router = createBrowserRouter([
   {
@@ -24,6 +38,14 @@ const router = createBrowserRouter([
   {
     path: "/create-account-participant",
     element: <CreateAccountP />,
+  },
+  {
+    path: "/home",
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/create-account-host",
