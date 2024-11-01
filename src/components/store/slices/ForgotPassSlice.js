@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const forgotPassword = createAsyncThunk(
-  "auth/forgotPassword",
+  "passwordReset/forgotPassword",
   async (email, { rejectWithValue }) => {
     try {
       const response = await fetch(
@@ -18,12 +18,12 @@ export const forgotPassword = createAsyncThunk(
       const data = await response.json();
 
       if (!response.ok) {
-        return rejectWithValue(data);
+        return rejectWithValue(data.message || "Invalid email");
       }
 
       return data;
     } catch (error) {
-      return rejectWithValue({ message: "Network error occurred" });
+      return rejectWithValue({ message: "Error occurred" });
     }
   }
 );
