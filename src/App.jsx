@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./components/store/store.js"; 
+import { store } from "./components/store/store.js";
 import {
   Login,
   CreateAccountP,
@@ -9,6 +9,7 @@ import {
   Org_Des,
   CreatePass,
   CreatePassP,
+  Home,
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import OtpWithPhone from "./components/otpwithphone/OWP.jsx";
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
     path: "/create-account-participant",
     element: <CreateAccountP />,
   },
+
+  {
+    path: "/home",
+    element: <Home />,
+  },
+
   {
     path: "/create-account-host",
     element: <CreateAccountH />,

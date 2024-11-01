@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, clearError } from "../../features/auth/authSlice";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error, token } = useSelector((state) => state.auth);
+
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (token) {
+      navigate("/Home");
+    }
+    dispatch(clearError());
+  }, [token, navigate, dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,14 +29,22 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/otpWithMail");
+    const result = await dispatch(loginUser(formData));
+    if (!result.error) {
+      navigate("/home");
+    }
   };
 
   const handleforgot = (e) => {
     e.preventDefault();
     navigate("/forgot-password");
+  };
+
+  const createaccount = (e) => {
+    e.preventDefault();
+    navigate("/areu");
   };
 
   return (
@@ -36,33 +56,33 @@ const Login = () => {
       />
       <img
         src="/bgMobile.png"
-        className="block md:hidden  white-bgMobile "
+        className="block md:hidden white-bgMobile"
         alt="background"
       />
       <div className="container">
         <div className="image-section">
-          <img src="/side1.png" alt="logo" className="logo  " />
+          <img src="/side1.png" alt="logo" className="logo" />
         </div>
 
-        <div className="form-section ">
+        <div className="form-section">
           <img src="/cross.svg" alt="cross" className="cross hidden md:block" />
           <h3 className="heading w-[300px] md:w-[392px]">Welcome Back!</h3>
+          {error && <div className="error-message">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label className="label">Username:</label>
+              <label className="label">Email:</label>
               <input
                 className="username-input"
-                type="text"
-                name="username"
-                placeholder="Enter username"
-                value={formData.username}
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                value={formData.email}
                 onChange={handleChange}
               />
             </div>
 
             <div className="form-group relative">
               <label className="label">Password:</label>
-
               <input
                 className="password-input"
                 type="password"
@@ -84,13 +104,13 @@ const Login = () => {
               </a>
             </div>
 
-            <button className="btn" type="submit">
-              Log In
+            <button className="btn" type="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Log In"}
             </button>
 
             <p className="signup-link">
               Don't have an account?{" "}
-              <a href="/signup" className="create-account">
+              <a href="#" onClick={createaccount} className="create-account">
                 Create account
               </a>
             </p>
