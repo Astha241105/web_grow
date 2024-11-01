@@ -8,29 +8,42 @@ const CreatePassP = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [checkboxError, setCheckboxError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
-  const { firstName, lastName, email, phone } = useSelector((state) => state.account);
+  const { firstName, lastName, email, phone } = useSelector(
+    (state) => state.account
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
- 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
 
-    
+    if (!acceptTerms) {
+      setCheckboxError("Please accept the terms and conditions to proceed");
+      setError("");
+      return;
+    }
+
     setError("");
     dispatch(createAccount({ firstName, lastName, email, phone, password }))
       .then(() => {
-        
-        navigate("/otpWithMail"); 
+        navigate("/otpWithMail");
       })
       .catch((err) => setError("Failed to register. Try again."));
+  };
+
+  const handleCheckboxChange = (e) => {
+    setAcceptTerms(e.target.checked);
+    if (e.target.checked) {
+      setCheckboxError("");
+    }
   };
 
   return (
@@ -58,7 +71,7 @@ const CreatePassP = () => {
                 required
               />
               <img src="/eye.svg" alt="eye" className="arrow1" />
-              
+
               <label htmlFor="ConfirmPassword" className="block mb-1">
                 Confirm Password:
               </label>
@@ -76,13 +89,19 @@ const CreatePassP = () => {
 
             {error && <p className="error-message">{error}</p>}
 
-            <img src="square.svg" className="square" />
+            <label className="square"> </label>
+            <input
+              type="checkbox"
+              checked={acceptTerms}
+              onChange={handleCheckboxChange}
+            />
             <p className="pass-para">
-              All your information is collected, stored, and processed as per our data processing guidelines. By signing up you agree to our{" "}
+              All your information is collected, stored, and processed as per
+              our data processing guidelines. By signing up you agree to our{" "}
               <span>Privacy Policy</span> and <span>Terms & Conditions</span>.
             </p>
             <button type="submit" className="pass-button">
-              Get OTP
+              GET OTP
             </button>
 
             <p className="signin-link">

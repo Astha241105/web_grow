@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./OtpWithMail.css";
+import "../otpwithmail/OtpWithMail.css";
 
 const Otp = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
