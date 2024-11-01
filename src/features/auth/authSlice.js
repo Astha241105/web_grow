@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
@@ -20,15 +21,16 @@ export const loginUser = createAsyncThunk(
       const data = await response.json();
 
       if (!response.ok) {
-        return rejectWithValue(data);
+        return rejectWithValue(data.message || "Invalid username or password");
       }
+
       if (data.token) {
         localStorage.setItem("token", data.token);
       }
 
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue("Invalid username or password");
     }
   }
 );
@@ -61,10 +63,13 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.user = null;
+        state.token = null;
       });
   },
 });
