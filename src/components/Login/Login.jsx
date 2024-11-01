@@ -116,7 +116,6 @@ const Login = () => {
 
             <p className="signup-link">
               Don't have an account?{" "}
-              <a href="/create-account-participant" className="create-account">
               <a href="#" onClick={createaccount} className="create-account">
                 Create account
               </a>
