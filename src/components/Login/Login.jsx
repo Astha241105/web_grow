@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, error, token } = useSelector((state) => state.auth);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -45,6 +46,10 @@ const Login = () => {
   const createaccount = (e) => {
     e.preventDefault();
     navigate("/areu");
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -85,7 +90,7 @@ const Login = () => {
               <label className="label">Password:</label>
               <input
                 className="password-input"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Enter password"
                 value={formData.password}
@@ -93,8 +98,9 @@ const Login = () => {
               />
               <img
                 src="/eye.svg"
-                alt="eye"
-                className="absolute bottom-[20%] right-[4%]"
+                alt={showPassword ? "Hide password" : "Show password"}
+                className="absolute bottom-[20%] right-[4%] cursor-pointer"
+                onClick={togglePasswordVisibility}
               />
             </div>
 

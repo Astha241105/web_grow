@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./components/store/store.js";
 import {
@@ -17,6 +21,15 @@ import Changepass from "./components/changepass/CP.jsx";
 import Areu from "./components/areu/Are.jsx";
 import "./index.css";
 
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,12 +39,14 @@ const router = createBrowserRouter([
     path: "/create-account-participant",
     element: <CreateAccountP />,
   },
-
   {
     path: "/home",
-    element: <Home />,
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
   },
-
   {
     path: "/create-account-host",
     element: <CreateAccountH />,
