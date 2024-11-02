@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, clearError } from "../../features/auth/authSlice";
+import { loginUser, clearError } from "../store/slices/authSlice";
 import "./Login.css";
 
 const Login = () => {
