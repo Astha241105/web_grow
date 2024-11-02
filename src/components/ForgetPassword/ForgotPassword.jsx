@@ -23,13 +23,14 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (success) {
-      navigate("/otpWithMail");
+      navigate("/otp-forgot-password");
     }
   }, [success, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (contact.includes("@")) {
+      localStorage.setItem("recoveryEmail", contact);
       await dispatch(forgotPassword(contact));
     }
   };
