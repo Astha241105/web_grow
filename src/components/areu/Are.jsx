@@ -17,7 +17,7 @@ const Areu = () => {
     if (selectedOption === "Participant") {
       navigate("/create-account-participant");
     } else if (selectedOption === "Host") {
-      console.log("Host");
+      navigate("/create-account-host");
     }
   };
 
