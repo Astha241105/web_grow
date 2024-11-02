@@ -18,6 +18,7 @@ import {
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import Changepass from "./components/changepass/CP.jsx";
 import Areu from "./components/areu/Are.jsx";
+import HostOtpVerification from './components/CreateAccountH/otpforhost.jsx';
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
     path: "/areu",
     element: <Areu />,
   },
+  {
+    path:"/otp-host",
+    element:<HostOtpVerification />
+  }
 ]);
 
 function App() {
