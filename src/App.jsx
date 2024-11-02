@@ -83,7 +83,7 @@ const router = createBrowserRouter([
     element: <OtpWithPhone />,
   },
   {
-    path: "/changepass",
+    path: "/change-password",
     element: <Changepass />,
   },
   {
