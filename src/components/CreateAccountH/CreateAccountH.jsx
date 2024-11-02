@@ -1,43 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateHostDetails } from "../store/slices/hostslice"; 
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const CreateAccountH = () => {
-  const [formData, setFormData] = useState({
-    name: "",  
-    email: "",
-    mobile: "",
-  });
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleInputChange = (e) => {
-    const { id, value } = e.target; 
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value, 
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const [firstName, ...lastNameParts] = formData.name.split(' ');
-    const lastName = lastNameParts.join(' '); 
-
-
-    dispatch(updateHostDetails({
-      firstName,
-      lastName,
-      email: formData.email,
-      mobile: formData.mobile,
-    }));
-
-    navigate("/create-account-host-options"); 
-  };
-
   return (
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
@@ -48,43 +11,22 @@ const CreateAccountH = () => {
         </div>
         <div className="form-section1">
           <h3 className="cnhead">Create your account</h3>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="cnform">
-              <label htmlFor="name" className="block mb-1">
+              <label For="name" className="block mb-1">
                 Name:
               </label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Enter full name"
-                value={formData.name}
-                onChange={handleInputChange} 
-                required
-              />
+              <input type="text" id="name" placeholder="Enter name" />
 
-              <label htmlFor="email" className="block mb-1">
+              <label For="email" className="block mb-1">
                 Email:
               </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter email"
-                value={formData.email}
-                onChange={handleInputChange} 
-                required
-              />
+              <input type="email" id="email" placeholder="Enter email" />
 
-              <label htmlFor="mobile" className="block mb-1">
-                Phone Number:
+              <label For="phone" className="block mb-1">
+                Phone number:
               </label>
-              <input
-                type="tel"
-                id="mobile"
-                placeholder="Enter phone number"
-                value={formData.mobile}
-                onChange={handleInputChange} 
-                required
-              />
+              <input type="tel" id="phone" placeholder="Enter phone number" />
             </div>
             <button type="submit" className="cn-continue">
               Continue
@@ -102,5 +44,4 @@ const CreateAccountH = () => {
     </div>
   );
 };
-
 export default CreateAccountH;
