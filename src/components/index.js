@@ -7,3 +7,4 @@ export { default as CreatePass } from "./CreateAccountH/CreatePass";
 export { default as CreatePassP } from "./CreateAccountP/CreatePassP";
 export { default as Home } from "./Home/Home";
 export { store } from "./store/store";
+export { default as Otp } from "./ForgetPassword/Otp";

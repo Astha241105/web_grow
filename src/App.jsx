@@ -14,6 +14,7 @@ import {
   CreatePass,
   CreatePassP,
   Home,
+  Otp,
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import Changepass from "./components/changepass/CP.jsx";
@@ -67,6 +68,12 @@ const router = createBrowserRouter([
     path: "/forgot-password",
     element: <ForgotPassword />,
   },
+
+  {
+    path: "/otp-forgot-password",
+    element: <Otp />,
+  },
+
   {
     path: "/otpWithMail",
     element: <OtpWithMail />,
