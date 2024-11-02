@@ -79,10 +79,6 @@ const router = createBrowserRouter([
     element: <OtpWithMail />,
   },
   {
-    path: "/otpWithPhone",
-    element: <OtpWithPhone />,
-  },
-  {
     path: "/change-password",
     element: <Changepass />,
   },
