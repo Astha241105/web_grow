@@ -34,6 +34,7 @@ const Login = () => {
     e.preventDefault();
     const result = await dispatch(loginUser(formData));
     if (!result.error) {
+      localStorage.setItem("token", result.payload.token);
       navigate("/home");
     }
   };
