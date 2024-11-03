@@ -37,7 +37,6 @@ const OtpWithMail = () => {
     dispatch(validateOtp({ email, otp: otpValue }));
   };
 
-
   useEffect(() => {
     if (status === "success") {
       navigate("/home");  
@@ -55,7 +54,7 @@ const OtpWithMail = () => {
             key={index}
             id={`otp-input-${index}`}
             type="text"
-            className="boxes"
+            className={`boxes ${status === "failed" ? "error-border" : ""}`}
             value={digit}
             onChange={(e) => handleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}

@@ -55,7 +55,7 @@ const HostOtpVerification = () => {
               key={index}
               id={`otp-input-${index}`}
               type="text"
-              className="boxes"
+              className={`boxes ${status === "failed" ? "error-border" : ""}`}
               value={digit}
               onChange={(e) => handleChange(e, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
