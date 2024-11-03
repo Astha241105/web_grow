@@ -4,6 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const createAccount = createAsyncThunk(
   "account/createAccount",
   async (accountDetails, { rejectWithValue }) => {
+    console.log(accountDetails)
     try {
       const response = await fetch(
         "https://webgrowproject.onrender.com/api/v1/auth/register",
