@@ -9,8 +9,11 @@ const Otp = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", ""]);
   const { email, isLoading, error, success } = useSelector(
-    (state) => state.recovery
+    (state) => state.recovery || {}
   );
+
+  const recoveryEmail = email || localStorage.getItem("recoveryEmail");
+  console.log("Email used for OTP verification:", recoveryEmail);
 
   useEffect(() => {
     if (success) {
@@ -36,6 +39,7 @@ const Otp = () => {
   };
 
   const handleVerify = async () => {
+    console.log("Starting OTP verification process");
     const otpValue = otp.join("");
     if (otpValue.length !== 4) {
       alert("Please enter a complete 4-digit OTP");
@@ -49,6 +53,7 @@ const Otp = () => {
           otp: otpValue,
         })
       ).unwrap();
+      console.log("OTP verification dispatched successfully");
     } catch (err) {
       console.error("Verification failed:", err);
     }

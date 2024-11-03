@@ -37,10 +37,10 @@ const OtpWithMail = () => {
     dispatch(validateOtp({ email, otp: otpValue }));
   };
 
- 
+
   useEffect(() => {
     if (status === "success") {
-      navigate("/home");
+      navigate("/home");  
     }
   }, [status, navigate]);
 

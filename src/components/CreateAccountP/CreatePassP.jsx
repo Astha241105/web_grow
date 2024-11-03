@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createAccount } from "../store/slices/accountslice"; // Updated import
+import { createAccount } from "../store/slices/accountslice";
 import { useNavigate } from "react-router-dom";
 import "./CreateAccountP.css";
 
@@ -13,7 +13,7 @@ const CreatePassP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { firstName, lastName, email, phone } = useSelector(
+  const { firstName, lastName, email, phone, status } = useSelector(
     (state) => state.account
   );
 
@@ -100,8 +100,9 @@ const CreatePassP = () => {
               our data processing guidelines. By signing up you agree to our{" "}
               <span>Privacy Policy</span> and <span>Terms & Conditions</span>.
             </p>
-            <button type="submit" className="pass-button">
-              GET OTP
+            
+            <button type="submit" className="pass-button" disabled={status === "loading"}>
+              {status === "loading" ? "Sending OTP..." : "GET OTP"}
             </button>
 
             <p className="signin-link">

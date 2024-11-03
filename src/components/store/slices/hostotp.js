@@ -17,7 +17,11 @@ export const validateHostOtp = createAsyncThunk(
       }
 
       const data = await response.json();
-      return data;
+      console.log(data);
+      if (data.data.token) {
+        localStorage.setItem("token", data.data.token);
+        return data;
+      }
     } catch (error) {
       return rejectWithValue(error.message);
     }

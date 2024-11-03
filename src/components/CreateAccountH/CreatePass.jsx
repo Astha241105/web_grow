@@ -8,10 +8,11 @@ const CreatePass = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [acceptTerms, setAcceptTerms] = useState(false);  // Track checkbox status
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   const existingHostDetails = useSelector((state) => state.host);
 
@@ -23,6 +24,10 @@ const CreatePass = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const handleCheckboxChange = (e) => {
+    setAcceptTerms(e.target.checked);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,17 +36,27 @@ const CreatePass = () => {
       return;
     }
 
+    if (!acceptTerms) {
+      setError("Please accept the terms and conditions to proceed");
+      return;
+    }
+
+    setError("");
+    setIsSubmitting(true); // Start submission
+
     const updatedHostDetails = {
       ...existingHostDetails,
       password,
     };
 
-   
     dispatch(updateHostDetails(updatedHostDetails));
-
-  
-    dispatch(registerHost(updatedHostDetails));
-    navigate("/otp-host");
+    dispatch(registerHost(updatedHostDetails))
+      .then(() => {
+        navigate("/otp-host"); // Navigate to OTP page after successful submission
+      })
+      .finally(() => {
+        setIsSubmitting(false); // Stop submission
+      });
   };
 
   return (
@@ -87,14 +102,21 @@ const CreatePass = () => {
               {error && <p className="error-message">{error}</p>}
             </div>
 
-            <img src="square.svg" className="square" alt="checkbox" />
+            <label className="square">
+              <input
+                type="checkbox"
+                checked={acceptTerms}
+                onChange={handleCheckboxChange}
+              />
+            </label>
             <p className="pass-para">
               All your information is collected, stored, and processed as per our
               data processing guidelines. By signing up, you agree to our{" "}
               <span>Privacy Policy</span> and <span>Terms & Conditions</span>.
             </p>
-            <button type="submit" className="pass-button">
-              Get OTP
+            
+            <button type="submit" className="pass-button" disabled={isSubmitting}>
+              {isSubmitting ? "Getting OTP..." : "Get OTP"}
             </button>
 
             <p className="signin-link">

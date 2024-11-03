@@ -40,7 +40,7 @@ const HostOtpVerification = () => {
   
     useEffect(() => {
       if (status === "success") {
-        navigate("/host-home");
+        navigate("/home");
       }
     }, [status, navigate]);
   

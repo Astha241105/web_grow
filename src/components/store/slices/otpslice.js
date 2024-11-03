@@ -16,6 +16,11 @@ export const validateOtp = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data);
+      if (data.data.token) {
+        localStorage.setItem("token", data.data.token);
+      }
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
