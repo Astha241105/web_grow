@@ -9,10 +9,8 @@ const Otp = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", ""]);
   const { email, isLoading, error, success } = useSelector(
-    (state) => state.recovery || {} // Avoid undefined if state.recovery is undefined
+    (state) => state.recovery || {}
   );
-
-  const recoveryEmail = email || localStorage.getItem("recoveryEmail");
 
   useEffect(() => {
     if (success) {
@@ -47,7 +45,7 @@ const Otp = () => {
     try {
       await dispatch(
         verifyOtpCode({
-          email: recoveryEmail, // use fallback email from localStorage
+          email: email || localStorage.getItem("recoveryEmail"),
           otp: otpValue,
         })
       ).unwrap();
@@ -62,7 +60,7 @@ const Otp = () => {
         <div id="codemail">Enter the code</div>
         <p id="mess1">
           Enter the 4-digit OTP code we have sent to{" "}
-          {recoveryEmail || "your email"}.
+          {email || localStorage.getItem("recoveryEmail")}.
         </p>
         {otp.map((digit, index) => (
           <input
