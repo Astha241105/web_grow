@@ -49,6 +49,11 @@ const CreatePassP = () => {
   return (
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
+      <img
+        src="/bgMobile.png"
+        className="block md:hidden white-bgMobile"
+        alt="background"
+      />
       <div className="container">
         <div className="image-section">
           <img src="/createnew.svg" alt="logo" className="logo" />
