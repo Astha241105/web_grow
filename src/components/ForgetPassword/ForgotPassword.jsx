@@ -48,7 +48,7 @@ const ForgotPassword = () => {
         <div className="image-section1">
           <img src="/fpass.svg" alt="logo" className="logo" />
         </div>
-        <div className="form-section">
+        <div className="form-section1">
           <h3 className="fphead">Forgot Password</h3>
           <p className="fpp">Enter your registered email or phone number</p>
 
