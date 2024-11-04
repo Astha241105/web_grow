@@ -24,8 +24,8 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue(data.message || "Invalid username or password");
       }
 
-      if (data.token) {
-        localStorage.setItem("token", data.token);
+      if (data.data.token) {
+        localStorage.setItem("token", data.data.token);
       }
 
       return data;

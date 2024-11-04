@@ -67,7 +67,7 @@ const OtpWithMail = () => {
           Verify
         </button>
         {status === "loading" && <p>Validating...</p>}
-        {status === "failed" && <p style={{ color: 'red' }}>{error}</p>}
+        {status === "failed" && <p style={{ color: 'red' }}>OTP invalid! Please try again.</p>}
         {status === "success" && <p style={{ color: 'green' }}>OTP Verified!</p>}
 
         <br />
