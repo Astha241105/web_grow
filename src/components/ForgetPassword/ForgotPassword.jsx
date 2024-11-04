@@ -38,6 +38,11 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
+      <img
+        src="/bgMobile.png"
+        className="block md:hidden white-bgMobile"
+        alt="background"
+      />
       <div className="container">
         <img className="fpback" src="back.svg" alt="back" />
         <div className="image-section">
