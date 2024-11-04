@@ -334,6 +334,18 @@
    }
 }
 
+@media screen and (max-height: 750px) {
+   .form-section{
+      top:-43px;
+   }
+   .signup-link{
+      font-size: 12px;
+   }
+   .image-section{
+      top:-21px;
+   }
+}
+
 
 .username-input {
    display: flex;

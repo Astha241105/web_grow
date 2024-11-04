@@ -50,7 +50,7 @@ const ForgotPassword = () => {
         </div>
         <div className="form-section1">
           <h3 className="fphead">Forgot Password</h3>
-          <p className="fpp">Enter your registered email or phone number</p>
+          <p className="fpp">Enter your registered email</p>
 
           {error && (
             <p className="error-message" style={{ color: "red" }}>
@@ -65,14 +65,14 @@ const ForgotPassword = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="fpform">
-              <label For="contact">Email / Phone number:</label>
+              <label For="contact">Email:</label>
               <input
                 type="text"
                 id="contact"
                 name="contact"
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
-                placeholder="Enter email/phone number"
+                placeholder="Enter email"
               />
             </div>
 
