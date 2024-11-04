@@ -60,7 +60,15 @@ const Otp = () => {
   };
 
   return (
-    <div id="contout">
+    <div className="forgot-pass">
+      <img src="/Rectangle2.png" className="white-bg" alt="background" />
+      <img
+        src="/bgMobile.png"
+        className="block md:hidden white-bgMobile"
+        alt="background"
+      />
+      <img src="/otp.svg" alt="logo" className="otp" />
+      <img src="back.svg" className="back" />
       <div id="container1">
         <div id="codemail">Enter the code</div>
         <p id="mess1">
