@@ -45,7 +45,7 @@ const ForgotPassword = () => {
       />
       <div className="container">
         <img className="fpback" src="back.svg" alt="back" />
-        <div className="image-section">
+        <div className="image-section1">
           <img src="/fpass.svg" alt="logo" className="logo" />
         </div>
         <div className="form-section">
