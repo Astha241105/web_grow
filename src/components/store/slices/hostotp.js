@@ -5,7 +5,7 @@ export const validateHostOtp = createAsyncThunk(
   async ({ email, otp }, { rejectWithValue }) => {
     try {
         console.log("Request payload:",{ email, otp });
-      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/validate", {
+      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/validate-host", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -13,6 +13,7 @@ export const validateHostOtp = createAsyncThunk(
       console.log("sent request");
       
       if (!response.ok) {
+        console.log("error")
         throw new Error("Host OTP validation failed");
       }
 
