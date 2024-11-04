@@ -60,6 +60,8 @@ const Login = () => {
         className="white-bg hidden md:block"
         alt="background"
       />
+
+      <img src="/home.svg" alt="cross" className="cross hidden md:block" />
       <img
         src="/bgMobile.png"
         className="block md:hidden white-bgMobile"
@@ -71,7 +73,6 @@ const Login = () => {
         </div>
 
         <div className="form-section">
-          <img src="/cross.svg" alt="cross" className="cross hidden md:block" />
           <h3 className="heading w-[300px] md:w-[392px]">Welcome Back!</h3>
           {error && <div className="error-message">{error}</div>}
           <form onSubmit={handleSubmit}>
