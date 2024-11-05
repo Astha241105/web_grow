@@ -59,10 +59,10 @@ const CreatePassP = () => {
           <img src="/createnew.svg" alt="logo" className="logo" />
           <img src="back.svg" className="cn-home" />
         </div>
-        <div className="form-section2">
+        <div className="form-sec">
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
-            <div className="cnform2">
+            <div className="cnform">
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>
@@ -96,6 +96,7 @@ const CreatePassP = () => {
 
             <label className="square"> </label>
             <input
+              className="box"
               type="checkbox"
               checked={acceptTerms}
               onChange={handleCheckboxChange}
@@ -105,8 +106,12 @@ const CreatePassP = () => {
               our data processing guidelines. By signing up you agree to our{" "}
               <span>Privacy Policy</span> and <span>Terms & Conditions</span>.
             </p>
-            
-            <button type="submit" className="pass-button" disabled={status === "loading"}>
+
+            <button
+              type="submit"
+              className="pass-button"
+              disabled={status === "loading"}
+            >
               {status === "loading" ? "Sending OTP..." : "GET OTP"}
             </button>
 

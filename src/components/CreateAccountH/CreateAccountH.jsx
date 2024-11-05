@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateHostDetails } from "../store/slices/hostslice"; 
+import { updateHostDetails } from "../store/slices/hostslice";
 import { useNavigate } from "react-router-dom";
 
 const CreateAccountH = () => {
   const [formData, setFormData] = useState({
-    name: "",  
+    name: "",
     email: "",
     mobile: "",
   });
@@ -14,28 +14,29 @@ const CreateAccountH = () => {
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    const { id, value } = e.target; 
+    const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [id]: value, 
+      [id]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const [firstName, ...lastNameParts] = formData.name.split(' ');
-    const lastName = lastNameParts.join(' '); 
+    const [firstName, ...lastNameParts] = formData.name.split(" ");
+    const lastName = lastNameParts.join(" ");
 
+    dispatch(
+      updateHostDetails({
+        firstName,
+        lastName,
+        email: formData.email,
+        mobile: formData.mobile,
+      })
+    );
 
-    dispatch(updateHostDetails({
-      firstName,
-      lastName,
-      email: formData.email,
-      mobile: formData.mobile,
-    }));
-
-    navigate("/create-account-host-options"); 
+    navigate("/create-account-host-options");
   };
 
   return (
@@ -51,7 +52,7 @@ const CreateAccountH = () => {
           <img src="/cah.svg" alt="logo" className="logo" />
           <img src="home.svg" className="cn-home" />
         </div>
-        <div className="form-section1">
+        <div className="form-sec">
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
             <div className="cnform">
@@ -63,7 +64,7 @@ const CreateAccountH = () => {
                 id="name"
                 placeholder="Enter full name"
                 value={formData.name}
-                onChange={handleInputChange} 
+                onChange={handleInputChange}
                 required
               />
 
@@ -75,7 +76,7 @@ const CreateAccountH = () => {
                 id="email"
                 placeholder="Enter email"
                 value={formData.email}
-                onChange={handleInputChange} 
+                onChange={handleInputChange}
                 required
               />
 
@@ -87,7 +88,7 @@ const CreateAccountH = () => {
                 id="mobile"
                 placeholder="Enter phone number"
                 value={formData.mobile}
-                onChange={handleInputChange} 
+                onChange={handleInputChange}
                 required
               />
             </div>
