@@ -233,6 +233,14 @@
         left: calc(100% - 750px);
         padding: 0;
     }
+    .image-section1{
+        position: relative;
+        width: 80%;
+        max-width: 535px;
+        height: 456px;
+        left: 4%;
+        top:-90px;
+    }
     #inside {
         position: absolute;
         top: 195px;
@@ -304,7 +312,7 @@
     }
     .image-section1{
         position: relative;
-        width: 60%;
+        width: 80%;
         max-width: 535px;
         height: 456px;
         left: 4%;
@@ -400,4 +408,14 @@
          left: calc(100% - 620px);
          padding: 0;
          
-     }}
+     }
+     .image-section1{
+        position: relative;
+        width: 80%;
+        max-width: 535px;
+        height: 456px;
+        left: 4%;
+        top:-230px;
+    }
+
+ }

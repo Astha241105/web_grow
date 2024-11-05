@@ -45,6 +45,21 @@ const OtpWithMail = () => {
 
   return (
     <div id="contout">
+      <img
+        src="/Rectangle2.png"
+        className="white-bg hidden md:block"
+        alt="background"
+      />
+
+      <img src="/home.svg" alt="cross" className="cross hidden md:block" />
+      <img
+        src="/bgMobile.png"
+        className="block md:hidden white-bgMobile"
+        alt="background"
+      />
+      <div className="image-section1">
+          <img src="/otp.svg" alt="logo" className="logo" />
+        </div>
       <div id="container1">
         <div id="codemail">Enter the code</div>
         <p id="mess1">Enter the 4-digit OTP code we have sent to {email}.</p>
