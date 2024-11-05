@@ -51,6 +51,14 @@ const accountSlice = createSlice({
       state.password = password;
       state.confirmPassword = confirmPassword;
     },
+    resetAccountDetails: (state) => {
+      state.firstName = "";
+      state.lastName = "";
+      state.email = "";
+      state.phone = "";
+      state.password = "";
+      state.confirmPassword = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -68,5 +76,5 @@ const accountSlice = createSlice({
   },
 });
 
-export const { setPersonalDetails, setPasswordDetails } = accountSlice.actions;
+export const { setPersonalDetails, setPasswordDetails, resetAccountDetails } = accountSlice.actions;
 export default accountSlice.reducer;

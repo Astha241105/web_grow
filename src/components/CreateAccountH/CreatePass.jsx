@@ -75,7 +75,8 @@ const CreatePass = () => {
         <div className="form-section2">
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
-            <div className="cnform2">
+            <div className="c
+            nform2">
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>

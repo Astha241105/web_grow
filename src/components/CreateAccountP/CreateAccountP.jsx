@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setPersonalDetails } from "../store/slices/accountslice";
+import { setPersonalDetails } from "../store/slices/accountslice.js";
 import { useNavigate } from "react-router-dom";
 import "./CreateAccountP.css";
 

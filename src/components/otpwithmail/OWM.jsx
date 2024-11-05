@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { validateOtp } from '../store/slices/otpslice'; 
-import './OtpWithMail.css';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { validateOtp, resendOtp } from "../store/slices/otpslice"; 
+import "./OtpWithMail.css";
 
 const OtpWithMail = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const email = useSelector((state) => state.account.email);
+  const { firstName, lastName, email, phone, password } = useSelector(
+    (state) => state.account
+  );
   const { status, error } = useSelector((state) => state.otp);
 
   const handleChange = (e, index) => {
     const { value } = e.target;
-
     if (value.length > 1) return;
 
     const newOtp = [...otp];
@@ -27,7 +28,7 @@ const OtpWithMail = () => {
   };
 
   const handleKeyDown = (e, index) => {
-    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
       document.getElementById(`otp-input-${index - 1}`).focus();
     }
   };
@@ -37,29 +38,34 @@ const OtpWithMail = () => {
     dispatch(validateOtp({ email, otp: otpValue }));
   };
 
+  const handleResendOtp = () => {
+    dispatch(
+      resendOtp({
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        mobile: phone,
+        password: password,
+      })
+    );
+  };
+
   useEffect(() => {
     if (status === "success") {
-      navigate("/home");  
+      navigate("/home");
     }
   }, [status, navigate]);
 
   return (
     <div id="contout">
-      <img
-        src="/Rectangle2.png"
-        className="white-bg hidden md:block"
-        alt="background"
-      />
-
+      <img src="/Rectangle2.png" className="white-bg hidden md:block" alt="background" />
       <img src="/home.svg" alt="cross" className="cross hidden md:block" />
-      <img
-        src="/bgMobile.png"
-        className="block md:hidden white-bgMobile"
-        alt="background"
-      />
+      <img src="/bgMobile.png" className="block md:hidden white-bgMobile" alt="background" />
+      
       <div className="image-section1">
-          <img src="/otp.svg" alt="logo" className="logo" />
-        </div>
+        <img src="/otp.svg" alt="logo" className="logo" />
+      </div>
+      
       <div id="container1">
         <div id="codemail">Enter the code</div>
         <p id="mess1">Enter the 4-digit OTP code we have sent to {email}.</p>
@@ -76,19 +82,20 @@ const OtpWithMail = () => {
             maxLength="1"
           />
         ))}
-
         <br />
         <button className="verify1" onClick={handleVerify}>
           Verify
         </button>
         {status === "loading" && <p>Validating...</p>}
-        {status === "failed" && <p style={{ color: 'red' }}>OTP invalid! Please try again.</p>}
-        {status === "success" && <p style={{ color: 'green' }}>OTP Verified!</p>}
+        {status === "failed" && <p style={{ color: "red" }}>OTP invalid! Please try again.</p>}
+        {status === "success" && <p style={{ color: "green" }}>OTP Verified!</p>}
 
         <br />
         <div className="didnt1">
           <span>Didn't receive the code?</span>
-          <span id="gradient1"> Resend code.</span>
+          <span id="gradient1" onClick={handleResendOtp} style={{ cursor: "pointer" }}>
+            Resend code.
+          </span>
         </div>
       </div>
     </div>

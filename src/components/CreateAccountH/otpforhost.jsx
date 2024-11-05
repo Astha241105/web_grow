@@ -45,7 +45,7 @@ const HostOtpVerification = () => {
     }, [status, navigate]);
   
     return (
-      <div id="contout">
+      <div id="contout10">
         <div id="container1">
           <div id="codemail">Enter code</div>
           <p id="mess1">Enter the 4-digit OTP code sent to {email}.</p>

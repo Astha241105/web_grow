@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createAccount } from "../store/slices/accountslice";
+import { createAccount, setPasswordDetails } from "../store/slices/accountslice";
 import { useNavigate } from "react-router-dom";
 import "./CreateAccountP.css";
 
@@ -32,6 +32,10 @@ const CreatePassP = () => {
     }
 
     setError("");
+    
+    dispatch(setPasswordDetails({ password, confirmPassword }));
+
+ 
     dispatch(createAccount({ firstName, lastName, email, phone, password }))
       .then(() => {
         navigate("/otpWithMail");
