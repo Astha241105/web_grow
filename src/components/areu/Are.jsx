@@ -23,6 +23,21 @@ const Areu = () => {
 
   return (
     <div id="contout5">
+      <img
+        src="/Rectangle2.png"
+        className="white-bg hidden md:block"
+        alt="background"
+      />
+
+      <img src="/home.svg" alt="cross" className="cross hidden md:block" />
+      <img
+        src="/bgMobile.png"
+        className="block md:hidden white-bgMobile"
+        alt="background"
+      />
+       <div className="image-section1">
+          <img src="/areu.png" alt="logo" className="logo" />
+        </div>
       <div id="container3">
         <div id="inside">Are You a</div>
         <div className="radio-group">

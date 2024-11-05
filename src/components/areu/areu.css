@@ -16,16 +16,11 @@
     position: relative;
     background: #008080;
     box-sizing: border-box;
-    overflow: hidden; 
-    background-image: url(../../assets/areu.png), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E") ;
-    background-color: #008080;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 10% 50%, right;
-    background-size: auto, auto 100vh ;
-
+    overflow: hidden;
+    bottom:0px;
+    margin: 0;
+    padding: 0;
     }
-    
 #container3 {
     text-align: center;
     box-sizing: border-box;
@@ -34,6 +29,7 @@
     width: 817px;
     left: calc(100% - 817px);
     padding: 0;
+    top:0px;
 }
 
 #inside {
@@ -44,6 +40,14 @@
     width: 209px;
     font-size: 42px;
     font-weight: 600;
+}
+.image-section1{
+    position: relative;
+    width: 40%;
+    max-width: 535px;
+    height: 456px;
+    left: 6%;
+    top:150px;
 }
 .radio-group{
     display:flex;
@@ -83,6 +87,19 @@
     transform: scale(3); 
     margin-right: 30px; 
 } 
+.logo1 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position:absolute;
+    top:150px;
+ }
+ .cross1 {
+    position: absolute;
+    top: 50px;
+    left: 80px;
+ }
+ 
 #cont3{
     color: white;
     background-color: black;
@@ -95,68 +112,106 @@
     left:265px;
 
 }
-@media( max-width:1400px){
-    #contout5 { 
-        background-image: url(../../assets/areu.png), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='817' height='736' viewBox='0 0 817 736' fill='none'%3E%3Cpath d='M113.557 197.139C91.6067 88.8849 171.543 0 282 0H817V736H0C169.402 544.739 145.636 355.345 113.557 197.139Z' fill='white'/%3E%3C/svg%3E") ;  
-        background-position: left,right ; 
-        background-size: 45% 50%, auto 100vh ;
 
-}}
 @media (max-width: 1322px) {
     #contout5 {          
             background-position: left,right ; 
             background-size: 40% 40%,auto 100vh, ;
     }
-}
-@media (max-width: 1238px) {
-    #contout5 {          
-            background-position: left,right ; 
-            background-size: 38% 38%,auto 100vh ;
+    #container3 {
+        text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 736px;
+        width: 817px;
+        left: calc(100% - 760px);
+        padding: 0;
+        top:0px;
     }
 }
+@media (max-width: 1200px) {
+    #container3 {
+        text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 736px;
+        width: 817px;
+        left: calc(100% - 740px);
+        padding: 0;
+        top:0px;
+    }
+/* 
+        .white-bg1 {
+            width: 65%;
+        } */
+       
+        .image-section1 {
+            width: 35%;
+        }
+     }
 @media (max-width: 1120px) {
-    #contout5 {          
-            background-position: left,right ; 
-            background-size: 35% 35%,auto 100vh ;
+    #container3 {
+        text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 736px;
+        width: 817px;
+        left: calc(100% - 700px);
+        padding: 0;
+        top:0px;
     }
 }
-@media (max-width: 1050px) {
-    #contout5 {          
-            background-position: left,right ; 
-            background-size: 30% 30%,auto 100vh ;
+@media screen and (max-width: 992px) {
+    /* .white-bg1 {
+        width: 75%;
+    } */
+   
+    .image-section1 {
+        width: 30%;
+        left: 4%;
     }
-}
-@media (max-width: 970px) {
-    #contout5 {          
-            background-position: left,right ; 
-            background-size: 25% 25%,auto 100vh ;
-    }
-}
-@media (max-width: 900px) {
-    #contout5 {          
-            background-position: left,right ; 
-            background-size: 20% 20%,auto 100vh ;
-    }
-}
-@media (max-width: 850px){
-    #contout5 {
-        background-image:  url(../../assets/areu.png),url(../../assets/s.png);
-        background-repeat: no-repeat;
-        background-position: 50% 10%,bottom ;
-        background-size: 300px 300px, 100vw 60%;
-        display:flex;
+ }
+ @media screen and (max-width: 768px) {
+    #container3{
+        flex-direction: column;
         justify-content: center;
-        align-items:center;
+        padding: 1.25rem;
+        height: auto;
+        top:120px;
+        min-height: 100vh;
+        left: calc(100% - 817px);
     }
-#container3 {
-    text-align: center;
-    box-sizing: border-box;
-    position: absolute;
-    height: 339px;
-    width: 415px;
-    top: 198px;
-    padding: 0;
-}}
+    .image-section1{
+        position: relative;
+        width: 60%;
+        max-width: 535px;
+        height: 456px;
+        left: 4%;
+        top:-90px;
+    }
+    .cross1 {
+        display: none;
+    }
+ }
+ @media(max-width:700px){
+    #container3{
+        flex-direction: column;
+        justify-content: center;
+        padding: 1.25rem;
+        height: auto;
+        top:120px;
+        min-height: 100vh;
+        left: calc(100% - 817px);
+    }
+    .image-section1{
+        position: relative;
+        width: 60%;
+        max-width: 535px;
+        height: 456px;
+        left: 4%;
+        top:-90px;
+    }
+ }
 @media(max-width:630px){
     #container3 {
         text-align: center;
@@ -239,19 +294,27 @@
 }
 @media (max-width: 430px){
        #contout5 {
-        background-image:  url(../../assets/areu.png),url(../../assets/s.png);
+        /* background-image:  url(../../assets/areu.png),url(../../assets/s.png);
         background-repeat: no-repeat;
         background-position: 50% 10%,bottom ;
-        background-size: 300px 300px, 100vw 60%;
+        background-size: 300px 300px, 100vw 60%; */
         display:flex;
         justify-content: center;
         align-items:center;
+    }
+    .image-section1{
+        position: relative;
+        width: 60%;
+        max-width: 535px;
+        height: 456px;
+        left: 4%;
+        top:-200px;
     }
     #container3 {
         text-align: center;
         box-sizing: border-box;
         position: absolute;
-        top:180px;
+        top:120px;
         height: 360px;
         width: 360px;
         left: calc(100% - 630px);
@@ -331,7 +394,7 @@
          text-align: center;
          box-sizing: border-box;
          position: absolute;
-         top:180px;
+         top:120px;
          height: 360px;
          width: 360px;
          left: calc(100% - 620px);
