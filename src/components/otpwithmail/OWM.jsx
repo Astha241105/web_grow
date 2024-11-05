@@ -62,7 +62,7 @@ const OtpWithMail = () => {
       <img src="/home.svg" alt="cross" className="cross hidden md:block" />
       <img src="/bgMobile.png" className="block md:hidden white-bgMobile" alt="background" />
       
-      <div className="image-section1">
+      <div className="image-sec">
         <img src="/otp.svg" alt="logo" className="logo" />
       </div>
       
