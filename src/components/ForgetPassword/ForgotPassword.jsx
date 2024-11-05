@@ -44,7 +44,9 @@ const ForgotPassword = () => {
         alt="background"
       />
       <div className="container">
-        <img className="fpback" src="back.svg" alt="back" />
+        <a href="#" onClick={() => navigate("/")}>
+          <img className="fpback" src="back.svg" alt="back" />
+        </a>
         <div className="image-section1">
           <img src="/fpass.svg" alt="logo" className="logo" />
         </div>
