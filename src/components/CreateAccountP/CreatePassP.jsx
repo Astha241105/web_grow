@@ -71,7 +71,9 @@ const CreatePassP = () => {
       <div className="container">
         <div className="image-section">
           <img src="/createnew.svg" alt="logo" className="logo" />
-          <img src="back.svg" className="cn-home" />
+          <a href="#" onClick={() => navigate("/create-account-participant")}>
+            <img src="back.svg" className="cn-home" />
+          </a>
         </div>
         <div className="form-sec">
           <h3 className="cnhead">Create your account</h3>
