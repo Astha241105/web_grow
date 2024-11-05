@@ -84,3 +84,41 @@ position: relative;
 width:133%;
 }
 }
+
+.eye{
+    right:-68px;
+}
+
+.pass-para1{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 45px;
+    width: 418px;
+    right: -6%;
+    position: relative;
+    flex: 1;
+    margin: 0;
+    top:-2px;
+    }
+
+    .pass-para1 span{
+        color:#000;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    
+    }
+    @media screen and (max-width: 420px) {
+    .pass-para1{
+        top: -24px;
+        left: -15px;
+        font-size: 10px;
+        width:304px;
+    }
+}

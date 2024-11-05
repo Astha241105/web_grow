@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateHostDetails, registerHost } from "../store/slices/hostslice"; 
+import { updateHostDetails, registerHost } from "../store/slices/hostslice";
 import { useNavigate } from "react-router-dom";
 import "./CreatePass.css";
 
@@ -8,9 +8,11 @@ const CreatePass = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [acceptTerms, setAcceptTerms] = useState(false);  // Track checkbox status
-  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
-  
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,6 +30,14 @@ const CreatePass = () => {
     setAcceptTerms(e.target.checked);
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -42,7 +52,7 @@ const CreatePass = () => {
     }
 
     setError("");
-    setIsSubmitting(true); // Start submission
+    setIsSubmitting(true);
 
     const updatedHostDetails = {
       ...existingHostDetails,
@@ -52,10 +62,10 @@ const CreatePass = () => {
     dispatch(updateHostDetails(updatedHostDetails));
     dispatch(registerHost(updatedHostDetails))
       .then(() => {
-        navigate("/otp-host"); // Navigate to OTP page after successful submission
+        navigate("/otp-host");
       })
       .finally(() => {
-        setIsSubmitting(false); // Stop submission
+        setIsSubmitting(false);
       });
   };
 
@@ -72,56 +82,74 @@ const CreatePass = () => {
           <img src="/cah.svg" alt="logo" className="logo" />
           <img src="back.svg" className="cn-home" />
         </div>
-        <div className="form-section2">
+        <div className="form-section1">
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
-            <div className="c
-            nform2">
+            <div className="cnform">
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>
-              <input
-                id="Password"
-                type="password"
-                placeholder="Enter Password"
-                className="pswd"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
-              <img src="/eye.svg" alt="eye" className="arrow1" />
+              <div className="relative">
+                <input
+                  id="Password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter Password"
+                  className="pswd"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required
+                />
+                <img
+                  src={showPassword ? "/eye-open.svg" : "/eye-cross.svg"}
+                  alt={showPassword ? "Hide password" : "Show password"}
+                  className="absolute top-1/2 right-[4%] transform -translate-y-1/2 cursor-pointer hover:opacity-70 transition-opacity eye"
+                  onClick={togglePasswordVisibility}
+                />
+              </div>
 
               <label htmlFor="ConfirmPassword" className="block mb-1">
                 Confirm Password:
               </label>
-              <input
-                id="ConfirmPassword"
-                type="password"
-                placeholder="Confirm Password"
-                className="pswd"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-                required
-              />
-              <img src="/eye.svg" alt="eye" className="arrow2" />
+              <div className="relative">
+                <input
+                  id="ConfirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  className="pswd"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  required
+                />
+                <img
+                  src={showConfirmPassword ? "/eye-open.svg" : "/eye-cross.svg"}
+                  alt={showConfirmPassword ? "Hide password" : "Show password"}
+                  className="absolute top-1/2 right-[4%] transform -translate-y-1/2 cursor-pointer hover:opacity-70 transition-opacity eye"
+                  onClick={toggleConfirmPasswordVisibility}
+                />
+              </div>
 
               {error && <p className="error-message">{error}</p>}
             </div>
 
             <label className="square">
               <input
+                className="box"
                 type="checkbox"
                 checked={acceptTerms}
                 onChange={handleCheckboxChange}
               />
             </label>
-            <p className="pass-para">
-              All your information is collected, stored, and processed as per our
-              data processing guidelines. By signing up, you agree to our{" "}
+            <p className="pass-para1">
+              All your information is collected, stored, and processed as per
+              our data processing guidelines. By signing up, you agree to our{" "}
               <span>Privacy Policy</span> and <span>Terms & Conditions</span>.
             </p>
-            
-            <button type="submit" className="pass-button" disabled={isSubmitting}>
+
+            <button
+              type="submit"
+              className="pass-button"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Getting OTP..." : "Get OTP"}
             </button>
 

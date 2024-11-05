@@ -10,6 +10,8 @@ const CreatePassP = () => {
   const [error, setError] = useState("");
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [checkboxError, setCheckboxError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -50,6 +52,14 @@ const CreatePassP = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
@@ -70,30 +80,44 @@ const CreatePassP = () => {
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>
-              <input
-                type="password"
-                id="Password"
-                placeholder="Enter Password"
-                className="pswd"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <img src="/eye.svg" alt="eye" className="arrow1" />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="Password"
+                  placeholder="Enter Password"
+                  className="pswd"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <img
+                  src={showPassword ? "/eye-open.svg" : "/eye-cross.svg"}
+                  alt={showPassword ? "Hide password" : "Show password"}
+                  className="absolute top-1/2 right-[4%] transform -translate-y-1/2 cursor-pointer hover:opacity-70 transition-opacity eye"
+                  onClick={togglePasswordVisibility}
+                />
+              </div>
 
               <label htmlFor="ConfirmPassword" className="block mb-1">
                 Confirm Password:
               </label>
-              <input
-                type="password"
-                id="ConfirmPassword"
-                placeholder="Confirm Password"
-                className="pswd"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-              <img src="/eye.svg" alt="eye" className="arrow2" />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="ConfirmPassword"
+                  placeholder="Confirm Password"
+                  className="pswd"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+                <img
+                  src={showConfirmPassword ? "/eye-open.svg" : "/eye-cross.svg"}
+                  alt={showConfirmPassword ? "Hide password" : "Show password"}
+                  className="absolute top-1/2 transform -translate-y-1/2 cursor-pointer hover:opacity-70 transition-opacity eye"
+                  onClick={toggleConfirmPasswordVisibility}
+                />
+              </div>
             </div>
 
             {error && <p className="error-message">{error}</p>}
