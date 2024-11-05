@@ -336,13 +336,13 @@
 
 @media screen and (max-height: 750px) {
    .form-section{
-      top:-43px;
+      top:-80px;
    }
    .signup-link{
       font-size: 12px;
    }
    .image-section{
-      top:-21px;
+      top:-43px;
    }
 }
 
