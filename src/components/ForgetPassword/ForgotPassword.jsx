@@ -67,7 +67,7 @@ const ForgotPassword = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="fpform">
-              <label For="contact">Email:</label>
+              <label htmlFor="contact">Email:</label>
               <input
                 type="text"
                 id="contact"
@@ -75,6 +75,7 @@ const ForgotPassword = () => {
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="Enter email"
+                disabled={loading} 
               />
             </div>
 

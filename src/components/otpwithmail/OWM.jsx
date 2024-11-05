@@ -83,7 +83,11 @@ const OtpWithMail = () => {
           />
         ))}
         <br />
-        <button className="verify1" onClick={handleVerify}>
+        <button
+          className="verify1"
+          onClick={handleVerify}
+          disabled={status === "loading"}
+        >
           Verify
         </button>
         {status === "loading" && <p>Validating...</p>}

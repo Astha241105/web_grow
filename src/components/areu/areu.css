@@ -43,10 +43,10 @@
 }
 .image-sec{
     position: relative;
-    width: 40%;
+    width: 50%;
     max-width: 535px;
     height: 456px;
-    left: 6%;
+    left: 8%;
     top:150px;
 }
 .radio-group{
@@ -183,7 +183,7 @@
     }
     .image-sec{
         position: relative;
-        width: 60%;
+        width: 50%;
         max-width: 535px;
         height: 456px;
         left: 4%;
@@ -221,6 +221,14 @@
         width: 817px;
         left: calc(100% - 700px);
         padding: 0;
+    }
+    .image-sec{
+        position: relative;
+        width: 80%;
+        max-width: 535px;
+        height: 456px;
+        left: 6%;
+        top:-90px;
     }
 }
 @media(max-width:490px){
@@ -312,11 +320,11 @@
     }
     .image-sec{
         position: relative;
-        width: 80%;
+        width: 60%;
         max-width: 535px;
         height: 456px;
         left: 4%;
-        top:-200px;
+        top:-300px;
     }
     #container3 {
         text-align: center;
