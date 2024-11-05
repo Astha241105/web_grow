@@ -33,7 +33,9 @@ const CreateAccountP = () => {
       <div className="container">
         <div className="image-section">
           <img src="/createnew.svg" alt="logo" className="logo" />
-          <img src="home.svg" className="cn-home hidden md:block" />
+          <a href="#" onClick={() => navigate("/")}>
+            <img src="home.svg" className="cn-home hidden md:block" />
+          </a>
         </div>
         <div className="form-sec">
           <h3 className="cnhead">Create your account</h3>

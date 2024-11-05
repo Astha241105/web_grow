@@ -68,7 +68,9 @@ const Otp = () => {
         alt="background"
       />
       <img src="/otp.svg" alt="logo" className="otp" />
-      <img src="back.svg" className="back" />
+      <a href="#" onClick={() => navigate("/forgot-password")}>
+        <img src="back.svg" className="back" />
+      </a>
       <div id="container1">
         <div id="codemail">Enter the code</div>
         <p id="mess1">
