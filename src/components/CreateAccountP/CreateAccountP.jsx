@@ -31,7 +31,7 @@ const CreateAccountP = () => {
         alt="background"
       />
       <div className="container">
-        <div className="image-section1">
+        <div className="image-section">
           <img src="/createnew.svg" alt="logo" className="logo" />
           <img src="home.svg" className="cn-home hidden md:block" />
         </div>

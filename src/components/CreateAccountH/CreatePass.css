@@ -122,3 +122,15 @@ width:133%;
         width:304px;
     }
 }
+
+@media screen and (max-height: 750px) {
+    .pass-button{
+        margin-bottom: 0px;
+        top:-43px;  
+    }
+.signin-link{
+    top:401px;
+    font-size: 12px;
+}
+
+}
