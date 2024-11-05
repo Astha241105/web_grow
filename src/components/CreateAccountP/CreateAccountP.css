@@ -71,7 +71,7 @@ font-weight: 700;
 line-height: normal;
  }
 
- .form-section1{
+ .form-sec{
     position: relative;
    width: 392px;
    max-width: 100%;
@@ -102,4 +102,38 @@ line-height: normal;
 text-decoration-line: underline;
 height:20px;
 width:56px;
+ }
+ @media screen and (max-width: 370px) {
+   .cnhead{
+left:-34px;
+   }
+ }
+ @media screen and (max-width: 420px) {
+   .cnhead{
+      font-size: 29px;
+      left: -9px;
+      position: relative;
+   }
+   .form-sec{
+      top: -28px;
+   }
+
+   .cnform{
+      left:-44px;
+   }
+
+   .cnform input{
+      width:133%
+   }
+
+   .cn-continue{
+      left:-44px;
+      width:133%;
+      position: relative;
+   }
+
+   .signin-link{
+      left:10px;
+   }
+
  }

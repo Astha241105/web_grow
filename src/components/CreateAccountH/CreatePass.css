@@ -23,6 +23,7 @@ right: -6%;
 position: relative;
 flex: 1;
 margin: 0;
+top:-22px;
 }
 
 .pass-para span{
@@ -65,4 +66,21 @@ align-items: flex-start;
 flex-shrink: 0;
 position: absolute;
 top: 68%;
+}
+@media screen and (max-width: 420px) {
+.box{
+    left:-38px;
+    position: relative;
+}
+.pass-para{
+    top: -24px;
+    left: -15px;
+    font-size: 10px;
+    width:304px;
+}
+.pass-button{
+left:-43px;
+position: relative;
+width:133%;
+}
 }
