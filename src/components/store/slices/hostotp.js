@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const validateHostOtp = createAsyncThunk(
   "hostOtp/validateHostOtp",
   async ({ email, otp }, { rejectWithValue }) => {
+    console.log({ email, otp });
     try {
         console.log("Request payload:",{ email, otp });
       const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/validate-host", {
