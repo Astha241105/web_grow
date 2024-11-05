@@ -159,7 +159,7 @@
         min-height: 100vh;
         left: calc(100% - 600px);
     }
-    .image-section1{
+    .image-sec{
         position: relative;
         width: 60%;
         max-width: 535px;

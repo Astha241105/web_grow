@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateHostDetails } from "../store/slices/hostslice"; 
+import { updateHostDetails } from "../store/slices/hostslice";
 import { useNavigate } from "react-router-dom";
 import "./Org_Des.css";
 
@@ -13,10 +13,8 @@ const Org_Des = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
-  const existingHostDetails = useSelector((state) => state.host); 
+  const existingHostDetails = useSelector((state) => state.host);
 
-  
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -24,7 +22,6 @@ const Org_Des = () => {
       [id]: value,
     }));
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +33,6 @@ const Org_Des = () => {
 
     dispatch(updateHostDetails(updatedHostDetails));
 
-  
     navigate("/create-pass-host");
   };
 
@@ -51,7 +47,9 @@ const Org_Des = () => {
       <div className="container">
         <div className="image-section">
           <img src="/cah.svg" alt="logo" className="logo" />
-          <img src="back.svg" className="cn-home" />
+          <a href="#" onClick={() => navigate("/create-pass-host")}>
+            <img src="back.svg" className="cn-home" />
+          </a>
         </div>
         <div className="form-section2">
           <h3 className="cnhead">Create your account</h3>
