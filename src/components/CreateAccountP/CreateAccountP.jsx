@@ -31,11 +31,11 @@ const CreateAccountP = () => {
         alt="background"
       />
       <div className="container">
-        <div className="image-section">
+        <div className="image-section1">
           <img src="/createnew.svg" alt="logo" className="logo" />
-          <img src="home.svg" className="cn-home" />
+          <img src="home.svg" className="cn-home hidden md:block" />
         </div>
-        <div className="form-section1">
+        <div className="form-sec">
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
             <div className="cnform">
