@@ -389,12 +389,16 @@
    font-size: 1rem;
 }
 
+.eye1{
+   right:-46px;
+}
+
 @media screen and (max-width: 480px) {
 .username-input {
    width:338px;
 }
 .eye1{
-right:-9px;
+right:-9px; 
 }
 .password-input {
    width:338px;
@@ -405,7 +409,9 @@ right:-9px;
    
 }
 
+.forgot-password{
+   left:24px;
 }
-.eye1{
-   right:-46px;
+
 }
+
