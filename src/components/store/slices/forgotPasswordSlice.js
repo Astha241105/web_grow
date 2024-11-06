@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 export const verifyOtpCode = createAsyncThunk(
   "recovery/verifyOtp",
   async ({ email, otp }, { rejectWithValue }) => {
@@ -15,8 +16,8 @@ export const verifyOtpCode = createAsyncThunk(
           body: JSON.stringify({
             email,
             otp,
-            newPassword: "temporary",
-            confirmPassword: "temporary",
+            newPassword: "tempPassword123",
+            confirmPassword: "tempPassword123",
           }),
         }
       );
@@ -36,6 +37,7 @@ export const verifyOtpCode = createAsyncThunk(
         throw new Error(data.message || "Verification failed");
       }
 
+      localStorage.setItem("verifiedOtp", otp);
       return data;
     } catch (error) {
       console.error("OTP Verification Error:", error);
@@ -46,14 +48,14 @@ export const verifyOtpCode = createAsyncThunk(
 
 export const updatePassword = createAsyncThunk(
   "recovery/updatePassword",
-  async ({ email, otp, newPassword, confirmPassword }, { rejectWithValue }) => {
+  async ({ email, newPassword, confirmPassword }, { rejectWithValue }) => {
     try {
-      console.log("Sending password update request:", {
-        email,
-        otp,
-        newPassword: "***",
-        confirmPassword: "***",
-      });
+      const verifiedOtp = localStorage.getItem("verifiedOtp");
+      if (!verifiedOtp) {
+        throw new Error("OTP verification required");
+      }
+
+      console.log("Sending password update request");
 
       const response = await fetch(
         "https://webgrowproject.onrender.com/api/v1/auth/verify-otp",
@@ -64,7 +66,7 @@ export const updatePassword = createAsyncThunk(
           },
           body: JSON.stringify({
             email,
-            otp,
+            otp: verifiedOtp,
             newPassword,
             confirmPassword,
           }),
@@ -85,7 +87,7 @@ export const updatePassword = createAsyncThunk(
       if (!response.ok) {
         throw new Error(data.message || "Password update failed");
       }
-
+      localStorage.removeItem("verifiedOtp");
       return data;
     } catch (error) {
       console.error("Password Update Error:", error);
@@ -100,8 +102,8 @@ const recoverySlice = createSlice({
     isLoading: false,
     error: null,
     success: false,
+    otpVerified: false,
     email: "",
-    verifiedOtp: "",
   },
   reducers: {
     setEmail: (state, action) => {
@@ -111,28 +113,26 @@ const recoverySlice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.success = false;
+      state.otpVerified = false;
     },
   },
   extraReducers: (builder) => {
     builder
-
       .addCase(verifyOtpCode.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        state.success = false;
+        state.otpVerified = false;
       })
-      .addCase(verifyOtpCode.fulfilled, (state, action) => {
+      .addCase(verifyOtpCode.fulfilled, (state) => {
         state.isLoading = false;
-        state.success = true;
-        state.verifiedOtp = action.meta.arg.otp;
+        state.otpVerified = true;
         state.error = null;
       })
       .addCase(verifyOtpCode.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-        state.success = false;
+        state.otpVerified = false;
       })
-
       .addCase(updatePassword.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -140,6 +140,7 @@ const recoverySlice = createSlice({
       .addCase(updatePassword.fulfilled, (state) => {
         state.isLoading = false;
         state.success = true;
+        state.otpVerified = false;
       })
       .addCase(updatePassword.rejected, (state, action) => {
         state.isLoading = false;
