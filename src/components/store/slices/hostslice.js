@@ -7,7 +7,7 @@ export const registerHost = createAsyncThunk(
     try {
       console.log("Request payload:", hostDetails);
 
-      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register-host", {
+      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(hostDetails),
@@ -35,7 +35,7 @@ export const resendHostOtp = createAsyncThunk(
   async (hostDetails, { rejectWithValue }) => {
     console.log(hostDetails)
     try {
-      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register-host", {
+      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(hostDetails),
@@ -63,6 +63,7 @@ const hostSlice = createSlice({
     organization: "",
     designation: "",
     password: "",
+    role:"HOST",
     status: null,
     error: null,
   },

@@ -15,7 +15,7 @@ const CreatePassP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { firstName, lastName, email, phone, status } = useSelector(
+  const { firstName, lastName, email, mobile, organization,designation,role,status } = useSelector(
     (state) => state.account
   );
 
@@ -38,7 +38,7 @@ const CreatePassP = () => {
     dispatch(setPasswordDetails({ password, confirmPassword }));
 
  
-    dispatch(createAccount({ firstName, lastName, email, phone, password }))
+    dispatch(createAccount({ firstName, lastName, email, mobile, password,organization,designation,role }))
       .then(() => {
         navigate("/otpWithMail");
       })

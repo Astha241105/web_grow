@@ -14,7 +14,7 @@ export const validateOtp = createAsyncThunk(
       if (!response.ok) {
         throw new Error("OTP validation failed");
       }
-
+      console.log(response.json());
       const data = await response.json();
       if (data.data.token) {
         localStorage.setItem("token", data.data.token);
@@ -29,19 +29,19 @@ export const validateOtp = createAsyncThunk(
 
 export const resendOtp = createAsyncThunk(
   "otp/resendOtp",
-  async ({ firstname, lastname, email, mobile, password }, { rejectWithValue }) => {
+  async ({ firstname, lastname, email, mobile,password, organization,designation,role  }, { rejectWithValue }) => {
     try {
-      console.log({ firstname, lastname, email, mobile, password })
+      console.log({ firstname, lastname, email, mobile,password, organization,designation,role  })
       const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstname, lastname, email, mobile, password }),
+        body: JSON.stringify({ firstname, lastname, email, mobile, password,organization,designation,role  }),
       });
 
       if (!response.ok) {
         throw new Error("Failed to resend OTP");
       }
-
+      console.log(response);
       return await response.json();
     } catch (error) {
       return rejectWithValue(error.message);

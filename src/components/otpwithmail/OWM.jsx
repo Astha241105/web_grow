@@ -9,7 +9,7 @@ const OtpWithMail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const { firstName, lastName, email, phone, password } = useSelector(
+  const { firstName, lastName, email, mobile ,password} = useSelector(
     (state) => state.account
   );
   const { status, error } = useSelector((state) => state.otp);
@@ -44,8 +44,11 @@ const OtpWithMail = () => {
         firstname: firstName,
         lastname: lastName,
         email: email,
-        mobile: phone,
+        mobile: mobile,
         password: password,
+        organization:null,
+        designation:null,
+        role:"USER"
       })
     );
   };

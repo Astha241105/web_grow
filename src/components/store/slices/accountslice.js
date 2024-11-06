@@ -32,19 +32,22 @@ const accountSlice = createSlice({
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    mobile: "",
     password: "",
     confirmPassword: "",
+    organization:null,
+    designation:null,
+    role:"USER",
     status: null,
     error: null,
   },
   reducers: {
     setPersonalDetails: (state, action) => {
-      const { firstName, lastName, email, phone } = action.payload;
+      const { firstName, lastName, email, mobile } = action.payload;
       state.firstName = firstName;
       state.lastName = lastName;
       state.email = email;
-      state.phone = phone;
+      state.mobile= mobile;
     },
     setPasswordDetails: (state, action) => {
       const { password, confirmPassword } = action.payload;
@@ -55,7 +58,7 @@ const accountSlice = createSlice({
       state.firstName = "";
       state.lastName = "";
       state.email = "";
-      state.phone = "";
+      state.mobile = "";
       state.password = "";
       state.confirmPassword = "";
     },
