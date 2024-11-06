@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword } from "../store/slices/forgotPasswordSlice";
 import { useNavigate } from "react-router-dom";
+import { changePassword } from "../store/slices/fpchangeslice";
 import "./changepass.css";
 
 const Changepass = () => {
@@ -12,9 +12,8 @@ const Changepass = () => {
     confirmPassword: "",
   });
 
-  const { email, verifiedOtp, isLoading, error } = useSelector(
-    (state) => state.recovery
-  );
+  const { email, verifiedOtp } = useSelector((state) => state.fpotp);
+  const { isLoading, error } = useSelector((state) => state.fpchange);
   const [localError, setLocalError] = useState("");
 
   const handleChange = (e) => {
@@ -68,21 +67,16 @@ const Changepass = () => {
 
       console.log("Submitting password update with:", {
         email: userEmail,
-        otp: verifiedOtp,
         newPassword: passwords.newPassword,
-        confirmPassword: passwords.confirmPassword,
       });
 
-      const result = await dispatch(
-        updatePassword({
+      await dispatch(
+        changePassword({
           email: userEmail,
-          otp: verifiedOtp,
           newPassword: passwords.newPassword,
-          confirmPassword: passwords.confirmPassword,
         })
-      ).unwrap();
+      );
 
-      console.log("Password update response:", result);
       navigate("/");
     } catch (err) {
       console.error("Password update error:", err);

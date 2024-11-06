@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { verifyOtpCode } from "../store/slices/forgotPasswordSlice";
 import { useNavigate } from "react-router-dom";
+import { verifyOtp } from "../store/slices/fpotpslice";
 import "../otpwithmail/OtpWithMail.css";
 
 const Otp = () => {
@@ -9,7 +9,7 @@ const Otp = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(["", "", "", ""]);
   const { email, isLoading, error, otpVerified } = useSelector(
-    (state) => state.recovery || {}
+    (state) => state.fpotp || {}
   );
 
   const recoveryEmail = email || localStorage.getItem("recoveryEmail");
@@ -58,15 +58,14 @@ const Otp = () => {
     }
 
     try {
-      const result = await dispatch(
-        verifyOtpCode({
-          email: recoveryEmail,
-          otp: otpValue,
-        })
+      await dispatch(
+        verifyOtp({ email: recoveryEmail, otp: otpValue })
       ).unwrap();
-      console.log("Verification result:", result);
+      console.log("OTP verified successfully, navigating to change password");
+      navigate("/change-password");
     } catch (err) {
-      console.error("Verification failed:", err);
+      console.error("Verification failed:", err.message);
+      // Handle the error, e.g., display an error message to the user
     }
   };
 
