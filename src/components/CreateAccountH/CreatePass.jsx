@@ -80,7 +80,7 @@ const CreatePass = () => {
       />
       <div className="container">
         <div className="image-section">
-          <img src="/cah.svg" alt="logo" className="logo" />
+          <img src="/host1.png" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/create-account-host")}>
             <img src="back.svg" className="cn-home" />
           </a>

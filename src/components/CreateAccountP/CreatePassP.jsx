@@ -9,13 +9,12 @@ const CreatePassP = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [checkboxError, setCheckboxError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { firstName, lastName, email, mobile, organization,designation,role,status } = useSelector(
+  const { firstName, lastName, email, mobile, organization, designation, role, status } = useSelector(
     (state) => state.account
   );
 
@@ -28,8 +27,7 @@ const CreatePassP = () => {
     }
 
     if (!acceptTerms) {
-      setCheckboxError("Please accept the terms and conditions to proceed");
-      setError("");
+      setError("Please agree to terms and conditions.");
       return;
     }
 
@@ -37,8 +35,7 @@ const CreatePassP = () => {
     
     dispatch(setPasswordDetails({ password, confirmPassword }));
 
- 
-    dispatch(createAccount({ firstName, lastName, email, mobile, password,organization,designation,role }))
+    dispatch(createAccount({ firstName, lastName, email, mobile, password, organization, designation, role }))
       .then(() => {
         navigate("/otpWithMail");
       })
@@ -48,7 +45,7 @@ const CreatePassP = () => {
   const handleCheckboxChange = (e) => {
     setAcceptTerms(e.target.checked);
     if (e.target.checked) {
-      setCheckboxError("");
+      setError("");
     }
   };
 
@@ -79,6 +76,7 @@ const CreatePassP = () => {
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
             <div className="cnform">
+              {error && <p className="error-message"><img src="/caution.png"></img>{error}</p>}
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>
@@ -122,15 +120,14 @@ const CreatePassP = () => {
               </div>
             </div>
 
-            {error && <p className="error-message">{error}</p>}
-
-            <label className="square"> </label>
-            <input
-              className="box"
-              type="checkbox"
-              checked={acceptTerms}
-              onChange={handleCheckboxChange}
-            />
+            <label className="square">
+              <input
+                className="box"
+                type="checkbox"
+                checked={acceptTerms}
+                onChange={handleCheckboxChange}
+              />
+            </label>
             <p className="pass-para">
               All your information is collected, stored, and processed as per
               our data processing guidelines. By signing up you agree to our{" "}

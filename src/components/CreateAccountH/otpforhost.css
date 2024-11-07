@@ -64,14 +64,6 @@
     text-align: center;
     font-size:21px;
 }
-/* .image-section2{
-    position: relative;
-    width: 90%;
-    max-width: 535px;
-    height: 456px;
-    left: 4%;
-    top:150px;
-} */
 .error-border {
     border: 4px solid red  !important;
   }
@@ -206,10 +198,6 @@
 
 @media (max-width: 430px){
     #contout{
-        /* background-image:  url(../../assets/otp.png),url(../../assets/s.png);
-        background-repeat: no-repeat;
-        background-position: 10px 75px,bottom ;
-        background-size: 350px 228px, 400px 450px; */
         display:flex;
         justify-content: center;
         align-items:center;

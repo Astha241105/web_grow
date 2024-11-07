@@ -49,7 +49,7 @@ const CreateAccountH = () => {
       />
       <div className="container">
         <div className="image-section">
-          <img src="/cah.svg" alt="logo" className="logo" />
+          <img src="/host1.png" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/")}>
             <img src="home.svg" className="cn-home" />
           </a>
