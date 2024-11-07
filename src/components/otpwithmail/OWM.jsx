@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { validateOtp } from "../store/slices/otpslice";
+import { validateOtp, resendOtp } from "../store/slices/otpslice"; 
 import "./OtpWithMail.css";
 
 const OtpWithMail = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const email = useSelector((state) => state.account.email);
+  const { firstName, lastName, email, mobile ,password} = useSelector(
+    (state) => state.account
+  );
   const { status, error } = useSelector((state) => state.otp);
 
   const handleChange = (e, index) => {
     const { value } = e.target;
-
     if (value.length > 1) return;
 
     const newOtp = [...otp];
@@ -37,6 +37,21 @@ const OtpWithMail = () => {
     dispatch(validateOtp({ email, otp: otpValue }));
   };
 
+  const handleResendOtp = () => {
+    dispatch(
+      resendOtp({
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        mobile: mobile,
+        password: password,
+        organization:null,
+        designation:null,
+        role:"USER"
+      })
+    );
+  };
+
   useEffect(() => {
     if (status === "success") {
       navigate("/home");
@@ -44,6 +59,7 @@ const OtpWithMail = () => {
   }, [status, navigate]);
 
   return (
+
     <div className="forgot-pass">
       <img
         src="/Rectangle2.png"
@@ -58,7 +74,6 @@ const OtpWithMail = () => {
         alt="background"
       />
       <img src="/otp.svg" alt="logo" className="otp" />
-
       <div id="container1">
         <div id="codemail">Enter the code</div>
         <p id="mess1">Enter the 4-digit OTP code we have sent to {email}.</p>
@@ -75,23 +90,24 @@ const OtpWithMail = () => {
             maxLength="1"
           />
         ))}
-
         <br />
-        <button className="verify1" onClick={handleVerify}>
+        <button
+          className="verify1"
+          onClick={handleVerify}
+          disabled={status === "loading"}
+        >
           Verify
         </button>
         {status === "loading" && <p>Validating...</p>}
-        {status === "failed" && (
-          <p style={{ color: "red" }}>OTP invalid! Please try again.</p>
-        )}
-        {status === "success" && (
-          <p style={{ color: "green" }}>OTP Verified!</p>
-        )}
+        {status === "failed" && <p style={{ color: "red" }}>OTP invalid! Please try again.</p>}
+        {status === "success" && <p style={{ color: "green" }}>OTP Verified!</p>}
 
         <br />
         <div className="didnt1">
           <span>Didn't receive the code?</span>
-          <span id="gradient1"> Resend code.</span>
+          <span id="gradient1" onClick={handleResendOtp} style={{ cursor: "pointer" }}>
+            Resend code.
+          </span>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { validateHostOtp } from '../store/slices/hostotp'; 
+import { validateHostOtp} from '../store/slices/hostotp'; 
+import { resendHostOtp}   from '../store/slices/hostslice'
 import './otpforhost.css';
 
 const HostOtpVerification = () => {
@@ -10,7 +11,13 @@ const HostOtpVerification = () => {
     const navigate = useNavigate();
   
     const email = useSelector((state) => state.host.email);
-    console.log(email);
+    const firstName = useSelector((state) => state.host.firstName);
+    const lastName = useSelector((state) => state.host.lastName);
+    const mobile = useSelector((state) => state.host.mobile);
+    const organization = useSelector((state) => state.host.organization);
+    const designation = useSelector((state) => state.host.designation);
+    const password = useSelector((state) => state.host.password);
+  
     const { status, error } = useSelector((state) => state.hostOtp);
   
     const handleChange = (e, index) => {
@@ -38,6 +45,20 @@ const HostOtpVerification = () => {
       dispatch(validateHostOtp({ email, otp: otpValue })); 
     };
   
+    const handleResendOtp = () => {
+      const hostDetails = {
+        firstName,
+        lastName,
+        email,
+        mobile,
+        organization,
+        designation,
+        password,
+      };
+      console.log(hostDetails)
+      dispatch(resendHostOtp(hostDetails));
+    };
+  
     useEffect(() => {
       if (status === "success") {
         navigate("/home");
@@ -45,7 +66,7 @@ const HostOtpVerification = () => {
     }, [status, navigate]);
   
     return (
-      <div id="contout">
+      <div id="contout10">
         <div id="container1">
           <div id="codemail">Enter code</div>
           <p id="mess1">Enter the 4-digit OTP code sent to {email}.</p>
@@ -64,9 +85,13 @@ const HostOtpVerification = () => {
           ))}
   
           <br />
-          <button className="verify1" onClick={handleVerify}>
-            Verify
-          </button>
+          <button
+          className="verify1"
+          onClick={handleVerify}
+          disabled={status === "loading"}
+        >
+          Verify
+        </button>
           {status === "loading" && <p>Validating...</p>}
           {status === "failed" && <p style={{ color: 'red' }}>OTP invalid! Please try again.</p>}
           {status === "success" && <p style={{ color: 'green' }}>OTP Verified!</p>}
@@ -74,12 +99,13 @@ const HostOtpVerification = () => {
           <br />
           <div className="didnt1">
             <span>Didn't receive the code?</span>
-            <span id="gradient1"> Resend code.</span>
+            <span id="gradient1" onClick={handleResendOtp} style={{ cursor: 'pointer' }}>
+              Resend code.
+            </span>
           </div>
         </div>
       </div>
     );
-  };
-  
-  export default HostOtpVerification;
-  
+};
+
+export default HostOtpVerification;

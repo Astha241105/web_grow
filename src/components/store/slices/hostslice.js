@@ -3,27 +3,51 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const registerHost = createAsyncThunk(
   "host/register",
   async (hostDetails, { rejectWithValue }) => {
+    console.log(hostDetails)
     try {
-      console.log("Request payload:", hostDetails); 
+      console.log("Request payload:", hostDetails);
 
-      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register-host", {
+      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(hostDetails),
       });
 
-      console.log("Response object:", response); 
+      console.log("Response object:", response);
 
       if (!response.ok) {
         throw new Error("Host registration failed");
       }
 
       const data = await response.json();
-      console.log("Response data:", data); 
+      console.log("Response data:", data);
 
       return data;
     } catch (error) {
-      console.error("Error:", error.message); 
+      console.error("Error:", error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const resendHostOtp = createAsyncThunk(
+  "host/resendOtp",
+  async (hostDetails, { rejectWithValue }) => {
+    console.log(hostDetails)
+    try {
+      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(hostDetails),
+      });
+
+      if (!response.ok) {
+        throw new Error("Resending OTP failed");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
       return rejectWithValue(error.message);
     }
   }
@@ -39,6 +63,7 @@ const hostSlice = createSlice({
     organization: "",
     designation: "",
     password: "",
+    role:"HOST",
     status: null,
     error: null,
   },
@@ -46,7 +71,6 @@ const hostSlice = createSlice({
     updateHostDetails: (state, action) => {
       return { ...state, ...action.payload };
     },
-
   },
   extraReducers: (builder) => {
     builder
@@ -64,9 +88,21 @@ const hostSlice = createSlice({
       .addCase(registerHost.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+      .addCase(resendHostOtp.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(resendHostOtp.fulfilled, (state, action) => {
+        state.status = "success";
+      })
+      .addCase(resendHostOtp.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       });
   },
 });
 
 export const { updateHostDetails } = hostSlice.actions;
 export default hostSlice.reducer;
+

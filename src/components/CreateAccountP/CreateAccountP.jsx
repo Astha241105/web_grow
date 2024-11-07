@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setPersonalDetails } from "../store/slices/accountslice";
+import { setPersonalDetails } from "../store/slices/accountslice.js";
 import { useNavigate } from "react-router-dom";
 import "./CreateAccountP.css";
 
 const CreateAccountP = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [mobile, setmobile] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const CreateAccountP = () => {
     const [firstName, ...lastNameParts] = name.trim().split(" ");
     const lastName = lastNameParts.join(" ");
 
-    dispatch(setPersonalDetails({ firstName, lastName, email, phone }));
+    dispatch(setPersonalDetails({ firstName, lastName, email, mobile }));
 
     navigate("/create-pass-participant");
   };
@@ -65,15 +65,15 @@ const CreateAccountP = () => {
                 required
               />
 
-              <label htmlFor="phone" className="block mb-1">
-                Phone number:
+              <label htmlFor="mobile" className="block mb-1">
+                mobile number:
               </label>
               <input
                 type="tel"
-                id="phone"
-                placeholder="Enter phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                id="mobile"
+                placeholder="Enter mobile number"
+                value={mobile}
+                onChange={(e) => setmobile(e.target.value)}
                 required
               />
             </div>
