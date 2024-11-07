@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { validateOtp } from '../store/slices/otpslice'; 
-import './OtpWithMail.css';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { validateOtp } from "../store/slices/otpslice";
+import "./OtpWithMail.css";
 
 const OtpWithMail = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const email = useSelector((state) => state.account.email);
   const { status, error } = useSelector((state) => state.otp);
 
@@ -27,7 +27,7 @@ const OtpWithMail = () => {
   };
 
   const handleKeyDown = (e, index) => {
-    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
       document.getElementById(`otp-input-${index - 1}`).focus();
     }
   };
@@ -39,12 +39,12 @@ const OtpWithMail = () => {
 
   useEffect(() => {
     if (status === "success") {
-      navigate("/home");  
+      navigate("/home");
     }
   }, [status, navigate]);
 
   return (
-    <div id="contout">
+    <div className="forgot-pass">
       <img
         src="/Rectangle2.png"
         className="white-bg hidden md:block"
@@ -57,9 +57,8 @@ const OtpWithMail = () => {
         className="block md:hidden white-bgMobile"
         alt="background"
       />
-      <div className="image-section1">
-          <img src="/otp.svg" alt="logo" className="logo" />
-        </div>
+      <img src="/otp.svg" alt="logo" className="otp" />
+
       <div id="container1">
         <div id="codemail">Enter the code</div>
         <p id="mess1">Enter the 4-digit OTP code we have sent to {email}.</p>
@@ -82,8 +81,12 @@ const OtpWithMail = () => {
           Verify
         </button>
         {status === "loading" && <p>Validating...</p>}
-        {status === "failed" && <p style={{ color: 'red' }}>OTP invalid! Please try again.</p>}
-        {status === "success" && <p style={{ color: 'green' }}>OTP Verified!</p>}
+        {status === "failed" && (
+          <p style={{ color: "red" }}>OTP invalid! Please try again.</p>
+        )}
+        {status === "success" && (
+          <p style={{ color: "green" }}>OTP Verified!</p>
+        )}
 
         <br />
         <div className="didnt1">
