@@ -83,7 +83,7 @@ const CreateAccountH = () => {
               />
 
               <label htmlFor="mobile" className="block mb-1">
-                mobile Number:
+                Mobile Number:
               </label>
               <input
                 type="tel"
