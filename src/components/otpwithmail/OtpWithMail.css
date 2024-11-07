@@ -224,15 +224,15 @@
     top:150px;
 } */
     #container1 {
-        text-align: center !important;
-        box-sizing: border-box !important;
-        position: absolute !important;
-        height: 269px !important;
-        width: 328px !important;
-        top: 290px !important; 
-        left: 50% !important; 
-        transform: translateX(-50%) !important; 
-        padding: 0 !important;
+        text-align: center ;
+        box-sizing: border-box ;
+        position: absolute ;
+        height: 269px ;
+        width: 328px ;
+        top: 290px ; 
+        left: 50% ; 
+        transform: translateX(-50%); 
+        padding: 0 ;
     }
     
     #codemail {
@@ -300,3 +300,71 @@ position: absolute;
     left:77px;
     position: absolute;
 }
+@media(max-height:1024px){
+    
+    #container1 {
+        /* text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 339px;
+        width: 415px; */
+        /* left: calc(100% -150px); */
+        top: 400px;
+        /* padding: 0; */
+    
+    }
+    
+    }
+    @media(max-height:800px){
+    
+        #container1 {
+            /* text-align: center;
+            box-sizing: border-box;
+            position: absolute;
+            height: 339px;
+            width: 415px; */
+            /* left: calc(100% - 575px); */
+            top: 260px;
+            /* padding: 0; */
+        
+        }}
+@media(max-height:740px){
+    
+    #container1 {
+        /* text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 339px;
+        width: 415px; */
+        /* left: calc(100% - 575px); */
+        top: 260px;
+        /* padding: 0; */
+    
+    }}
+@media(max-height:670px){
+    
+#container1 {
+    /* text-align: center;
+    box-sizing: border-box;
+    position: absolute;
+    height: 339px;
+    width: 415px; */
+    /* left: calc(100% - 575px); */
+    top: 240px;
+    /* padding: 0; */
+
+}}
+@media(max-height:600px){
+    
+    #container1 {
+        /* text-align: center;
+        box-sizing: border-box;
+        position: absolute;
+        height: 339px;
+        width: 415px; */
+        /* left: calc(100% - 575px); */
+        top: 130px;
+        /* padding: 0; */
+    
+    }}
+
