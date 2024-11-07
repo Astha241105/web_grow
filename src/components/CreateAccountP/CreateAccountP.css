@@ -110,7 +110,7 @@ left:-34px;
  }
  @media screen and (max-width: 430px) {
    .cnhead{
-      font-size: 29px;
+      font-size: 24px;
       left: -9px;
       position: relative;
    }
