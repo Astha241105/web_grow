@@ -325,15 +325,38 @@ width:52%;
     left:77px;
     position: absolute;
 }
-@media(max-height:1024px){
+@media (min-height: 735px) and (min-width: 786px) {
+    .otp5 {
+        top: 30%;
+    }
+}
+@media(max-height:1261px){
     
     #container1 {
         
-        top: 31%;
+        top: 37% !important;
     
     }
     
     }
+
+
+    @media(min-height:1268px) and (min-width:786px){
+        .otp5{
+            top:35%;
+        }
+
+        #container1{
+            top:35% !important;
+        }
+    }
+
+    /* @media(max-height:1261px) and (max-width:1380px){
+        .otp5{
+            top:35% ;
+        }
+    } */
+
     @media(max-height:800px){
     
         #container1 {
