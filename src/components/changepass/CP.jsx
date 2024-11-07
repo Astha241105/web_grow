@@ -97,7 +97,16 @@ const Changepass = () => {
   };
 
   return (
-    <div id="contout3">
+    <div className="forgot-pass">
+      <img src="/Rectangle2.png" className="white-bg" alt="background" />
+      <img
+        src="/bgMobile.png"
+        className="block md:hidden white-bgMobile"
+        alt="background"
+      />
+      <div className="image-section1">
+        <img src="/fpass.svg" alt="logo" className="logo" />
+      </div>
       <div id="container4">
         <h1 id="change">Change Password</h1>
         {(error || localError) && (
