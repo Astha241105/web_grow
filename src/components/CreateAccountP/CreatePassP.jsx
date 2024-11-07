@@ -138,8 +138,10 @@ const CreatePassP = () => {
               type="submit"
               className="pass-button"
               disabled={status === "loading"}
+              style={{ opacity:status === "loading"  ? 0.7 : 1 }}
             >
               {status === "loading" ? "Sending OTP..." : "GET OTP"}
+            
             </button>
 
             <p className="signin-link">

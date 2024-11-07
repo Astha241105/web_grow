@@ -106,6 +106,9 @@ const Changepass = () => {
       />
       <div className="image-section1">
         <img src="/fpass.svg" alt="logo" className="logo" />
+        <a href="#" onClick={() => navigate("/home")}>
+            <img src="back.svg" className="cn-home" />
+          </a>
       </div>
       <div id="container4">
         <h1 id="change">Change Password</h1>

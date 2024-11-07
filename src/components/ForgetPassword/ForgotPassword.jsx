@@ -56,6 +56,7 @@ const ForgotPassword = () => {
 
           {error && (
             <p className="error-message" style={{ color: "red" }}>
+              <img src="/caution.png"></img>
               {error}
             </p>
           )}
@@ -76,6 +77,7 @@ const ForgotPassword = () => {
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="Enter email"
                 disabled={loading} 
+                required
               />
             </div>
 

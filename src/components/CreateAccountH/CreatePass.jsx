@@ -47,7 +47,7 @@ const CreatePass = () => {
     }
 
     if (!acceptTerms) {
-      setError("Please accept the terms and conditions to proceed");
+      setError("Please accept the terms and conditions.");
       return;
     }
 
@@ -89,6 +89,9 @@ const CreatePass = () => {
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
             <div className="cnform">
+            {error && <p className="error-message">
+              <img src="/caution.png"></img>{error}
+              </p>}
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>
@@ -131,7 +134,7 @@ const CreatePass = () => {
                 />
               </div>
 
-              {error && <p className="error-message">{error}</p>}
+              
             </div>
 
             <label className="square">

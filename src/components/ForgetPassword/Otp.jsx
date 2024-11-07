@@ -113,14 +113,7 @@ const Otp = () => {
           />
         ))}
         <br />
-        {error && (
-          <div
-            className="error-message"
-            style={{ color: "red", marginTop: "10px" }}
-          >
-            {error}
-          </div>
-        )}
+        
         <button
           className="verify1"
           onClick={handleVerify}

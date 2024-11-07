@@ -105,12 +105,14 @@ const HostOtpVerification = () => {
           className="verify1"
           onClick={handleVerify}
           disabled={status === "loading"}
+          style={{ opacity: status === "loading" ? 0.7 : 1 }}
         >
           Verify
         </button>
         {status === "loading" && <p>Validating...</p>}
         {status === "failed" && (
-          <p style={{ color: "red" }}>OTP invalid! Please try again.</p>
+          <p style={{ color: "red" ,fontSize: "20px"}}>
+            <b>Incorrect code!</b><br></br>Try again.</p>
         )}
         {status === "success" && (
           <p style={{ color: "green" }}>OTP Verified!</p>

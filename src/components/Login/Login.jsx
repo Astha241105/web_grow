@@ -74,7 +74,7 @@ const Login = () => {
 
         <div className="form-section">
           <h3 className="heading w-[300px] md:w-[392px]">Welcome Back!</h3>
-          {error && <div className="error-message">{error}</div>}
+          {error && <div className="error-message"><img src="/caution.png"></img>{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label className="label">Email:</label>
@@ -85,6 +85,7 @@ const Login = () => {
                 placeholder="Enter email"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </div>
 
@@ -97,6 +98,7 @@ const Login = () => {
                 placeholder="Enter password"
                 value={formData.password}
                 onChange={handleChange}
+                required
               />
               <img
                 src={showPassword ? "/eye-open.svg" : "/eye-cross.svg"}
