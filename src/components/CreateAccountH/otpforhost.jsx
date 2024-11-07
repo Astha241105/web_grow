@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { validateHostOtp } from "../store/slices/hostotp";
-import { resendHostOtp } from "../store/slices/hostslice";
-import "./otpforhost.css";
+import { verifyOtp } from "../store/slices/fpotpslice";
+import { forgotPassword } from "../store/slices/ForgotPassSlice";
+import "../otpwithmail/OtpWithMail.css";
+import "./otp.css";
 
-const HostOtpVerification = () => {
-  const [otp, setOtp] = useState(["", "", "", ""]);
+const Otp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const { email, isLoading, error, otpVerified } = useSelector(
+    (state) => state.fpotp || {}
+  );
 
-  const email = useSelector((state) => state.host.email);
-  const firstName = useSelector((state) => state.host.firstName);
-  const lastName = useSelector((state) => state.host.lastName);
-  const mobile = useSelector((state) => state.host.mobile);
-  const organization = useSelector((state) => state.host.organization);
-  const designation = useSelector((state) => state.host.designation);
-  const password = useSelector((state) => state.host.password);
-  const role = useSelector((state) => state.host.role);
+  const recoveryEmail = email || localStorage.getItem("recoveryEmail");
 
-  const { status, error } = useSelector((state) => state.hostOtp);
+  useEffect(() => {
+    if (!recoveryEmail) {
+      console.error("No recovery email found");
+      navigate("/forgot-password");
+    }
+  }, [recoveryEmail, navigate]);
+
+  useEffect(() => {
+    if (otpVerified) {
+      console.log("OTP verified successfully, navigating to change password");
+      navigate("/change-password");
+    }
+  }, [otpVerified, navigate]);
 
   const handleChange = (e, index) => {
     const { value } = e.target;
-
     if (value.length > 1) return;
-
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
     if (value && index < otp.length - 1) {
       document.getElementById(`otp-input-${index + 1}`).focus();
     }
@@ -41,82 +47,88 @@ const HostOtpVerification = () => {
     }
   };
 
-  const handleVerify = () => {
+  const handleVerify = async () => {
     const otpValue = otp.join("");
-    dispatch(validateHostOtp({ email, otp: otpValue }));
-  };
+    console.log("Starting OTP verification with:", {
+      email: recoveryEmail,
+      otp: otpValue,
+    });
 
-  const handleResendOtp = () => {
-    const hostDetails = {
-      firstName,
-      lastName,
-      email,
-      mobile,
-      organization,
-      designation,
-      password,
-      role,
-    };
-    console.log(hostDetails);
-    dispatch(resendHostOtp(hostDetails));
-  };
-
-  useEffect(() => {
-    if (status === "success") {
-      navigate("/home");
+    if (otpValue.length !== 4) {
+      alert("Please enter a complete 4-digit OTP");
+      return;
     }
-  }, [status, navigate]);
+
+    try {
+      await dispatch(
+        verifyOtp({ email: recoveryEmail, otp: otpValue })
+      ).unwrap();
+      console.log("OTP verified successfully, navigating to change password");
+      navigate("/change-password");
+    } catch (err) {
+      console.error("Verification failed:", err.message);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    console.log("Resending OTP to:", recoveryEmail);
+    try {
+      await dispatch(forgotPassword(recoveryEmail));
+      console.log("OTP resent successfully");
+    } catch (err) {
+      console.error("Failed to resend OTP:", err.message);
+    }
+  };
 
   return (
-    <div id="contout10">
-      <img
-        src="/Rectangle2.png"
-        className="white-bg hidden md:block"
-        alt="background"
-      />
-      <img src="/home.svg" alt="cross" className="cross hidden md:block" />
+    <div className="forgot-pass">
+      <img src="/Rectangle2.png" className="white-bg" alt="background" />
       <img
         src="/bgMobile.png"
         className="block md:hidden white-bgMobile"
         alt="background"
       />
 
-      <div className="image-sec">
-        <img src="/otp.svg" alt="logo" className="logo" />
-      </div>
-      <div id="container1">
-        <div id="codemail">Enter code</div>
-        <p id="mess1">Enter the 4-digit OTP code sent to {email}.</p>
+      <img src="/otp.svg" alt="logo" className="otp" />
 
+      <a href="#" onClick={() => navigate("/forgot-password")}>
+        <img src="back.svg" className="back" alt="back" />
+      </a>
+      <div className="form-section1" id="formm">
+        <h1 id="codemail">Enter the code</h1>
+        <p id="mess1">
+          Enter the 4-digit OTP code we have sent to {recoveryEmail}.
+        </p>
         {otp.map((digit, index) => (
           <input
             key={index}
             id={`otp-input-${index}`}
             type="text"
-            className={`boxes ${status === "failed" ? "error-border" : ""}`}
+            className="boxes"
             value={digit}
             onChange={(e) => handleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             maxLength="1"
+            disabled={isLoading}
           />
         ))}
-
         <br />
+        {error && (
+          <div
+            className="error-message"
+            style={{ color: "red", marginTop: "10px" }}
+          >
+            {error}
+          </div>
+        )}
         <button
           className="verify1"
           onClick={handleVerify}
-          disabled={status === "loading"}
+          disabled={isLoading}
+          style={{ opacity: isLoading ? 0.7 : 1 }}
         >
-          Verify
+          {isLoading ? "Verifying..." : "Verify"}
         </button>
-        {status === "loading" && <p>Validating...</p>}
-        {status === "failed" && (
-          <p style={{ color: "red" }}>OTP invalid! Please try again.</p>
-        )}
-        {status === "success" && (
-          <p style={{ color: "green" }}>OTP Verified!</p>
-        )}
-
         <br />
         <div className="didnt1">
           <span>Didn't receive the code?</span>
@@ -133,4 +145,4 @@ const HostOtpVerification = () => {
   );
 };
 
-export default HostOtpVerification;
+export default Otp;
