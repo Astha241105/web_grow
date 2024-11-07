@@ -108,6 +108,13 @@
    z-index: 1;
  }
 
+ .otp5{
+top:137px;
+left:-58px;
+position: absolute;
+width:52%;
+}
+
 @media (max-width: 1274px)and(min-width: 1120px) {
     
 #container1 {
@@ -149,6 +156,8 @@
     
     }
 }
+
+
 @media screen and (max-width: 768px) {
     #container1{
         flex-direction: column;
@@ -170,7 +179,28 @@
     .cross1 {
         display: none;
     }
+    
+        .otp5 {
+            top: 2%;
+            left: -2%;
+            width: 500px;
+            height: 286px;
+        }
  }
+ @media (max-height: 680px) and (max-width: 768px){
+    .otp5{
+    top: -5%;
+ }
+}
+
+@media (min-width: 512px) and (max-width: 768px){
+    .otp5{
+        left:9%;
+    }
+
+
+}
+
  @media screen and (max-width: 730px) {
     #container1{
         flex-direction: column;
@@ -214,6 +244,8 @@
         justify-content: center;
         align-items:center;
     }
+
+
     /* }
     .image-section1{
     position: relative;
@@ -293,21 +325,38 @@
     left:77px;
     position: absolute;
 }
-@media(max-height:1024px){
+@media (min-height: 735px) and (min-width: 786px) {
+    .otp5 {
+        top: 30%;
+    }
+}
+@media(max-height:1261px){
     
     #container1 {
-        /* text-align: center;
-        box-sizing: border-box;
-        position: absolute;
-        height: 339px;
-        width: 415px; */
-        /* left: calc(100% -150px); */
-        top: 400px;
-        /* padding: 0; */
+        
+        top: 37% !important;
     
     }
     
     }
+
+
+    @media(min-height:1268px) and (min-width:786px){
+        .otp5{
+            top:35%;
+        }
+
+        #container1{
+            top:35% !important;
+        }
+    }
+
+    /* @media(max-height:1261px) and (max-width:1380px){
+        .otp5{
+            top:35% ;
+        }
+    } */
+
     @media(max-height:800px){
     
         #container1 {
@@ -334,19 +383,21 @@
         /* padding: 0; */
     
     }}
-@media(max-height:670px){
+@media(min-height:670px){
     
 #container1 {
-    /* text-align: center;
-    box-sizing: border-box;
-    position: absolute;
-    height: 339px;
-    width: 415px; */
-    /* left: calc(100% - 575px); */
-    top: 240px;
-    /* padding: 0; */
+    top: 173px;
+
 
 }}
+@media(max-width: 768px) and (max-height:670px){
+    
+    #container1 {
+        top: 240px !important;
+    
+    }
+  }
+
 @media(max-height:600px){
     
     #container1 {

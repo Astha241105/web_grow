@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { verifyOtp } from "../store/slices/fpotpslice";
-import { forgotPassword } from "../store/slices/ForgotPassSlice"; 
+import { forgotPassword } from "../store/slices/ForgotPassSlice";
 import "../otpwithmail/OtpWithMail.css";
 import "./otp.css";
 
@@ -89,12 +89,12 @@ const Otp = () => {
         alt="background"
       />
 
-      <img src="/otp.svg" alt="logo" className="otp" />
+      <img src="/otp.svg" alt="logo" className="otp5" />
 
       <a href="#" onClick={() => navigate("/forgot-password")}>
-        <img src="back.svg" className="back" alt="back" />
+        <img src="back.svg" className="back hidden md:block" alt="back" />
       </a>
-      <div className="form-section1" id="formm">
+      <div id="container1">
         <h1 id="codemail">Enter the code</h1>
         <p id="mess1">
           Enter the 4-digit OTP code we have sent to {recoveryEmail}.
@@ -132,7 +132,11 @@ const Otp = () => {
         <br />
         <div className="didnt1">
           <span>Didn't receive the code?</span>
-          <span id="gradient1" onClick={handleResendOtp} style={{ cursor: "pointer" }}>
+          <span
+            id="gradient1"
+            onClick={handleResendOtp}
+            style={{ cursor: "pointer" }}
+          >
             Resend code.
           </span>
         </div>
