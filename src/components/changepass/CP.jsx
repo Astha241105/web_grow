@@ -11,6 +11,8 @@ const Changepass = () => {
     newPassword: "",
     confirmPassword: "",
   });
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { email, verifiedOtp } = useSelector((state) => state.fpotp);
   const { isLoading, error } = useSelector((state) => state.fpchange);
@@ -22,6 +24,14 @@ const Changepass = () => {
       ...passwords,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const validatePasswords = () => {
@@ -104,26 +114,42 @@ const Changepass = () => {
         )}
 
         <div className="label">New Password:</div>
-        <input
-          className="cpass"
-          placeholder="Enter password"
-          type="password"
-          name="newPassword"
-          value={passwords.newPassword}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
+        <div className="relative">
+          <input
+            className="cpass"
+            placeholder="Enter password"
+            type={showNewPassword ? "text" : "password"}
+            name="newPassword"
+            value={passwords.newPassword}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+          <img
+            src={showNewPassword ? "/eye-open.svg" : "/eye-cross.svg"}
+            alt={showNewPassword ? "Hide password" : "Show password"}
+            className="absolute top-1/2 right-[4%] transform -translate-y-1/2 cursor-pointer hover:opacity-70 transition-opacity cpeye"
+            onClick={toggleNewPasswordVisibility}
+          />
+        </div>
 
         <div className="label">Confirm Password:</div>
-        <input
-          className="cpass"
-          placeholder="Confirm password"
-          type="password"
-          name="confirmPassword"
-          value={passwords.confirmPassword}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
+        <div className="relative">
+          <input
+            className="cpass"
+            placeholder="Confirm password"
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            value={passwords.confirmPassword}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+          <img
+            src={showConfirmPassword ? "/eye-open.svg" : "/eye-cross.svg"}
+            alt={showConfirmPassword ? "Hide password" : "Show password"}
+            className="absolute top-1/2 right-[4%] transform -translate-y-1/2 cursor-pointer hover:opacity-70 transition-opacity cpeye"
+            onClick={toggleConfirmPasswordVisibility}
+          />
+        </div>
 
         <button
           id="cont"
