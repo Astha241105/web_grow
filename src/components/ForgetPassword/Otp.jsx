@@ -73,7 +73,7 @@ const Otp = () => {
   const handleResendOtp = async () => {
     console.log("Resending OTP to:", recoveryEmail);
     try {
-      await dispatch(forgotPassword({ email: recoveryEmail})).unwrap();
+      await dispatch(forgotPassword(recoveryEmail));
       console.log("OTP resent successfully");
     } catch (err) {
       console.error("Failed to resend OTP:", err.message);
