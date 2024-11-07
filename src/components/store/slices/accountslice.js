@@ -72,7 +72,7 @@ const accountSlice = createSlice({
       .addCase(createAccount.fulfilled, (state) => {
         state.status = "success";
       })
-      .addCase(createAccount.rejected, (state, action) => {
+      .addCase(createAccount.rejected, (state,action) => {
         state.status = "failed";
         state.error = action.payload;
       });

@@ -35,9 +35,9 @@ const Areu = () => {
         className="block md:hidden white-bgMobile"
         alt="background"
       />
-      <div className="image-sec">
-        <img src="/areu.png" alt="logo" className="logo" />
-      </div>
+      
+        <img src="/areu.png" alt="logo" className="logo-99" />
+  
       <div id="container3">
         <div id="inside">Are You a</div>
         <div className="radio-group">
