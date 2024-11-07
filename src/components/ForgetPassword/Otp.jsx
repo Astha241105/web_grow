@@ -89,12 +89,12 @@ const Otp = () => {
         alt="background"
       />
 
-      <img src="/otp.svg" alt="logo" className="otp" />
+      <img src="/otp.svg" alt="logo" className="otp5" />
 
       <a href="#" onClick={() => navigate("/forgot-password")}>
-        <img src="back.svg" className="back" alt="back" />
+        <img src="back.svg" className="back hidden md:block" alt="back" />
       </a>
-      <div className="form-section1" id="formm">
+      <div id="container1">
         <h1 id="codemail">Enter the code</h1>
         <p id="mess1">
           Enter the 4-digit OTP code we have sent to {recoveryEmail}.
