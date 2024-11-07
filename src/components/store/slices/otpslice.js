@@ -14,8 +14,9 @@ export const validateOtp = createAsyncThunk(
       if (!response.ok) {
         throw new Error("OTP validation failed");
       }
-      console.log(response.json());
+      // console.log(response.json());
       const data = await response.json();
+      console.log(data);
       if (data.data.token) {
         localStorage.setItem("token", data.data.token);
       }
