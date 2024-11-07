@@ -8,12 +8,13 @@ const CreateAccountP = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setmobile] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const [firstName, ...lastNameParts] = name.trim().split(" ");
     const lastName = lastNameParts.join(" ");
 
@@ -66,7 +67,7 @@ const CreateAccountP = () => {
               />
 
               <label htmlFor="mobile" className="block mb-1">
-                mobile number:
+                Mobile number:
               </label>
               <input
                 type="tel"
@@ -75,9 +76,13 @@ const CreateAccountP = () => {
                 value={mobile}
                 onChange={(e) => setmobile(e.target.value)}
                 required
+                maxLength="10"
+                minLength="10"
+                pattern="[0-9]{10}"
+                title="Please enter exactly 10 digits"
               />
             </div>
-            <button type="submit" className="cn-continue">
+            <button type="submit" className="cn-continue" disabled={loading}>
               Continue
             </button>
 
