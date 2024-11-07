@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { verifyOtp } from "../store/slices/fpotpslice";
 import { forgotPassword } from "../store/slices/ForgotPassSlice"; 
 import "../otpwithmail/OtpWithMail.css";
+import "./otp.css";
 
 const Otp = () => {
   const dispatch = useDispatch();
@@ -87,12 +88,14 @@ const Otp = () => {
         className="block md:hidden white-bgMobile"
         alt="background"
       />
+
       <img src="/otp.svg" alt="logo" className="otp" />
+
       <a href="#" onClick={() => navigate("/forgot-password")}>
         <img src="back.svg" className="back" alt="back" />
       </a>
-      <div id="container1">
-        <div id="codemail">Enter the code</div>
+      <div className="form-section1" id="formm">
+        <h1 id="codemail">Enter the code</h1>
         <p id="mess1">
           Enter the 4-digit OTP code we have sent to {recoveryEmail}.
         </p>
