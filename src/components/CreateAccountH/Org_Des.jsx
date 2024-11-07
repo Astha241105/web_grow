@@ -46,9 +46,9 @@ const Org_Des = () => {
       />
       <div className="container">
         <div className="image-section">
-          <img src="/cah.svg" alt="logo" className="logo" />
+          <img src="create_account.svg" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/create-pass-host")}>
-            <img src="back.svg" className="cn-home" />
+            <img src="back.svg" className="cn-home hidden md:block" />
           </a>
         </div>
         <div className="form-section2">
@@ -63,6 +63,7 @@ const Org_Des = () => {
                 value={formData.organization}
                 onChange={handleInputChange}
                 required
+                className="opt"
               >
                 <option value="">Enter Organisation</option>
                 <option value="Organization A">Organization A</option>
@@ -78,6 +79,7 @@ const Org_Des = () => {
                 value={formData.designation}
                 onChange={handleInputChange}
                 required
+                className="opt"
               >
                 <option value="">Enter Designation</option>
                 <option value="Manager">Manager</option>
@@ -86,7 +88,7 @@ const Org_Des = () => {
               <img src="/down-arrow.svg" alt="arrow" className="arrow2" />
             </div>
 
-            <button type="submit" className="org-continue">
+            <button type="submit" id="org-continue" className="opt">
               Continue
             </button>
 

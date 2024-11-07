@@ -57,7 +57,7 @@ const CreatePass = () => {
     const updatedHostDetails = {
       ...existingHostDetails,
       password,
-      role:"HOST"
+      role: "HOST",
     };
 
     dispatch(updateHostDetails(updatedHostDetails));
@@ -80,9 +80,9 @@ const CreatePass = () => {
       />
       <div className="container">
         <div className="image-section">
-          <img src="/cah.svg" alt="logo" className="logo" />
+          <img src="/create_account.svg" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/create-account-host")}>
-            <img src="back.svg" className="cn-home" />
+            <img src="back.svg" className="cn-home hidden md:block" />
           </a>
         </div>
         <div className="form-section1">

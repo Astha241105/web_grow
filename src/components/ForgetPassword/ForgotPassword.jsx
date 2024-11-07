@@ -45,7 +45,7 @@ const ForgotPassword = () => {
       />
       <div className="container">
         <a href="#" onClick={() => navigate("/")}>
-          <img className="fpback" src="back.svg" alt="back" />
+          <img className="fpback hidden md:block" src="back.svg" alt="back" />
         </a>
         <div className="image-section1">
           <img src="/fpass.svg" alt="logo" className="logo" />
@@ -75,7 +75,7 @@ const ForgotPassword = () => {
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="Enter email"
-                disabled={loading} 
+                disabled={loading}
               />
             </div>
 
