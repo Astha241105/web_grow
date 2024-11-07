@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const forgotPassword = createAsyncThunk(
   "passwordReset/forgotPassword",
   async (email, { rejectWithValue }) => {
+    console.log(email);
     try {
       const response = await fetch(
         "https://webgrowproject.onrender.com/api/v1/auth/forgot-password",

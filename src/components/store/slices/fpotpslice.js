@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const verifyOtp = createAsyncThunk(
   "fpotp/verifyOtp",
   async ({ email, otp }) => {
+    console.log({ email, otp })
     const response = await fetch(
       "https://webgrowproject.onrender.com/api/v1/auth/verify-otp",
       {
