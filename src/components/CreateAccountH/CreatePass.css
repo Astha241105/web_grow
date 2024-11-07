@@ -129,7 +129,9 @@ width:133%;
         top:-43px;  
     }
 .signin-link{
-    top:467px;
+    font-size: 12px;
+}
+.sign-in{
     font-size: 12px;
 }
 

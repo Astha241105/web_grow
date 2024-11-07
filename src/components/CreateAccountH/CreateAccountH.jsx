@@ -49,9 +49,9 @@ const CreateAccountH = () => {
       />
       <div className="container">
         <div className="image-section">
-          <img src="/host1.png" alt="logo" className="logo" />
+          <img src="/create_account.svg" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/")}>
-            <img src="home.svg" className="cn-home" />
+            <img src="home.svg" className="cn-home hidden md:block" />
           </a>
         </div>
         <div className="form-sec">

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createAccount, setPasswordDetails } from "../store/slices/accountslice";
+import {
+  createAccount,
+  setPasswordDetails,
+} from "../store/slices/accountslice";
 import { useNavigate } from "react-router-dom";
 import "./CreateAccountP.css";
 
@@ -14,9 +17,16 @@ const CreatePassP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { firstName, lastName, email, mobile, organization, designation, role, status } = useSelector(
-    (state) => state.account
-  );
+  const {
+    firstName,
+    lastName,
+    email,
+    mobile,
+    organization,
+    designation,
+    role,
+    status,
+  } = useSelector((state) => state.account);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,10 +42,20 @@ const CreatePassP = () => {
     }
 
     setError("");
-    
-    dispatch(setPasswordDetails({ password, confirmPassword }));
 
-    dispatch(createAccount({ firstName, lastName, email, mobile, password, organization, designation, role }))
+    dispatch(setPasswordDetails({ password, confirmPassword }));
+    dispatch(
+      createAccount({
+        firstName,
+        lastName,
+        email,
+        mobile,
+        password,
+        organization,
+        designation,
+        role,
+      })
+    )
       .then(() => {
         navigate("/otpWithMail");
       })
@@ -69,7 +89,7 @@ const CreatePassP = () => {
         <div className="image-section">
           <img src="/createnew.svg" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/create-account-participant")}>
-            <img src="back.svg" className="cn-home" />
+            <img src="back.svg" className="cn-home hidden md:block" />
           </a>
         </div>
         <div className="form-sec">
