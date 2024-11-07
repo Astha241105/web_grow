@@ -83,12 +83,12 @@ const CreateAccountH = () => {
               />
 
               <label htmlFor="mobile" className="block mb-1">
-                Phone Number:
+                mobile Number:
               </label>
               <input
                 type="tel"
                 id="mobile"
-                placeholder="Enter phone number"
+                placeholder="Enter mobile number"
                 value={formData.mobile}
                 onChange={handleInputChange}
                 required
