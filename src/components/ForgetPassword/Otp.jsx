@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { verifyOtp } from "../store/slices/fpotpslice";
-import { forgotPassword } from "../store/slices/ForgotPassSlice"; 
+import { forgotPassword } from "../store/slices/ForgotPassSlice";
 import "../otpwithmail/OtpWithMail.css";
 import "./otp.css";
 
@@ -132,7 +132,11 @@ const Otp = () => {
         <br />
         <div className="didnt1">
           <span>Didn't receive the code?</span>
-          <span id="gradient1" onClick={handleResendOtp} style={{ cursor: "pointer" }}>
+          <span
+            id="gradient1"
+            onClick={handleResendOtp}
+            style={{ cursor: "pointer" }}
+          >
             Resend code.
           </span>
         </div>
