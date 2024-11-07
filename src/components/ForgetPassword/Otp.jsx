@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { verifyOtp } from "../store/slices/fpotpslice";
@@ -65,7 +65,16 @@ const Otp = () => {
       navigate("/change-password");
     } catch (err) {
       console.error("Verification failed:", err.message);
-      // Handle the error, e.g., display an error message to the user
+    }
+  };
+
+  const handleResendOtp = async () => {
+    console.log("Resending OTP to:", recoveryEmail);
+    try {
+      await dispatch(verifyOtp({ email: recoveryEmail, otp: "" })).unwrap();
+      console.log("OTP resent successfully");
+    } catch (err) {
+      console.error("Failed to resend OTP:", err.message);
     }
   };
 
@@ -119,7 +128,9 @@ const Otp = () => {
         <br />
         <div className="didnt1">
           <span>Didn't receive the code?</span>
-          <span id="gradient1">Resend code.</span>
+          <span id="gradient1" onClick={handleResendOtp} style={{ cursor: "pointer" }}>
+            Resend code.
+          </span>
         </div>
       </div>
     </div>

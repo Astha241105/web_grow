@@ -17,6 +17,7 @@ const HostOtpVerification = () => {
     const organization = useSelector((state) => state.host.organization);
     const designation = useSelector((state) => state.host.designation);
     const password = useSelector((state) => state.host.password);
+    const role=useSelector((state)=>state.host.role);
   
     const { status, error } = useSelector((state) => state.hostOtp);
   
@@ -54,6 +55,8 @@ const HostOtpVerification = () => {
         organization,
         designation,
         password,
+        role
+
       };
       console.log(hostDetails)
       dispatch(resendHostOtp(hostDetails));
@@ -67,6 +70,13 @@ const HostOtpVerification = () => {
   
     return (
       <div id="contout10">
+         <img src="/Rectangle2.png" className="white-bg hidden md:block" alt="background" />
+      <img src="/home.svg" alt="cross" className="cross hidden md:block" />
+      <img src="/bgMobile.png" className="block md:hidden white-bgMobile" alt="background" />
+      
+      <div className="image-sec">
+        <img src="/otp.svg" alt="logo" className="logo" />
+      </div>
         <div id="container1">
           <div id="codemail">Enter code</div>
           <p id="mess1">Enter the 4-digit OTP code sent to {email}.</p>
