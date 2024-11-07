@@ -77,3 +77,9 @@ font-weight: 700;
 line-height: normal;
 margin-top: 148px;
 }
+
+@media screen and (max-width: 768px) {
+    .form-section2{
+    left:20px;
+}}
+
