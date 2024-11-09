@@ -4,7 +4,7 @@ export const changePassword = createAsyncThunk(
   "fpchange/changePassword",
   async ({ email, newPassword }) => {
     const response = await fetch(
-      "https://webgrowproject.onrender.com/api/v1/auth/change-password",
+      "https://webgrowproject-1.onrender.com/api/v1/auth/change-password",
       {
         method: "PUT",
         headers: {

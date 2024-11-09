@@ -7,7 +7,7 @@ export const createAccount = createAsyncThunk(
     console.log(accountDetails)
     try {
       const response = await fetch(
-        "https://webgrowproject.onrender.com/api/v1/auth/register",
+        "https://webgrowproject-1.onrender.com/api/v1/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -29,23 +29,23 @@ export const createAccount = createAsyncThunk(
 const accountSlice = createSlice({
   name: "account",
   initialState: {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     mobile: "",
     password: "",
     confirmPassword: "",
     organization:null,
     designation:null,
-    role:"USER",
+    role:"user",
     status: null,
     error: null,
   },
   reducers: {
     setPersonalDetails: (state, action) => {
       const { firstName, lastName, email, mobile } = action.payload;
-      state.firstName = firstName;
-      state.lastName = lastName;
+      state.firstname = firstName;
+      state.lastname = lastName;
       state.email = email;
       state.mobile= mobile;
     },
@@ -55,8 +55,8 @@ const accountSlice = createSlice({
       state.confirmPassword = confirmPassword;
     },
     resetAccountDetails: (state) => {
-      state.firstName = "";
-      state.lastName = "";
+      state.firstname = "";
+      state.lastname = "";
       state.email = "";
       state.mobile = "";
       state.password = "";

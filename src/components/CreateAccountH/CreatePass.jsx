@@ -57,7 +57,7 @@ const CreatePass = () => {
     const updatedHostDetails = {
       ...existingHostDetails,
       password,
-      role: "HOST",
+      role: "host",
     };
 
     dispatch(updateHostDetails(updatedHostDetails));

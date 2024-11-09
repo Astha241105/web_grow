@@ -47,7 +47,7 @@ const OtpWithMail = () => {
         password: password,
         organization: null,
         designation: null,
-        role: "USER",
+        role: "user",
       })
     );
   };

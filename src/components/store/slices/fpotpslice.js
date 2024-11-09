@@ -5,9 +5,9 @@ export const verifyOtp = createAsyncThunk(
   async ({ email, otp }) => {
     console.log({ email, otp })
     const response = await fetch(
-      "https://webgrowproject.onrender.com/api/v1/auth/verify-otp",
+      "https://webgrowproject-1.onrender.com/api/v1/auth/verify-otp",
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },

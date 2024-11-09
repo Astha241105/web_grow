@@ -5,7 +5,7 @@ export const validateOtp = createAsyncThunk(
   async ({ email, otp }, { rejectWithValue }) => {
     console.log({ email, otp })
     try {
-      const response = await fetch("https://webgrowproject.onrender.com/api/v1/auth/validate", {
+      const response = await fetch("https://webgrowproject-1.onrender.com/api/v1/auth/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),

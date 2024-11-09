@@ -18,8 +18,8 @@ const CreatePassP = () => {
   const navigate = useNavigate();
 
   const {
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     email,
     mobile,
     organization,
@@ -46,8 +46,8 @@ const CreatePassP = () => {
     dispatch(setPasswordDetails({ password, confirmPassword }));
     dispatch(
       createAccount({
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         email,
         mobile,
         password,

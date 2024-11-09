@@ -24,13 +24,13 @@ const CreateAccountH = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const [firstName, ...lastNameParts] = formData.name.split(" ");
-    const lastName = lastNameParts.join(" ");
+    const [firstname, ...lastNameParts] = formData.name.split(" ");
+    const lastname = lastNameParts.join(" ");
 
     dispatch(
       updateHostDetails({
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         email: formData.email,
         mobile: formData.mobile,
       })
