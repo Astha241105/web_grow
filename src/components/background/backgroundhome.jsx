@@ -1,15 +1,7 @@
 import React from 'react'
 import "../background/backgroundhome.css"
+const Backgroundhome = ({ children }) => {
+  return <div className="backgroundhome">{children}</div>;
+};
 
-const Backgroundhome = () => {
-  return (
-    
-      <div id="backhome">
-        {/* <div id="blur1"></div>
-        <div id="blur2"></div> */}
-      </div>
-  
-  )
-}
-
-export default Backgroundhome
+export default Backgroundhome;
