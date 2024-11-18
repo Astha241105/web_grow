@@ -1,0 +1,10 @@
+#backhome{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100vw;
+    min-height:100vh;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    background-color:white;
+    z-index:1;}

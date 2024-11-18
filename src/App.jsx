@@ -18,7 +18,12 @@ import {
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import Changepass from "./components/changepass/CP.jsx";
+import Down from "./component-2/down/down.jsx";
 import Areu from "./components/areu/Are.jsx";
+import Nav from "./component-2/navhome/nav.jsx"
+import Des from "./component-2/description/description.jsx"
+import Browsebycategory from "./component-2/browsebycategory/browsebycategory.jsx";
+import Backgroundhome from "./component-2/background/backgroundhome.jsx";
 import HostOtpVerification from './components/CreateAccountH/otpforhost.jsx';
 import "./index.css";
 
@@ -43,9 +48,14 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: (
-      <ProtectedRoute>
-        <Home />
-      </ProtectedRoute>
+      // <ProtectedRoute>
+        <Backgroundhome>
+        <Nav />
+        <Des />
+        <Down />
+        <Browsebycategory />
+        </Backgroundhome>
+      // </ProtectedRoute>
     ),
   },
   {
