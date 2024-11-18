@@ -1,8 +1,8 @@
 import React from 'react';
-import "../down/down.css";
-import i1 from "../down/online.png"
-import i2 from "../down/collab.png"
-import i3 from "../down/certi.png"
+import "./down.css";
+import i1 from "./online.png"
+import i2 from "./collab.png"
+import i3 from "./certi.png"
 
 const Down = () => {
   return (

@@ -1,9 +1,9 @@
 import React from 'react'
-import "../browsebycategory/browsebycategory.css"
-import i1 from "../browsebycategory/quiz.png"
-import i2 from "../browsebycategory/hack.png"
-import i3 from "../browsebycategory/webinar.png"
-import i4 from "../browsebycategory/meeting.png"
+import "./browsebycategory.css"
+import i1 from "./quiz.png"
+import i2 from "./hack.png"
+import i3 from "./webinar.png"
+import i4 from "./meeting.png"
 
 const Browsebycategory = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import "../description/description.css";
-import ia from "../description/i.png";
+import "./description.css";
+import ia from "./i.png";
 
 const Des = () => {
   return (
