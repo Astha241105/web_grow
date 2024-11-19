@@ -1,0 +1,11 @@
+#background-event{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100vw;
+    min-height:100vh;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    background-color:#D4E5E4;
+    z-index:1;
+}

@@ -1,0 +1,61 @@
+#eventname-back{
+    position:relative;
+    top:216px;
+    left:116px;
+    /* height:49px;
+    width:297px; */
+}
+#name-of-event{
+    position:absolute;
+     height:49px;
+     width:50vw;
+     font-size:40px;
+     font-weight:600;}
+#institute{
+    position:absolute;
+     height:20px;
+     width:50vw;
+     top:71px;
+     display: flex;
+     flex-direction: row;
+}
+#type-event{
+    position:absolute;
+     height:20px;
+     width:50vw;
+     top:100px;
+     display: flex;
+     flex-direction: row;
+
+}
+#location{
+    position:absolute;
+    height:20px;
+    width:50vw;
+    top:129px;
+    display: flex;
+    flex-direction: row;
+}
+.eventname-text{
+    font-size:16px;
+    font-weight: 500;
+    padding-left: 15px;
+
+}
+.event-name-images{
+    width:20px;
+    height:20px;   
+}
+#event-skill{
+  position:absolute;
+  top:160px;
+  border: teal solid 1px;
+  border-radius:10px;
+  height:50px;
+  width:114px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  padding-top:10px;
+
+}

@@ -25,6 +25,10 @@ import Des from "./component-2/description/description.jsx"
 import Browsebycategory from "./component-2/browsebycategory/browsebycategory.jsx";
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
 import HostOtpVerification from './components/CreateAccountH/otpforhost.jsx';
+import BackgroundEvent from "./events-page/background-event.jsx";
+import Eventname from "./events-page/event-name/eventname.jsx";
+import Details from "./events-page/details/details.jsx";
+import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -57,6 +61,14 @@ const router = createBrowserRouter([
         </Backgroundhome>
       // </ProtectedRoute>
     ),
+  },
+  {
+    path: "/event",
+    element: (<BackgroundEvent>
+              <Eventname />
+              <ParticipantDetails />
+              <Details />
+              </BackgroundEvent>),
   },
   {
     path: "/create-account-host",
