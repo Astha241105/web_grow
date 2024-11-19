@@ -29,6 +29,8 @@ import BackgroundEvent from "./events-page/background-event.jsx";
 import Eventname from "./events-page/event-name/eventname.jsx";
 import Details from "./events-page/details/details.jsx";
 import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
+import NavEvent from "./events-page/nav-event/navEvent.jsx";
+import Regi from "./registration-event-part/regi.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -67,8 +69,13 @@ const router = createBrowserRouter([
     element: (<BackgroundEvent>
               <Eventname />
               <ParticipantDetails />
+              <NavEvent />
               <Details />
               </BackgroundEvent>),
+  },
+  {
+    path: "/regifore",
+    element: <Regi />,
   },
   {
     path: "/create-account-host",

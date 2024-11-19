@@ -1,0 +1,21 @@
+#nav-event{
+    height: 94px;
+    width:848px;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    left:80px;
+    top:100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav-event-options{
+    height: 40px;
+    width:fit-content;
+    border:1px solid teal;
+    border-radius: 10px;
+    padding-top:6px ;
+    font-size: 16px;
+    font-weight: 500;
+}
