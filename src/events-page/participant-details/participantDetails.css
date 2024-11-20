@@ -3,7 +3,7 @@
     height: 489px;
     width:416px;
     background-color: white;
-    top:108px;
+    top:-30px;
     left:944px;
     border-radius:10px;
 }
@@ -22,7 +22,14 @@
     background-color: #14BE14;
     border-radius:10px;
     color:white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top:10px;
 }
+#tick-svg{
+    height:22px;
+    width:22px;}
 #name-part{
     font-size: 22px;
     font-weight: 500;
@@ -42,14 +49,25 @@
     transform: translate(-50%);
     color:white;
 }
+#line{
+    position: absolute;
+    top:208px;
+    height:1px;
+    width:400px;
+    border:.5px solid black;
+    left:8px;
+    /* transform:translate(-50%); */
+}
 .part-details-info{
     display: flex;  
     position: absolute; 
     left:30px;
-}
-.minor-details{
+    align-items:center;
     font-size: 16px;
     font-weight: 500; 
+}
+.minor-details{
+    
     margin-left: 20px;  
 }
 #registered{

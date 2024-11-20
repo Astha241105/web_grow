@@ -9,3 +9,16 @@
     background-color:#D4E5E4;
     z-index:1;
 }
+#images-for-notify-and-profile{
+    position: relative;
+    left:calc(100% - 200px);
+    top:30px;
+    display:flex;
+    width:92px;
+    height:50px;
+    justify-content: space-between;
+    align-items:center;
+}
+#images-for-notify-and-profile1{
+    margin-top:10px;
+}

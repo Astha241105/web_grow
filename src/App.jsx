@@ -31,6 +31,10 @@ import Details from "./events-page/details/details.jsx";
 import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
 import NavEvent from "./events-page/nav-event/navEvent.jsx";
 import Regi from "./registration-event-part/regi.jsx";
+import Stages from "./events-page/details/stages/stages.jsx";
+import Dates from "./events-page/details/Dates/dates.jsx";
+import Organizer from "./events-page/details/organizers/organizer.jsx";
+import EventDetails from "./events-page/details/event-details/event-details.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -67,10 +71,18 @@ const router = createBrowserRouter([
   {
     path: "/event",
     element: (<BackgroundEvent>
+      <div id="event-and-part">
+      <div id="event-and-nav">
               <Eventname />
-              <ParticipantDetails />
               <NavEvent />
-              <Details />
+              </div>
+              <ParticipantDetails /></div>
+              <Details>
+              <Stages/>
+                <Dates />
+                <EventDetails />
+                <Organizer/>
+                </ Details>
               </BackgroundEvent>),
   },
   {

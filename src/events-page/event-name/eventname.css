@@ -1,29 +1,38 @@
+#for-content-and-image{
+    display:flex;
+    position:absolute;
+    top:175px;
+    align-items:center;
+}
 #eventname-back{
     position:relative;
-    top:216px;
-    left:116px;
-    /* height:49px;
-    width:297px; */
+    /* top:175px; */
+    left:80px;
+    height:320px;
+    width:500px;
+    padding-left: 20px;
+    background: url('/border.svg') left center no-repeat;
+    background-size: 9px;
 }
 #name-of-event{
     position:absolute;
      height:49px;
-     width:50vw;
+     /* width:500px; */
+     left:27px;
+     top:41px;
      font-size:40px;
      font-weight:600;}
 #institute{
     position:absolute;
      height:20px;
-     width:50vw;
-     top:71px;
+     top:112px;
      display: flex;
      flex-direction: row;
 }
 #type-event{
     position:absolute;
      height:20px;
-     width:50vw;
-     top:100px;
+     top:141px;
      display: flex;
      flex-direction: row;
 
@@ -31,8 +40,7 @@
 #location{
     position:absolute;
     height:20px;
-    width:50vw;
-    top:129px;
+    top:170px;
     display: flex;
     flex-direction: row;
 }
@@ -46,9 +54,20 @@
     width:20px;
     height:20px;   
 }
+#event-updatedon{
+    display:flex;
+    position:absolute;
+    top:207px;
+    left:54px;
+    font-size:16px;
+}
+#event-updatedon-1{
+   font-weight: 700;
+}
 #event-skill{
   position:absolute;
-  top:160px;
+  top:248px;
+  left:54px;
   border: teal solid 1px;
   border-radius:10px;
   height:50px;
@@ -59,3 +78,11 @@
   padding-top:10px;
 
 }
+#logo-of-event{
+    width:156px;
+    height:158px;
+    background-color: aliceblue;
+    border-radius:10px;
+    margin-left:200px;
+}
+

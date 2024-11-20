@@ -5,7 +5,7 @@
     border-radius: 10px;
     position: relative;
     left:80px;
-    top:100px;
+    top:460px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -13,6 +13,7 @@
 .nav-event-options{
     height: 40px;
     width:fit-content;
+    padding:10px;
     border:1px solid teal;
     border-radius: 10px;
     padding-top:6px ;

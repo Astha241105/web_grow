@@ -1,0 +1,42 @@
+#stages-and-timeline{
+    position: absolute;
+    height:340px;
+    width:848px;
+}
+ #stages-and-timeline-head{
+    position: absolute;
+    padding-left:80px;
+    top:39px;
+    height:66px;
+    font-size: 28px;
+    font-weight:600;
+    padding-top:10px;
+    background: url('/smallrec.svg') left center no-repeat;
+    background-size: 9px;
+}
+#stages-and-timeline-content{
+    position: absolute;
+    top:134px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height:205px;
+    width:848px;
+}
+#stages-and-timeline-date{
+    /* position:absolute; */
+    width:90px;
+    height:90px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #D4E5E4 50%, #76DBEE 50%);
+}
+.stages-and-timeline-1{
+    /* position: absolute; */
+    height:205px;
+    width:666px;
+    border-radius: 10px;
+    border:1px solid black;
+    font-size: 28px;
+    font-weight:600;
+}

@@ -1,0 +1,29 @@
+#details{
+    position: absolute;
+    width:848px;
+    height:340px ;
+    top:680px;
+} 
+#details-head{
+    position: absolute;
+    padding-left:80px;
+    top:30px;
+    height:66px;
+    font-size: 28px;
+    font-weight:600;
+    padding-top:10px;
+    background: url('/smallrec.svg') left center no-repeat;
+    background-size: 9px;
+
+}
+#details-1{
+    position: absolute;
+    top:130px;
+    height:205px;
+    width:666px;
+    left:160px;
+    border-radius: 10px;
+    border:1px solid black;
+    font-size: 28px;
+    font-weight:600;
+}
