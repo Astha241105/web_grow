@@ -1,12 +1,11 @@
 #home-down{
     height: 206px;
     width:1140px;
-    background-color: teal;
+    background-color: #4C4DAC;
     z-index:2;
     position: relative;
     left: 50%;
-    /* top:718px; */
-    margin-top:-80px;
+    margin-top:-100px;
     transform: translate(-50%);
     border-radius:10px;
     display:flex;
@@ -28,12 +27,12 @@
   
 }
 .home-down-1-head{
-    font-size: 20px;
+    font-size: 18px;
     font-weight:700;
 }
 .home-down-1-cont{
-    font-size: 16px;
-    font-weight:500; 
+    font-size: 14px;
+    font-weight:400; 
 }
 .home-down-img{
     display:flex;

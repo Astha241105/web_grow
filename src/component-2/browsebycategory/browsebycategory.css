@@ -2,13 +2,18 @@
     position: relative;
     z-index:2;
     width:100vw;
+    height:470px;
 }
 #home-browse-by-category-head{
     position: absolute;
-    top:100px;
+    top:90px;
     left:75px;
     font-size: 32px;
     font-weight: 600;
+}
+#home-browse-by-category-head-span{
+    color:teal;
+    font-weight:600
 }
 #home-browse-by-category-content{
     position: absolute;

@@ -1,0 +1,11 @@
+#eventcard{
+    position: relative;
+    z-index:2;
+    height: 251px;
+    top:700px;
+    width:493px;
+    left:80px;
+    border-radius: 10px;
+    border:1px solid black;
+
+}

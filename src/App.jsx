@@ -35,6 +35,10 @@ import Stages from "./events-page/details/stages/stages.jsx";
 import Dates from "./events-page/details/Dates/dates.jsx";
 import Organizer from "./events-page/details/organizers/organizer.jsx";
 import EventDetails from "./events-page/details/event-details/event-details.jsx";
+import Upcoming from "./component-2/upcoming-events/upcoming.jsx";
+import Eventlist from "./component-2/diff-events/eventlist.jsx";
+import Eventcard from "./component-2/eventcard/eventcard.jsx";
+import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -64,6 +68,10 @@ const router = createBrowserRouter([
         <Des />
         <Down />
         <Browsebycategory />
+        <Upcoming />
+        <Eventlist />
+        <Eventcard />
+        <Hostnow />
         </Backgroundhome>
       // </ProtectedRoute>
     ),

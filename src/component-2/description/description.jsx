@@ -1,6 +1,5 @@
 import React from 'react';
 import "./description.css";
-import ia from "./i.png";
 
 const Des = () => {
   return (
@@ -14,7 +13,7 @@ const Des = () => {
         </div>
         <input id="home-search" placeholder="Search" />
       </div>
-      <img id="ia" src={ia} alt="Event illustration" />
+      <img id="ia" src="/group.svg" alt="Event illustration" />
     </div>
   );
 };
