@@ -204,7 +204,11 @@ textarea {
 .ce-form-group input::placeholder {
   color: #000;
 }
-
+.ce-form-group input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
 .ce-guidelines {
   margin-top: 16px;
   font-size: 14px;
@@ -281,4 +285,151 @@ textarea:focus {
 
 .ce-form-group label:not(:has(+ [required])):after {
   content: none;
+}
+
+.event-management-website {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-button,
+.team-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.basic-details,
+.registration-details {
+  font-weight: bold;
+}
+
+.participation-type {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.individual-option,
+.team-option {
+  background-color: #f1f1f1;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.team-participation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.team-min,
+.team-max {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration-start-date-time,
+.registration-end-date-time {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.registration-start-date,
+.registration-start-time,
+.registration-end-date,
+.registration-end-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registrations-allowed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.prev-button,
+.next-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.page-number {
+  margin: 0 10px;
+}
+
+.step.unactive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #008000;
+  border-radius: 10px;
+  border: 0px;
+  color: white;
+}
+
+.step1 {
+  padding: 8px 16px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: 1px solid #d9d9d9;
+  background: var(--Teal, #008080);
+  color: #fff;
+  font-family: Montserrat;
+}
+
+#numberInput {
+  width: 100%;
+  padding: -1px 70px 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+}
+#numberInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
