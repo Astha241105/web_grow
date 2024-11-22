@@ -11,29 +11,47 @@ export const loginUser = createAsyncThunk(
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            email: credentials.email,
-            password: credentials.password,
-          }),
+          body: JSON.stringify(credentials),
         }
       );
 
       const data = await response.json();
 
+      console.log("Response Data:", data); 
+
       if (!response.ok) {
+        console.error("Error in response:", data);
         return rejectWithValue(data.message || "Invalid username or password");
       }
 
-      if (data.data.token) {
-        localStorage.setItem("token", data.data.token);
+      const token = data?.data?.token;
+      if (token) {
+
+        console.log("Extracted Token:", token);
+        localStorage.setItem("token", token); 
+        console.log("Token saved to localStorage:", token);
+
+
+        const storedToken = localStorage.getItem("token");
+        console.log("Token from localStorage:", storedToken);
+
+        if (storedToken === token) {
+          console.log("Token successfully saved in localStorage.");
+        } else {
+          console.error("Failed to store token in localStorage.");
+        }
+      } else {
+        console.error("Token not found in the response data:", data);
       }
 
-      return data;
+      return data; 
     } catch (error) {
+      console.error("Error during login request:", error);
       return rejectWithValue("Invalid username or password");
     }
   }
 );
+
 
 const authSlice = createSlice({
   name: "auth",

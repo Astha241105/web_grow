@@ -17,7 +17,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      navigate("/Home");
+      navigate("/");
     }
     dispatch(clearError());
   }, [token, navigate, dispatch]);
@@ -35,7 +35,7 @@ const Login = () => {
     const result = await dispatch(loginUser(formData));
     if (!result.error) {
       localStorage.setItem("token", result.payload.token);
-      navigate("/home");
+      navigate("/");
     }
   };
 

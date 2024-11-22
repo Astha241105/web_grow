@@ -39,6 +39,8 @@ import Upcoming from "./component-2/upcoming-events/upcoming.jsx";
 import Eventlist from "./component-2/diff-events/eventlist.jsx";
 import Eventcard from "./component-2/eventcard/eventcard.jsx";
 import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
+import Reviews from "./component-2/reviews/reviews.jsx";
+import Navpart from "./component-2/nav-participant/navpart.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -52,7 +54,7 @@ const ProtectedRoute = ({ children }) => {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -60,11 +62,11 @@ const router = createBrowserRouter([
     element: <CreateAccountP />,
   },
   {
-    path: "/home",
+    path: "/",
     element: (
       // <ProtectedRoute>
         <Backgroundhome>
-        <Nav />
+        {localStorage.getItem("token") ? <Navpart /> : <Nav />}
         <Des />
         <Down />
         <Browsebycategory />
@@ -72,6 +74,7 @@ const router = createBrowserRouter([
         <Eventlist />
         <Eventcard />
         <Hostnow />
+        <Reviews />
         </Backgroundhome>
       // </ProtectedRoute>
     ),

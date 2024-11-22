@@ -1,0 +1,20 @@
+#review-box{
+    position:relative;
+    height:485px;
+    width:983px;
+    border-radius:10px;
+    background-color: teal;
+    z-index:2;
+    top:850px;
+    left:50%;
+    transform: translate(-50%);
+}
+#review-box-q{
+    position:absolute;
+    font-size: 26px;
+    font-weight: 500;
+    left:50%;
+    transform: translate(-50%);
+    top:100px;
+    color:white;
+}
