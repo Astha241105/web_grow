@@ -41,6 +41,9 @@ import Eventcard from "./component-2/eventcard/eventcard.jsx";
 import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
 import Reviews from "./component-2/reviews/reviews.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
+import Partprofile from "./participant-profile/partprofile.jsx";
+import Edit from "./participant-profile/edit-profile/edit.jsx";
+import Certificate from "./participant-profile/certificate/certificate.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -58,6 +61,13 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/part-profile",
+    element:( <><Partprofile />
+              <Edit />
+              <Certificate /></>
+    ),
+  },
+  {
     path: "/create-account-participant",
     element: <CreateAccountP />,
   },
@@ -68,7 +78,7 @@ const router = createBrowserRouter([
         <Backgroundhome>
         {localStorage.getItem("token") ? <Navpart /> : <Nav />}
         <Des />
-        <Down />
+        {/* <Down /> */}
         <Browsebycategory />
         <Upcoming />
         <Eventlist />
