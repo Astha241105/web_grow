@@ -47,6 +47,7 @@ import Partprofile from "./participant-profile/partprofile.jsx";
 import Edit from "./participant-profile/edit-profile/edit.jsx";
 import Certificate from "./participant-profile/certificate/certificate.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
+import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import "./index.css";
 import { CreateEvents, Create_Events, HHomeScreen } from "./Pages";
 
@@ -119,6 +120,20 @@ const router = createBrowserRouter([
     path: "/regifore",
     element: (<> <Navregister />
               <Regi />
+             </>
+    ),
+  },
+  {
+    path: "/regiteam",
+    element: (<> <Navregister />
+              <Teampage />
+             </>
+    ),
+  },
+  {
+    path: "/create-or-join",
+    element: (<> <Navregister />
+              <Creatingteam />
              </>
     ),
   },
