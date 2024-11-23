@@ -169,9 +169,6 @@
 
 }
 @media(max-width:460px){
-    #hostnow{
-        /* display:inline-block; */
-    }
     #hostnow-content-head{
        position: absolute;
        top:0px;
