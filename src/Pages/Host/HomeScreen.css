@@ -1,0 +1,15 @@
+.page-wrapper {
+  height: 100vh;
+  /* background-image: url("../../component-2/description/Group.png"); */
+  /* background-color: black; */
+  background-size: cover;
+  background-position: center;
+}
+
+.page-content {
+  width: 100%;
+  margin: 0px;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 64px);
+  padding: 2rem 1rem;
+}

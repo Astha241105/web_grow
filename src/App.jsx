@@ -48,7 +48,7 @@ import Edit from "./participant-profile/edit-profile/edit.jsx";
 import Certificate from "./participant-profile/certificate/certificate.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import "./index.css";
-import { CreateEvents, Create_Events } from "./Pages";
+import { CreateEvents, Create_Events, HHomeScreen } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -172,6 +172,10 @@ const router = createBrowserRouter([
   {
     path: "/create-event1",
     element: <Create_Events />,
+  },
+  {
+    path: "/home-host",
+    element: <HHomeScreen />,
   },
 ]);
 

@@ -1,16 +1,20 @@
-import React from 'react';
+import React from "react";
 import "./description.css";
-import ib from"./eclipse-des.png";
+import ib from "./eclipse-des.png";
 
 const Des = () => {
   return (
-    <div id="home-des">
+    <div className="home-des">
       <div id="home-des-inside">
         <div id="home-des-inside-1">
           Discover Unforgettable&nbsp;
-          <span className="des-span" style={{ fontWeight: 600 }}>Experience&nbsp;</span>
+          <span className="des-span" style={{ fontWeight: 600 }}>
+            Experience&nbsp;
+          </span>
           At Spectacular&nbsp;
-          <span className="des-span" style={{ fontWeight: 600 }}>Events</span>
+          <span className="des-span" style={{ fontWeight: 600 }}>
+            Events
+          </span>
         </div>
         <input id="home-search" placeholder="Search" />
       </div>
