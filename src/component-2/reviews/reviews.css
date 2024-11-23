@@ -5,7 +5,6 @@
     border-radius:10px;
     background-color: teal;
     z-index:2;
-    top:850px;
     left:50%;
     transform: translate(-50%);
 }
