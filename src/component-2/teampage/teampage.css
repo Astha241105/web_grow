@@ -1,0 +1,82 @@
+#teampage-nav {
+    position: relative;
+    height: 114px;
+    width: 100vw;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; Distributes children */
+    padding: 0 20px; /* Optional spacing */
+}
+
+#teampage-nav-back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left:300px; /* Space between icon and text */
+}
+
+#teampage-nav-logo {
+    height: 68px;
+    width: 68px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-left:100px;
+}
+#teampage-nav-name{
+    font-size:24px;
+    font-weight:600;
+    margin-left:100px;
+}
+#teampage-nav-location{
+    font-size:16px;
+    font-weight:500;
+    margin-left:100px;
+}
+#team-details{
+    width:100vw;
+    height:100vh;
+    background-color:#D4E5E4;
+    display: flex;
+    justify-content: center;
+}
+#team-details-1{
+    height:543px;
+    width:893px;
+    background-color: white;
+    border-radius:10px;
+    margin-top:23px;
+}
+#my-team{
+    width:100%;
+    height:53px;
+    border-bottom:1px teal solid;
+    font-size:16px;
+    font-weight:600;
+    color:teal;
+    display: flex;
+    align-items: center;
+    padding-left:30px;
+    background: url('/downrec.svg') no-repeat bottom;
+    background-position: 35px bottom;
+    background-size: auto; /* Ensures proper scaling */
+}
+#team-name{
+    width:100%;
+    height:29px;
+    margin-bottom:40px;
+    margin-left:30px;
+    margin-top:58px;
+    font-size:24px;
+    font-weight:600;
+}
+#team-members{
+    height:78px;
+    width:100%;
+    margin-top:10px;
+    border-radius:10px;
+    background: url('/smallrec.svg') left center no-repeat;
+    background-size: 9px;
+    background-color: #C8FAC8;
+    
+}

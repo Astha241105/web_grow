@@ -44,6 +44,7 @@ import Navpart from "./component-2/nav-participant/navpart.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
 import Edit from "./participant-profile/edit-profile/edit.jsx";
 import Certificate from "./participant-profile/certificate/certificate.jsx";
+import Teampage from "./component-2/teampage/teampage.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
   {
     path: "/create-account-participant",
     element: <CreateAccountP />,
+  },
+  {
+    path: "/team",
+    element: <Teampage />,
   },
   {
     path: "/",
