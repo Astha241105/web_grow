@@ -1,6 +1,7 @@
 import React from "react";
 import "./HomeScreen.css";
 import Footer from "../../component-2/footer/footer";
+import NavHost from "./NavHost";
 const HHomeScreen = () => {
   const categories = [
     {
@@ -42,30 +43,7 @@ const HHomeScreen = () => {
             backgroundBlendMode: "overlay",
           }}
         >
-          <header>
-            <div className="max-w-6xl mx-auto px-4 py-4">
-              <div className="flex justify-between items-center">
-                <img src="Web.svg"></img>
-                <nav className="flex items-center space-x-4">
-                  <a href="#" className="text-[#008080] font-semibold flex">
-                    My Events
-                    <img src="down_arrow.svg"></img>
-                  </a>
-                  <a href="#" className="text-[#008080] font-semibold flex">
-                    Manage
-                    <img src="down_arrow.svg"></img>
-                  </a>
-                  <a>
-                    <img src="Notify.svg"></img>
-                  </a>
-                  <a className="text-[#008080] font-semibold flex items-center">
-                    <img src="Prof.svg" className="w-7 h-7 mr-2"></img>
-                    My Profile
-                  </a>
-                </nav>
-              </div>
-            </div>
-          </header>
+          <NavHost></NavHost>
 
           <main className="max-w-6xl mx-auto px-4 py-8 relative z-10">
             <div className="flex justify-between items-start mb-12">
