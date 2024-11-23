@@ -20,8 +20,8 @@ import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import Changepass from "./components/changepass/CP.jsx";
 import Down from "./component-2/down/down.jsx";
 import Areu from "./components/areu/Are.jsx";
-import Nav from "./component-2/navhome/nav.jsx"
-import Des from "./component-2/description/description.jsx"
+import Nav from "./component-2/navhome/nav.jsx";
+import Des from "./component-2/description/description.jsx";
 import Browsebycategory from "./component-2/browsebycategory/browsebycategory.jsx";
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
 import HostOtpVerification from './components/CreateAccountH/otpforhost.jsx';
@@ -46,6 +46,7 @@ import Edit from "./participant-profile/edit-profile/edit.jsx";
 import Certificate from "./participant-profile/certificate/certificate.jsx";
 import Teampage from "./component-2/teampage/teampage.jsx";
 import "./index.css";
+import { CreateEvents, Create_Events } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -119,6 +120,7 @@ const router = createBrowserRouter([
     path: "/create-account-host",
     element: <CreateAccountH />,
   },
+
   {
     path: "/create-pass-host",
     element: <CreatePass />,
@@ -152,9 +154,19 @@ const router = createBrowserRouter([
     element: <Areu />,
   },
   {
-    path:"/otp-host",
-    element:<HostOtpVerification />
-  }
+    path: "/otp-host",
+    element: <HostOtpVerification />,
+  },
+
+  {
+    path: "/Create-Events",
+    element: <CreateEvents />,
+  },
+
+  {
+    path: "/create-event1",
+    element: <Create_Events />,
+  },
 ]);
 
 function App() {
