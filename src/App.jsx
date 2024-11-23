@@ -31,11 +31,12 @@ import Details from "./events-page/details/details.jsx";
 import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
 import NavEvent from "./events-page/nav-event/navEvent.jsx";
 import Regi from "./registration-event-part/regi.jsx";
+import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
 import Stages from "./events-page/details/stages/stages.jsx";
 import Dates from "./events-page/details/Dates/dates.jsx";
 import Organizer from "./events-page/details/organizers/organizer.jsx";
 import EventDetails from "./events-page/details/event-details/event-details.jsx";
-import Teampage from "./component-2/teampage/teampage.jsx";
+import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -92,7 +93,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/regifore",
-    element: <Regi />,
+    element: (<> <Navregister />
+              <Regi />
+             </>
+    ),
   },
   {
     path: "/create-account-host",

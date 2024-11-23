@@ -1,0 +1,91 @@
+#teampage-nav {
+    position: relative;
+    height: 114px;
+    width: 100vw;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px; 
+    border-bottom:1px solid black;
+}
+
+#teampage-nav-back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left:20.83%; 
+}
+
+#teampage-nav-logo {
+    height: 68px;
+    width: 68px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-left:6.94%;
+}
+#teampage-nav-name-and-location{
+    margin-left:6.94%;
+}
+#teampage-nav-name{
+    font-size:24px;
+    font-weight:600;
+}
+#teampage-nav-location{
+    font-size:16px;
+    font-weight:500;
+}
+@media(max-width:750px){
+    #teampage-nav-back {
+        margin-left:16.83%; 
+    }
+    
+    #teampage-nav-logo {
+        height: 68px;
+        width: 68px;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-left:4.94%;
+    }
+    #teampage-nav-name-and-location{
+        margin-left:4.94%;
+    } 
+}
+@media(max-width:640px){
+    #teampage-nav {
+        height: 141px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 0px 20px; 
+        border-bottom:1px solid black;
+    }
+    #teampage-nav-back {
+        display: flex;
+        width:100%;
+        align-items: center;
+        gap: 10px;
+        margin-top: 40px;
+        margin-left:33px; 
+    }
+    #teampage-nav-back1{
+        display: none;
+    }
+    #teampage-nav-logo {
+        height: 50px;
+        width: 50px;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-left:4.94%;
+    }
+    #teampage-nav-name-and-location{
+        margin-left:4.94%;
+    } 
+    #teampage-nav-name{
+    font-size:20px;
+    font-weight:600;
+}
+    #teampage-nav-location{
+    font-size:12px;
+    font-weight:500;
+}
+}
