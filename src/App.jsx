@@ -45,7 +45,7 @@ import Navpart from "./component-2/nav-participant/navpart.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
 import Edit from "./participant-profile/edit-profile/edit.jsx";
 import Certificate from "./participant-profile/certificate/certificate.jsx";
-import Teampage from "./component-2/teampage/teampage.jsx";
+import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import "./index.css";
 import { CreateEvents, Create_Events } from "./Pages";
 
