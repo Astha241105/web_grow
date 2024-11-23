@@ -78,7 +78,7 @@ const router = createBrowserRouter([
         <Backgroundhome>
         {localStorage.getItem("token") ? <Navpart /> : <Nav />}
         <Des />
-        {/* <Down /> */}
+        <Down />
         <Browsebycategory />
         <Upcoming />
         <Eventlist />

@@ -17,7 +17,7 @@ const Upcoming = () => {
                 </div>
             </div>
         </div>
-        {/* <div></div> */}
+
         <img className='home-upcomimg-events-arrow' src="/side.svg"></img>
       </div>
     </div>

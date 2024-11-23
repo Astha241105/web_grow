@@ -3,7 +3,6 @@ import "./down.css";
 import i1 from "./online.png"
 import i2 from "./collab.png"
 import i3 from "./certi.png"
-
 const Down = () => {
   return (
     <div id="home-down">
