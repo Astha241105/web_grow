@@ -82,7 +82,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
         <Backgroundhome>
-        {localStorage.getItem("token") ? <Navpart /> : <Nav />}
+        <Nav />
         <Des />
         <Down />
         <Browsebycategory />
