@@ -8,7 +8,7 @@ import i4 from "./meeting.png"
 const Browsebycategory = () => {
   return (
     <div id="home-browse-by-category">
-        <div id="home-browse-by-category-head">Pick an <span id="home-browse-by-category-head-span">Oppotunity</span> :</div>
+        <div id="home-browse-by-category-head">Pick an <span id="home-browse-by-category-head-span">Opportunity</span> :</div>
         <div  id="home-browse-by-category-content">
             <div className='home-browse-by-category-content-box-1 home-browse-by-category-content-box'>
                 <img src={i1} className='home-browse-by-category-content-box-img'></img>
