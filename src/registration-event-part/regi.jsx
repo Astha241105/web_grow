@@ -4,7 +4,6 @@ import "./regi.css";
 const Regi = () => {
   return (
     <div>
-      <div id="form-details"></div>
       <form id="form-for-event">
         <div id="form-for-event1">Fill your Details</div>
 
@@ -50,19 +49,20 @@ const Regi = () => {
           placeholder="Course"
         />
         <div id="last-options">
-          <div>
+          <div className="last-options-parts">
             <label className="form-for-events-labels">Duration:</label>
             <input
             className="form-for-events-input1" 
             placeholder="Duration"></input>
           </div>
-          <div>
+          <div className="last-options-parts">
             <label className="form-for-events-labels">Graduation Year:</label>
             <input
             className="form-for-events-input1" 
             placeholder="Graduation year"></input>
           </div>
         </div>
+        <button id="form-for-event-next">Next</button>
       </form>
     </div>
   );
