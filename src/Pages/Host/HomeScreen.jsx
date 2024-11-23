@@ -1,5 +1,6 @@
 import React from "react";
 import "./HomeScreen.css";
+import Footer from "../../component-2/footer/footer";
 const HHomeScreen = () => {
   const categories = [
     {
@@ -30,7 +31,7 @@ const HHomeScreen = () => {
 
   return (
     <div className="page-wrapper">
-      <div className="page-content">
+      <div className="home-des">
         <div
           className="min-h-screen relative"
           style={{
@@ -44,7 +45,7 @@ const HHomeScreen = () => {
           <header>
             <div className="max-w-6xl mx-auto px-4 py-4">
               <div className="flex justify-between items-center">
-                <img src="Group.svg"></img>
+                <img src="Web.svg"></img>
                 <nav className="flex items-center space-x-4">
                   <a href="#" className="text-[#008080] font-semibold flex">
                     My Events
@@ -58,7 +59,7 @@ const HHomeScreen = () => {
                     <img src="Notify.svg"></img>
                   </a>
                   <a className="text-[#008080] font-semibold flex items-center">
-                    <img src="Profile.svg" className="w-7 h-7 mr-2"></img>
+                    <img src="Prof.svg" className="w-7 h-7 mr-2"></img>
                     My Profile
                   </a>
                 </nav>
@@ -137,6 +138,7 @@ const HHomeScreen = () => {
               </div>
             </div>
           </main>
+          <Footer></Footer>
         </div>
       </div>
     </div>
