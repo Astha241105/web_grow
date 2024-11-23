@@ -26,7 +26,7 @@ import Browsebycategory from "./component-2/browsebycategory/browsebycategory.js
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
 import HostOtpVerification from "./components/CreateAccountH/otpforhost.jsx";
 import "./index.css";
-import { CreateEvents, Create_Events } from "./Pages";
+import { CreateEvents, Create_Events, HHomeScreen } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -109,6 +109,10 @@ const router = createBrowserRouter([
   {
     path: "/create-event1",
     element: <Create_Events />,
+  },
+  {
+    path: "/home-host",
+    element: <HHomeScreen />,
   },
 ]);
 
