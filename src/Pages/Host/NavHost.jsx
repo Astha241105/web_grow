@@ -1,9 +1,9 @@
 import React from "react";
 
-const NavHost = () => {
+const NavHost = ({ className = "" }) => {
   return (
-    <header>
-      <div className="max-w-6xl mx-auto px-4 py-4">
+    <header className="w-full">
+      <div className={`max-w-6xl mx-auto px-4 py-4`}>
         <div className="flex justify-between items-center">
           <img src="Web.svg" alt="Web logo" />
           <nav className="flex items-center space-x-4">

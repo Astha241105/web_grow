@@ -24,7 +24,7 @@ import Nav from "./component-2/navhome/nav.jsx";
 import Des from "./component-2/description/description.jsx";
 import Browsebycategory from "./component-2/browsebycategory/browsebycategory.jsx";
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
-import HostOtpVerification from './components/CreateAccountH/otpforhost.jsx';
+import HostOtpVerification from "./components/CreateAccountH/otpforhost.jsx";
 import BackgroundEvent from "./events-page/background-event.jsx";
 import Eventname from "./events-page/event-name/eventname.jsx";
 import Details from "./events-page/details/details.jsx";
@@ -49,7 +49,12 @@ import Certificate from "./participant-profile/certificate/certificate.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import "./index.css";
-import { CreateEvents, Create_Events, HHomeScreen } from "./Pages";
+import {
+  CreateEvents,
+  Create_Events,
+  HHomeScreen,
+  TeamManagement,
+} from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -67,9 +72,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/part-profile",
-    element:( <><Partprofile />
-              <Edit />
-              <Certificate /></>
+    element: (
+      <>
+        <Partprofile />
+        <Edit />
+        <Certificate />
+      </>
     ),
   },
   {
@@ -84,7 +92,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       // <ProtectedRoute>
-        <Backgroundhome>
+      <Backgroundhome>
         <Nav />
         <Des />
         <Down />
@@ -95,26 +103,29 @@ const router = createBrowserRouter([
         <Hostnow />
         <Reviews />
         <Footer />
-        </Backgroundhome>
+      </Backgroundhome>
       // </ProtectedRoute>
     ),
   },
   {
     path: "/event",
-    element: (<BackgroundEvent>
-      <div id="event-and-part">
-      <div id="event-and-nav">
-              <Eventname />
-              <NavEvent />
-              </div>
-              <ParticipantDetails /></div>
-              <Details>
-              <Stages/>
-                <Dates />
-                <EventDetails />
-                <Organizer/>
-                </ Details>
-              </BackgroundEvent>),
+    element: (
+      <BackgroundEvent>
+        <div id="event-and-part">
+          <div id="event-and-nav">
+            <Eventname />
+            <NavEvent />
+          </div>
+          <ParticipantDetails />
+        </div>
+        <Details>
+          <Stages />
+          <Dates />
+          <EventDetails />
+          <Organizer />
+        </Details>
+      </BackgroundEvent>
+    ),
   },
   {
     path: "/regifore",
@@ -191,6 +202,11 @@ const router = createBrowserRouter([
   {
     path: "/home-host",
     element: <HHomeScreen />,
+  },
+
+  {
+    path: "/host-manage",
+    element: <TeamManagement />,
   },
 ]);
 
