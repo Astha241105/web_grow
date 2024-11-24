@@ -54,6 +54,7 @@ import {
   HHomeScreen,
   TeamManagement,
   Event_Manage,
+  QuizCreator,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -74,9 +75,9 @@ const router = createBrowserRouter([
     path: "/part-profile",
     element: (
       <div>
-         <Navpart bgColor="#D4E5E4"/>
+        <Navpart bgColor="#D4E5E4" />
         <Partprofile />
-        </div>
+      </div>
     ),
   },
   {
@@ -92,7 +93,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        <Nav bgColor="#fdf8ee"/>
+        <Nav bgColor="#fdf8ee" />
         <Des />
         <Down />
         <Browsebycategory />
@@ -104,8 +105,7 @@ const router = createBrowserRouter([
         <Footer />
         <Loginpopup />
       </Backgroundhome>
-        
-       
+
       // </ProtectedRoute>
     ),
   },
@@ -131,23 +131,32 @@ const router = createBrowserRouter([
   },
   {
     path: "/regifore",
-    element: (<> <Navregister />
-              <Regi />
-             </>
+    element: (
+      <>
+        {" "}
+        <Navregister />
+        <Regi />
+      </>
     ),
   },
   {
     path: "/regiteam",
-    element: (<> <Navregister />
-              <Teampage />
-             </>
+    element: (
+      <>
+        {" "}
+        <Navregister />
+        <Teampage />
+      </>
     ),
   },
   {
     path: "/create-or-join",
-    element: (<> <Navregister />
-              <Creatingteam />
-             </>
+    element: (
+      <>
+        {" "}
+        <Navregister />
+        <Creatingteam />
+      </>
     ),
   },
   {
@@ -213,6 +222,10 @@ const router = createBrowserRouter([
   {
     path: "/event-manage",
     element: <Event_Manage />,
+  },
+  {
+    path: "/create-quiz",
+    element: <QuizCreator />,
   },
 ]);
 
