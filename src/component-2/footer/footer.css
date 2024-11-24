@@ -41,3 +41,45 @@
     flex-direction: column;
     justify-content: space-between;
 }
+@media(max-width:1000px){
+    
+#footer-categories{
+    left:400px;
+}
+#footer-company{
+    left:585px;
+}
+}
+@media(max-width:740px){
+    
+    #footer-categories{
+        left:350px;
+    }
+    #footer-company{
+        left:535px;
+    }
+    }
+    @media(max-width:650px){
+    
+        #footer-categories{
+            left:300px;
+        }
+        #footer-company{
+            left:475px;
+        }
+        #logo-in-footer{
+            left:60px;
+        }
+        }
+ @media(max-width:570px){
+    
+            #footer-categories{
+                left:250px;
+            }
+            #footer-company{
+                left:435px;
+            }
+            #logo-in-footer{
+                left:40px;
+            }
+            }

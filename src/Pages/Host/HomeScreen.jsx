@@ -32,7 +32,7 @@ const HHomeScreen = () => {
 
   return (
     <div className="page-wrapper">
-      <div className="home-des">
+      <div>
         <div
           className="min-h-screen relative"
           style={{

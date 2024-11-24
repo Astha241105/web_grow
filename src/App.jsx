@@ -42,10 +42,9 @@ import Eventcard from "./component-2/eventcard/eventcard.jsx";
 import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
 import Reviews from "./component-2/reviews/reviews.jsx";
 import Footer from "./component-2/footer/footer.jsx";
+import Loginpopup from "./component-2/login-popup/login-popup.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
-import Edit from "./participant-profile/edit-profile/edit.jsx";
-import Certificate from "./participant-profile/certificate/certificate.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import "./index.css";
@@ -54,6 +53,7 @@ import {
   Create_Events,
   HHomeScreen,
   TeamManagement,
+  Event_Manage,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -73,11 +73,10 @@ const router = createBrowserRouter([
   {
     path: "/part-profile",
     element: (
-      <>
+      <div>
+         <Navpart bgColor="#D4E5E4"/>
         <Partprofile />
-        <Edit />
-        <Certificate />
-      </>
+        </div>
     ),
   },
   {
@@ -93,7 +92,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        <Nav />
+        <Nav bgColor="#fdf8ee"/>
         <Des />
         <Down />
         <Browsebycategory />
@@ -103,7 +102,10 @@ const router = createBrowserRouter([
         <Hostnow />
         <Reviews />
         <Footer />
+        <Loginpopup />
       </Backgroundhome>
+        
+       
       // </ProtectedRoute>
     ),
   },
@@ -207,6 +209,10 @@ const router = createBrowserRouter([
   {
     path: "/host-manage",
     element: <TeamManagement />,
+  },
+  {
+    path: "/event-manage",
+    element: <Event_Manage />,
   },
 ]);
 
