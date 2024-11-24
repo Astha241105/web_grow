@@ -92,7 +92,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        <Nav />
+        <Nav bgColor="#fdf8ee"/>
         <Des />
         <Down />
         <Browsebycategory />

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; 
 import "./nav.css";
 
-const Nav = () => {
+const Nav = ({bgColor}) => {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
@@ -14,7 +14,7 @@ const Nav = () => {
   };
 
   return (
-    <div id="nav">
+    <div id="nav" style={{ backgroundColor: bgColor}}>
       <img id="web-logo" src="/logo.svg" alt="Website Logo" />
       <div id="home-nav-options">
         <div className="home-nav-options1">
