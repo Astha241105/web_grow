@@ -1,6 +1,8 @@
 #edit-profile{
-    height:930px;
-    width:847px;
+    max-height:930px;
+    height:100vh;
+    max-width:847px;
+    width:100vw;
     border:1px solid black;
     position: relative;
     background-color: white;

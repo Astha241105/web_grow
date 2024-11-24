@@ -44,8 +44,6 @@ import Reviews from "./component-2/reviews/reviews.jsx";
 import Footer from "./component-2/footer/footer.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
-import Edit from "./participant-profile/edit-profile/edit.jsx";
-import Certificate from "./participant-profile/certificate/certificate.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import "./index.css";
@@ -73,9 +71,9 @@ const router = createBrowserRouter([
   {
     path: "/part-profile",
     element: (
-      <div style={{backgroundColor: "#D4E5E4" }}> <Navpart bgColor="#D4E5E4"/>
+      <div>
+         <Navpart bgColor="#D4E5E4"/>
         <Partprofile />
-
         </div>
     ),
   },

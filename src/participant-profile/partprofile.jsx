@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import './part-profile.css';
-// import Registrations from './Registrations';
-// import Badges from './Badges';
-// import Watchlist from './Watchlist';
+import Edit from "./edit-profile/edit"
+import Registered from './registered/registered';
+import Badges from './badges/badges';
+import Watchlist from './watchlist/watchlist';
 import Certificate from './certificate/certificate';
 
 const Partprofile = () => {
-  const [selectedOption, setSelectedOption] = useState('Registrations');
+  const [selectedOption, setSelectedOption] = useState(<Edit />);
 
   const renderContent = () => {
     switch (selectedOption) {
-      // case 'Registrations':
-      //   return <Registrations />;
-      // case 'Badges':
-      //   return <Badges />;
-      // case 'Watchlist':
-      //   return <Watchlist />;
+      case 'Registrations':
+        return <Registered />;
+      case 'Badges':
+        return <Badges />;
+      case 'Watchlist':
+        return <Watchlist />;
       case 'Certificates':
         return <Certificate />;
       default:
-        return <div></div>;
+        return <Edit />;
     }
   };
 
   return (
+    <div id="part-profile-render">
     <div id="part-profile">
       <div id="my-profile">My Profile</div>
       <div id="part-profile-details">
@@ -73,10 +75,8 @@ const Partprofile = () => {
           <div className="part-profile-options-list-1">Log out</div>
         </div>
       </div>
-
-      {/* Render the selected content */}
       <div id="part-profile-content">{renderContent()}</div>
-    </div>
+    </div></div>
   );
 };
 
