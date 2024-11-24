@@ -32,6 +32,7 @@ const Creatingteam = () => {
       <div className="create-team-name-label">Team Members</div>
       <div id="complete-team">Add team members to complete the team</div>
       <div id="create-member-card"></div>
+      <button id="create-add-members">Add Members</button>
     </div>
   );
 };

@@ -1,0 +1,19 @@
+#filter-by{
+    width:100vw;
+    height:58px;
+}
+#filter-by-1{
+    width:500px;
+    height:58px;
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+}
+#dropdown-event{
+    width:122px;
+    height:37px;
+    border-radius:10px;
+    border:1px solid black;
+    font-size: 14px;
+    font-weight: 400;
+}
