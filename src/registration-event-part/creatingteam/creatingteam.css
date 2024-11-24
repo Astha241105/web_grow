@@ -1,8 +1,8 @@
 #create-or-join {
+    position: relative;
     height: 100vh;
     max-width: 846px;
     width: 100%;
-    position: relative;
     left: 50%;
     transform: translate(-50%);
     padding:20px;
@@ -71,3 +71,34 @@
     background-size: 9px;
     background-color: #C8FAC8;
 }
+#create-add-members{
+    position: absolute;
+    height:58px ;
+    width:414px;
+    background-color: teal;
+    color: white;
+    border-radius: 10px;
+    font-size:18px ;
+    font-weight: 500;
+    margin-top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+@media(max-width:450px){
+  
+#create-add-members{
+    width:90%;
+}  
+}
+@media(max-width:370px){
+    #cancel-part-team{
+        height: 37px;
+        width:110px;
+        color:red;
+        font-size: 14px;
+        font-weight: 400;
+        border:1px solid red ;
+        border-radius:10px;
+        padding: 10px 0px;
+    }
+    }
