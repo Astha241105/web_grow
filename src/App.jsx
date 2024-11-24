@@ -52,6 +52,7 @@ import {
   Create_Events,
   HHomeScreen,
   TeamManagement,
+  Event_Manage,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -188,6 +189,10 @@ const router = createBrowserRouter([
   {
     path: "/host-manage",
     element: <TeamManagement />,
+  },
+  {
+    path: "/event-manage",
+    element: <Event_Manage />,
   },
 ]);
 
