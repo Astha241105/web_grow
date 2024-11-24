@@ -4,14 +4,23 @@ import "./filter.css"
 const Filter = () => {
   return (
     <div id="filter-by">
-      <select id="dropdown" defaultValue="">
-        <option value="" disabled>
-          Event type
+      <div id="filter-by-1">
+      <select id="dropdown-event" defaultValue="">
+        <option value="hackathon" disabled>
+          Hackathon
         </option>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
+        <option value="seminar">Seminar</option>
+        <option value="webinar">Webinar</option>
+        <option value="quiz">Quiz</option>
       </select>
+      <select id="dropdown-event" defaultValue="">
+        <option value="" disabled>
+          Event-type
+        </option>
+        <option value="offline">Offline</option>
+        <option value="online">Online</option>
+      </select>
+    </div>
     </div>
   )
 }

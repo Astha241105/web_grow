@@ -47,6 +47,8 @@ import Navpart from "./component-2/nav-participant/navpart.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
+import Filter from "./browse-by-category/filter/filter.jsx";
+import Oneeventdetail from "./browse-by-category/oneeventdetail/oneeventdetail.jsx";
 import "./index.css";
 import {
   CreateEvents,
@@ -140,6 +142,14 @@ const router = createBrowserRouter([
     path: "/regiteam",
     element: (<> <Navregister />
               <Teampage />
+             </>
+    ),
+  },
+  {
+    path: "/event-type",
+    element: (<> <Nav />
+              <Filter />
+              <Oneeventdetail />
              </>
     ),
   },
