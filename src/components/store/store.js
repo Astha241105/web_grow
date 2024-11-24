@@ -7,6 +7,7 @@ import hostOtpReducer from "./slices/hostotp";
 import otpReducer from "./slices/otpslice";
 import fpotpReducer from "./slices/fpotpslice";
 import fpchangeReducer from "./slices/fpchangeslice";
+import registeredEventsReducer from "./slices/registeredevent"
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     otp: otpReducer,
     fpotp: fpotpReducer,
     fpchange: fpchangeReducer,
+    registeredEvents: registeredEventsReducer,
   },
 });
 
