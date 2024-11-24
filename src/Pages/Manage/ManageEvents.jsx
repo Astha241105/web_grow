@@ -1,13 +1,12 @@
 import React from "react";
 import NavHost from "../Host/NavHost";
-// import { PencilIcon, Trash2Icon } from "lucide-react";
 
 const Event_Manage = () => {
   const metrics = [
     {
       label: "Total Events",
       value: "0",
-      bgColor: "bg-[#E91E63]",
+      bgColor: "bg-[#B72A7E]",
       textColor: "text-white",
     },
     {
@@ -45,51 +44,45 @@ const Event_Manage = () => {
     <div
       className={`${bgColor} ${textColor} rounded-lg px-4 py-2 flex items-center space-x-2`}
     >
-      <div className="w-6 h-6">
-        {label === "Total Events" && (
-          <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-            <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2zm4-8h6v2h-6V7zm0 4h6v2h-6v-2zm0 4h6v2h-6v-2z" />
-          </svg>
-        )}
+      <div className="w-6 h-6 flex">
+        {label === "Total Events" && <img src="GG.svg" alt="Events" />}
         {label === "Total Impressions" && (
-          <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
-          </svg>
+          <img src="star.svg" alt="Impressions" />
         )}
         {label === "Total Registrations" && (
-          <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
-          </svg>
+          <img src="notes.svg" alt="Registrations" />
         )}
       </div>
-      <div>
+      <div className="flex gap-[10px]">
+        <div className="text-lg font-semibold">{label}</div>
         <div className="text-lg font-semibold">{value}</div>
-        <div className="text-sm">{label}</div>
       </div>
     </div>
   );
 
   const EventCard = ({ title, college, tag, date }) => (
-    <div className="border border-gray-200 rounded-lg p-4 mb-4 bg-white">
+    <div className="border border-[#000] rounded-lg p-4 mb-4 bg-white">
       <div className="flex items-start justify-between">
         <div className="flex space-x-4">
           <div className="w-12 h-12 bg-gray-200 rounded"></div>
           <div>
             <h3 className="font-semibold">{title}</h3>
-            <p className="text-sm text-gray-600">{college}</p>
-            <span className="inline-block px-3 py-1 text-sm bg-gray-100 rounded-full mt-1">
+            <p className="text-sm text-[#000] font-medium">{college}</p>
+            <span className="inline-block px-3 py-1 text-sm bg-gray-100 rounded-full mt-1 font-medium">
               {tag}
             </span>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-sm text-gray-500">{date}</span>
-          <button className="p-1 hover:bg-gray-100 rounded">
-            {/* <PencilIcon className="w-5 h-5 text-gray-600" /> */}
-          </button>
-          <button className="p-1 hover:bg-gray-100 rounded">
-            {/* <Trash2Icon className="w-5 h-5 text-gray-600" /> */}
-          </button>
+        <div className="flex flex-col items-end space-y-2">
+          <span className="text-sm text-[#000] font-medium">{date}</span>
+          <div className="flex space-x-2">
+            <button className="p-1 hover:bg-gray-100 rounded">
+              <img src="Pencil.svg" alt="Edit" />
+            </button>
+            <button className="p-1 hover:bg-gray-100 rounded">
+              <img src="delete.svg" alt="Delete" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -103,8 +96,7 @@ const Event_Manage = () => {
         <div className="mb-8">
           <h1 className="text-3xl font-semibold mt-8">
             <span className="text-[#008080] font-semibold">Manage</span> Your{" "}
-            <span className="text-[#008080] font-semibold">Offline</span> Events
-            with ease
+            Events with ease
           </h1>
         </div>
 
