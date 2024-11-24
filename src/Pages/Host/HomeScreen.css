@@ -13,3 +13,9 @@
   min-height: calc(100vh - 64px);
   padding: 2rem 1rem;
 }
+
+.bg {
+  background: url("../../component-2/description/Group.png");
+  background-position: center;
+  background-size: contain;
+}

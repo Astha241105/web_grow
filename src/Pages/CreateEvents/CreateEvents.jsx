@@ -12,8 +12,8 @@ const CreateEvents = () => {
   };
   return (
     <div className="ce">
-      <div className="ce-gradient"> </div>
-      <div className="ce-gradient2"></div>
+      <div className="ce-gradient z-[-1]"> </div>
+      <div className="ce-gradient2 z-[-1]"></div>
       <div className="ce-form">
         <div className="ce-progress-bar">
           <div className="ce-back-button">
