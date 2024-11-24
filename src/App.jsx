@@ -73,11 +73,10 @@ const router = createBrowserRouter([
   {
     path: "/part-profile",
     element: (
-      <>
+      <div style={{backgroundColor: "#D4E5E4" }}> <Navpart bgColor="#D4E5E4"/>
         <Partprofile />
-        <Edit />
-        <Certificate />
-      </>
+
+        </div>
     ),
   },
   {

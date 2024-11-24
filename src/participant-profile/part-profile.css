@@ -35,6 +35,12 @@
     border-radius:50%;
     background-color: #D9D9D9 ;
 }
+#edit-part-profile{
+    position: absolute;
+    top:150px;
+    right:0px;
+
+}
 #part-profile-details-details{
     position: absolute;
     left:169px;

@@ -3,6 +3,7 @@
     width:947px;
     position: relative;
     border: 1px solid black;
+    background-color:white;
 }
 #certificates-head{
     position: absolute;
