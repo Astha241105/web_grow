@@ -31,6 +31,7 @@ import Details from "./events-page/details/details.jsx";
 import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
 import NavEvent from "./events-page/nav-event/navEvent.jsx";
 import Regi from "./registration-event-part/regi.jsx";
+import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
 import Stages from "./events-page/details/stages/stages.jsx";
 import Dates from "./events-page/details/Dates/dates.jsx";
 import Organizer from "./events-page/details/organizers/organizer.jsx";
@@ -41,11 +42,11 @@ import Eventcard from "./component-2/eventcard/eventcard.jsx";
 import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
 import Reviews from "./component-2/reviews/reviews.jsx";
 import Footer from "./component-2/footer/footer.jsx";
+import Loginpopup from "./component-2/login-popup/login-popup.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
-import Edit from "./participant-profile/edit-profile/edit.jsx";
-import Certificate from "./participant-profile/certificate/certificate.jsx";
-import Teampage from "./component-2/teampage/teampage.jsx";
+import Teampage from "./registration-event-part/teampage/teampage.jsx";
+import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import "./index.css";
 import {
   CreateEvents,
@@ -72,11 +73,10 @@ const router = createBrowserRouter([
   {
     path: "/part-profile",
     element: (
-      <>
+      <div>
+         <Navpart bgColor="#D4E5E4"/>
         <Partprofile />
-        <Edit />
-        <Certificate />
-      </>
+        </div>
     ),
   },
   {
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        <Nav />
+        <Nav bgColor="#fdf8ee"/>
         <Des />
         <Down />
         <Browsebycategory />
@@ -102,7 +102,10 @@ const router = createBrowserRouter([
         <Hostnow />
         <Reviews />
         <Footer />
+        <Loginpopup />
       </Backgroundhome>
+        
+       
       // </ProtectedRoute>
     ),
   },
@@ -128,7 +131,24 @@ const router = createBrowserRouter([
   },
   {
     path: "/regifore",
-    element: <Regi />,
+    element: (<> <Navregister />
+              <Regi />
+             </>
+    ),
+  },
+  {
+    path: "/regiteam",
+    element: (<> <Navregister />
+              <Teampage />
+             </>
+    ),
+  },
+  {
+    path: "/create-or-join",
+    element: (<> <Navregister />
+              <Creatingteam />
+             </>
+    ),
   },
   {
     path: "/create-account-host",

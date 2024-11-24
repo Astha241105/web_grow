@@ -19,7 +19,7 @@ const Des = () => {
         <input id="home-search" placeholder="Search" />
       </div>
       <img id="eclipse" src={ib}></img>
-      <img id="ia" src="/group.svg" alt="Event illustration" />
+      <img id="ia" src="/group2.svg" alt="Event illustration" />
     </div>
   );
 };
