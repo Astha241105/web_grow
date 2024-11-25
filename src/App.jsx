@@ -44,6 +44,7 @@ import Reviews from "./component-2/reviews/reviews.jsx";
 import Footer from "./component-2/footer/footer.jsx";
 import Loginpopup from "./component-2/login-popup/login-popup.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
+import ResponsiveComponent from "./component-2/condnav/condnav.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
@@ -95,7 +96,8 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        <Nav bgColor="#fdf8ee" />
+        <ResponsiveComponent />
+        {/* <Nav bgColor="#fdf8ee" /> */}
         <Des />
         <Down />
         <Browsebycategory />

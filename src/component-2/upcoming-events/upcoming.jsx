@@ -3,7 +3,7 @@ import "./upcoming.css"
 
 const Upcoming = () => {
   return (
-    <div id="home-upcomimg-events">
+    <div id="home-upcomimg-events-outer">
       <div id="home-upcomimg-events-head">Upcoming Events :</div>
       <div  id="home-upcomimg-events-content">
         <img className='home-upcomimg-events-arrow' src="/side2.svg"></img>
@@ -19,7 +19,7 @@ const Upcoming = () => {
         </div>
 
         <img className='home-upcomimg-events-arrow' src="/side.svg"></img>
-      </div>
+    </div>
     </div>
   )
 }

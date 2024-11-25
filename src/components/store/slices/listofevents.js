@@ -1,24 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-const BASE_URL = 'http://35.154.224.49:8080/api/v1/participant/eventsevents?search={workshop}&category={technology}&location={NewYork}';
+const BASE_URL = 'http://35.154.224.49:8080/api/v1/participant/events?search=gk&category=quiz&location=CSE LAB 3';
 
 
 export const fetchEvents = createAsyncThunk(
   'events/fetchEvents',
   async ({ search, category, location }, thunkAPI) => {
     try {
+      const authToken = localStorage.getItem('authToken');
+      console.log(authToken)
       const url = new URL(BASE_URL);
       url.searchParams.append('search', search);
       url.searchParams.append('category', category);
       url.searchParams.append('location', location);
 
       const response = await fetch(url, {
-        method: 'GET',
+        method: 'GET', 
         headers: {
-          'Content-Type': 'application/json',
-        
-            
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${authToken}`, 
         },
-      });
+    });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

@@ -1,4 +1,5 @@
 import React from 'react'
+import "./badges.css"
 
 const Badges = () => {
   return (

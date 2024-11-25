@@ -6,7 +6,7 @@ export const fetchParticipantProfile = createAsyncThunk(
   'participantProfile/fetchParticipantProfile',
   async (_, thunkAPI) => {
     try {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('authToken'); 
       console.log(token)
       if (!token) {
         throw new Error('No authentication token found.');

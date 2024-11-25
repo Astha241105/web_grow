@@ -1,0 +1,48 @@
+#nav-bar-with-hambuger {
+    position: relative;
+     }
+  #nav-bar-with-hamburger-icon{
+    display: flex;
+    align-items: center;
+    height:71px;
+    width:100vw;
+  }
+  #nav-ham-icon{
+    margin-left:30px;
+  }
+  .nav-logo-ham{
+    margin-left:20px;
+  }
+  
+  .hamburger {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .close-menu{
+    position: absolute;
+    right:20px;
+  }
+ .nav-ham-options-list{
+    color:teal;
+    font-size:12px;
+    font-weight:600;
+ } 
+  .menu {
+    position: absolute;
+    width: 167px;
+    top: 0px; 
+    left: 0;
+    background-color: white; 
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 5px;
+    z-index:3;
+  }
+  
+  .menu li {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
