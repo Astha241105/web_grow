@@ -1,9 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 export const fetchFavoriteEvents = createAsyncThunk(
   'favorites/fetchFavoriteEvents',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://35.154.224.49:8080/api/v1/participant/events/favourites');
+      const token = localStorage.getItem('token'); 
+
+      if (!token) {
+        throw new Error('Authorization token not found.');
+      }
+
+      const response = await fetch('http://35.154.224.49:8080/api/v1/participant/events/favourites', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, 
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -16,7 +29,6 @@ export const fetchFavoriteEvents = createAsyncThunk(
     }
   }
 );
-
 
 const favoritesSlice = createSlice({
   name: 'favorites',

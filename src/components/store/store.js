@@ -13,6 +13,7 @@ import eventsReducer from "./slices/listofevents"
 import eventDetailsReducer from './slices/eventdetails';
 import eventRegistrationReducer from './slices/registerforevent';
 import favoritesReducer from "./slices/favouriteevents"
+import addToFavoritesReducer from "./slices/addfavourite"
 
 export const store = configureStore({
   reducer: {
@@ -30,6 +31,7 @@ export const store = configureStore({
     eventDetails: eventDetailsReducer,   
     eventRegistration: eventRegistrationReducer,
     favorites: favoritesReducer,
+    addToFavorites: addToFavoritesReducer,
   },
 });
 
