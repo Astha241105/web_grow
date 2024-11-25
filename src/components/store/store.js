@@ -12,6 +12,7 @@ import participantProfileReducer from "./slices/participantprofile"
 import eventsReducer from "./slices/listofevents"
 import eventDetailsReducer from './slices/eventdetails';
 import eventRegistrationReducer from './slices/registerforevent';
+import favoritesReducer from "./slices/favouriteevents"
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     events: eventsReducer,
     eventDetails: eventDetailsReducer,   
     eventRegistration: eventRegistrationReducer,
+    favorites: favoritesReducer,
   },
 });
 

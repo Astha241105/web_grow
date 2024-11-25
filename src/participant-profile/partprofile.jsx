@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'; // Import useDispatch
+import { useDispatch } from 'react-redux'; 
 import './part-profile.css';
 import Edit from "./edit-profile/edit";
 import Registered from './registered/registered';
 import Badges from './badges/badges';
 import Watchlist from './watchlist/watchlist';
 import Certificate from './certificate/certificate';
-import { fetchRegisteredEvents } from '../components/store/slices/registeredevent'; 
+import { fetchRegisteredEvents } from '../components/store/slices/registeredevent';
+import { fetchFavoriteEvents } from '../components/store/slices/favouriteevents'; 
 
 const Partprofile = () => {
   const [selectedOption, setSelectedOption] = useState('Edit'); 
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     if (selectedOption === 'Registrations') {
-      console.log("dispatch")
       dispatch(fetchRegisteredEvents());
+    } else if (selectedOption === 'Watchlist') {
+      dispatch(fetchFavoriteEvents());
     }
   }, [selectedOption, dispatch]);
 
