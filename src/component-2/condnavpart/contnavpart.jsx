@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Nav from "../navhome/nav";
-import Navham from "../navham/navham";
+import Navpart from "../nav-participant/navpart";
+import Partnavham from "../part-navham/partnavham";
 
-const ResponsiveNav = () => {
+
+const ResponsiveNav2 = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1000);
 
   useEffect(() => {
@@ -17,9 +18,9 @@ const ResponsiveNav = () => {
 
   return (
     <div>
-      {isLargeScreen ? <Nav bgColor="#fdf8ee" /> : <Navham />}
+      {isLargeScreen ? <Navpart bgColor="#fdf8ee" /> : <Partnavham  />}
     </div>
   );
 };
 
-export default ResponsiveNav;
+export default ResponsiveNav2;

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import "./navham.css";
+import "./partnavham.css"
 
-const Navham = () => {
+const Partnavham = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   return (
     <div id="nav-bar-with-hamburger">
         <div id="nav-bar-with-hamburger-icon">
@@ -21,19 +20,19 @@ const Navham = () => {
           <li className="close-menu" onClick={toggleMenu}>
             <img src="/cross2.svg" alt="Close Menu" className="menu-close-icon" />
           </li>
-          <li className="nav-ham-options-list">Login</li>
-          <li className="nav-ham-options-list">Sign Up</li>
+          <li className="nav-ham-options-list">My Profile</li>
+          <li className="nav-ham-options-list">Notification</li>
           <li className="nav-ham-options-list">Reviews</li>
-          <li className="nav-ham-options-list">Registered Events</li>
-          <li className="nav-ham-options-list">Create Events</li>
           <li className="nav-ham-options-list">Quiz</li>
           <li className="nav-ham-options-list">Seminar</li>
           <li className="nav-ham-options-list">Webinar</li>
           <li className="nav-ham-options-list">Hackathon</li>
+          <li className="nav-ham-options-list">Past Events</li>
+          <li className="nav-ham-options-list">Registered Events</li>
         </ul>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Navham;
+export default Partnavham
