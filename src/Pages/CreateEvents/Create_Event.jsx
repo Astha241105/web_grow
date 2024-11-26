@@ -127,7 +127,6 @@ const Create_Events = () => {
             showHostPrompt || showSuccessModal ? "pointer-events-none" : ""
           }`}
         >
-          {/* Rest of the form content remains the same */}
           <div className="ce-form-group">
             <label>Participation Type</label>
             <div className="ce-button-group">
@@ -261,12 +260,7 @@ const Create_Events = () => {
               <h3 className="text-lg font-semibold mb-4">
                 Your Event has been created successfully
               </h3>
-              <button
-                style={styles.successButton}
-                onClick={() => {
-                  /* Handle view event */
-                }}
-              >
+              <button style={styles.successButton} onClick={() => {}}>
                 View Event
               </button>
               <br />
