@@ -33,7 +33,6 @@ const HomeScreen = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Hero Section with Background */}
       <div className="relative bg">
         <div className="absolute inset-0 bg-[#FDF8EE] z-[-1]" />
 
@@ -55,13 +54,11 @@ const HomeScreen = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <main className="flex-grow max-w-6xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-semibold mb-4">
           What do you want to host
         </h1>
 
-        {/* Categories Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {categories.map((category) => (
             <div
@@ -84,7 +81,6 @@ const HomeScreen = () => {
           ))}
         </div>
 
-        {/* My Events Section */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">My Events</h2>
