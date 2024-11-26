@@ -1,12 +1,31 @@
 import React from "react";
 import NavHost from "../Host/NavHost";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 const HostProfile = () => {
+  const data = [
+    { name: "Day 1", value: 50 },
+    { name: "Day 2", value: 100 },
+    { name: "Day 3", value: 150 },
+    { name: "Day 4", value: 200 },
+    { name: "Day 5", value: 250 },
+    { name: "Day 6", value: 300 },
+    { name: "Day 7", value: 350 },
+  ];
+
   return (
     <div>
       <NavHost />
       <div className="container mx-auto my-8">
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <div className="flex items-center space-x-4 mb-4">
               <img
@@ -23,12 +42,6 @@ const HostProfile = () => {
               </div>
               <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
                 Edit Profile
-              </button>
-            </div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold">Analytics</h3>
-              <button className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded">
-                Log Out
               </button>
             </div>
             <div className="bg-white shadow-md rounded-md p-4">
@@ -61,6 +74,14 @@ const HostProfile = () => {
           </div>
           <div className="bg-white shadow-md rounded-md p-4">
             <h4 className="text-lg font-bold mb-4">Analytics</h4>
+            <LineChart width={500} height={300} data={data}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
           </div>
         </div>
       </div>
