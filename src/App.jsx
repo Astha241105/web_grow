@@ -59,6 +59,7 @@ import {
   TeamManagement,
   Event_Manage,
   QuizCreator,
+  HostProfile,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -97,7 +98,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-         {localStorage.getItem("token") ? <ResponsiveNav2 /> : <ResponsiveNav />}
+        {localStorage.getItem("token") ? <ResponsiveNav2 /> : <ResponsiveNav />}
         <Des />
         <Down />
         <Browsebycategory />
@@ -155,10 +156,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/event-type",
-    element: (<> <Nav />
-              <Filter />
-              <Oneeventdetail />
-             </>
+    element: (
+      <>
+        {" "}
+        <Nav />
+        <Filter />
+        <Oneeventdetail />
+      </>
     ),
   },
   {
@@ -238,6 +242,11 @@ const router = createBrowserRouter([
   {
     path: "/create-quiz",
     element: <QuizCreator />,
+  },
+
+  {
+    path: "/host-profile",
+    element: <HostProfile />,
   },
 ]);
 
