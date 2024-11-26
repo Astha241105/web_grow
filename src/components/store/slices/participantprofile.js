@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const BASE_URL = 'http://35.154.224.49:8080/api/v1/participant/profile';
+// Use a relative URL for proxy
+const BASE_URL = '/api/v1/participant/profile';
 
 export const fetchParticipantProfile = createAsyncThunk(
   'participantProfile/fetchParticipantProfile',
   async (_, thunkAPI) => {
     try {
       const token = localStorage.getItem('authToken'); 
-      console.log(token)
+      console.log(token);
       if (!token) {
         throw new Error('No authentication token found.');
       }
@@ -16,7 +17,7 @@ export const fetchParticipantProfile = createAsyncThunk(
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
         },
       });
 
@@ -31,7 +32,6 @@ export const fetchParticipantProfile = createAsyncThunk(
     }
   }
 );
-
 
 const participantProfileSlice = createSlice({
   name: 'participantProfile',

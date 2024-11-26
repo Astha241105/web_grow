@@ -1,7 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; 
 import "./nav-part.css";
 
 const Navpart = ({ bgColor}) => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+
+    navigate("/part-profile");
+  };
+
 
   return (
     <div id="nav" style={{ backgroundColor: bgColor}}>
@@ -17,7 +25,9 @@ const Navpart = ({ bgColor}) => {
         </div>
         <div className="home-nav-options1">Reviews</div>
         <img src="/bell.svg"></img>
-        <div id="part-profile-00" className="home-nav-options1">
+        <div id="part-profile-00" 
+         onClick={handleLoginClick} 
+         className="home-nav-options1">
             <img src="/profile.svg"></img>
             <div  id="part-profile1">My Profile</div>
         </div>

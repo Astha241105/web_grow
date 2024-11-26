@@ -5,7 +5,7 @@ const Badges = () => {
   return (
     <div id="part-profile-coins-and-badges">
         <div id="part-profile-coins">Coins</div>
-        <div><img src="/coins.svg"></img>
+        <div id="coins-info"><img src="/coins.svg"></img>
         <div>Total coins</div>0</div>
         <div id="part-profile-badges">Badges</div>
       

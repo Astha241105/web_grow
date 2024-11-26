@@ -2,14 +2,14 @@
     max-height:930px;
     height:100vh;
     max-width:847px;
-    width:100vw;
+    width:60vw;
     border:1px solid black;
     position: relative;
     background-color: white;
 }
 #edit-my-profile{
     position: absolute;
-    font-size:24px ;
+    font-size:24px;
     font-weight: 500;
     top:70px;
     left:10px;

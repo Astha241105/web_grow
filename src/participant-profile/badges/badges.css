@@ -14,6 +14,16 @@
     font-weight: 500;
     top:30px; 
 }
-/* #part-profile-badges{
-
-} */
+#coins-info{
+    position:absolute;
+    top: 130px;
+    left:50%;
+    transform: translate(-50%);
+}
+#part-profile-badges{
+    position: absolute;
+    left:20px;
+    font-size: 24px;
+    font-weight: 500;
+    top:500px; 
+}
