@@ -9,6 +9,13 @@ const Navpart = ({ bgColor}) => {
 
     navigate("/part-profile");
   };
+  const handleScrollToReviews = () => {
+    const reviewsSection = document.getElementById("review-box");
+    if (reviewsSection) {
+      reviewsSection.scrollIntoView({ behavior: "smooth" }); 
+    }
+  };
+
 
 
   return (
@@ -23,7 +30,9 @@ const Navpart = ({ bgColor}) => {
           <div className="nav-option-text">Compete</div>
           <img src="/down-nav.svg" alt="Dropdown Icon" />
         </div>
-        <div className="home-nav-options1">Reviews</div>
+        <div className="home-nav-options1"
+        onClick={handleScrollToReviews}
+        >Reviews</div>
         <img src="/bell.svg"></img>
         <div id="part-profile-00" 
          onClick={handleLoginClick} 

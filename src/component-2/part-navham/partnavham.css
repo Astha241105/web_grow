@@ -1,6 +1,13 @@
 #nav-bar-with-hamburger {
     position: relative;
-    background-color: #fdf8ee;
+    height: 74px;
+    width: 100vw;
+    border-bottom: 1px solid black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; 
+    background-color: #FDF8EE;
     
      }
   #nav-bar-with-hamburger-icon{
@@ -50,7 +57,14 @@
   @media(max-width:560px){
     #nav-bar-with-hamburger {
         position: relative;
-        background-color: white;
+        height: 74px;
+        width: 100vw;
+        border-bottom: 1px solid black;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000; 
+        background-color:white;
          }
   }
   

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./partnavham.css"
 
 const Partnavham = () => {
@@ -6,6 +7,12 @@ const Partnavham = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+
+    navigate("/part-profile");
   };
   return (
     <div id="nav-bar-with-hamburger">
@@ -20,7 +27,8 @@ const Partnavham = () => {
           <li className="close-menu" onClick={toggleMenu}>
             <img src="/cross2.svg" alt="Close Menu" className="menu-close-icon" />
           </li>
-          <li className="nav-ham-options-list">My Profile</li>
+          <li className="nav-ham-options-list"
+          onClick={handleLoginClick} >My Profile</li>
           <li className="nav-ham-options-list">Notification</li>
           <li className="nav-ham-options-list">Reviews</li>
           <li className="nav-ham-options-list">Quiz</li>

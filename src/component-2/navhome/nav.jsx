@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "./nav.css";
 
 const Nav = ({bgColor}) => {
+  const handleScrollToReviews = () => {
+    const reviewsSection = document.getElementById("review-box");
+    if (reviewsSection) {
+      reviewsSection.scrollIntoView({ behavior: "smooth" }); 
+    }
+  };
+
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
@@ -25,7 +32,7 @@ const Nav = ({bgColor}) => {
           <div className="nav-option-text">Explore</div>
           <img src="/down-nav.svg" alt="Dropdown Icon" />
         </div>
-        <div className="home-nav-options1">Reviews</div>
+        <div className="home-nav-options1" onClick={handleScrollToReviews}>Reviews</div>
         <div className="home-nav-buttons">
           <button
             className="button-home-nav"

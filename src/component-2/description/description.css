@@ -3,6 +3,7 @@
   position: relative;
   height: 600px;
   width: 100vw;
+  top:74px;
   background-color: #fdf8ee;
   background-image: url("./Group.png");
   background-position: center top, 928px 20px;
