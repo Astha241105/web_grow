@@ -1,7 +1,7 @@
 /* .ce {
   height: 100%;
   width: 100%;
-}
+}*/
 .ce-gradient {
   width: 875px;
   height: 2935px;
@@ -19,7 +19,7 @@
   height: 2903px;
   flex-shrink: 0;
   background: linear-gradient(453deg, #fff 33.94%, #d4e5e4 98.51%);
-} */
+}
 .ce-form {
   max-width: 800px;
   margin: 0 auto;

@@ -1,7 +1,43 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  uploadImage,
+  setBasicDetails,
+} from "../../store/slices/create_event_Slice";
 import "./CreateEvents.css";
 
 const CreateEvents = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {
+    imageUrl = "",
+    opportunityType,
+    visibility,
+    opportunityTitle,
+    organization,
+    websiteUrl,
+    festival,
+    eventMode,
+    category,
+    skills,
+    aboutOpportunity,
+  } = useSelector((state) => state.events || {});
+
+  const [formData, setFormData] = useState({
+    opportunityType,
+    visibility,
+    opportunityTitle,
+    organization,
+    websiteUrl: websiteUrl || "https://",
+    festival,
+    eventMode,
+    category,
+    skills,
+    aboutOpportunity,
+  });
+
   const urlInputRef = useRef(null);
 
   const handleUrlFocus = () => {
@@ -10,10 +46,31 @@ const CreateEvents = () => {
       urlInputRef.current.setSelectionRange(length, length);
     }
   };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        await dispatch(uploadImage(file)).unwrap();
+      } catch (error) {
+        console.error("Image upload failed", error);
+      }
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleNextStep = () => {
+    dispatch(setBasicDetails(formData));
+    navigate("/create-event1");
+  };
   return (
     <div className="ce">
-      <div className="ce-gradient"> </div>
-      <div className="ce-gradient2"></div>
+      <div className="ce-gradient z-[-1]"> </div>
+      <div className="ce-gradient2 z-[-1]"></div>
       <div className="ce-form">
         <div className="ce-progress-bar">
           <div className="ce-back-button">
@@ -40,7 +97,14 @@ const CreateEvents = () => {
           <div className="ce-form-group">
             <label>Opportunity Logo*</label>
             <div className="logo-upload">
-              <div className="logo-placeholder">Upload Logo</div>
+              <input
+                type="file"
+                onChange={handleImageUpload}
+                accept="image/*"
+              />
+              <div className="logo-placeholder">
+                {imageUrl ? "Logo Uploaded" : "Upload Logo"}
+              </div>
             </div>
           </div>
 
@@ -79,6 +143,9 @@ const CreateEvents = () => {
             <input
               className="ce-placeholder"
               type="text"
+              name="opportunityTitle"
+              value={formData.opportunityTitle}
+              onChange={handleInputChange}
               placeholder="Enter opportunity title"
             />
           </div>
@@ -170,7 +237,9 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-actions">
-            <button className="ce-next-button">Next</button>
+            <button className="ce-next-button" onClick={handleNextStep}>
+              Next
+            </button>
           </div>
         </div>
       </div>

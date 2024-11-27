@@ -1,9 +1,77 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setRegistrationDetails,
+  setHostStatus,
+  createEvent,
+} from "../../store/slices/create_event_Slice";
 
 const Create_Events = () => {
+  const dispatch = useDispatch();
+  const eventState = useSelector((state) => state.events);
   const [showHostPrompt, setShowHostPrompt] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  const [formData, setFormData] = useState({
+    participationType: "",
+    minTeamSize: "",
+    maxTeamSize: "",
+    registrationStartDate: "",
+    registrationStartTime: "",
+    registrationEndDate: "",
+    registrationEndTime: "",
+    maxRegistrations: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleNextStep = () => {
+    // Dispatch registration details to Redux store
+    dispatch(setRegistrationDetails(formData));
+
+    // Show host prompt
+    setShowHostPrompt(true);
+  };
+
+  const handleHostPromptResponse = (hasHost) => {
+    dispatch(setHostStatus(hasHost));
+    setShowHostPrompt(false);
+
+    if (!hasHost) {
+      // Prepare event payload using data from Redux store
+      const eventPayload = {
+        imageUrl:
+          eventState.imageUrl ||
+          "https://webgrowbucket.s3.ap-south-1.amazonaws.com/photo",
+        title: eventState.opportunityTitle,
+        description: eventState.aboutOpportunity,
+        location: eventState.organization,
+        mode: eventState.eventMode,
+        registerStart: `${formData.registrationStartDate} ${formData.registrationStartTime}`,
+        registerEnd: `${formData.registrationEndDate} ${formData.registrationEndTime}`,
+        startTime: "",
+        endTime: "",
+        capacityMax: formData.maxRegistrations,
+        eventType: eventState.opportunityType,
+        festival: eventState.festival,
+        teamCreationAllowed: formData.participationType === "Team",
+        maxTeamSize: formData.maxTeamSize,
+        minTeamSize: formData.minTeamSize,
+      };
+
+      // Dispatch event creation
+      dispatch(createEvent(eventPayload))
+        .then(() => {
+          setShowSuccessModal(true);
+        })
+        .catch((error) => {
+          console.error("Event creation failed", error);
+        });
+    }
+  };
   const styles = {
     inputContainer: {
       display: "flex",
@@ -86,17 +154,6 @@ const Create_Events = () => {
     },
   };
 
-  const handleSubmit = () => {
-    setShowHostPrompt(true);
-  };
-
-  const handleHostPromptResponse = (hasHost) => {
-    setShowHostPrompt(false);
-    if (!hasHost) {
-      setShowSuccessModal(true);
-    }
-  };
-
   return (
     <div className="ce">
       <div className="ce-gradient"> </div>
@@ -127,17 +184,32 @@ const Create_Events = () => {
             showHostPrompt || showSuccessModal ? "pointer-events-none" : ""
           }`}
         >
-          {/* Rest of the form content remains the same */}
           <div className="ce-form-group">
             <label>Participation Type</label>
             <div className="ce-button-group">
-              <button className="option-button">
+              <button
+                className="option-button"
+                onClick={() =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    participationType: "Individual",
+                  }))
+                }
+              >
                 <img src="Globe.svg" alt="individual" />
                 <div>
                   <div className="button-title">Individual</div>
                 </div>
               </button>
-              <button className="option-button">
+              <button
+                className="option-button"
+                onClick={() =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    participationType: "Team",
+                  }))
+                }
+              >
                 <img src="Globe.svg" alt="team" />
                 <div>
                   <div className="button-title">Team</div>
@@ -217,11 +289,17 @@ const Create_Events = () => {
           </div>
           <div className="ce-form-group">
             <label>Number of Registrations allowed (optional)</label>
-            <input type="number" placeholder="Enter count" />
+            <input
+              type="number"
+              placeholder="Enter count"
+              name="maxRegistrations"
+              value={formData.maxRegistrations}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="ce-form-actions">
-            <button className="ce-next-button" onClick={handleSubmit}>
+            <button className="ce-next-button" onClick={handleNextStep}>
               Next
             </button>
           </div>
