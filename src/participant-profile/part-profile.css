@@ -1,19 +1,19 @@
 #part-profile-render{
-    width:100%;
+    width:100vw;
     height:100vh;
     background-color: #D4E5E4;
     position: relative;
+    display:flex;
+    justify-content: space-around;
 }
 #part-profile{
-    position: absolute;
-    left:80px;
+    position: relative;
     max-height:930px;
     height: 100vh;
+    max-width:28.68%;
     width:100%;
-    max-width:413px;
     background-color: white;
     border: 1px solid black;
-    position:relative;
 
 }
 #my-profile{
@@ -85,6 +85,17 @@
     font-weight: 500;
 }
 #part-profile-content{
-    position:absolute;
-    left:450px;
+    width:58.82%;
+}
+@media(max-width:1200px){
+    #part-profile{
+        max-width:350px;  
+    }}
+@media(max-width:900px){
+    #part-profile-content{
+        display:none;
+    }
+    #part-profile{
+        max-width:417px;  
+    }
 }

@@ -5,7 +5,7 @@ export const validateOtp = createAsyncThunk(
   async ({ email, otp }, { rejectWithValue }) => {
     console.log({ email, otp })
     try {
-      const response = await fetch("https://webgrowproject-1.onrender.com/api/v1/auth/validate", {
+      const response = await fetch("http://www.arthkambhoj.me.:8080/api/v1/auth/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -17,9 +17,9 @@ export const validateOtp = createAsyncThunk(
       // console.log(response.json());
       const data = await response.json();
       console.log(data.data.token);
-      console.log("token generated")
+      console.log("token generated-part")
       if (data.data.token) {
-        localStorage.setItem("token", data.data.token);
+        localStorage.setItem("authToken", data.data.token);
       }
 
       return data;

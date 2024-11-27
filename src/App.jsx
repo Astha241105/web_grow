@@ -52,6 +52,7 @@ import Creatingteam from "./registration-event-part/creatingteam/creatingteam.js
 import Filter from "./browse-by-category/filter/filter.jsx";
 import Oneeventdetail from "./browse-by-category/oneeventdetail/oneeventdetail.jsx";
 import "./index.css";
+import "./App.css"
 import {
   CreateEvents,
   Create_Events,
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
   {
     path: "/part-profile",
     element: (
-      <div>
+      <div id="part-profile-container">
         <Navpart bgColor="#D4E5E4" />
         <Partprofile />
       </div>
@@ -98,7 +99,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        {localStorage.getItem("token") ? <ResponsiveNav2 /> : <ResponsiveNav />}
+        {localStorage.getItem("authToken") ? <ResponsiveNav2 /> : <ResponsiveNav />}
         <Des />
         <Down />
         <Browsebycategory />
@@ -108,7 +109,6 @@ const router = createBrowserRouter([
         <Hostnow />
         <Reviews />
         <Footer />
-        <Loginpopup />
       </Backgroundhome>
 
       // </ProtectedRoute>

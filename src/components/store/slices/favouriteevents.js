@@ -4,13 +4,13 @@ export const fetchFavoriteEvents = createAsyncThunk(
   'favorites/fetchFavoriteEvents',
   async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('authToken'); 
 
       if (!token) {
         throw new Error('Authorization token not found.');
       }
 
-      const response = await fetch('http://35.154.224.49:8080/api/v1/participant/events/favourites', {
+      const response = await fetch('http://www.arthkambhoj.me.:8080/api/v1/participant/events/favourites', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -23,6 +23,7 @@ export const fetchFavoriteEvents = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');

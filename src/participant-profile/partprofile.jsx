@@ -87,9 +87,8 @@ const Partprofile = () => {
             <div className="part-profile-options-list-1">Log out</div>
           </div>
         </div>
-
-        <div id="part-profile-content">{renderContent()}</div>
-      </div>
+      </div>      
+      <div id="part-profile-content">{renderContent()}</div>
     </div>
   );
 };

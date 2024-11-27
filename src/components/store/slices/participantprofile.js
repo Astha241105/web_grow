@@ -1,61 +1,62 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Use a relative URL for proxy
-const BASE_URL = '/api/v1/participant/profile';
-
 export const fetchParticipantProfile = createAsyncThunk(
-  'participantProfile/fetchParticipantProfile',
-  async (_, thunkAPI) => {
+  'participant/fetchProfile',
+  async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('authToken'); 
-      console.log(token);
-      if (!token) {
-        throw new Error('No authentication token found.');
-      }
+      const authToken = localStorage.getItem('authToken');
+      if (!authToken) throw new Error('Auth token not found');
 
-      const response = await fetch(BASE_URL, {
+      const response = await fetch('http://35.154.224.49:8080/api/v1/participant/profile', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          Authorization: `Bearer ${authToken}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to fetch profile');
       }
 
       const data = await response.json();
+      console.log(data)
       return data; 
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message || 'Failed to fetch participant profile');
+      return rejectWithValue(error.message);
     }
   }
 );
 
-const participantProfileSlice = createSlice({
-  name: 'participantProfile',
+const participantSlice = createSlice({
+  name: 'participant',
   initialState: {
     profile: null,
-    status: 'idle',
-    error: null, 
+    isLoading: false,
+    error: null,
   },
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchParticipantProfile.pending, (state) => {
-        state.status = 'loading';
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchParticipantProfile.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.isLoading = false;
         state.profile = action.payload;
       })
       .addCase(fetchParticipantProfile.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.payload || 'Something went wrong';
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export default participantProfileSlice.reducer;
+export const { clearError } = participantSlice.actions;
+
+export default participantSlice.reducer;

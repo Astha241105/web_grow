@@ -21,7 +21,7 @@ export const validateHostOtp = createAsyncThunk(
       const data = await response.json();
       console.log(data);
       if (data.data.token) {
-        localStorage.setItem("token", data.data.token);
+        localStorage.setItem("authToken", data.data.token);
         return data;
       }
     } catch (error) {

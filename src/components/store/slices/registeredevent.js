@@ -9,7 +9,7 @@ export const fetchRegisteredEvents = createAsyncThunk(
     try {
 
       console.log("ok")
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('authToken'); 
       console.log(token)
   
       if (!token) {
@@ -29,6 +29,7 @@ export const fetchRegisteredEvents = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data)
       return data; 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch registered events');

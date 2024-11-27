@@ -54,7 +54,7 @@ const OtpWithMail = () => {
 
   useEffect(() => {
     if (status === "success") {
-      navigate("/home");
+      navigate("/");
     }
   }, [status, navigate]);
 
