@@ -1,14 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
-const uploadImage = (file) => {
-  return async (dispatch) => {
-    dispatch(eventsSlice.actions.setLoading(true));
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+const uploadImage = createAsyncThunk(
+  "events/uploadImage",
+  async (file, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       formData.append("keyName", file.name);
-      formData.append("Logo", file);
+      formData.append("file", file);
+
+      const token = localStorage.getItem("token");
 
       const response = await fetch("http://www.arthkambhoj.me:8080/s3/upload", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
 
@@ -17,21 +23,20 @@ const uploadImage = (file) => {
       }
 
       const data = await response.json();
-      dispatch(eventsSlice.actions.setImageUrl(data.imageUrl));
       return data.imageUrl;
     } catch (error) {
-      dispatch(eventsSlice.actions.setError(error.message));
-      throw error;
-    } finally {
-      dispatch(eventsSlice.actions.setLoading(false));
+      return rejectWithValue(error.message);
     }
-  };
-};
+  }
+);
 
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
     imageUrl: null,
+    loading: false,
+    error: null,
+
     opportunityType: "",
     visibility: "",
     opportunityTitle: "",
@@ -53,9 +58,6 @@ const eventsSlice = createSlice({
     maxRegistrations: "",
 
     hasHost: null,
-
-    loading: false,
-    error: null,
   },
   reducers: {
     setBasicDetails: (state, action) => {
@@ -85,18 +87,36 @@ const eventsSlice = createSlice({
       });
     },
   },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(uploadImage.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(uploadImage.fulfilled, (state, action) => {
+        state.loading = false;
+        state.imageUrl = action.payload;
+      })
+      .addCase(uploadImage.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
 });
 
 const createEvent = (eventData) => {
   return async (dispatch) => {
     dispatch(eventsSlice.actions.setLoading(true));
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         "http://www.arthkambhoj.me:8080/api/events/create",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(eventData),
         }
