@@ -8,7 +8,7 @@ import otpReducer from "./slices/otpslice";
 import fpotpReducer from "./slices/fpotpslice";
 import fpchangeReducer from "./slices/fpchangeslice";
 import registeredEventsReducer from "./slices/registeredevent"
-import participantProfileReducer from "./slices/participantprofile"
+import participantReducer from "./slices/participantprofile"
 import eventsReducer from "./slices/listofevents"
 import eventDetailsReducer from './slices/eventdetails';
 import eventRegistrationReducer from './slices/registerforevent';
@@ -26,7 +26,7 @@ export const store = configureStore({
     fpotp: fpotpReducer,
     fpchange: fpchangeReducer,
     registeredEvents: registeredEventsReducer,
-    participantProfile: participantProfileReducer,
+    participant: participantReducer,
     events: eventsReducer,
     eventDetails: eventDetailsReducer,   
     eventRegistration: eventRegistrationReducer,
