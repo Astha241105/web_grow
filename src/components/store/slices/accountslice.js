@@ -1,4 +1,4 @@
-// src/redux/accountSlice.js
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const createAccount = createAsyncThunk(
@@ -7,7 +7,7 @@ export const createAccount = createAsyncThunk(
     console.log(accountDetails)
     try {
       const response = await fetch(
-        "https://webgrowproject-1.onrender.com/api/v1/auth/register",
+        "http://www.arthkambhoj.me.:8080/api/v1/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -1,38 +1,3 @@
-#teampage-nav {
-    position: relative;
-    height: 114px;
-    width: 100vw;
-    margin-top: 0px;
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; Distributes children */
-    padding: 0 20px; /* Optional spacing */
-}
-
-#teampage-nav-back {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left:300px; /* Space between icon and text */
-}
-
-#teampage-nav-logo {
-    height: 68px;
-    width: 68px;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-left:100px;
-}
-#teampage-nav-name{
-    font-size:24px;
-    font-weight:600;
-    margin-left:100px;
-}
-#teampage-nav-location{
-    font-size:16px;
-    font-weight:500;
-    margin-left:100px;
-}
 #team-details{
     width:100vw;
     height:100vh;
@@ -59,7 +24,7 @@
     padding-left:30px;
     background: url('/downrec.svg') no-repeat bottom;
     background-position: 35px bottom;
-    background-size: auto; /* Ensures proper scaling */
+    background-size: auto; 
 }
 #team-name{
     width:100%;

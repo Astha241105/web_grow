@@ -3,18 +3,18 @@
     position: relative;
     height: 74px;
     width: 100vw;
-    background-color: #fdf8ee;
     border-bottom: 1px solid black;
   }
   
   #web-logo {
     position: absolute;
-    left: 80px;
+    left: 20px;
     top:10px;
-    height: 50px; /* Ensure consistent logo size */
+    height: 50px; 
+    scale:calc(.5);
   }
   
-  #home-nav-options {
+  .home-nav-options {
     position: absolute;
     display: flex;
     flex-direction: row;
@@ -44,7 +44,7 @@
     display: flex;
     /* gap: 10px; */
   }
-#part-profile{
+#part-profile-00{
     display: flex;
     gap:5px;
     align-items: center;

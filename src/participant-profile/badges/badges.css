@@ -1,0 +1,29 @@
+#part-profile-coins-and-badges{
+    max-height:930px;
+    height:100vh;
+    max-width:847px;
+    width:100vw;
+    border:1px solid black;
+    position: relative;
+    background-color: white;
+}
+#part-profile-coins{
+    position: absolute;
+    left:20px;
+    font-size: 24px;
+    font-weight: 500;
+    top:30px; 
+}
+#coins-info{
+    position:absolute;
+    top: 130px;
+    left:50%;
+    transform: translate(-50%);
+}
+#part-profile-badges{
+    position: absolute;
+    left:20px;
+    font-size: 24px;
+    font-weight: 500;
+    top:500px; 
+}

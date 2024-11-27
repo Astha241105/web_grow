@@ -97,14 +97,21 @@ const CreateEvents = () => {
           <div className="ce-form-group">
             <label>Opportunity Logo*</label>
             <div className="logo-upload">
+              <label htmlFor="logo-upload" className="logo-upload-label">
+                <img
+                  src="/cam.svg"
+                  alt="Upload Logo"
+                  className="logo-upload-icon"
+                />
+                {imageUrl ? "Logo Uploaded" : "Upload Logo"}
+              </label>
               <input
+                id="logo-upload"
                 type="file"
                 onChange={handleImageUpload}
                 accept="image/*"
+                className="logo-upload-input"
               />
-              <div className="logo-placeholder">
-                {imageUrl ? "Logo Uploaded" : "Upload Logo"}
-              </div>
             </div>
           </div>
 
@@ -112,6 +119,10 @@ const CreateEvents = () => {
             <label>Opportunity Type</label>
             <select>
               <option>Select opportunity type</option>
+              <option>Seminar</option>
+              <option>Webinar</option>
+              <option>Quiz</option>
+              <option>Hackathon</option>
             </select>
           </div>
 

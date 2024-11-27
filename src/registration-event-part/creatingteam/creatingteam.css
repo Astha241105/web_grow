@@ -1,0 +1,104 @@
+#create-or-join {
+    position: relative;
+    height: 100vh;
+    max-width: 846px;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    padding:20px;
+}
+#create-and-cancel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#create-and-join{
+    display: flex;
+    gap:20px;
+}
+#creating-team,
+#joining-team {
+    display: inline-block; 
+    width: auto;
+    height: 53px;
+    font-size: 16px;
+    font-weight: 600;
+    color: teal;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+}
+.active {
+    background: url('/downrec.svg') no-repeat bottom;
+    background-position: center bottom;
+    background-size: auto;
+}
+#cancel-part-team{
+    height: 37px;
+    width:110px;
+    color:red;
+    font-size: 14px;
+    font-weight: 400;
+    border:1px solid red ;
+    border-radius:10px;
+    padding: 10px 9px;
+}
+.create-team-name-label{
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+    margin-top:40px ;
+    margin-bottom: 20px;
+}
+#create-team-name-input{
+    width:100%;
+    background-color:#D9D9D9;
+    height: 50px;
+    padding: 10px;
+    border-radius: 10px;
+}
+#complete-team{
+    font-size: 18px;
+    font-weight: 500;
+}
+#create-member-card{
+    height:78px;
+    width:100%;
+    margin-top:10px;
+    border-radius:10px;
+    background: url('/smallrec.svg') left center no-repeat;
+    background-size: 9px;
+    background-color: #C8FAC8;
+}
+#create-add-members{
+    position: absolute;
+    height:58px ;
+    width:414px;
+    background-color: teal;
+    color: white;
+    border-radius: 10px;
+    font-size:18px ;
+    font-weight: 500;
+    margin-top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+@media(max-width:450px){
+  
+#create-add-members{
+    width:90%;
+}  
+}
+@media(max-width:370px){
+    #cancel-part-team{
+        height: 37px;
+        width:110px;
+        color:red;
+        font-size: 14px;
+        font-weight: 400;
+        border:1px solid red ;
+        border-radius:10px;
+        padding: 10px 0px;
+    }
+    }

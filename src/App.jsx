@@ -24,13 +24,14 @@ import Nav from "./component-2/navhome/nav.jsx";
 import Des from "./component-2/description/description.jsx";
 import Browsebycategory from "./component-2/browsebycategory/browsebycategory.jsx";
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
-import HostOtpVerification from './components/CreateAccountH/otpforhost.jsx';
+import HostOtpVerification from "./components/CreateAccountH/otpforhost.jsx";
 import BackgroundEvent from "./events-page/background-event.jsx";
 import Eventname from "./events-page/event-name/eventname.jsx";
 import Details from "./events-page/details/details.jsx";
 import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
 import NavEvent from "./events-page/nav-event/navEvent.jsx";
 import Regi from "./registration-event-part/regi.jsx";
+import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
 import Stages from "./events-page/details/stages/stages.jsx";
 import Dates from "./events-page/details/Dates/dates.jsx";
 import Organizer from "./events-page/details/organizers/organizer.jsx";
@@ -41,13 +42,25 @@ import Eventcard from "./component-2/eventcard/eventcard.jsx";
 import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
 import Reviews from "./component-2/reviews/reviews.jsx";
 import Footer from "./component-2/footer/footer.jsx";
+import Loginpopup from "./component-2/login-popup/login-popup.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
+import ResponsiveNav from "./component-2/condnav/condnav.jsx";
+import ResponsiveNav2 from "./component-2/condnavpart/contnavpart.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
-import Edit from "./participant-profile/edit-profile/edit.jsx";
-import Certificate from "./participant-profile/certificate/certificate.jsx";
-import Teampage from "./component-2/teampage/teampage.jsx";
+import Teampage from "./registration-event-part/teampage/teampage.jsx";
+import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
+import Filter from "./browse-by-category/filter/filter.jsx";
+import Oneeventdetail from "./browse-by-category/oneeventdetail/oneeventdetail.jsx";
 import "./index.css";
-import { CreateEvents, Create_Events, HHomeScreen } from "./Pages";
+import {
+  CreateEvents,
+  Create_Events,
+  HHomeScreen,
+  TeamManagement,
+  Event_Manage,
+  QuizCreator,
+  HostProfile,
+} from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -65,9 +78,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/part-profile",
-    element:( <><Partprofile />
-              <Edit />
-              <Certificate /></>
+    element: (
+      <div>
+        <Navpart bgColor="#D4E5E4" />
+        <Partprofile />
+      </div>
     ),
   },
   {
@@ -82,8 +97,8 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       // <ProtectedRoute>
-        <Backgroundhome>
-        <Nav />
+      <Backgroundhome>
+        {localStorage.getItem("token") ? <ResponsiveNav2 /> : <ResponsiveNav />}
         <Des />
         <Down />
         <Browsebycategory />
@@ -93,30 +108,72 @@ const router = createBrowserRouter([
         <Hostnow />
         <Reviews />
         <Footer />
-        </Backgroundhome>
+        <Loginpopup />
+      </Backgroundhome>
+
       // </ProtectedRoute>
     ),
   },
   {
     path: "/event",
-    element: (<BackgroundEvent>
-      <div id="event-and-part">
-      <div id="event-and-nav">
-              <Eventname />
-              <NavEvent />
-              </div>
-              <ParticipantDetails /></div>
-              <Details>
-              <Stages/>
-                <Dates />
-                <EventDetails />
-                <Organizer/>
-                </ Details>
-              </BackgroundEvent>),
+    element: (
+      <BackgroundEvent>
+        <div id="event-and-part">
+          <div id="event-and-nav">
+            <Eventname />
+            <NavEvent />
+          </div>
+          <ParticipantDetails />
+        </div>
+        <Details>
+          <Stages />
+          <Dates />
+          <EventDetails />
+          <Organizer />
+        </Details>
+      </BackgroundEvent>
+    ),
   },
   {
     path: "/regifore",
-    element: <Regi />,
+    element: (
+      <>
+        {" "}
+        <Navregister />
+        <Regi />
+      </>
+    ),
+  },
+  {
+    path: "/regiteam",
+    element: (
+      <>
+        {" "}
+        <Navregister />
+        <Teampage />
+      </>
+    ),
+  },
+  {
+    path: "/event-type",
+    element: (
+      <>
+        {" "}
+        <Nav />
+        <Filter />
+        <Oneeventdetail />
+      </>
+    ),
+  },
+  {
+    path: "/create-or-join",
+    element: (
+      <>
+        {" "}
+        <Navregister />
+        <Creatingteam />
+      </>
+    ),
   },
   {
     path: "/create-account-host",
@@ -172,6 +229,24 @@ const router = createBrowserRouter([
   {
     path: "/home-host",
     element: <HHomeScreen />,
+  },
+
+  {
+    path: "/host-manage",
+    element: <TeamManagement />,
+  },
+  {
+    path: "/event-manage",
+    element: <Event_Manage />,
+  },
+  {
+    path: "/create-quiz",
+    element: <QuizCreator />,
+  },
+
+  {
+    path: "/host-profile",
+    element: <HostProfile />,
   },
 ]);
 

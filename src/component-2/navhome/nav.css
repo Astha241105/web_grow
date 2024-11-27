@@ -3,15 +3,15 @@
     position: relative;
     height: 74px;
     width: 100vw;
-    background-color: #fdf8ee;
     border-bottom: 1px solid black;
   }
   
   #web-logo {
     position: absolute;
-    left: 80px;
+    left: 30px;
     top:10px;
     height: 50px; 
+    scale:calc(.6);
   }
   
   #home-nav-options {

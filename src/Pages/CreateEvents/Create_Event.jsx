@@ -156,8 +156,8 @@ const Create_Events = () => {
 
   return (
     <div className="ce">
-      <div className="ce-gradient"> </div>
-      <div className="ce-gradient2"></div>
+      <div className="ce-gradient z-[-1]"> </div>
+      <div className="ce-gradient2 z-[-1]"></div>
       <div className="ce-form">
         <div className="ce-progress-bar">
           <div className="ce-back-button">
@@ -339,12 +339,7 @@ const Create_Events = () => {
               <h3 className="text-lg font-semibold mb-4">
                 Your Event has been created successfully
               </h3>
-              <button
-                style={styles.successButton}
-                onClick={() => {
-                  /* Handle view event */
-                }}
-              >
+              <button style={styles.successButton} onClick={() => {}}>
                 View Event
               </button>
               <br />

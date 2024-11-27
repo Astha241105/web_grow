@@ -9,6 +9,7 @@
   flex-shrink: 0;
   background: linear-gradient(269deg, #fff 33.93%, #d4e5e4 106.13%);
 }
+
 .ce-gradient2 {
   top: 0px;
   right: 0px;
@@ -96,7 +97,7 @@
 }
 
 hr {
-  width: 100%;
+  width: 153%;
   left: 0px;
   top: 75px;
   position: absolute;
@@ -142,6 +143,7 @@ textarea {
   font-weight: 400;
   margin-top: 4px;
 }
+
 .ce-help-text1 {
   color: #000;
   margin-top: 4px;
@@ -149,6 +151,7 @@ textarea {
   font-weight: 400;
   margin-top: 4px;
 }
+
 .ce-button-group {
   display: flex;
   gap: 16px;
@@ -204,11 +207,13 @@ textarea {
 .ce-form-group input::placeholder {
   color: #000;
 }
+
 .ce-form-group input:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
+
 .ce-guidelines {
   margin-top: 16px;
   font-size: 14px;
@@ -240,6 +245,7 @@ textarea {
   float: right;
   margin: 15px;
 }
+
 /* .hr1 {
   width: 848px;
   height: 1px;
@@ -428,8 +434,35 @@ textarea:focus {
   border-radius: 6px;
   font-size: 14px;
 }
+
 #numberInput:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.logo-upload {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-upload-label {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.logo-upload-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.logo-upload-input {
+  display: none;
 }

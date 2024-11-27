@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://webgrowproject-1.onrender.com/api/v1/auth/authenticate",
+        "http://www.arthkambhoj.me.:8080/api/v1/auth/authenticate",
         {
           method: "POST",
           headers: {
@@ -16,23 +16,23 @@ export const loginUser = createAsyncThunk(
       );
 
       const data = await response.json();
-
+      
       console.log("Response Data:", data); 
 
       if (!response.ok) {
         console.error("Error in response:", data);
         return rejectWithValue(data.message || "Invalid username or password");
       }
-
+      
       const token = data?.data?.token;
       if (token) {
 
         console.log("Extracted Token:", token);
-        localStorage.setItem("token", token); 
+        localStorage.setItem("authToken", token); 
         console.log("Token saved to localStorage:", token);
 
 
-        const storedToken = localStorage.getItem("token");
+        const storedToken = localStorage.getItem("authToken");
         console.log("Token from localStorage:", storedToken);
 
         if (storedToken === token) {
