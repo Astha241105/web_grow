@@ -42,7 +42,6 @@ import Eventcard from "./component-2/eventcard/eventcard.jsx";
 import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
 import Reviews from "./component-2/reviews/reviews.jsx";
 import Footer from "./component-2/footer/footer.jsx";
-import Loginpopup from "./component-2/login-popup/login-popup.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
 import ResponsiveNav from "./component-2/condnav/condnav.jsx";
 import ResponsiveNav2 from "./component-2/condnavpart/contnavpart.jsx";

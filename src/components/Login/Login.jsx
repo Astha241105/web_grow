@@ -38,7 +38,7 @@ const Login = () => {
     e.preventDefault();
     const result = await dispatch(loginUser(formData)); // Login action
     if (!result.error) {
-      localStorage.setItem("authToken", result.payload.token); // Store token in localStorage
+      // localStorage.setItem("authToken", result.payload.token); // Store token in localStorage
       dispatch(fetchAllUserData()); // Fetch all user data
       navigate("/"); // Navigate to the home page
     }
