@@ -1,38 +1,35 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-const BASE_URL = 'http://www.arthkambhoj.me.:8080/api/v1/participant/events';
 
+const BASE_URL = 'http://www.arthkambhoj.me.:8080/api/v1/participant/events';
 
 export const fetchEvents = createAsyncThunk(
   'events/fetchEvents',
-  async ({ search, category, location }, thunkAPI) => {
+  async (_, thunkAPI) => { 
     try {
       const authToken = localStorage.getItem('authToken');
-      console.log(authToken)
-      const url = new URL(BASE_URL);
-      url.searchParams.append('search', search);
-      url.searchParams.append('category', category);
-      url.searchParams.append('location', location);
+      console.log(authToken);
 
-      const response = await fetch(url, {
-        method: 'GET', 
+      const response = await fetch(BASE_URL, {
+        method: 'GET',
         headers: {
-            'Content-Type': 'application/json', 
-            'Authorization': `Bearer ${authToken}`, 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
         },
-    });
+      });
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       const data = await response.json();
-      console.log(data)
-      return data; 
+      console.log(data.data);
+      return data.data; 
     } catch (error) {
-        console.error('Error fetching events:', error);
+      console.error('Error fetching events:', error);
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch events');
     }
   }
 );
-
 
 const eventsSlice = createSlice({
   name: 'events',
