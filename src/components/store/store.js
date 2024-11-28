@@ -7,18 +7,16 @@ import hostOtpReducer from "./slices/hostotp";
 import otpReducer from "./slices/otpslice";
 import fpotpReducer from "./slices/fpotpslice";
 import fpchangeReducer from "./slices/fpchangeslice";
-
-// import eventsReducer from "./slices/create_event_Slice";
+import createEventReducer from "./slices/create_event_Slice";
 import eventmanageReducer from "./slices/eventmanageSlice";
 
-import registeredEventsReducer from "./slices/registeredevent"
-import participantReducer from "./slices/participantprofile"
-import eventsReducer from "./slices/listofevents"
-import eventDetailsReducer from './slices/eventdetails';
-import eventRegistrationReducer from './slices/registerforevent';
-import favoritesReducer from "./slices/favouriteevents"
-import addToFavoritesReducer from "./slices/addfavourite"
-
+import registeredEventsReducer from "./slices/registeredevent";
+import participantReducer from "./slices/participantprofile";
+import eventsReducer from "./slices/listofevents";
+import eventDetailsReducer from "./slices/eventdetails";
+import eventRegistrationReducer from "./slices/registerforevent";
+import favoritesReducer from "./slices/favouriteevents";
+import addToFavoritesReducer from "./slices/addfavourite";
 
 export const store = configureStore({
   reducer: {
@@ -37,7 +35,7 @@ export const store = configureStore({
     eventRegistration: eventRegistrationReducer,
     favorites: favoritesReducer,
     addToFavorites: addToFavoritesReducer,
-    // events: eventsReducer,
+    createEvent: createEventReducer,
     eventmanage: eventmanageReducer,
   },
 });
