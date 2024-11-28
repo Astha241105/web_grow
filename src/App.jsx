@@ -50,7 +50,7 @@ import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
 import "./index.css";
-import "./App.css"
+import "./App.css";
 import {
   CreateEvents,
   Create_Events,
@@ -59,6 +59,7 @@ import {
   Event_Manage,
   QuizCreator,
   HostProfile,
+  EventDetail,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -97,7 +98,11 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        {localStorage.getItem("authToken") ? <ResponsiveNav2 /> : <ResponsiveNav />}
+        {localStorage.getItem("authToken") ? (
+          <ResponsiveNav2 />
+        ) : (
+          <ResponsiveNav />
+        )}
         <Des />
         <Down />
         <Browsebycategory />
@@ -154,14 +159,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/event-type",
-element: (
-  <>
-    <div className="event-type-page">
-      <Nav />
-      <Filter />
-    </div>
-  </>
-),
+    element: (
+      <>
+        <div className="event-type-page">
+          <Nav />
+          <Filter />
+        </div>
+      </>
+    ),
   },
   {
     path: "/create-or-join",
@@ -245,6 +250,11 @@ element: (
   {
     path: "/host-profile",
     element: <HostProfile />,
+  },
+
+  {
+    path: "/event-detail",
+    element: <EventDetail />,
   },
 ]);
 
