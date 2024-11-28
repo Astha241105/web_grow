@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEvents } from "../../store/slices/eventmanageSlice"; // Adjust the path as needed
 import NavHost from "../Host/NavHost";
 
 const Event_Manage = () => {
+  const dispatch = useDispatch();
+  const { events, loading, error } = useSelector((state) => state.eventmanage);
+
+  useEffect(() => {
+    dispatch(fetchEvents());
+  }, [dispatch]);
+
   const metrics = [
     {
       label: "Total Events",
-      value: "0",
+      value: events.length.toString(),
       bgColor: "bg-[#B72A7E]",
       textColor: "text-white",
     },
@@ -20,23 +29,6 @@ const Event_Manage = () => {
       value: "0",
       bgColor: "bg-[#7E57C2]",
       textColor: "text-white",
-    },
-  ];
-
-  const events = [
-    {
-      id: 1,
-      title: "Inspiron",
-      college: "Ajay Kumar Garg Engineering College",
-      tag: "Coding Challenge",
-      date: "1 September, 2024",
-    },
-    {
-      id: 2,
-      title: "Inspiron",
-      college: "Ajay Kumar Garg Engineering College",
-      tag: "Coding Challenge",
-      date: "1 September, 2024",
     },
   ];
 
@@ -107,9 +99,11 @@ const Event_Manage = () => {
         </div>
 
         <div className="space-y-4">
-          {events.map((event) => (
-            <EventCard key={event.id} {...event} />
-          ))}
+          {loading && <p>Loading events...</p>}
+          {error && <p className="text-red-500">Error: {error}</p>}
+          {!loading &&
+            !error &&
+            events.map((event) => <EventCard key={event.id} {...event} />)}
         </div>
       </main>
     </div>
