@@ -227,3 +227,23 @@
     }
 
 }
+@media(max-width:320px){
+    #home-browse-by-category-content{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 20px;;
+        gap:10px;
+        top:120px;
+    }
+    .home-browse-by-category-content-box{
+        height:129px;
+    }
+    #home-browse-by-category-head{
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+}
+
