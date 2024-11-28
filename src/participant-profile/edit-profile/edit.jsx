@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateParticipantProfile } from '../../components/store/slices/participantprofile'; // Adjust the path as needed
+import Imgoption from '../imgoptions/imgoption'; // Import Imgoption component
 import "./edit.css";
 
 const Edit = () => {
   const { profile, isLoading, error } = useSelector((state) => state.participant);
   const dispatch = useDispatch();
-
 
   const [editedProfile, setEditedProfile] = useState({
     firstName: '',
@@ -15,7 +15,8 @@ const Edit = () => {
     imageUrl: ''
   });
 
- 
+  const [isEditingImage, setIsEditingImage] = useState(false); // State to toggle image input
+
   useEffect(() => {
     if (profile) {
       setEditedProfile({
@@ -35,9 +36,24 @@ const Edit = () => {
     }));
   };
 
-
   const handleSave = () => {
-    dispatch(updateParticipantProfile(editedProfile));
+    dispatch(updateParticipantProfile(editedProfile)); // Dispatch the update to save the profile
+  };
+
+  const handleImageClick = () => {
+    setIsEditingImage(true); // Enable image URL input when the image is clicked
+  };
+
+  const handleImageSave = () => {
+    setIsEditingImage(false); // Save and exit image input mode
+  };
+
+  const handleImageOptionClick = (url) => {
+    setEditedProfile(prevState => ({
+      ...prevState,
+      imageUrl: url // Update the image URL with the selected one
+    }));
+    setIsEditingImage(false); // Close the image options
   };
 
   if (isLoading) {
@@ -56,9 +72,16 @@ const Edit = () => {
           id="part-profile-details-image"
           src={editedProfile.imageUrl || "/default-profile.svg"} 
           alt="Profile"
+          onClick={handleImageClick} // Show input when clicked
         />
         <div id="change-profile">Change profile</div>
       </div>
+
+      {isEditingImage && (
+        // Conditionally render Imgoption component when editing image
+        <Imgoption onImageClick={handleImageOptionClick} />
+      )}
+
       <div id="edit-profile-options">
         <label htmlFor="firstName" className="edit-profile-options-labels">
           First Name:

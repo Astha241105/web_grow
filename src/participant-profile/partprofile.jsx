@@ -55,10 +55,10 @@ const Partprofile = () => {
         ) : profile ? (
           <div id="part-profile-details">
             <img
-              id="part-profile-details-img"
-              src={profile.imageUrl || "/default-profile.svg"}
-              alt="Profile"
-            />
+            id="part-profile-details-img"
+            src={profile.imageUrl || "/default-profile.svg"}
+            alt="Profile"
+/>
             <div id="part-profile-details-details">
               <div id="part-profile-details-name">
                 {profile.firstname || "First Name"} {profile.lastname || "Last Name"}
