@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
-const NavHost = ({ className = "" }) => {
+const NavHost = ({ className = "", cameFromProfile = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="w-full relative">
+    <header
+      className={`w-full relative ${
+        cameFromProfile ? "bg-[#D4E5E4]  border-b-[1px] border-black" : ""
+      }`}
+    >
       <div className={`max-w-6xl mx-auto px-4 py-4`}>
         <div className="flex justify-between items-center">
           <img src="Web.svg" alt="Web logo" />
