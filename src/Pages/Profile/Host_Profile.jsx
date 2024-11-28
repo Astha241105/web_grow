@@ -1,5 +1,6 @@
 import React from "react";
 import NavHost from "../Host/NavHost";
+
 import {
   LineChart,
   Line,
@@ -23,67 +24,40 @@ const HostProfile = () => {
 
   return (
     <div>
-      <NavHost />
-      <div className="container mx-auto my-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <div className="flex items-center space-x-4 mb-4">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Profile"
-                className="rounded-full w-16 h-16"
-              />
-              <div>
-                <h2 className="text-xl font-bold">Anshika Gupta</h2>
-                <p className="text-gray-500">ag@gmail.com</p>
-                <p className="text-gray-500">
-                  Ajay Kumar Garg Engineering College
-                </p>
-              </div>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                Edit Profile
-              </button>
-            </div>
-            <div className="bg-white shadow-md rounded-md p-4">
-              <h4 className="text-lg font-bold mb-4">General Knowledge</h4>
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="text-gray-500">Coding Challenge</p>
-                  <p className="text-gray-500">Created on: 29 October, 2024</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Impressions</p>
-                  <div className="bg-gray-200 rounded-full h-4 relative">
-                    <div
-                      className="bg-yellow-500 rounded-full h-4 absolute left-0 top-0 bottom-0"
-                      style={{ width: "75%" }}
-                    ></div>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-gray-500">Candidates Registered</p>
-                  <div className="bg-gray-200 rounded-full h-4 relative">
-                    <div
-                      className="bg-green-500 rounded-full h-4 absolute left-0 top-0 bottom-0"
-                      style={{ width: "50%" }}
-                    ></div>
-                  </div>
-                </div>
+      <NavHost cameFromProfile={true} />
+      <div className="profileSection border border-x-[75px] border-[#D4E5E4]">
+        <div>
+          <div className="m-4 text-xl text-[#008080] font-semibold">
+            My Profile
+          </div>
+          <div className="flex items-center py-9 px-9  border-y-2 mx-4">
+            <div className=" w-28 h-28 rounded-full bg-gray-300 mr-6"></div>
+            <div>
+              <h2 className="text-lg font-semibold">Anshika Gupta</h2>
+              <p className="text-gray-600">a@gmail.com</p>
+              <p className="text-gray-600">
+                Ajay Kumar Garg Engineering College
+              </p>
+              <div className="flex  px-4 py-2 rounded-md mt-4">
+                <img src="pen_edit.svg" alt="Edit Icon" className="mr-2" />
+                <span className="text-[#00F] text-base font-semibold mt-1">
+                  Edit Profile
+                </span>
               </div>
             </div>
           </div>
-          <div className="bg-white shadow-md rounded-md p-4">
-            <h4 className="text-lg font-bold mb-4">Analytics</h4>
-            <LineChart width={500} height={300} data={data}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <CartesianGrid strokeDasharray="3 3" />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
-            </LineChart>
+          <div className="flex flex-col mx-8 mt-8">
+            <div className="flex gap-2 mb-2">
+              <img src="analytics.svg" alt="Analytics Icon" className="mr-2" />
+              <span className=" text-base font-medium mt-1">Analytics</span>
+            </div>
+            <div className="flex gap-2">
+              <img src="logout_1.svg" alt="Analytics Icon" className="mr-2" />
+              <span className=" text-base font-medium mt-1">Logout</span>
+            </div>
           </div>
         </div>
+        <div className="w-[2%] bg-[#D4E5E4]"></div>
       </div>
     </div>
   );
