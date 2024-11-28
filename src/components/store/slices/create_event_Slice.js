@@ -30,8 +30,8 @@ const uploadImage = createAsyncThunk(
   }
 );
 
-const eventsSlice = createSlice({
-  name: "events",
+const createEventSlice = createSlice({
+  name: "createEvent",
   initialState: {
     imageUrl: null,
     loading: false,
@@ -148,4 +148,4 @@ export const {
 } = eventsSlice.actions;
 
 export { uploadImage, createEvent };
-export default eventsSlice.reducer;
+export default createEventSlice.reducer;
