@@ -103,10 +103,10 @@ const router = createBrowserRouter([
         <Down />
         <Browsebycategory />
         <Upcoming />
-        <Eventlist />
-        <Eventcard />
+        {/* <Eventlist />
+        <Eventcard /> */}
         <Hostnow />
-        <Reviews />
+        {/* <Reviews /> */}
         <Footer />
       </Backgroundhome>
 

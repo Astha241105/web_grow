@@ -6,7 +6,7 @@ export const registerInEvent = createAsyncThunk(
   async ({ eventId, participantData }, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://35.154.224.49:8080/api/v1/participant/events/${eventId}/register`,
+        `http:///www.arthkambhoj.me.:8080/api/v1/participant/events/${eventId}/register`,
         {
           method: 'POST',
           headers: {

@@ -5,12 +5,12 @@ export const addToFavorites = createAsyncThunk(
   async ({ eventId }, { rejectWithValue }) => {
     try {
         const token = localStorage.getItem('authToken'); 
-
+        console.log(token)
         if (!token) {
           throw new Error('Authorization token not found.');
         }
       const response = await fetch(
-        `http://35.154.224.49:8080/api/v1/participant/events/${eventId}/favourites`,
+        `http://www.arthkambhoj.me.:8080/api/v1/participant/events/${eventId}/favourites`,
         {
           method: 'POST',
           headers: {

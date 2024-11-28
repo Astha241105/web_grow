@@ -38,6 +38,9 @@
    font-weight: 700;
 }
 @media(max-width:1170px){
+    #hostnow{
+        height:600px;
+    }
     #hostnow-content{
     padding-left:20px; ;
 }
@@ -48,11 +51,22 @@
     width:500px;
     padding-left:20px; 
 }
+#hostnow{
+    height:500px;
+}
 #hostnow-image{
     transform: scale(.8);
 }
 }
+@media(max-width:960px){
+    #hostnow{
+        height:550px;
+    }
+}
 @media(max-width:930px){
+    #hostnow{
+        height:450px;
+    }
     #hostnow-content{
     width:500px;
     padding-left:20px; 
@@ -69,6 +83,9 @@
 }
 }
 @media(max-width:840px){
+    #hostnow{
+        height:400px;
+    }
     #hostnow-content{
     width:500px;
     padding-left:20px; 
@@ -85,6 +102,9 @@
 }
 }
 @media(max-width:790px){
+    #hostnow{
+        height:350px;
+    }
     #hostnow-content-head{
         display: flex;
         font-size: 34px;
@@ -99,6 +119,9 @@
 
 }
 @media(max-width:750px){
+    #hostnow{
+        height:340px;
+    }
     #hostnow-content-head{
         display: flex;
         font-size: 30px;
@@ -127,6 +150,9 @@
 
 }
 @media(max-width:580px){
+    #hostnow{
+        height:300px;
+    }
     #hostnow-content-head{
         display: flex;
         font-size: 24px;
@@ -145,7 +171,6 @@
         height:200px;
         width:100%;
         background-color: white;
-        top:740px;
     }
     #hostnow-content-head{
         display: flex;
