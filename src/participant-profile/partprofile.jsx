@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux'; 
 import './part-profile.css';
 import Edit from "./edit-profile/edit";
 import Registered from './registered/registered';
@@ -8,10 +8,16 @@ import Watchlist from './watchlist/watchlist';
 import Certificate from './certificate/certificate';
 import { fetchRegisteredEvents } from '../components/store/slices/registeredevent';
 import { fetchFavoriteEvents } from '../components/store/slices/favouriteevents'; 
+import { fetchParticipantProfile } from '../components/store/slices/participantprofile'; 
 
 const Partprofile = () => {
-  const [selectedOption, setSelectedOption] = useState('Edit'); 
+  const [selectedOption, setSelectedOption] = useState('Edit');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchParticipantProfile());
+  }, [dispatch]);
+
 
   useEffect(() => {
     if (selectedOption === 'Registrations') {
@@ -21,10 +27,12 @@ const Partprofile = () => {
     }
   }, [selectedOption, dispatch]);
 
+  const { profile, isLoading, error } = useSelector((state) => state.participant);
+
   const renderContent = () => {
     switch (selectedOption) {
       case 'Registrations':
-        return <Registered />; 
+        return <Registered />;
       case 'Badges':
         return <Badges />;
       case 'Watchlist':
@@ -40,15 +48,31 @@ const Partprofile = () => {
     <div id="part-profile-render">
       <div id="part-profile">
         <div id="my-profile">My Profile</div>
-        <div id="part-profile-details">
-          <img id="part-profile-details-img" alt="Profile" />
-          <div id="part-profile-details-details">
-            <div id="part-profile-details-name">Astha</div>
-            <div className="part-profile-details-e-and-i">email@example.com</div>
-            <div className="part-profile-details-e-and-i">Institute Name</div>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>Error: {error}</div>
+        ) : profile ? (
+          <div id="part-profile-details">
+            <img
+              id="part-profile-details-img"
+              src={profile.imageUrl || "/default-profile.svg"}
+              alt="Profile"
+            />
+            <div id="part-profile-details-details">
+              <div id="part-profile-details-name">
+                {profile.firstname || "First Name"} {profile.lastname || "Last Name"}
+              </div>
+              <div className="part-profile-details-e-and-i">{profile.email || "Email"}</div>
+              <div className="part-profile-details-e-and-i">
+                {profile.instituteName || "Institute Name"}
+              </div>
+            </div>
+            <img id="edit-part-profile" src="/edit-profile.svg" alt="Edit Profile" />
           </div>
-          <img id="edit-part-profile" src="/edit-profile.svg" alt="Edit Profile" />
-        </div>
+        ) : (
+          <div>No profile data available.</div>
+        )}
 
         <div id="part-profile-options">
           <div
@@ -87,7 +111,7 @@ const Partprofile = () => {
             <div className="part-profile-options-list-1">Log out</div>
           </div>
         </div>
-      </div>      
+      </div>
       <div id="part-profile-content">{renderContent()}</div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+
 export const fetchParticipantProfile = createAsyncThunk(
   'participant/fetchProfile',
   async (_, { rejectWithValue }) => {
@@ -7,7 +8,7 @@ export const fetchParticipantProfile = createAsyncThunk(
       const authToken = localStorage.getItem('authToken');
       if (!authToken) throw new Error('Auth token not found');
 
-      const response = await fetch('http://35.154.224.49:8080/api/v1/participant/profile', {
+      const response = await fetch('http://www.arthkambhoj.me:8080/api/v1/participant/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -20,8 +21,40 @@ export const fetchParticipantProfile = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data)
-      return data; 
+      console.log(data);
+      return data.data; 
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const updateParticipantProfile = createAsyncThunk(
+  'participant/updateProfile',
+  async (updatedData, { rejectWithValue }) => {
+    try {
+      console.log(updatedData)
+      const authToken = localStorage.getItem('authToken');
+      if (!authToken) throw new Error('Auth token not found');
+
+      const response = await fetch('http://www.arthkambhoj.me:8080/api/v1/participant/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to update profile');
+      }
+
+      const data = await response.json();
+      console.log(data);
+      return data.data; 
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -42,6 +75,7 @@ const participantSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
       .addCase(fetchParticipantProfile.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -53,10 +87,22 @@ const participantSlice = createSlice({
       .addCase(fetchParticipantProfile.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+
+      .addCase(updateParticipantProfile.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateParticipantProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.profile = action.payload; 
+      })
+      .addCase(updateParticipantProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export const { clearError } = participantSlice.actions;
-
 export default participantSlice.reducer;
