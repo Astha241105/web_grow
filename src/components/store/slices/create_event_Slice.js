@@ -83,7 +83,7 @@ const createEventSlice = createSlice({
     },
     resetState: (state) => {
       Object.keys(state).forEach((key) => {
-        state[key] = eventsSlice.initialState[key];
+        state[key] = createEventSlice.initialState[key];
       });
     },
   },
@@ -107,7 +107,7 @@ const createEventSlice = createSlice({
 
 const createEvent = (eventData) => {
   return async (dispatch) => {
-    dispatch(eventsSlice.actions.setLoading(true));
+    dispatch(createEventSlice.actions.setLoading(true));
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
@@ -127,13 +127,13 @@ const createEvent = (eventData) => {
       }
 
       const data = await response.json();
-      dispatch(eventsSlice.actions.resetState());
+      dispatch(createEventSlice.actions.resetState());
       return data;
     } catch (error) {
-      dispatch(eventsSlice.actions.setError(error.message));
+      dispatch(createEventSlice.actions.setError(error.message));
       throw error;
     } finally {
-      dispatch(eventsSlice.actions.setLoading(false));
+      dispatch(createEventSlice.actions.setLoading(false));
     }
   };
 };
@@ -145,7 +145,7 @@ export const {
   setImageUrl,
   setError,
   resetState,
-} = eventsSlice.actions;
+} = createEventSlice.actions;
 
 export { uploadImage, createEvent };
 export default createEventSlice.reducer;
