@@ -3,16 +3,19 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const registerInEvent = createAsyncThunk(
   'eventRegistration/registerInEvent',
-  async ({ eventId, participantData }, { rejectWithValue }) => {
+  async ({ eventId}, { rejectWithValue }) => {
     try {
+      const token =localStorage.getItem("authToken")
       const response = await fetch(
         `http:///www.arthkambhoj.me.:8080/api/v1/participant/events/${eventId}/register`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+
           },
-          body: JSON.stringify(participantData),
+        
         }
       );
 
@@ -21,6 +24,7 @@ export const registerInEvent = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
