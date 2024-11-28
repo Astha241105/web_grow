@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEvents } from "../../store/slices/eventmanageSlice"; // Adjust the path as needed
+import { fetchEvents } from "../../components/store/slices/eventmanageSlice";
 import NavHost from "../Host/NavHost";
 
 const Event_Manage = () => {
@@ -20,13 +20,17 @@ const Event_Manage = () => {
     },
     {
       label: "Total Impressions",
-      value: "0",
+      value: events
+        .reduce((total, event) => total + (event.impressions || 0), 0)
+        .toString(),
       bgColor: "bg-[#26A69A]",
       textColor: "text-white",
     },
     {
       label: "Total Registrations",
-      value: "0",
+      value: events
+        .reduce((total, event) => total + (event.registrations || 0), 0)
+        .toString(),
       bgColor: "bg-[#7E57C2]",
       textColor: "text-white",
     },
@@ -52,33 +56,52 @@ const Event_Manage = () => {
     </div>
   );
 
-  const EventCard = ({ title, college, tag, date }) => (
-    <div className="border border-[#000] rounded-lg p-4 mb-4 bg-white">
-      <div className="flex items-start justify-between">
-        <div className="flex space-x-4">
-          <div className="w-12 h-12 bg-gray-200 rounded"></div>
-          <div>
-            <h3 className="font-semibold">{title}</h3>
-            <p className="text-sm text-[#000] font-medium">{college}</p>
-            <span className="inline-block px-3 py-1 text-sm bg-gray-100 rounded-full mt-1 font-medium">
-              {tag}
-            </span>
+  const EventCard = ({ title, college, tag, date, mode }) => {
+    const eventDate = new Date(date);
+    const formattedDate = eventDate.toLocaleString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    return (
+      <div className="border border-[#000] rounded-lg p-4 mb-4 bg-white">
+        <div className="flex items-start justify-between">
+          <div className="flex space-x-4">
+            <div className="w-12 h-12 bg-gray-200 rounded"></div>
+            <div>
+              <h3 className="font-semibold">{title}</h3>
+              <p className="text-sm text-[#000] font-medium">{college}</p>
+              <span className="inline-block px-3 py-1 text-sm bg-white border border-black rounded-full mt-1 font-medium">
+                {tag}
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col items-end space-y-2">
-          <span className="text-sm text-[#000] font-medium">{date}</span>
-          <div className="flex space-x-2">
-            <button className="p-1 hover:bg-gray-100 rounded">
-              <img src="Pencil.svg" alt="Edit" />
-            </button>
-            <button className="p-1 hover:bg-gray-100 rounded">
-              <img src="delete.svg" alt="Delete" />
-            </button>
+          <div className="flex flex-col items-end space-y-2">
+            <div className="flex items-center space-x-2">
+              <div className="px-2 py-1 rounded-full text-xs font-medium bg-white border border-black">
+                {mode || "Not Available"}
+              </div>
+              <span className="text-sm text-[#000] font-medium">
+                {formattedDate}
+              </span>
+            </div>
+            <div className="flex space-x-2">
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <img src="door.svg" alt="Edit" />
+              </button>
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <img src="Pencil.svg" alt="Edit" />
+              </button>
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <img src="delete.svg" alt="Delete" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[#FFF]">
@@ -87,7 +110,7 @@ const Event_Manage = () => {
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold mt-8">
-            <span className="text-[#008080] font-semibold">Manage</span> Your{" "}
+            <span className="text-[#008080] font-semibold">Manage</span> Your
             Events with ease
           </h1>
         </div>
@@ -103,7 +126,9 @@ const Event_Manage = () => {
           {error && <p className="text-red-500">Error: {error}</p>}
           {!loading &&
             !error &&
-            events.map((event) => <EventCard key={event.id} {...event} />)}
+            events.map((event) => (
+              <EventCard key={event.id} {...event} mode={event.mode} />
+            ))}
         </div>
       </main>
     </div>

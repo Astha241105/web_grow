@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 export const fetchEvents = createAsyncThunk(
   "eventmanage/fetchEvents",
   async (_, { rejectWithValue }) => {
@@ -22,14 +21,16 @@ export const fetchEvents = createAsyncThunk(
         title: item.data.title,
         college: item.data.location,
         tag: item.data.eventType,
-        date: item.data.registerStart.split("T")[0],
+        date: item.data.registerStart,
+        mode: item.data.mode,
+        impressions: item.data.impressions || 0,
+        registrations: item.data.registrations || 0,
       }));
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-
 const eventmanageSlice = createSlice({
   name: "eventmanage",
   initialState: {
