@@ -135,6 +135,9 @@
     }
 }
 @media(max-width:560px){
+    #home-browse-by-category{
+        height:800px;
+    }
     #home-browse-by-category-content{
         display: flex;
         flex-wrap: wrap;
@@ -159,9 +162,16 @@
         width:180px;
         height:250px;
     }
+    #home-browse-by-category{
+        height:700px;
+    }
 
 }
 @media(max-width:445px){
+    #home-browse-by-category-head{
+        font-size: 28px;
+     
+    }
     .home-browse-by-category-content-box{
         width:160px;
         height:230px;
@@ -176,6 +186,9 @@
 
 }
 @media(max-width:360px){
+    #home-browse-by-category{
+        height:400px;
+    }
     #home-browse-by-category-content{
         display: flex;
         flex-wrap: wrap;
