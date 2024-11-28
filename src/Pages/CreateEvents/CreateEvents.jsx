@@ -11,13 +11,11 @@ const CreateEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Select existing event data from store
   const existingEventData = useSelector((state) => state.createEvent.eventData);
   const imageUrl = useSelector((state) => state.createEvent.imageUrl);
   const loading = useSelector((state) => state.createEvent.loading);
   const error = useSelector((state) => state.createEvent.error);
 
-  // Initialize form data with existing data or defaults
   const [formData, setFormData] = useState({
     opportunityType: existingEventData.opportunityType || "",
     visibility: existingEventData.visibility || "",
@@ -57,15 +55,13 @@ const CreateEvents = () => {
   };
 
   const handleNextStep = () => {
-    // Dispatch form data to Redux store
     dispatch(
       setEventData({
         ...formData,
-        imageUrl: imageUrl || null, // Include image URL if available
+        imageUrl: imageUrl || null,
       })
     );
 
-    // Navigate to next page
     navigate("/create-event1");
   };
 
