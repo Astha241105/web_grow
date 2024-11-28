@@ -33,7 +33,6 @@ const Create_Events = () => {
   };
 
   const handleNextStep = () => {
-    // Prepare event payload for API
     const eventPayload = {
       imageUrl:
         imageUrl || "https://webgrowbucket.s3.ap-south-1.amazonaws.com/default",
@@ -50,7 +49,6 @@ const Create_Events = () => {
       minTeamSize: formData.minTeamSize,
     };
 
-    // Dispatch event creation
     dispatch(createEventApi(eventPayload))
       .then(() => {
         setShowSuccessModal(true);
@@ -63,7 +61,7 @@ const Create_Events = () => {
   const handleResetAndClose = () => {
     dispatch(resetState());
     setShowSuccessModal(false);
-    navigate("/events"); // Redirect to events page
+    navigate("/event-manage");
   };
   const styles = {
     inputContainer: {
