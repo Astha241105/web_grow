@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { registerInEvent } from '../components/store/slices/registerforevent'; 
+import { fetchEventDetails } from "../components/store/slices/eventdetails";
+import Teampopup from "./team-pop-up/teampopup";
 import './regi.css';
 
 const Regi = () => {
@@ -21,9 +23,7 @@ const Regi = () => {
     graduationYear: '',
   });
 
-  const { status, error, registrationSuccess } = useSelector(
-    (state) => state.eventRegistration
-  );
+  const { data, status, error } = useSelector((state) => state.eventDetails);
 
   useEffect(() => {
     console.log('Registering for event ID:', eventId);
@@ -43,24 +43,32 @@ const Regi = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("yes");
 
     if (!eventId) {
       console.error("Event ID is missing");
       return;
     }
 
-    dispatch(registerInEvent({ eventId }));
+    try {
+      const resultAction = await dispatch(registerInEvent({ eventId })).unwrap();
+      console.log(resultAction);
+
+      if (resultAction.success) {
+        console.log("yes");
+        // Fetch event details if registration is successful
+        await dispatch(fetchEventDetails(eventId));
+        console.log('Event details fetched successfully');
+        console.log(data.data.teamCreationAllowed,"yesyes")
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   return (
     <div>
-      {status === 'loading' && <p>Registering for event...</p>}
-      {status === 'failed' && <p>Error: {error}</p>}
-      {registrationSuccess && <p>Successfully registered for the event!</p>}
-
       <form id="form-for-event" onSubmit={handleSubmit}>
         <div id="form-for-event1">Fill your Details</div>
 
@@ -177,6 +185,9 @@ const Regi = () => {
           Next
         </button>
       </form>
+
+      {/* Render the team popup based on the event details */}
+      {data.data.teamCreationAllowed && <Teampopup />}
     </div>
   );
 };
