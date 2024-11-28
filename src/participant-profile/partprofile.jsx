@@ -64,9 +64,6 @@ const Partprofile = () => {
                 {profile.firstname || "First Name"} {profile.lastname || "Last Name"}
               </div>
               <div className="part-profile-details-e-and-i">{profile.email || "Email"}</div>
-              <div className="part-profile-details-e-and-i">
-                {profile.instituteName || "Institute Name"}
-              </div>
             </div>
             <img id="edit-part-profile" src="/edit-profile.svg" alt="Edit Profile" />
           </div>
