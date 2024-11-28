@@ -22,7 +22,7 @@ export const fetchEvents = createAsyncThunk(
         title: item.data.title,
         college: item.data.location,
         tag: item.data.eventType,
-        date: item.data.registerStart,
+        date: item.data.registerStart.split("T")[0],
       }));
     } catch (error) {
       return rejectWithValue(error.message);
