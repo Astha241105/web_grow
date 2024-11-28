@@ -17,7 +17,7 @@ export const fetchEvents = createAsyncThunk(
         throw new Error(data.message || "Failed to fetch events");
       }
       return data.content.map((item, index) => ({
-        id: index + 1,
+        id: item.data.id,
         title: item.data.title,
         college: item.data.location,
         tag: item.data.eventType,
@@ -31,12 +31,44 @@ export const fetchEvents = createAsyncThunk(
     }
   }
 );
+
+export const deleteEvent = createAsyncThunk(
+  "eventmanage/deleteEvent",
+  async (eventId, { rejectWithValue, dispatch }) => {
+    const token = localStorage.getItem("authToken");
+    try {
+      const response = await fetch(
+        `http://www.arthkambhoj.me.:8080/api/events/delete/${eventId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to delete event");
+      }
+
+      dispatch(fetchEvents());
+
+      return eventId;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 const eventmanageSlice = createSlice({
   name: "eventmanage",
   initialState: {
     events: [],
     status: "idle",
     error: null,
+    deleteStatus: "idle",
+    deleteError: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -51,6 +83,17 @@ const eventmanageSlice = createSlice({
       .addCase(fetchEvents.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+
+      .addCase(deleteEvent.pending, (state) => {
+        state.deleteStatus = "loading";
+      })
+      .addCase(deleteEvent.fulfilled, (state) => {
+        state.deleteStatus = "succeeded";
+      })
+      .addCase(deleteEvent.rejected, (state, action) => {
+        state.deleteStatus = "failed";
+        state.deleteError = action.payload;
       });
   },
 });
