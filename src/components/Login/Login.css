@@ -1,417 +1,385 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   font-family: "Montserrat", sans-serif;
-   font-weight: 400;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
 }
-
 
 .login {
-   min-height: 100vh;
-   width: 100%;
-   position: relative;
-   background: #008080;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   padding: 1.25rem;
-   overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: #008080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  overflow: hidden;
 }
-
 
 .white-bg {
-   position: absolute;
-   width: 55%;
-   height: 100%;
-   right: 0;
-   top: 0;
-   min-width: 600px;
+  position: absolute;
+  width: 55%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  min-width: 600px;
 }
-
 
 .white-bgMobile {
-   position: absolute;
-   width: 100%;
-   height: 65%;
-   right: 0;
-   top: 30%;
-   display: none;
+  position: absolute;
+  width: 100%;
+  height: 65%;
+  right: 0;
+  top: 30%;
+  display: none;
 }
-
 
 .container {
-   position: relative;
-   width: 100%;
-   max-width: 1440px;
-   height: 100vh;
-   display: flex;
-   align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
 }
-
 
 .image-section {
-   position: relative;
-   width: 40%;
-   max-width: 535px;
-   height: 456px;
-   left: 6%;
+  position: relative;
+  width: 40%;
+  max-width: 535px;
+  height: 456px;
+  left: 6%;
 }
-
 
 .logo {
-   width: 100%;
-   height: 100%;
-   object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
-
 
 .form-section {
-   position: relative;
-   width: 392px;
-   max-width: 100%;
-   padding: 2rem;
-   margin-left: auto;
-   margin-right: 6%;
-   z-index: 1;
+  position: relative;
+  width: 392px;
+  max-width: 100%;
+  padding: 2rem;
+  margin-left: auto;
+  margin-right: 6%;
+  z-index: 1;
 }
-
 
 .heading {
-   font-weight: 600;
-   font-size: 2.25rem;
-   line-height: 1.2;
-   text-align: center;
-   color: #000000;
-   margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 2.25rem;
+  line-height: 1.2;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 2rem;
 }
-
 
 .form-group {
-   margin-bottom: 1.5rem;
-   position: relative;
-   width: 100%;
+  margin-bottom: 1.5rem;
+  position: relative;
+  width: 100%;
 }
-
 
 .label {
-   display: block;
-   font-weight: 500;
-   font-size: 1.125rem;
-   line-height: 1.2;
-   color: #000000;
-   margin-bottom: 0.5rem;
+  display: block;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  color: #000000;
+  margin-bottom: 0.5rem;
 }
-
 
 .input-box {
-   width: 439px;
-   height: 72px;
-   padding: 0.875rem 1rem;
-   background: rgba(217, 217, 217, 0.5);
-   border-radius: 10px;
-   border: none;
-   font-size: 1rem;
+  width: 439px;
+  height: 72px;
+  padding: 0.875rem 1rem;
+  background: rgba(217, 217, 217, 0.5);
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
 }
-
 
 .input-box:focus {
-   outline: none;
-   border-color: #0B4C54;
+  outline: none;
+  border-color: #0b4c54;
 }
-
 
 .input-box::placeholder {
-   color: black;
+  color: black;
 }
-
 
 .forgot-password {
-   text-align: right;
-   margin: 1rem 0 1.5rem;
-   left:76px;
-   position: relative;
+  text-align: right;
+  margin: 1rem 0 1.5rem;
+  left: 76px;
+  position: relative;
 }
-
 
 .btn {
-   width: 407px;
-   padding: 0.75rem;
-   background-color: #000;
-   border: none;
-   border-radius: 10px;
-   font-weight: 700;
-   font-size: 1.25rem;
-   color: #FFFFFF;
-   cursor: pointer;
-   transition: background-color 0.3s;
+  width: 407px;
+  padding: 0.75rem;
+  background-color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-
 
 .btn:hover {
-   background-color: #333;
+  background-color: #333;
 }
-
 
 .signup-link {
-   text-align: center;
-   font-size: 0.875rem;
-   color: #000000;
-   margin-top: 1.25rem;
-   font-weight: 500;
-   left: 42px;
-   position: relative;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #000000;
+  margin-top: 1.25rem;
+  font-weight: 500;
+  left: 42px;
+  position: relative;
 }
-
 
 .create-account {
-    color: #008080;
-    text-decoration: underline;
-   font-weight: 600;
+  color: #008080;
+  text-decoration: underline;
+  font-weight: 600;
 }
-
 
 .cross {
-   position: absolute;
-   top: 50px;
-   left: 80px;
+  position: absolute;
+  top: 50px;
+  left: 80px;
 }
 
-.error-message{
-    display: flex;
-    width: 327px;
-    height: 49px;
-    padding: 11px 7px;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-    border-radius: 10px;
- border: 1px solid #F00;
- color: #F00;
- font-family: Montserrat;
- font-size: 16px;
- font-style: normal;
- font-weight: 500;
- line-height: normal;
- margin-bottom: 29px;
- }
+.error-message {
+  display: flex;
+  width: 327px;
+  height: 49px;
+  padding: 11px 7px;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #f00;
+  color: #f00;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 29px;
+}
 
 /* Responsive Design */
 @media screen and (max-width: 360px) {
-   .image-section{
-      top:-15px;
-   }
+  .image-section {
+    top: -15px;
+  }
 }
 
 @media screen and (max-height: 667px) {
-   .white-bgMobile {
-      display: none;
-      height: 54%;
+  .white-bgMobile {
+    display: none;
+    height: 54%;
   }
 
-  .form-section{
-   height: 316px;
-   top:-77px;
+  .form-section {
+    height: 316px;
+    top: -77px;
   }
 
-  .signup-link{
-   font-size: 13px;
+  .signup-link {
+    font-size: 13px;
   }
 }
 
 @media screen and (max-width: 1200px) {
-   .white-bg {
-       width: 65%;
-   }
-  
-   .image-section {
-       width: 35%;
-   }
-}
+  .white-bg {
+    width: 65%;
+  }
 
+  .image-section {
+    width: 35%;
+  }
+}
 
 @media screen and (max-width: 992px) {
-   .white-bg {
-       width: 75%;
-   }
-  
-   .image-section {
-       width: 30%;
-       left: 4%;
-   }
-  
-   .form-section {
-       margin-right: 4%;
-   }
-}
+  .white-bg {
+    width: 75%;
+  }
 
+  .image-section {
+    width: 30%;
+    left: 4%;
+  }
+
+  .form-section {
+    margin-right: 4%;
+  }
+}
 
 @media screen and (max-width: 768px) {
-   .container {
-       flex-direction: column;
-       justify-content: center;
-       padding: 1.25rem;
-       height: auto;
-       min-height: 100vh;
-   }
-  
-   .white-bg {
-       display: none;
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.25rem;
+    height: auto;
+    min-height: 100vh;
+  }
 
-   }
-  
-   .white-bgMobile {
-       display: block;
-       height: 72%;
-   }
-  
-   .image-section {
-       width: 100%;
-       max-width: 370px;
-       height: auto;
-       left: -12px;
-       margin: 0 auto 2rem;
-       top:-52px;
-   }
-  
-   .form-section {
-       width: 100%;
-       max-width: 392px;
-       margin: 0 auto;
-       padding: 1.5rem;
-   }
-  
-   .cross {
-       display: none;
-   }
+  .white-bg {
+    display: none;
+  }
+
+  .white-bgMobile {
+    display: block;
+    height: 72%;
+  }
+
+  .image-section {
+    width: 100%;
+    max-width: 370px;
+    height: auto;
+    left: -12px;
+    margin: 0 auto 2rem;
+    top: -52px;
+  }
+
+  .form-section {
+    width: 100%;
+    max-width: 392px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  .cross {
+    display: none;
+  }
 }
-
 
 @media screen and (max-width: 480px) {
-   .login {
-       padding: 1rem;
-   }
-  
-   .image-section {
-       max-width: 306px;
-       top:-55px;
-   }
-  
-   .heading {
-       font-size: 1.75rem;
-       top:11px;
-       position: relative;
-       left:-15px;
-   }
-  
-   .form-section {
-       padding: 1rem;
-   }
-  
-   .label {
-       font-size: 1rem;
-   }
-  
-   .input-box {
-       height: 45px;
-   }
-  
-   .btn {
-       font-size: 1.125rem;
-   }
+  .login {
+    padding: 1rem;
+  }
+
+  .image-section {
+    max-width: 306px;
+    top: -55px;
+  }
+
+  .heading {
+    font-size: 1.75rem;
+    top: 11px;
+    position: relative;
+    left: -15px;
+  }
+
+  .form-section {
+    padding: 1rem;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  .input-box {
+    height: 45px;
+  }
+
+  .btn {
+    font-size: 1.125rem;
+  }
 }
 
-
 @media screen and (max-height: 700px) {
-   .container {
-       padding-top: 2rem;
-       padding-bottom: 2rem;
-   }
-  
-   .image-section {
-       height: auto;
-       max-height: 200px;
-       width: 238px;
-   }
+  .container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .image-section {
+    height: auto;
+    max-height: 200px;
+    width: 238px;
+  }
 }
 
 @media screen and (max-height: 750px) {
-   .form-section{
-      top:-80px;
-   }
-   .signup-link{
-      font-size: 12px;
-   }
-   .image-section{
-      top:-43px;
-   }
+  .form-section {
+    top: -80px;
+  }
+  .signup-link {
+    font-size: 12px;
+  }
+  .image-section {
+    top: -43px;
+  }
 }
-
 
 .username-input {
-   display: flex;
-   align-items: center;
-   width: 407px;
-   height: 50px;
-   padding: 0.875rem 1rem;
-   background: rgba(217, 217, 217, 0.5);
-   border-radius: 10px;
-   border: none;
-   font-size: 1rem;
-   margin-right: 112px;
+  display: flex;
+  align-items: center;
+  width: 407px;
+  height: 50px;
+  padding: 0.875rem 1rem;
+  background: rgba(217, 217, 217, 0.5);
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  margin-right: 112px;
 }
-
 
 .username-input::placeholder {
-   color: black;
-   font-size: 1rem;
+  color: black;
+  font-size: 1rem;
 }
-
 
 .password-input {
-   display: flex;
-   align-items: center;
-   width: 407px;
-   height: 50px;
-   padding: 0.875rem 1rem;
-   background: rgba(217, 217, 217, 0.5);
-   border-radius: 10px;
-   border: none;
-   font-size: 1rem;
+  display: flex;
+  align-items: center;
+  width: 407px;
+  height: 50px;
+  padding: 0.875rem 1rem;
+  background: rgba(217, 217, 217, 0.5);
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
 }
-
 
 .password-input::placeholder {
-   color: black;
-   font-size: 1rem;
+  color: black;
+  font-size: 1rem;
 }
 
-.eye1{
-   right:-46px;
+.eye1 {
+  right: -46px;
 }
 
 @media screen and (max-width: 480px) {
-.username-input {
-   width:338px;
-}
-.eye1{
-right:-9px; 
-}
-.password-input {
-   width:338px;
-}
-.btn {
-   font-size: 1.125rem;
-   width:338px;
-   
-}
+  .username-input {
+    width: 338px;
+  }
+  .eye1 {
+    right: -9px;
+  }
+  .password-input {
+    width: 338px;
+  }
+  .btn {
+    font-size: 1.125rem;
+    width: 338px;
+  }
 
-.forgot-password{
-   left:24px;
+  .forgot-password {
+    left: 24px;
+  }
 }
-
-}
-
