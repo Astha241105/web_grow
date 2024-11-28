@@ -1,41 +1,34 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  uploadImage,
-  setBasicDetails,
-} from "../../store/slices/create_event_Slice";
+  uploadEventImage,
+  setEventData,
+} from "../../components/store/slices/create_event_Slice";
 import "./CreateEvents.css";
 
 const CreateEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {
-    imageUrl = "",
-    opportunityType,
-    visibility,
-    opportunityTitle,
-    organization,
-    websiteUrl,
-    festival,
-    eventMode,
-    category,
-    skills,
-    aboutOpportunity,
-  } = useSelector((state) => state.createEvent || {});
+  // Select existing event data from store
+  const existingEventData = useSelector((state) => state.createEvent.eventData);
+  const imageUrl = useSelector((state) => state.createEvent.imageUrl);
+  const loading = useSelector((state) => state.createEvent.loading);
+  const error = useSelector((state) => state.createEvent.error);
 
+  // Initialize form data with existing data or defaults
   const [formData, setFormData] = useState({
-    opportunityType,
-    visibility,
-    opportunityTitle,
-    organization,
-    websiteUrl: websiteUrl || "https://",
-    festival,
-    eventMode,
-    category,
-    skills,
-    aboutOpportunity,
+    opportunityType: existingEventData.opportunityType || "",
+    visibility: existingEventData.visibility || "",
+    opportunityTitle: existingEventData.opportunityTitle || "",
+    organization: existingEventData.organization || "",
+    websiteUrl: existingEventData.websiteUrl || "https://",
+    festival: existingEventData.festival || "",
+    eventMode: existingEventData.eventMode || "",
+    category: existingEventData.category || "",
+    skills: existingEventData.skills || "",
+    aboutOpportunity: existingEventData.aboutOpportunity || "",
   });
 
   const urlInputRef = useRef(null);
@@ -51,7 +44,7 @@ const CreateEvents = () => {
     const file = e.target.files[0];
     if (file) {
       try {
-        await dispatch(uploadImage(file)).unwrap();
+        await dispatch(uploadEventImage(file)).unwrap();
       } catch (error) {
         console.error("Image upload failed", error);
       }
@@ -64,7 +57,15 @@ const CreateEvents = () => {
   };
 
   const handleNextStep = () => {
-    dispatch(setBasicDetails(formData));
+    // Dispatch form data to Redux store
+    dispatch(
+      setEventData({
+        ...formData,
+        imageUrl: imageUrl || null, // Include image URL if available
+      })
+    );
+
+    // Navigate to next page
     navigate("/create-event1");
   };
 
@@ -103,10 +104,16 @@ const CreateEvents = () => {
                 name="opportunityLogo"
                 onChange={handleImageUpload}
                 accept="image/*"
+                disabled={loading}
               />
               <div className="logo-placeholder">
-                {imageUrl ? "Logo Uploaded" : "Upload Logo"}
+                {loading
+                  ? "Uploading..."
+                  : imageUrl
+                  ? "Logo Uploaded"
+                  : "Upload Logo"}
               </div>
+              {error && <div className="text-red-500">{error}</div>}
             </div>
           </div>
 
@@ -285,7 +292,11 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-actions">
-            <button className="ce-next-button" onClick={handleNextStep}>
+            <button
+              className="ce-next-button"
+              onClick={handleNextStep}
+              disabled={loading}
+            >
               Next
             </button>
           </div>

@@ -1,27 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
-  setRegistrationDetails,
-  setHostStatus,
-  createEvent,
-} from "../../store/slices/create_event_Slice";
+  createEventApi,
+  resetState,
+} from "../../components/store/slices/create_event_Slice";
 
 const Create_Events = () => {
   const dispatch = useDispatch();
-  const eventState = useSelector((state) => state.events);
-  const [showHostPrompt, setShowHostPrompt] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const navigate = useNavigate();
+
+  const eventState = useSelector((state) => state.createEvent);
+  const { eventData, imageUrl, loading, error, success } = eventState;
 
   const [formData, setFormData] = useState({
-    participationType: "",
-    minTeamSize: "",
-    maxTeamSize: "",
-    registrationStartDate: "",
-    registrationStartTime: "",
-    registrationEndDate: "",
-    registrationEndTime: "",
-    maxRegistrations: "",
+    participationType: eventData.participationType || "",
+    minTeamSize: eventData.minTeamSize || "",
+    maxTeamSize: eventData.maxTeamSize || "",
+    registrationStartDate: eventData.registrationStartDate || "",
+    registrationStartTime: eventData.registrationStartTime || "",
+    registrationEndDate: eventData.registrationEndDate || "",
+    registrationEndTime: eventData.registrationEndTime || "",
+    maxRegistrations: eventData.maxRegistrations || "",
   });
+
+  const [showHostPrompt, setShowHostPrompt] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,48 +33,37 @@ const Create_Events = () => {
   };
 
   const handleNextStep = () => {
-    // Dispatch registration details to Redux store
-    dispatch(setRegistrationDetails(formData));
+    // Prepare event payload for API
+    const eventPayload = {
+      imageUrl:
+        imageUrl || "https://webgrowbucket.s3.ap-south-1.amazonaws.com/default",
+      title: eventData.opportunityTitle,
+      description: eventData.aboutOpportunity,
+      location: eventData.organization,
+      mode: eventData.eventMode,
+      registerStart: `${formData.registrationStartDate}T${formData.registrationStartTime}:00`,
+      registerEnd: `${formData.registrationEndDate}T${formData.registrationEndTime}:00`,
+      capacityMax: formData.maxRegistrations,
+      festival: eventData.festival || null,
+      teamCreationAllowed: formData.participationType === "Team",
+      maxTeamSize: formData.maxTeamSize,
+      minTeamSize: formData.minTeamSize,
+    };
 
-    // Show host prompt
-    setShowHostPrompt(true);
+    // Dispatch event creation
+    dispatch(createEventApi(eventPayload))
+      .then(() => {
+        setShowSuccessModal(true);
+      })
+      .catch((error) => {
+        console.error("Event creation failed", error);
+      });
   };
 
-  const handleHostPromptResponse = (hasHost) => {
-    dispatch(setHostStatus(hasHost));
-    setShowHostPrompt(false);
-
-    if (!hasHost) {
-      // Prepare event payload using data from Redux store
-      const eventPayload = {
-        imageUrl:
-          eventState.imageUrl ||
-          "https://webgrowbucket.s3.ap-south-1.amazonaws.com/photo",
-        title: eventState.opportunityTitle,
-        description: eventState.aboutOpportunity,
-        location: eventState.organization,
-        mode: eventState.eventMode,
-        registerStart: `${formData.registrationStartDate} ${formData.registrationStartTime}`,
-        registerEnd: `${formData.registrationEndDate} ${formData.registrationEndTime}`,
-        startTime: "",
-        endTime: "",
-        capacityMax: formData.maxRegistrations,
-        eventType: eventState.opportunityType,
-        festival: eventState.festival,
-        teamCreationAllowed: formData.participationType === "Team",
-        maxTeamSize: formData.maxTeamSize,
-        minTeamSize: formData.minTeamSize,
-      };
-
-      // Dispatch event creation
-      dispatch(createEvent(eventPayload))
-        .then(() => {
-          setShowSuccessModal(true);
-        })
-        .catch((error) => {
-          console.error("Event creation failed", error);
-        });
-    }
+  const handleResetAndClose = () => {
+    dispatch(resetState());
+    setShowSuccessModal(false);
+    navigate("/events"); // Redirect to events page
   };
   const styles = {
     inputContainer: {
@@ -299,7 +292,11 @@ const Create_Events = () => {
           </div>
 
           <div className="ce-form-actions">
-            <button className="ce-next-button" onClick={handleNextStep}>
+            <button
+              className="ce-next-button"
+              onClick={handleNextStep}
+              disabled={loading}
+            >
               Next
             </button>
           </div>
@@ -333,25 +330,21 @@ const Create_Events = () => {
         )}
 
         {showSuccessModal && (
-          <div style={styles.modal}>
-            <div style={styles.backdrop}></div>
-            <div style={styles.modalContent}>
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="bg-white p-6 rounded-lg shadow-xl text-center">
               <h3 className="text-lg font-semibold mb-4">
-                Your Event has been created successfully
+                Event Created Successfully!
               </h3>
-              <button style={styles.successButton} onClick={() => {}}>
-                View Event
-              </button>
-              <br />
               <button
-                style={styles.closeButton}
-                onClick={() => setShowSuccessModal(false)}
+                className="bg-teal-600 text-white px-4 py-2 rounded"
+                onClick={handleResetAndClose}
               >
                 Close
               </button>
             </div>
           </div>
         )}
+        {error && <div className="text-red-500 text-center mt-4">{error}</div>}
       </div>
     </div>
   );
