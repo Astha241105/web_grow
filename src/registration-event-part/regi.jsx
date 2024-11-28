@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation  } from 'react-router-dom';
 import "./regi.css";
 
 const Regi = () => {
+  const location = useLocation();
+  const { eventId } = location.state || {};
+
+  useEffect(() => {
+    console.log("Registering for event ID:", eventId);
+  }, [eventId]);
   return (
     <div>
       <form id="form-for-event">
