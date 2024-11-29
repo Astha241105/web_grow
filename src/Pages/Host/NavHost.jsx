@@ -7,7 +7,7 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
     <header
       className={`w-full relative ${
         cameFromProfile ? "bg-[#D4E5E4]  border-b-[1px] border-black" : ""
-      }`}
+      } ${className}`}
     >
       <div className={`max-w-6xl mx-auto px-4 py-4`}>
         <div className="flex justify-between items-center">

@@ -1,121 +1,79 @@
 import React, { useState } from "react";
-
-const GeneralKnowledge = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  return (
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">General Knowledge</h2>
-        <button
-          className={`px-4 py-2 rounded-md transition-colors ${
-            isDropdownOpen
-              ? "bg-gray-200 hover:bg-gray-300"
-              : "bg-gray-100 hover:bg-gray-200"
-          }`}
-          onClick={toggleDropdown}
-        >
-          {isDropdownOpen ? "Close" : "Open"}
-        </button>
-      </div>
-      {isDropdownOpen && (
-        <div className="mt-4">
-          <p>This is where the dropdown content would be displayed.</p>
-        </div>
-      )}
-      <div className="mt-4">
-        <p>Registration deadline: 25 Nov 24, 11:00 PM IST</p>
-        <a
-          href="#"
-          className="mt-4 inline-block bg-green-500 hover:bg-green-600
-          text-white font-bold py-2 px-4 rounded"
-        >
-          {" "}
-          Register
-        </a>
-      </div>
-    </div>
-  );
-};
-
-const Stages = () => {
-  return (
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-2xl font-bold">Stages and Timeline</h2>
-      <p className="mt-4">
-        On WebGrow. You'll be given an assignment. You will also get a "hint"
-        button to see the correct answer.
-      </p>
-    </div>
-  );
-};
-
-const Deadlines = () => {
-  return (
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-2xl font-bold">Deadlines</h2>
-      <p className="mt-4">Registration deadline: 25 Nov 24, 11:00 PM IST</p>
-    </div>
-  );
-};
-
-const Contact = () => {
-  return (
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-2xl font-bold">Contact the organiser</h2>
-      <p className="mt-4">Anshika Gupta, cse@acm.org, +91 9999999999</p>
-    </div>
-  );
-};
-
-const Rewards = () => {
-  return (
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-2xl font-bold">Rewards</h2>
-      <div className="mt-4">
-        <div>
-          <span className="font-bold">Winner:</span>
-          <input
-            type="text"
-            className="border-gray-300 rounded-md px-2 py-1 ml-2"
-            placeholder="Add Description"
-          />
-        </div>
-        <div className="mt-2">
-          <span className="font-bold">First Runner-up:</span>
-          <input
-            type="text"
-            className="border-gray-300 rounded-md px-2 py-1 ml-2"
-            placeholder="Add Description"
-          />
-        </div>
-        <div className="mt-2">
-          <span className="font-bold">Second Runner-up:</span>
-          <input
-            type="text"
-            className="border-gray-300 rounded-md px-2 py-1 ml-2"
-            placeholder="Add Description"
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
+import NavHost from "../Host/NavHost";
+import EventCard from "./components/EventCard";
+import InfoCard from "./components/InfoCard";
+import TimelineCard from "./components/TimelineCard";
 
 const details = () => {
+  const stagesData = {
+    description:
+      "This will be an online quiz on webgrow. You will be given 2 minutes to answer a question.",
+    date: "To be announced",
+  };
+
+  const deadlinesData = {
+    title: "Registration deadline",
+    date: "25 Nov 24, 11:00 PM IST",
+  };
+
+  const contactData = {
+    name: "Anshika Gupta",
+    email: "an@gmail.com",
+    phone: "+91 9565656565",
+  };
+
+  const rewardsData = {
+    rewards: [
+      { title: "Winner", description: "" },
+      { title: "First Runner-up", description: "" },
+      { title: "Second Runner-up", description: "" },
+    ],
+  };
   return (
-    <div className="container mx-auto py-8">
-      <GeneralKnowledge />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <Stages />
-        <Deadlines />
-        <Contact />
-        <Rewards />
-      </div>
+    <div className="min-h-screen bg-white ">
+      <NavHost className="border-b border-gray-900" />
+      <section className="flex flex-col mx-4 gap-5 mb-10">
+        <div className="flex flex-col items-center justify-between mt-2 gap-1">
+          <span className=" font-medium text-base md:text-xl">
+            {" "}
+            Host Quiz | General Knowledge{" "}
+          </span>
+          <span className="font-medium text-base md:text-xl">
+            {" "}
+            Organizers- Anshika Gupta
+          </span>
+        </div>
+        <div className="flex flex-col md:flex-row gap-5  justify-between items-center  md:mx-12">
+          <EventCard />
+          <div className="flex flex-col gap-3">
+            <InfoCard
+              icon="📅"
+              title="Registration deadline"
+              value="13 Days Left"
+            />
+            <InfoCard
+              icon="📅"
+              title="Registration deadline"
+              value="13 Days Left"
+            />
+            <InfoCard
+              icon="📅"
+              title="Registration deadline"
+              value="13 Days Left"
+            />
+          </div>
+        </div>
+        <section className="flex flex-col justify-between gap-5">
+          <TimelineCard
+            type="Stages and Timeline"
+            data={stagesData}
+            onEdit={true}
+          />
+          <TimelineCard type="Deadlines" data={deadlinesData} />
+          <TimelineCard type="Contact the organiser" data={contactData} />
+          <TimelineCard type="Rewards" data={rewardsData} />
+        </section>
+      </section>
     </div>
   );
 };
