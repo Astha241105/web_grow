@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import NavHost from "../Host/NavHost";
+import {
+  createQuiz,
+  resetQuizCreateState,
+} from "../../components/store/slices/create_quiz_Slice";
 
 const QuizCreator = () => {
+  const { eventId } = useParams();
+  const dispatch = useDispatch();
+  const { loading, success, error } = useSelector((state) => state.quizCreate);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [questions, setQuestions] = useState([
@@ -12,7 +22,6 @@ const QuizCreator = () => {
       correctOption: null,
     },
   ]);
-
   const handleAddQuestion = () => {
     setQuestions([
       ...questions,
@@ -79,6 +88,54 @@ const QuizCreator = () => {
       )
     );
   };
+
+  const handleSubmitQuiz = () => {
+    if (!title.trim()) {
+      alert("Please enter a quiz title");
+      return;
+    }
+
+    if (questions.some((q) => !q.question.trim())) {
+      alert("Please fill in all question texts");
+      return;
+    }
+
+    if (questions.some((q) => q.correctOption === null)) {
+      alert("Please select a correct answer for each question");
+      return;
+    }
+    dispatch(
+      createQuiz({
+        eventId,
+        title,
+        description,
+        questions,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (success) {
+      alert("Quiz created successfully!");
+      setTitle("");
+      setDescription("");
+      setQuestions([
+        {
+          id: 1,
+          question: "",
+          options: ["", "", "", ""],
+          correctOption: null,
+        },
+      ]);
+      dispatch(resetQuizCreateState());
+    }
+  }, [success, dispatch]);
+  useEffect(() => {
+    if (error) {
+      alert(`Quiz creation failed: ${error}`);
+      dispatch(resetQuizCreateState());
+    }
+  }, [error, dispatch]);
 
   return (
     <div className="max-w-3xl mx-auto bg-white">
@@ -200,12 +257,15 @@ const QuizCreator = () => {
         >
           + Add Questions
         </button>
-        <button className="w-1/2 p-3 bg-teal-600 text-white rounded-md font-medium hover:bg-teal-700 transition-colors duration-200">
-          Submit
+        <button
+          onClick={handleSubmitQuiz}
+          disabled={loading}
+          className="w-1/2 p-3 bg-teal-600 text-white rounded-md font-medium hover:bg-teal-700 transition-colors duration-200 disabled:opacity-50"
+        >
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </div>
     </div>
   );
 };
-
 export default QuizCreator;
