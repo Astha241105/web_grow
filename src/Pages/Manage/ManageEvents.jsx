@@ -18,8 +18,13 @@ const Event_Manage = () => {
     dispatch(fetchEvents());
   }, [dispatch]);
 
-  const handleEdit = () => {
-    navigate("/update-event");
+  const handleEdit = (event) => {
+    navigate("/update-event", {
+      state: {
+        eventId: event.id,
+        eventData: event,
+      },
+    });
   };
 
   const metrics = [
@@ -67,7 +72,16 @@ const Event_Manage = () => {
     </div>
   );
 
-  const EventCard = ({ id, title, college, tag, date, mode, imageUrl }) => {
+  const EventCard = ({
+    id,
+    title,
+    college,
+    tag,
+    date,
+    mode,
+    imageUrl,
+    ...event
+  }) => {
     const eventDate = new Date(date);
     const formattedDate = eventDate.toLocaleString("en-US", {
       day: "numeric",
@@ -123,7 +137,18 @@ const Event_Manage = () => {
               </button>
               <button
                 className="p-1 hover:bg-gray-100 rounded"
-                onClick={handleEdit}
+                onClick={() =>
+                  handleEdit({
+                    id,
+                    title,
+                    college,
+                    tag,
+                    date,
+                    mode,
+                    imageUrl,
+                    ...event,
+                  })
+                }
               >
                 <img src="Pencil.svg" alt="Edit" />
               </button>

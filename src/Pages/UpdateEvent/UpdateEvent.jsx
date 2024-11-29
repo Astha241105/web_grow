@@ -1,21 +1,24 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   uploadEventImage,
   updateEventApi,
   setUpdateEventData,
+  fetchEventDetails,
 } from "../../components/store/slices/updateeventSlice";
 
 const Update_event = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { imageUrl, loading, error } = useSelector(
+  const location = useLocation();
+  const { imageUrl, loading, error, eventDetails } = useSelector(
     (state) => state.updateEvent
   );
   const fileInputRef = useRef(null);
 
   const [formData, setFormData] = useState({
+    eventId: "",
     opportunityType: "",
     visibility: "",
     opportunityTitle: "",
@@ -26,6 +29,32 @@ const Update_event = () => {
     aboutOpportunity: "",
     imageFile: null,
   });
+
+  useEffect(() => {
+    const eventId = location.state?.eventId;
+
+    if (eventId) {
+      dispatch(fetchEventDetails(eventId));
+    }
+  }, [dispatch, location.state]);
+
+  useEffect(() => {
+    const eventData = location.state?.eventData;
+    if (eventData) {
+      setFormData((prevData) => ({
+        ...prevData,
+        eventId: eventData.id,
+        opportunityType: eventData.opportunityType || "",
+        visibility: eventData.visibility || "",
+        opportunityTitle: eventData.title || "",
+        organization: eventData.organization || "",
+        websiteUrl: eventData.websiteUrl || "https://",
+        festival: eventData.festival || "",
+        eventMode: eventData.mode || "",
+        aboutOpportunity: eventData.description || "",
+      }));
+    }
+  }, [location.state]);
 
   const [isEditable, setIsEditable] = useState(false);
 
@@ -66,8 +95,10 @@ const Update_event = () => {
       alert(`Please fill in the following fields: ${missingFields.join(", ")}`);
       return;
     }
+
     dispatch(
       setUpdateEventData({
+        eventId: formData.eventId,
         opportunityType: formData.opportunityType,
         visibility: formData.visibility,
         opportunityTitle: formData.opportunityTitle,
@@ -80,9 +111,12 @@ const Update_event = () => {
       })
     );
 
-    navigate("/update-event_1");
+    navigate("/update-event_1", {
+      state: {
+        eventId: formData.eventId,
+      },
+    });
   };
-
   return (
     <div className="ce">
       <div className="ce-gradient z-[-1]"> </div>

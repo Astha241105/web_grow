@@ -155,6 +155,18 @@ export const updateEventApi = createAsyncThunk(
   }
 );
 
+export const fetchEventDetails = createAsyncThunk(
+  "updateEvent/fetchEventDetails",
+  async (eventId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/api/events/${eventId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const updateEventSlice = createSlice({
   name: "updateEvent",
   initialState: {
@@ -163,6 +175,7 @@ const updateEventSlice = createSlice({
     loading: false,
     success: false,
     error: null,
+    eventDetails: null,
   },
   reducers: {
     resetUpdateState: (state) => {
@@ -215,6 +228,18 @@ const updateEventSlice = createSlice({
         state.error =
           action.payload || "Update failed: No additional details provided";
         state.success = false;
+      })
+      .addCase(fetchEventDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchEventDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.eventDetails = action.payload;
+      })
+      .addCase(fetchEventDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
