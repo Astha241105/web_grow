@@ -6,3 +6,5 @@ export { default as Event_Manage } from "./Manage/ManageEvents.jsx";
 export { default as HostProfile } from "./Profile/Host_Profile.jsx";
 export { default as QuizCreator } from "./Quiz/Quiz.jsx";
 export { default as EventDetail } from "./CreateEvents/EventDetail.jsx";
+export { default as Update_event } from "./UpdateEvent/UpdateEvent.jsx";
+export { default as Update_Event_1 } from "./UpdateEvent/Update_Event_1.jsx";
