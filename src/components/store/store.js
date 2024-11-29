@@ -17,9 +17,10 @@ import eventDetailsReducer from "./slices/eventdetails";
 import eventRegistrationReducer from "./slices/registerforevent";
 import favoritesReducer from "./slices/favouriteevents";
 import addToFavoritesReducer from "./slices/addfavourite";
-import teamsReducer from './slices/listofteams';
-import createTeamReducer from './slices/creatingteampart';
-import teamRequestReducer from './slices/joinrequest';
+import teamsReducer from "./slices/listofteams";
+import createTeamReducer from "./slices/creatingteampart";
+import teamRequestReducer from "./slices/joinrequest";
+import updateEventReducer from "./slices/updateeventSlice";
 
 export const store = configureStore({
   reducer: {
@@ -40,9 +41,10 @@ export const store = configureStore({
     addToFavorites: addToFavoritesReducer,
     createEvent: createEventReducer,
     eventmanage: eventmanageReducer,
-    teams: teamsReducer, 
+    teams: teamsReducer,
     createTeam: createTeamReducer,
     teamRequest: teamRequestReducer,
+    updateEvent: updateEventReducer,
   },
 });
 
