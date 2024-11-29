@@ -40,14 +40,21 @@ const Create_Events = () => {
       description: eventData.aboutOpportunity,
       location: eventData.organization,
       mode: eventData.eventMode,
-      registerStart: `${formData.registrationStartDate}T${formData.registrationStartTime}:00`,
-      registerEnd: `${formData.registrationEndDate}T${formData.registrationEndTime}:00`,
+      registerStart:
+        formData.registrationStartDate && formData.registrationStartTime
+          ? `${formData.registrationStartDate}T${formData.registrationStartTime}:00`
+          : null,
+      registerEnd:
+        formData.registrationEndDate && formData.registrationEndTime
+          ? `${formData.registrationEndDate}T${formData.registrationEndTime}:00`
+          : null,
       capacityMax: formData.maxRegistrations,
       festival: eventData.festival || null,
       teamCreationAllowed: formData.participationType === "Team",
       maxTeamSize: formData.maxTeamSize,
       minTeamSize: formData.minTeamSize,
     };
+    console.log("Payload before dispatch:", eventPayload);
 
     dispatch(createEventApi(eventPayload))
       .then(() => {

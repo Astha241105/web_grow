@@ -24,8 +24,6 @@ const CreateEvents = () => {
     websiteUrl: existingEventData.websiteUrl || "https://",
     festival: existingEventData.festival || "",
     eventMode: existingEventData.eventMode || "",
-    category: existingEventData.category || "",
-    skills: existingEventData.skills || "",
     aboutOpportunity: existingEventData.aboutOpportunity || "",
   });
 
@@ -53,8 +51,14 @@ const CreateEvents = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  const [isEditable, setIsEditable] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditable(true);
+  };
 
   const handleNextStep = () => {
+    console.log("Final formData before dispatch:", formData);
     dispatch(
       setEventData({
         ...formData,
@@ -243,47 +247,32 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Categories</label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleInputChange}
-            >
-              <option value="">Choose category</option>
-            </select>
-          </div>
-
-          <div className="ce-form-group">
-            <label>Skill to be Accessed</label>
-            <select
-              name="skills"
-              value={formData.skills}
-              onChange={handleInputChange}
-            >
-              <option value="">Search Skills</option>
-            </select>
-          </div>
-
-          <div className="ce-form-group">
             <label>About Opportunity*</label>
-            <div className="ce-guidelines">
-              <div className="ce-edit">
-                <img src="Edit.svg"></img>Edit
-              </div>
-              <p>Guidelines:</p>
-              <ul>
-                <li>
-                  Mention all the guidelines like eligibility, format, etc.
-                </li>
-                <li>Inter-college team members allowed or not.</li>
-                <li>Inter-specialization team members allowed or not.</li>
-                <li>The number of questions/problem statements.</li>
-                <li>Duration of the rounds.</li>
-              </ul>
-              <p>Rules:</p>
-              <ul>
-                <li>Mention the rules of the competition.</li>
-              </ul>
+            <textarea
+              className="ce-guidelines"
+              name="aboutOpportunity"
+              disabled={!isEditable}
+              value={formData.aboutOpportunity}
+              onChange={handleInputChange}
+              placeholder="This field helps you to mention the details of the opportunity you are listing. It is better to include Rules, Eligibility, Process, Format, etc., in order to get the opportunity approved. The more details, the better!
+
+Guidelines:
+Mention all the guidelines like eligibility, format, etc.
+Inter-college team members allowed or not.
+Inter-specialization team members allowed or not.
+The number of questions/ problem statements.
+Duration of the rounds.
+
+Rules:
+Mention the rules of the competition."
+            ></textarea>
+            <div
+              className="ce-edit"
+              onClick={() => setIsEditable((prev) => !prev)}
+              style={{ cursor: "pointer" }}
+            >
+              <img src="Edit.svg" alt="Edit Icon" />
+              {isEditable ? "Lock" : "Edit"}
             </div>
           </div>
 
