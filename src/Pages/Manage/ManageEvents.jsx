@@ -102,7 +102,26 @@ const Event_Manage = () => {
 
     const handleCardClick = () => {
       if (tag === "quiz") {
-        navigate("/create-quiz", {
+        // For quiz events, show a prompt with two options
+        const userChoice = window.confirm(
+          "Do you want to add questions to this quiz? \n\nClick OK to add questions, Cancel to view participants."
+        );
+
+        if (userChoice) {
+          navigate("/create-quiz", {
+            state: {
+              eventId: id,
+            },
+          });
+        } else {
+          navigate("/view-participants", {
+            state: {
+              eventId: id,
+            },
+          });
+        }
+      } else {
+        navigate("/view-participants", {
           state: {
             eventId: id,
           },
