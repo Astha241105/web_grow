@@ -25,6 +25,7 @@ export const fetchEvents = createAsyncThunk(
         mode: item.data.mode,
         impressions: item.data.impressions || 0,
         registrations: item.data.registrations || 0,
+        imageUrl: item.data.imageUrl || "",
       }));
     } catch (error) {
       return rejectWithValue(error.message);
