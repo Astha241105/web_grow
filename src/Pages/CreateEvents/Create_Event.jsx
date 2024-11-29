@@ -37,6 +37,7 @@ const Create_Events = () => {
       imageUrl:
         imageUrl || "https://webgrowbucket.s3.ap-south-1.amazonaws.com/default",
       title: eventData.opportunityTitle,
+      category: eventData.opportunityType,
       description: eventData.aboutOpportunity,
       location: eventData.organization,
       mode: eventData.eventMode,
@@ -54,6 +55,7 @@ const Create_Events = () => {
       maxTeamSize: formData.maxTeamSize,
       minTeamSize: formData.minTeamSize,
     };
+
     console.log("Payload before dispatch:", eventPayload);
 
     dispatch(createEventApi(eventPayload))
@@ -247,17 +249,19 @@ const Create_Events = () => {
                 <input
                   className="ce-placeholder"
                   type="date"
-                  id="numberInput"
-                  placeholder="Enter date"
+                  name="registrationStartDate"
+                  value={formData.registrationStartDate}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={styles.inputWrapper}>
                 <label>Time</label>
                 <input
-                  type="time"
                   className="ce-placeholder"
-                  id="numberInput"
-                  placeholder="Enter time"
+                  type="time"
+                  name="registrationStartTime"
+                  value={formData.registrationStartTime}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -270,21 +274,24 @@ const Create_Events = () => {
                 <input
                   className="ce-placeholder"
                   type="date"
-                  id="numberInput"
-                  placeholder="Enter date"
+                  name="registrationEndDate"
+                  value={formData.registrationEndDate}
+                  onChange={handleInputChange}
                 />
               </div>
               <div style={styles.inputWrapper}>
                 <label>Time</label>
                 <input
-                  type="time"
                   className="ce-placeholder"
-                  id="numberInput"
-                  placeholder="Enter time"
+                  type="time"
+                  name="registrationEndTime"
+                  value={formData.registrationEndTime}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
           </div>
+
           <div className="ce-form-group">
             <label>Number of Registrations allowed (optional)</label>
             <input
