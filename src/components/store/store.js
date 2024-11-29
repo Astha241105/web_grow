@@ -21,10 +21,9 @@ import teamsReducer from "./slices/listofteams";
 import createTeamReducer from "./slices/creatingteampart";
 import teamRequestReducer from "./slices/joinrequest";
 import updateEventReducer from "./slices/updateeventSlice";
-import notificationsReducer from './slices/notificationpart';
-import joinRequestResponseReducer from './slices/requestresponse'; 
-
-
+import notificationsReducer from "./slices/notificationpart";
+import joinRequestResponseReducer from "./slices/requestresponse";
+import quizCreateReducer from "./slices/create_quiz_Slice";
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -49,7 +48,8 @@ export const store = configureStore({
     teamRequest: teamRequestReducer,
     updateEvent: updateEventReducer,
     notifications: notificationsReducer,
-    joinrequestResponse: joinRequestResponseReducer, 
+    joinrequestResponse: joinRequestResponseReducer,
+    quizCreate: quizCreateReducer,
   },
 });
 
