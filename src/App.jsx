@@ -62,6 +62,7 @@ import {
   EventDetail,
   Update_event,
   Update_Event_1,
+  Room_allocate,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -266,6 +267,10 @@ const router = createBrowserRouter([
   {
     path: "/update-event_1",
     element: <Update_Event_1 />,
+  },
+  {
+    path: "/room-allocate",
+    element: <Room_allocate />,
   },
 ]);
 
