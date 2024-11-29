@@ -49,6 +49,7 @@ import Creatingteam from "./registration-event-part/creatingteam/creatingteam.js
 import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
+import Quiz from "./quiz/quiz.jsx";
 import "./index.css";
 import "./App.css";
 import {
@@ -80,7 +81,7 @@ const router = createBrowserRouter([
     path: "/part-profile",
     element: (
       <div id="part-profile-container">
-        <Navpart bgColor="#D4E5E4" />
+          <ResponsiveNav2 bgColor="#D4E5E4" />
         <Partprofile />
       </div>
     ),
@@ -99,7 +100,7 @@ const router = createBrowserRouter([
       // <ProtectedRoute>
       <Backgroundhome>
         {localStorage.getItem("authToken") ? (
-          <ResponsiveNav2 />
+          <ResponsiveNav2 bgColor="#FDF8EE"/>
         ) : (
           <ResponsiveNav />
         )}
@@ -177,6 +178,14 @@ const router = createBrowserRouter([
         <Creatingteam />
       </>
     ),
+  },
+  {
+    path: "/quiz",
+    element: <>
+    {" "}
+    <Navregister />
+    <Quiz />
+  </>
   },
   {
     path: "/create-account-host",

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./partnavham.css"
 
-const Partnavham = () => {
+const Partnavham = ({bgColor}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -15,7 +15,7 @@ const Partnavham = () => {
     navigate("/part-profile");
   };
   return (
-    <div id="nav-bar-with-hamburger">
+    <div id="nav-bar-with-hamburger" style={{backgroundColor:bgColor}}>
         <div id="nav-bar-with-hamburger-icon">
       <div className="hamburger" onClick={toggleMenu}>
         <img id="nav-ham-icon" src="/hambuger.svg"  />

@@ -13,7 +13,6 @@
     max-width:28.68%;
     width:100%;
     background-color: white;
-    border: 1px solid black;
 
 }
 #my-profile{
@@ -91,9 +90,15 @@
     #part-profile{
         max-width:350px;  
     }}
-@media(max-width:900px){
-    #part-profile-content{
+@media(max-width:1000px){
+    #part-profile{
         display:none;
+    }
+    #part-profile-render{
+        background-color:white;
+    }
+    #part-profile-content{
+        width:1000%;
     }
     #part-profile{
         max-width:417px;  

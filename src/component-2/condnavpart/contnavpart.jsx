@@ -3,7 +3,7 @@ import Navpart from "../nav-participant/navpart";
 import Partnavham from "../part-navham/partnavham";
 
 
-const ResponsiveNav2 = () => {
+const ResponsiveNav2 = ({bgColor}) => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1000);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const ResponsiveNav2 = () => {
 
   return (
     <div>
-      {isLargeScreen ? <Navpart bgColor="#fdf8ee" /> : <Partnavham  />}
+      {isLargeScreen ? <Navpart bgColor={bgColor} /> : <Partnavham  bgColor="white"/>}
     </div>
   );
 };

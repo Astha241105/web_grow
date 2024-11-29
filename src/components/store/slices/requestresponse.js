@@ -4,6 +4,7 @@ export const handleJoinRequestResponse = createAsyncThunk(
   'joinrequestResponse/handleJoinRequestResponse',
   async ({ requestId, response }, { rejectWithValue }) => {
     try {
+        console.log(response)
       const token = localStorage.getItem('authToken'); 
       
       const responseFromAPI = await fetch(`http://www.arthkambhoj.me:8080/api/v1/participant/teams/join/request/${requestId}?response=${response}`, {

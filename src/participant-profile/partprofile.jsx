@@ -56,16 +56,16 @@ const Partprofile = () => {
           <div id="part-profile-details">
             <img
             id="part-profile-details-img"
-            src={profile.imageUrl || "/default-profile.svg"}
-            alt="Profile"
+            src={profile.imageUrl}
 />
             <div id="part-profile-details-details">
               <div id="part-profile-details-name">
-                {profile.firstname || "First Name"} {profile.lastname || "Last Name"}
+                {profile.firstname || "First Name"} {profile.lastname}
               </div>
               <div className="part-profile-details-e-and-i">{profile.email || "Email"}</div>
             </div>
-            <img id="edit-part-profile" src="/edit-profile.svg" alt="Edit Profile" />
+            <img id="edit-part-profile" src="/edit-profile.svg" alt="Edit Profile"
+            onClick={() => setSelectedOption('Edit')} />
           </div>
         ) : (
           <div>No profile data available.</div>

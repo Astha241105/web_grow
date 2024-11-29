@@ -1,18 +1,12 @@
-/* edit.css */
-
-/* Ensure the profile edit container takes the full height of the screen */
 #edit-profile {
     max-height: 930px;
     height: 100vh;
     max-width: 847px;
     width: 100%;
-    border: 1px solid black;
     position: relative;
     background-color: white;
-    padding-bottom: 100px; /* To give space for the Save button */
+    padding-bottom: 100px; 
   }
-  
-  /* Profile title positioning */
   #edit-my-profile {
     position: absolute;
     font-size: 24px;
@@ -21,7 +15,6 @@
     left: 10px;
   }
   
-  /* Profile image container positioning */
   #edit-my-profile-1 {
     position: absolute;
     top: 140px;
@@ -35,21 +28,17 @@
     transform: translate(-50%);
   }
   
-  /* Profile image styling */
   #part-profile-details-image {
     height: 84px;
     width: 84px;
     border-radius: 50%;
     background-color: #d9d9d9;
   }
-  
-  /* Change profile text styling */
   #change-profile {
     font-size: 16px;
     font-weight: 500;
   }
-  
-  /* Profile edit options container positioning */
+
   #edit-profile-options {
     position: absolute;
     top: 300px;
@@ -59,56 +48,56 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  
-  /* Styling for labels */
   .edit-profile-options-labels {
     padding-left: 20px;
     font-size: 18px;
     font-weight: 500;
     display: block;
   }
-  
-  /* Styling for input fields */
+
   .edit-profile-options-input {
     height: 50px;
-    width: 100%;
+    width: 90%;
+    margin-left:10px;
+    padding-left:20px;
     background-color: #d9d9d9;
     border-radius: 10px;
-    z-index: 1; /* Ensure input fields are not hidden */
+    z-index: 1; 
   }
   
-  /* Save button styling */
   #save-profile-button {
-    height: 100px;
-    width: 100px;
-    color: teal;
+    background-color: teal;
+    color:white;
+    border-radius:10px;
+    box-sizing: content-box;
+    width:fit-content;
+    padding:10px;
+    font-size: 20px;
+    font-weight: 500;
     position: absolute;
-    top: 900px;
+    top:700px;
+    right:30px;
   }
-  
-  /* Image options container styling */
   #img-options {
     position: absolute;
-    top: 270px; /* Adjust to ensure it doesn't overlap with profile image */
+    top: 270px; 
     left: 50%;
     transform: translate(-50%);
     height: 221px;
-    width: 445px;
+    width: 340px;
     background-color: white;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    z-index: 100; /* Ensure the image options are on top */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
+    z-index: 100; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   }
-  
-  /* Individual image option styling */
   .img-option {
     height: 90px;
     width: 90px;
     border-radius: 50%;
-    cursor: pointer; /* Make the images clickable */
+    cursor: pointer; 
   }
   

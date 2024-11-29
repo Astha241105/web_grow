@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateParticipantProfile } from '../../components/store/slices/participantprofile'; // Adjust the path as needed
-import Imgoption from '../imgoptions/imgoption'; // Import Imgoption component
+import Imgoption from '../imgoptions/imgoption';
 import "./edit.css";
 
 const Edit = () => {
@@ -15,7 +15,7 @@ const Edit = () => {
     imageUrl: ''
   });
 
-  const [isEditingImage, setIsEditingImage] = useState(false); // State to toggle image input
+  const [isEditingImage, setIsEditingImage] = useState(false);
 
   useEffect(() => {
     if (profile) {
@@ -37,23 +37,23 @@ const Edit = () => {
   };
 
   const handleSave = () => {
-    dispatch(updateParticipantProfile(editedProfile)); // Dispatch the update to save the profile
+    dispatch(updateParticipantProfile(editedProfile));
   };
 
   const handleImageClick = () => {
-    setIsEditingImage(true); // Enable image URL input when the image is clicked
+    setIsEditingImage(true);
   };
 
   const handleImageSave = () => {
-    setIsEditingImage(false); // Save and exit image input mode
+    setIsEditingImage(false);
   };
 
   const handleImageOptionClick = (url) => {
     setEditedProfile(prevState => ({
       ...prevState,
-      imageUrl: url // Update the image URL with the selected one
+      imageUrl: url
     }));
-    setIsEditingImage(false); // Close the image options
+    setIsEditingImage(false);
   };
 
   if (isLoading) {
@@ -71,14 +71,12 @@ const Edit = () => {
         <img
           id="part-profile-details-image"
           src={editedProfile.imageUrl || "/default-profile.svg"} 
-          alt="Profile"
-          onClick={handleImageClick} // Show input when clicked
+          onClick={handleImageClick}
         />
         <div id="change-profile">Change profile</div>
       </div>
 
       {isEditingImage && (
-        // Conditionally render Imgoption component when editing image
         <Imgoption onImageClick={handleImageOptionClick} />
       )}
 
@@ -113,15 +111,6 @@ const Edit = () => {
           onChange={handleInputChange}
         />
 
-        <label htmlFor="imageUrl" className="edit-profile-options-labels">
-          Image URL:
-        </label>
-        <input
-          id="imageUrl"
-          className="edit-profile-options-input"
-          value={editedProfile.imageUrl}
-          onChange={handleInputChange}
-        />
       </div>
       <div>
         <button id="save-profile-button" onClick={handleSave}>
