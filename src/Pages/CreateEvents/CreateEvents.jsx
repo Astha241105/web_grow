@@ -1,47 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   uploadEventImage,
   setEventData,
 } from "../../components/store/slices/create_event_Slice";
-import { updateEventApi } from "../../components/store/slices/updateeventSlice";
 import "./CreateEvents.css";
 
 const CreateEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const isUpdateMode = location.state?.isUpdateMode || false;
-  const existingEventData =
-    location.state?.eventData ||
-    useSelector((state) => state.createEvent.eventData);
-
-  const imageUrl = useSelector((state) =>
-    isUpdateMode
-      ? state.updateEvent.imageUrl || existingEventData.imageUrl
-      : state.createEvent.imageUrl
-  );
-
-  const loading = useSelector((state) =>
-    isUpdateMode ? state.updateEvent.loading : state.createEvent.loading
-  );
-
-  const error = useSelector((state) =>
-    isUpdateMode ? state.updateEvent.error : state.createEvent.error
-  );
+  const existingEventData = useSelector((state) => state.createEvent.eventData);
+  const imageUrl = useSelector((state) => state.createEvent.imageUrl);
+  const loading = useSelector((state) => state.createEvent.loading);
+  const error = useSelector((state) => state.createEvent.error);
 
   const [formData, setFormData] = useState({
-    opportunityType: existingEventData?.opportunityType || "",
-    visibility: existingEventData?.visibility || "",
-    opportunityTitle: existingEventData?.opportunityTitle || "",
-    organization: existingEventData?.organization || "",
-    websiteUrl: existingEventData?.websiteUrl || "https://",
-    festival: existingEventData?.festival || "",
-    eventMode: existingEventData?.eventMode || "",
-    aboutOpportunity: existingEventData?.aboutOpportunity || "",
-    eventId: existingEventData?.eventId || null,
+    opportunityType: existingEventData.opportunityType || "",
+    visibility: existingEventData.visibility || "",
+    opportunityTitle: existingEventData.opportunityTitle || "",
+    organization: existingEventData.organization || "",
+    websiteUrl: existingEventData.websiteUrl || "https://",
+    festival: existingEventData.festival || "",
+    eventMode: existingEventData.eventMode || "",
+    aboutOpportunity: existingEventData.aboutOpportunity || "",
   });
 
   const urlInputRef = useRef(null);
@@ -68,39 +51,22 @@ const CreateEvents = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
   const [isEditable, setIsEditable] = useState(false);
 
+  const handleEditClick = () => {
+    setIsEditable(true);
+  };
+
   const handleNextStep = () => {
-    const eventDataToDispatch = {
-      ...formData,
-      imageUrl: imageUrl || null,
-    };
+    console.log("Final formData before dispatch:", formData);
+    dispatch(
+      setEventData({
+        ...formData,
+        imageUrl: imageUrl || null,
+      })
+    );
 
-    if (isUpdateMode) {
-      const updatePayload = {
-        ...eventDataToDispatch,
-        eventId: formData.eventId,
-      };
-
-      dispatch(updateEventApi(updatePayload))
-        .then((response) => {
-          if (response.payload) {
-            navigate("/create-event1", {
-              state: {
-                isUpdateMode: true,
-                eventData: response.payload,
-              },
-            });
-          }
-        })
-        .catch((error) => {
-          console.error("Update failed", error);
-        });
-    } else {
-      dispatch(setEventData(eventDataToDispatch));
-      navigate("/create-event1");
-    }
+    navigate("/create-event1");
   };
 
   return (

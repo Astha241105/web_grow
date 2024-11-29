@@ -71,7 +71,6 @@ export const createEventApi = createAsyncThunk(
         if (!eventData[field]) {
           throw new Error(`Missing required field: ${field}`);
         }
-
       });
 
       const response = await fetch(

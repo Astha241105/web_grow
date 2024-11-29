@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Async thunk for updating an event
 export const updateEventApi = createAsyncThunk(
   "events/updateEvent",
   async (eventData, { rejectWithValue }) => {
     try {
-      // Get the token from localStorage
       const token = localStorage.getItem("token");
 
       // Prepare the payload matching the API requirements
