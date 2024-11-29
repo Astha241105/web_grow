@@ -42,7 +42,6 @@ const Update_event = () => {
       try {
         const resultAction = await dispatch(uploadEventImage(file));
         if (uploadEventImage.fulfilled.match(resultAction)) {
-          // Image uploaded successfully
           setFormData((prev) => ({ ...prev, imageUrl: resultAction.payload }));
         }
       } catch (error) {
@@ -52,7 +51,6 @@ const Update_event = () => {
   };
 
   const handleNext = () => {
-    // Validate form data
     const requiredFields = [
       "opportunityType",
       "visibility",
@@ -68,8 +66,6 @@ const Update_event = () => {
       alert(`Please fill in the following fields: ${missingFields.join(", ")}`);
       return;
     }
-
-    // Dispatch event data to Redux store
     dispatch(
       setUpdateEventData({
         opportunityType: formData.opportunityType,

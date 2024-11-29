@@ -23,7 +23,6 @@ const Update_Event_1 = () => {
   };
 
   const handleSubmit = async () => {
-    // Validate required fields
     const requiredFields = [
       "participationType",
       "registrationStartDate",
@@ -50,13 +49,12 @@ const Update_Event_1 = () => {
     };
 
     try {
-      console.log("Submitting event data:", completeEventData); // Add this line to log data
+      console.log("Submitting event data:", completeEventData);
       const resultAction = await dispatch(updateEventApi(completeEventData));
 
       if (updateEventApi.fulfilled.match(resultAction)) {
         alert("Event updated successfully!");
       } else {
-        // Add more detailed error handling
         console.error("Update failed", resultAction.payload);
         alert("Failed to update event: " + resultAction.payload?.message);
       }
