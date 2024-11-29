@@ -1,72 +1,86 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   uploadEventImage,
-  setEventData,
-} from "../../components/store/slices/create_event_Slice";
-import "./CreateEvents.css";
+  updateEventApi,
+  setUpdateEventData,
+} from "../../components/store/slices/updateeventSlice";
 
-const CreateEvents = () => {
+const Update_event = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const existingEventData = useSelector((state) => state.createEvent.eventData);
-  const imageUrl = useSelector((state) => state.createEvent.imageUrl);
-  const loading = useSelector((state) => state.createEvent.loading);
-  const error = useSelector((state) => state.createEvent.error);
+  const { imageUrl, loading, error } = useSelector(
+    (state) => state.updateEvent
+  );
+  const fileInputRef = useRef(null);
 
   const [formData, setFormData] = useState({
-    opportunityType: existingEventData.opportunityType || "",
-    visibility: existingEventData.visibility || "",
-    opportunityTitle: existingEventData.opportunityTitle || "",
-    organization: existingEventData.organization || "",
-    websiteUrl: existingEventData.websiteUrl || "https://",
-    festival: existingEventData.festival || "",
-    eventMode: existingEventData.eventMode || "",
-    aboutOpportunity: existingEventData.aboutOpportunity || "",
+    opportunityType: "",
+    visibility: "",
+    opportunityTitle: "",
+    organization: "",
+    websiteUrl: "https://",
+    festival: "",
+    eventMode: "",
+    aboutOpportunity: "",
+    imageFile: null,
   });
 
-  const urlInputRef = useRef(null);
+  const [isEditable, setIsEditable] = useState(false);
 
-  const handleUrlFocus = () => {
-    if (urlInputRef.current) {
-      const length = urlInputRef.current.value.length;
-      urlInputRef.current.setSelectionRange(length, length);
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageUpload = async (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setFormData((prev) => ({ ...prev, imageFile: file }));
+
       try {
-        await dispatch(uploadEventImage(file)).unwrap();
+        const resultAction = await dispatch(uploadEventImage(file));
+        if (uploadEventImage.fulfilled.match(resultAction)) {
+          setFormData((prev) => ({ ...prev, imageUrl: resultAction.payload }));
+        }
       } catch (error) {
         console.error("Image upload failed", error);
       }
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-  const [isEditable, setIsEditable] = useState(false);
+  const handleNext = () => {
+    const requiredFields = [
+      "opportunityType",
+      "visibility",
+      "opportunityTitle",
+      "organization",
+      "eventMode",
+      "aboutOpportunity",
+    ];
 
-  const handleEditClick = () => {
-    setIsEditable(true);
-  };
+    const missingFields = requiredFields.filter((field) => !formData[field]);
 
-  const handleNextStep = () => {
-    console.log("Final formData before dispatch:", formData);
+    if (missingFields.length > 0) {
+      alert(`Please fill in the following fields: ${missingFields.join(", ")}`);
+      return;
+    }
     dispatch(
-      setEventData({
-        ...formData,
-        imageUrl: imageUrl || null,
+      setUpdateEventData({
+        opportunityType: formData.opportunityType,
+        visibility: formData.visibility,
+        opportunityTitle: formData.opportunityTitle,
+        organization: formData.organization,
+        websiteUrl: formData.websiteUrl,
+        festival: formData.festival,
+        eventMode: formData.eventMode,
+        aboutOpportunity: formData.aboutOpportunity,
+        imageUrl: imageUrl || formData.imageUrl,
       })
     );
 
-    navigate("/create-event1");
+    navigate("/update-event_1");
   };
 
   return (
@@ -101,22 +115,30 @@ const CreateEvents = () => {
             <div className="logo-upload">
               <input
                 type="file"
+                ref={fileInputRef}
                 name="opportunityLogo"
-                onChange={handleImageUpload}
                 accept="image/*"
-                disabled={loading}
+                onChange={handleFileUpload}
+                style={{ display: "none" }}
               />
-              <div className="logo-placeholder">
-                {loading
-                  ? "Uploading..."
-                  : imageUrl
-                  ? "Logo Uploaded"
-                  : "Upload Logo"}
+              <div
+                className="logo-placeholder"
+                onClick={() => fileInputRef.current.click()}
+              >
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt="Uploaded Logo"
+                    className="uploaded-logo"
+                  />
+                ) : (
+                  "Upload Logo"
+                )}
               </div>
-              {error && <div className="text-red-500">{error}</div>}
+              {loading && <p>Uploading...</p>}
+              {error && <p className="error">Upload failed: {error}</p>}
             </div>
           </div>
-
           <div className="ce-form-group">
             <label>Opportunity Type</label>
             <select
@@ -193,17 +215,11 @@ const CreateEvents = () => {
 
           <div className="ce-form-group">
             <label>Website URL</label>
-            <p className="ce-help-text">
-              The URL can be your organization's website or an
-              opportunity-related URL.
-            </p>
             <input
               type="text"
               name="websiteUrl"
-              ref={urlInputRef}
               value={formData.websiteUrl}
               onChange={handleInputChange}
-              onFocus={handleUrlFocus}
             />
           </div>
 
@@ -254,17 +270,7 @@ const CreateEvents = () => {
               disabled={!isEditable}
               value={formData.aboutOpportunity}
               onChange={handleInputChange}
-              placeholder="This field helps you to mention the details of the opportunity you are listing. It is better to include Rules, Eligibility, Process, Format, etc., in order to get the opportunity approved. The more details, the better!
-
-Guidelines:
-Mention all the guidelines like eligibility, format, etc.
-Inter-college team members allowed or not.
-Inter-specialization team members allowed or not.
-The number of questions/ problem statements.
-Duration of the rounds.
-
-Rules:
-Mention the rules of the competition."
+              placeholder="Enter details here"
             ></textarea>
             <div
               className="ce-edit"
@@ -279,10 +285,10 @@ Mention the rules of the competition."
           <div className="ce-form-actions">
             <button
               className="ce-next-button"
-              onClick={handleNextStep}
+              onClick={handleNext}
               disabled={loading}
             >
-              Next
+              {loading ? "Processing..." : "Next"}
             </button>
           </div>
         </div>
@@ -291,4 +297,4 @@ Mention the rules of the competition."
   );
 };
 
-export default CreateEvents;
+export default Update_event;

@@ -1,52 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   createEventApi,
   resetState,
 } from "../../components/store/slices/create_event_Slice";
-import { updateEventApi } from "../../components/store/slices/updateeventSlice";
 
 const Create_Events = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const [showHostPrompt, setShowHostPrompt] = useState(false);
-
-  const isUpdateMode = location.state?.isUpdateMode || false;
-  const existingEventData =
-    location.state?.eventData ||
-    useSelector((state) => state.createEvent.eventData);
-
-  const eventState = useSelector((state) =>
-    isUpdateMode ? state.updateEvent : state.createEvent
-  );
-
-  const { loading, error, success } = eventState;
+  const eventState = useSelector((state) => state.createEvent);
+  const { eventData, imageUrl, loading, error, success } = eventState;
 
   const [formData, setFormData] = useState({
-    participationType: existingEventData?.teamCreationAllowed
-      ? "Team"
-      : "Individual",
-    minTeamSize: existingEventData?.minTeamSize || "",
-    maxTeamSize: existingEventData?.maxTeamSize || "",
-    registrationStartDate: existingEventData?.registerStart
-      ? existingEventData.registerStart.split("T")[0]
-      : "",
-    registrationStartTime: existingEventData?.registerStart
-      ? existingEventData.registerStart.split("T")[1].slice(0, 5)
-      : "",
-    registrationEndDate: existingEventData?.registerEnd
-      ? existingEventData.registerEnd.split("T")[0]
-      : "",
-    registrationEndTime: existingEventData?.registerEnd
-      ? existingEventData.registerEnd.split("T")[1].slice(0, 5)
-      : "",
-    maxRegistrations: existingEventData?.capacityMax || "",
-    eventId: existingEventData?.eventId || null,
+    participationType: eventData.participationType || "",
+    minTeamSize: eventData.minTeamSize || "",
+    maxTeamSize: eventData.maxTeamSize || "",
+    registrationStartDate: eventData.registrationStartDate || "",
+    registrationStartTime: eventData.registrationStartTime || "",
+    registrationEndDate: eventData.registrationEndDate || "",
+    registrationEndTime: eventData.registrationEndTime || "",
+    maxRegistrations: eventData.maxRegistrations || "",
   });
 
+  const [showHostPrompt, setShowHostPrompt] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleInputChange = (e) => {
@@ -57,13 +35,12 @@ const Create_Events = () => {
   const handleNextStep = () => {
     const eventPayload = {
       imageUrl:
-        existingEventData.imageUrl ||
-        "https://webgrowbucket.s3.ap-south-1.amazonaws.com/default",
-      title: existingEventData.opportunityTitle,
-      category: existingEventData.opportunityType,
-      description: existingEventData.aboutOpportunity,
-      location: existingEventData.organization,
-      mode: existingEventData.eventMode.toUpperCase(),
+        imageUrl || "https://webgrowbucket.s3.ap-south-1.amazonaws.com/default",
+      title: eventData.opportunityTitle,
+      category: eventData.opportunityType,
+      description: eventData.aboutOpportunity,
+      location: eventData.organization,
+      mode: eventData.eventMode,
       registerStart:
         formData.registrationStartDate && formData.registrationStartTime
           ? `${formData.registrationStartDate}T${formData.registrationStartTime}:00`
@@ -73,32 +50,21 @@ const Create_Events = () => {
           ? `${formData.registrationEndDate}T${formData.registrationEndTime}:00`
           : null,
       capacityMax: formData.maxRegistrations,
-      festival: existingEventData.festival || null,
+      festival: eventData.festival || null,
       teamCreationAllowed: formData.participationType === "Team",
       maxTeamSize: formData.maxTeamSize,
       minTeamSize: formData.minTeamSize,
-      eventId: formData.eventId,
     };
 
-    if (isUpdateMode) {
-      dispatch(updateEventApi(eventPayload))
-        .then((response) => {
-          if (response.payload) {
-            setShowSuccessModal(true);
-          }
-        })
-        .catch((error) => {
-          console.error("Event update failed", error);
-        });
-    } else {
-      dispatch(createEventApi(eventPayload))
-        .then(() => {
-          setShowSuccessModal(true);
-        })
-        .catch((error) => {
-          console.error("Event creation failed", error);
-        });
-    }
+    console.log("Payload before dispatch:", eventPayload);
+
+    dispatch(createEventApi(eventPayload))
+      .then(() => {
+        setShowSuccessModal(true);
+      })
+      .catch((error) => {
+        console.error("Event creation failed", error);
+      });
   };
 
   const handleResetAndClose = () => {
@@ -106,7 +72,6 @@ const Create_Events = () => {
     setShowSuccessModal(false);
     navigate("/event-manage");
   };
-
   const styles = {
     inputContainer: {
       display: "flex",
@@ -344,7 +309,7 @@ const Create_Events = () => {
               onClick={handleNextStep}
               disabled={loading}
             >
-              {isUpdateMode ? "Update Event" : "Next"}
+              Next
             </button>
           </div>
         </div>
@@ -380,9 +345,7 @@ const Create_Events = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="bg-white p-6 rounded-lg shadow-xl text-center">
               <h3 className="text-lg font-semibold mb-4">
-                {isUpdateMode
-                  ? "Event Updated Successfully!"
-                  : "Event Created Successfully!"}
+                Event Created Successfully!
               </h3>
               <button
                 className="bg-teal-600 text-white px-4 py-2 rounded"

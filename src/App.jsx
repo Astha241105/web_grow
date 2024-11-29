@@ -61,6 +61,8 @@ import {
   QuizCreator,
   HostProfile,
   EventDetail,
+  Update_event,
+  Update_Event_1,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -264,6 +266,15 @@ const router = createBrowserRouter([
   {
     path: "/event-detail",
     element: <EventDetail />,
+  },
+
+  {
+    path: "/update-event",
+    element: <Update_event />,
+  },
+  {
+    path: "/update-event_1",
+    element: <Update_Event_1 />,
   },
 ]);
 

@@ -18,13 +18,8 @@ const Event_Manage = () => {
     dispatch(fetchEvents());
   }, [dispatch]);
 
-  const handleEditClick = () => {
-    navigate("/create-events", {
-      state: {
-        isUpdateMode: true,
-        eventData: existingEventData,
-      },
-    });
+  const handleEdit = () => {
+    navigate("/update-event");
   };
 
   const metrics = [
@@ -128,7 +123,7 @@ const Event_Manage = () => {
               </button>
               <button
                 className="p-1 hover:bg-gray-100 rounded"
-                onClick={handleEditClick}
+                onClick={handleEdit}
               >
                 <img src="Pencil.svg" alt="Edit" />
               </button>
