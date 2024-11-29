@@ -36,7 +36,6 @@ const createEventSlice = createSlice({
     imageUrl: null,
     loading: false,
     error: null,
-
     opportunityType: "",
     visibility: "",
     opportunityTitle: "",

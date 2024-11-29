@@ -61,7 +61,7 @@ const Event_Manage = () => {
     </div>
   );
 
-  const EventCard = ({ id, title, college, tag, date, mode }) => {
+  const EventCard = ({ id, title, college, tag, date, mode, imageUrl }) => {
     const eventDate = new Date(date);
     const formattedDate = eventDate.toLocaleString("en-US", {
       day: "numeric",
@@ -70,7 +70,6 @@ const Event_Manage = () => {
     });
 
     const handleDelete = () => {
-      // Confirm before deleting
       console.log("Event ID to delete:", id);
       const confirmDelete = window.confirm(
         `Are you sure you want to delete the event "${title}"?`
@@ -84,7 +83,17 @@ const Event_Manage = () => {
       <div className="border border-[#000] rounded-lg p-4 mb-4 bg-white">
         <div className="flex items-start justify-between">
           <div className="flex space-x-4">
-            <div className="w-12 h-12 bg-gray-200 rounded"></div>
+            <div className="w-12 h-12 bg-gray-200 rounded overflow-hidden">
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-200"></div>
+              )}
+            </div>
             <div>
               <h3 className="font-semibold">{title}</h3>
               <p className="text-sm text-[#000] font-medium">{college}</p>
