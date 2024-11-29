@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { registerInEvent } from '../components/store/slices/registerforevent'; 
 import { fetchEventDetails } from "../components/store/slices/eventdetails";
 import Teampopup from "./team-pop-up/teampopup";
@@ -8,6 +8,7 @@ import './regi.css';
 
 const Regi = () => {
   const location = useLocation();
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const { eventId } = location.state || {};
 
@@ -56,15 +57,17 @@ const Regi = () => {
       console.log(resultAction);
 
       if (resultAction.success) {
-        console.log("yes");
-        // Fetch event details if registration is successful
-        await dispatch(fetchEventDetails(eventId));
+        console.log("Registration successful");
+        dispatch(fetchEventDetails(eventId));
         console.log('Event details fetched successfully');
-        console.log(data.data.teamCreationAllowed,"yesyes")
       }
     } catch (error) {
       console.error("Registration failed:", error);
     }
+  };
+
+  const handlePopupClick = () => {
+    navigate('/regiteam', { state: { eventId } }); 
   };
 
   return (
@@ -186,8 +189,9 @@ const Regi = () => {
         </button>
       </form>
 
-      {/* Render the team popup based on the event details */}
-      {data.data.teamCreationAllowed && <Teampopup />}
+      {data?.data?.teamCreationAllowed && (
+        <Teampopup handlePopupClick={handlePopupClick} />
+      )}
     </div>
   );
 };
