@@ -64,6 +64,7 @@ import {
   EventDetail,
   Update_event,
   Update_Event_1,
+  Room_allocate,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -88,7 +89,7 @@ const router = createBrowserRouter([
     path: "/part-profile",
     element: (
       <div id="part-profile-container">
-          <ResponsiveNav2 bgColor="#D4E5E4" />
+        <ResponsiveNav2 bgColor="#D4E5E4" />
         <Partprofile />
       </div>
     ),
@@ -107,7 +108,7 @@ const router = createBrowserRouter([
       // <ProtectedRoute>
       <Backgroundhome>
         {localStorage.getItem("authToken") ? (
-          <ResponsiveNav2 bgColor="#FDF8EE"/>
+          <ResponsiveNav2 bgColor="#FDF8EE" />
         ) : (
           <ResponsiveNav />
         )}
@@ -190,11 +191,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/quiz",
-    element: <>
-    {" "}
-    <Navregister />
-    <Quiz />
-  </>
+    element: (
+      <>
+        {" "}
+        <Navregister />
+        <Quiz />
+      </>
+    ),
   },
   {
     path: "/create-account-host",
@@ -282,6 +285,10 @@ const router = createBrowserRouter([
   {
     path: "/update-event_1",
     element: <Update_Event_1 />,
+  },
+  {
+    path: "/room-allocate",
+    element: <Room_allocate />,
   },
 ]);
 
