@@ -1,0 +1,8 @@
+#team-ask-pop-up{
+    height:343px;
+    max-width:343px;
+    width:90%;
+    background-color: aqua;
+    border-radius:10px;
+    z-index:10;
+}

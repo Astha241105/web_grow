@@ -10,7 +10,7 @@ export const fetchEventDetails = createAsyncThunk(
         throw new Error('Authorization token not found.');
       }
       const response = await fetch(
-        `http://35.154.224.49:8080/api/v1/participant/events/details/${eventId}`,
+        `http://www.arthkambhoj.me.:8080/api/v1/participant/events/details/${eventId}`,
       {
         method: 'GET',
         headers: {
@@ -24,6 +24,7 @@ export const fetchEventDetails = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');

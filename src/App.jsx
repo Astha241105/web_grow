@@ -45,13 +45,12 @@ import Footer from "./component-2/footer/footer.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
 import ResponsiveNav from "./component-2/condnav/condnav.jsx";
 import ResponsiveNav2 from "./component-2/condnavpart/contnavpart.jsx";
+import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
-import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
-import Oneeventdetail from "./browse-by-category/oneeventdetail/oneeventdetail.jsx";
 import "./index.css";
-import "./App.css"
+import "./App.css";
 import {
   CreateEvents,
   Create_Events,
@@ -60,6 +59,7 @@ import {
   Event_Manage,
   QuizCreator,
   HostProfile,
+  EventDetail,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -98,7 +98,11 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        {localStorage.getItem("authToken") ? <ResponsiveNav2 /> : <ResponsiveNav />}
+        {localStorage.getItem("authToken") ? (
+          <ResponsiveNav2 />
+        ) : (
+          <ResponsiveNav />
+        )}
         <Des />
         <Down />
         <Browsebycategory />
@@ -149,7 +153,7 @@ const router = createBrowserRouter([
       <>
         {" "}
         <Navregister />
-        <Teampage />
+        <Creatingteam />
       </>
     ),
   },
@@ -157,10 +161,10 @@ const router = createBrowserRouter([
     path: "/event-type",
     element: (
       <>
-        {" "}
-        <Nav />
-        <Filter />
-        <Oneeventdetail />
+        <div className="event-type-page">
+          <Nav />
+          <Filter />
+        </div>
       </>
     ),
   },
@@ -246,6 +250,11 @@ const router = createBrowserRouter([
   {
     path: "/host-profile",
     element: <HostProfile />,
+  },
+
+  {
+    path: "/event-detail",
+    element: <EventDetail />,
   },
 ]);
 

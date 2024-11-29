@@ -1,4 +1,4 @@
-// action.js
+
 import { fetchParticipantProfile } from './store/slices/participantprofile';
 import { fetchRegisteredEvents } from './store/slices/registeredevent';
 import { fetchFavoriteEvents } from './store/slices/favouriteevents';
