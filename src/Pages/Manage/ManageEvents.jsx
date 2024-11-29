@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   fetchEvents,
   deleteEvent,
@@ -8,6 +9,7 @@ import NavHost from "../Host/NavHost";
 
 const Event_Manage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { events, loading, error, deleteStatus, deleteError } = useSelector(
     (state) => state.eventmanage
   );
@@ -15,6 +17,15 @@ const Event_Manage = () => {
   useEffect(() => {
     dispatch(fetchEvents());
   }, [dispatch]);
+
+  const handleEditClick = () => {
+    navigate("/create-events", {
+      state: {
+        isUpdateMode: true,
+        eventData: existingEventData,
+      },
+    });
+  };
 
   const metrics = [
     {
@@ -61,7 +72,7 @@ const Event_Manage = () => {
     </div>
   );
 
-  const EventCard = ({ id, title, college, tag, date, mode }) => {
+  const EventCard = ({ id, title, college, tag, date, mode, imageUrl }) => {
     const eventDate = new Date(date);
     const formattedDate = eventDate.toLocaleString("en-US", {
       day: "numeric",
@@ -70,7 +81,6 @@ const Event_Manage = () => {
     });
 
     const handleDelete = () => {
-      // Confirm before deleting
       console.log("Event ID to delete:", id);
       const confirmDelete = window.confirm(
         `Are you sure you want to delete the event "${title}"?`
@@ -84,7 +94,17 @@ const Event_Manage = () => {
       <div className="border border-[#000] rounded-lg p-4 mb-4 bg-white">
         <div className="flex items-start justify-between">
           <div className="flex space-x-4">
-            <div className="w-12 h-12 bg-gray-200 rounded"></div>
+            <div className="w-12 h-12 bg-gray-200 rounded overflow-hidden">
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-200"></div>
+              )}
+            </div>
             <div>
               <h3 className="font-semibold">{title}</h3>
               <p className="text-sm text-[#000] font-medium">{college}</p>
@@ -106,7 +126,10 @@ const Event_Manage = () => {
               <button className="p-1 hover:bg-gray-100 rounded">
                 <img src="door.svg" alt="Edit" />
               </button>
-              <button className="p-1 hover:bg-gray-100 rounded">
+              <button
+                className="p-1 hover:bg-gray-100 rounded"
+                onClick={handleEditClick}
+              >
                 <img src="Pencil.svg" alt="Edit" />
               </button>
               <button

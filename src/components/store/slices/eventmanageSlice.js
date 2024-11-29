@@ -21,10 +21,11 @@ export const fetchEvents = createAsyncThunk(
         title: item.data.title,
         college: item.data.location,
         tag: item.data.eventType,
-        date: item.data.registerStart,
+        date: item.data.lastUpdate,
         mode: item.data.mode,
         impressions: item.data.impressions || 0,
         registrations: item.data.registrations || 0,
+        imageUrl: item.data.imageUrl || "",
       }));
     } catch (error) {
       return rejectWithValue(error.message);
