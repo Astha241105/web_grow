@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { updateEventApi } from "../../components/store/slices/updateeventSlice";
 
 const Update_Event_1 = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { eventData: basicDetails } = useSelector((state) => state.updateEvent);
+  const [eventId, setEventId] = useState(() => location.state?.eventId);
+
+  useEffect(() => {
+    if (!eventId) {
+      console.error("No event ID provided");
+    }
+  }, [eventId]);
 
   const [formData, setFormData] = useState({
     participationType: "",
@@ -39,12 +48,13 @@ const Update_Event_1 = () => {
     }
 
     const completeEventData = {
+      eventId,
       ...basicDetails,
       participationType: formData.participationType,
       minTeamSize: formData.minTeamSize || 1,
       maxTeamSize: formData.maxTeamSize || 1,
-      registerStart: `${formData.registrationStartDate} ${formData.registrationStartTime}`,
-      registerEnd: `${formData.registrationEndDate} ${formData.registrationEndTime}`,
+      registerStart: `${formData.registrationStartDate}T${formData.registrationStartTime}:00`, // Add seconds and use 'T' separator
+      registerEnd: `${formData.registrationEndDate}T${formData.registrationStartTime}:00`, // Same for end date
       maxRegistrations: formData.maxRegistrations,
     };
 
