@@ -45,9 +45,9 @@ import Footer from "./component-2/footer/footer.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
 import ResponsiveNav from "./component-2/condnav/condnav.jsx";
 import ResponsiveNav2 from "./component-2/condnavpart/contnavpart.jsx";
+import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
-import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
 import "./index.css";
 import "./App.css";
@@ -153,7 +153,7 @@ const router = createBrowserRouter([
       <>
         {" "}
         <Navregister />
-        <Teampage />
+        <Creatingteam />
       </>
     ),
   },
