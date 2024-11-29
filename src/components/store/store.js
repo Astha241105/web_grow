@@ -23,6 +23,8 @@ import teamRequestReducer from "./slices/joinrequest";
 import updateEventReducer from "./slices/updateeventSlice";
 import notificationsReducer from './slices/notificationpart';
 import joinRequestResponseReducer from './slices/requestresponse'; 
+import quizReducer from './slices/quizpart';
+import quizStatusReducer from './slices/quizprogress';
 
 
 export const store = configureStore({
@@ -49,7 +51,10 @@ export const store = configureStore({
     teamRequest: teamRequestReducer,
     updateEvent: updateEventReducer,
     notifications: notificationsReducer,
-    joinrequestResponse: joinRequestResponseReducer, 
+    joinrequestResponse: joinRequestResponseReducer,
+    quiz: quizReducer,
+    quizStatus: quizStatusReducer,
+     
   },
 });
 
