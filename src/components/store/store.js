@@ -25,6 +25,8 @@ import notificationsReducer from './slices/notificationpart';
 import joinRequestResponseReducer from './slices/requestresponse'; 
 import quizReducer from './slices/quizpart';
 import quizStatusReducer from './slices/quizprogress';
+import quizfinalReducer from './slices/finish';
+import quizresultsReducer from "./slices/quizresult2"
 
 
 export const store = configureStore({
@@ -54,6 +56,8 @@ export const store = configureStore({
     joinrequestResponse: joinRequestResponseReducer,
     quiz: quizReducer,
     quizStatus: quizStatusReducer,
+    quizfinal: quizfinalReducer,
+    quizresults: quizresultsReducer
      
   },
 });

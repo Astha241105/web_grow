@@ -2,14 +2,60 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchQuizQuestions = createAsyncThunk(
   'quiz/fetchQuizQuestions',
-  async ({ eventId, page }, { rejectWithValue }) => {
+  async ({ quizId, page }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://35.154.224.49:8080/api/participant/quiz/${eventId}/questions/${page}`);
+        const authToken=localStorage.getItem("authToken")
+      const response = await fetch(`http://35.154.224.49:8080/api/participant/quiz/${quizId}/questions/${page}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        
+      });
       if (!response.ok) {
         throw new Error('Failed to fetch quiz questions');
       }
       const data = await response.json();
-      return data; 
+      console.log(data)
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message || 'Something went wrong');
+    }
+  }
+);
+
+export const submitQuizAnswer = createAsyncThunk(
+  'quiz/submitQuizAnswer',
+  async ({ quizId, questionId, answer ,selectedOption}, { rejectWithValue }) => {
+    try {
+        console.log(quizId)
+        console.log(questionId)
+        console.log(answer)
+        console.log(selectedOption)
+      const authToken=localStorage.getItem("authToken")
+      console.log(authToken)
+      const response = await fetch(
+        `http://35.154.224.49:8080/api/participant/quiz/${quizId}/questions/${questionId}/answer`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({
+            quizId,
+            questionId,
+            selectedOption,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error('Failed to submit answer');
+      }
+      const responseText = await response.text();
+      console.log('Response Text:', responseText);
+
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
     }
@@ -19,13 +65,13 @@ export const fetchQuizQuestions = createAsyncThunk(
 const quizSlice = createSlice({
   name: 'quiz',
   initialState: {
-    questions: [],
+    question: null,
     loading: false,
     error: null,
   },
   reducers: {
     resetQuizState: (state) => {
-      state.questions = [];
+      state.question = null;
       state.loading = false;
       state.error = null;
     },
@@ -38,9 +84,20 @@ const quizSlice = createSlice({
       })
       .addCase(fetchQuizQuestions.fulfilled, (state, action) => {
         state.loading = false;
-        state.questions = action.payload;
+        state.question = action.payload;
       })
       .addCase(fetchQuizQuestions.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(submitQuizAnswer.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(submitQuizAnswer.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(submitQuizAnswer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

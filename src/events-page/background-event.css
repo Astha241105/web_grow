@@ -9,16 +9,11 @@
     background-color:#D4E5E4;
     z-index:1;
 }
-#images-for-notify-and-profile{
-    position: relative;
-    left:calc(100% - 200px);
-    top:30px;
-    display:flex;
-    width:92px;
-    height:50px;
-    justify-content: space-between;
-    align-items:center;
+#background-event-all-details{
+    width:60vw;
+    min-height:100vh; 
 }
-#images-for-notify-and-profile1{
-    margin-top:10px;
+#background-event-all-details-participant{
+    width:40vw;
+    min-height:100vh;  
 }

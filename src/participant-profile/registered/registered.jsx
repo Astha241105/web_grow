@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchRegisteredEvents } from '../../components/store/slices/registeredevent';
 import { fetchQuizStatus } from '../../components/store/slices/quizprogress';
 import './registered.css';
 
 const Registered = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+
   const { events, loading, error } = useSelector((state) => state.registeredEvents);
   const { status, loading: statusLoading, error: statusError } = useSelector((state) => state.quizStatus);
 
@@ -14,7 +17,14 @@ const Registered = () => {
   }, [dispatch]);
 
   const handleViewDetails = (quizId) => {
-    dispatch(fetchQuizStatus({ quizId })); 
+    dispatch(fetchQuizStatus({ quizId })).then((result) => {
+      if (result.payload) {
+        const { totalQuestions } = result.payload;
+        navigate('/quiz', {
+          state: { totalQuestions,quizId}, 
+        });
+      }
+    });
   };
 
   if (loading) {
@@ -58,15 +68,8 @@ const Registered = () => {
       </div>
       {statusLoading && <div>Loading quiz status...</div>}
       {statusError && <div>Error fetching quiz status: {statusError}</div>}
-      {status && (
-        <div className="quiz-status">
-          <h3>Quiz Status</h3>
-          <p>Status: {status.status}</p> 
-          <p>Quiz Title: {status.quizTitle}</p>
-        </div>
-      )}
     </div>
   );
 };
 
-export default Registered; 
+export default Registered;
