@@ -1,15 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchRegisteredEvents } from '../../components/store/slices/registeredevent';
+import { fetchQuizStatus } from '../../components/store/slices/quizprogress';
 import './registered.css';
 
 const Registered = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+
   const { events, loading, error } = useSelector((state) => state.registeredEvents);
+  const { status, loading: statusLoading, error: statusError } = useSelector((state) => state.quizStatus);
 
   useEffect(() => {
-    dispatch(fetchRegisteredEvents()); // Fetch registered events when component mounts
+    dispatch(fetchRegisteredEvents());
   }, [dispatch]);
+
+  const handleViewDetails = (quizId) => {
+    dispatch(fetchQuizStatus({ quizId })).then((result) => {
+      if (result.payload) {
+        const { totalQuestions } = result.payload;
+        navigate('/quiz', {
+          state: { totalQuestions,quizId}, 
+        });
+      }
+    });
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -29,18 +45,29 @@ const Registered = () => {
           events.map((event) => (
             <div key={event.id} className="registered-event-card">
               <div className="registered-event-card-info">
-                <img className="registered-event-card-info-image"src={event.imageUrl}></img>
+                <img
+                  className="registered-event-card-info-image"
+                  src={event.imageUrl}
+                  alt={`${event.title} Thumbnail`}
+                />
                 <div className="registered-event-card-info-details">
                   <div className="registered-event-card-info-title">{event.title}</div>
                   <div className="registered-event-card-info-category">{event.category}</div>
                   <div className="registered-event-card-info-mode">{event.mode}</div>
                 </div>
               </div>
-              <button className="registered-event-card-info-view-more">View Details</button>
+              <button
+                className="registered-event-card-info-view-more"
+                onClick={() => handleViewDetails(event.id)} 
+              >
+                View Details
+              </button>
             </div>
           ))
         )}
       </div>
+      {statusLoading && <div>Loading quiz status...</div>}
+      {statusError && <div>Error fetching quiz status: {statusError}</div>}
     </div>
   );
 };

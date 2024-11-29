@@ -22,29 +22,29 @@ const Watchlist = () => {
   return (
     <div id="part-profile-watchlist">
       <div id="part-profile-watchlist-head">Watchlist</div>
-      <div id="watchlist-cards-container">
+      <div id="registered-events-cards">
         {favoriteEvents?.data?.map((event) => (
-          <div key={event.id} className="watchlist-card">
-            <img src={event.imageUrl} alt={event.title} className="watchlist-card-image" />
-            <div className="watchlist-card-details">
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <p>
-                <strong>Category:</strong> {event.category}
-              </p>
-              <p>
-                <strong>Location:</strong> {event.location}
-              </p>
-              <p>
-                <strong>Time:</strong> {new Date(event.startTime).toLocaleString()} -{' '}
-                {new Date(event.endTime).toLocaleString()}
-              </p>
-              <p>
-                <strong>Mode:</strong> {event.mode}
-              </p>
+            <div key={event.id} className="registered-event-card">
+              <div className="registered-event-card-info">
+                <img
+                  className="registered-event-card-info-image"
+                  src={event.imageUrl}
+                  alt={`${event.title} Thumbnail`}
+                />
+                <div className="registered-event-card-info-details">
+                  <div className="registered-event-card-info-title">{event.title}</div>
+                  <div className="registered-event-card-info-category">{event.category}</div>
+                  <div className="registered-event-card-info-mode">{event.mode}</div>
+                </div>
+              </div>
+              <button
+                className="registered-event-card-info-view-more"
+                onClick={() => handleViewDetails(event.id)} 
+              >
+                View Details
+              </button>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

@@ -50,6 +50,7 @@ import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
 import Quiz from "./quiz/quiz.jsx";
+import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
 import "./index.css";
 import "./App.css";
 import {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/leader",
+    element: <Leaderboard />,
   },
   {
     path: "/part-profile",
@@ -123,9 +128,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/event",
-    element: (
+    element: (<div>
+      <ResponsiveNav2 bgColor="#D4E5E4"/>
       <BackgroundEvent>
-        <div id="event-and-part">
+       
+        {/* <div id="event-and-part">
           <div id="event-and-nav">
             <Eventname />
             <NavEvent />
@@ -137,8 +144,8 @@ const router = createBrowserRouter([
           <Dates />
           <EventDetails />
           <Organizer />
-        </Details>
-      </BackgroundEvent>
+        </Details> */}
+      </BackgroundEvent></div>
     ),
   },
   {
