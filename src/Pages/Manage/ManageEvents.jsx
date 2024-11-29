@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   fetchEvents,
   deleteEvent,
@@ -8,6 +9,7 @@ import NavHost from "../Host/NavHost";
 
 const Event_Manage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { events, loading, error, deleteStatus, deleteError } = useSelector(
     (state) => state.eventmanage
   );
@@ -15,6 +17,15 @@ const Event_Manage = () => {
   useEffect(() => {
     dispatch(fetchEvents());
   }, [dispatch]);
+
+  const handleEditClick = () => {
+    navigate("/create-events", {
+      state: {
+        isUpdateMode: true,
+        eventData: existingEventData,
+      },
+    });
+  };
 
   const metrics = [
     {
@@ -115,7 +126,10 @@ const Event_Manage = () => {
               <button className="p-1 hover:bg-gray-100 rounded">
                 <img src="door.svg" alt="Edit" />
               </button>
-              <button className="p-1 hover:bg-gray-100 rounded">
+              <button
+                className="p-1 hover:bg-gray-100 rounded"
+                onClick={handleEditClick}
+              >
                 <img src="Pencil.svg" alt="Edit" />
               </button>
               <button
