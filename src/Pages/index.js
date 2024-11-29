@@ -8,3 +8,4 @@ export { default as QuizCreator } from "./Quiz/Quiz.jsx";
 export { default as EventDetail } from "./CreateEvents/EventDetail.jsx";
 export { default as Update_event } from "./UpdateEvent/UpdateEvent.jsx";
 export { default as Update_Event_1 } from "./UpdateEvent/Update_Event_1.jsx";
+export { default as Room_allocate } from "./Seat_Allocation/Seat_Allocation.jsx";
