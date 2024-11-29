@@ -1,0 +1,6 @@
+.left-part {
+  height: 2935px;
+  position: absolute;
+  flex-shrink: 0;
+  background: #d4e5e4;
+}
