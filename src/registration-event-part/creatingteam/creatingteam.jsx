@@ -45,6 +45,7 @@ const Creatingteam = () => {
     }
 
     const teamData = { teamName, public: publicTeam };
+    console.log(teamData)
     dispatch(createTeam({ eventId, teamData }))
       .unwrap()
       .then((response) => {

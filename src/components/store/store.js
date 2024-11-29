@@ -20,6 +20,9 @@ import addToFavoritesReducer from "./slices/addfavourite";
 import teamsReducer from './slices/listofteams';
 import createTeamReducer from './slices/creatingteampart';
 import teamRequestReducer from './slices/joinrequest';
+import notificationsReducer from './slices/notificationpart';
+import joinRequestResponseReducer from './slices/requestresponse'; 
+
 
 export const store = configureStore({
   reducer: {
@@ -43,6 +46,8 @@ export const store = configureStore({
     teams: teamsReducer, 
     createTeam: createTeamReducer,
     teamRequest: teamRequestReducer,
+    notifications: notificationsReducer,
+    joinrequestResponse: joinRequestResponseReducer, 
   },
 });
 
