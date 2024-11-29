@@ -1,41 +1,30 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  uploadImage,
-  setBasicDetails,
-} from "../../store/slices/create_event_Slice";
+  uploadEventImage,
+  setEventData,
+} from "../../components/store/slices/create_event_Slice";
 import "./CreateEvents.css";
 
 const CreateEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {
-    imageUrl = "",
-    opportunityType,
-    visibility,
-    opportunityTitle,
-    organization,
-    websiteUrl,
-    festival,
-    eventMode,
-    category,
-    skills,
-    aboutOpportunity,
-  } = useSelector((state) => state.createEvent || {});
+  const existingEventData = useSelector((state) => state.createEvent.eventData);
+  const imageUrl = useSelector((state) => state.createEvent.imageUrl);
+  const loading = useSelector((state) => state.createEvent.loading);
+  const error = useSelector((state) => state.createEvent.error);
 
   const [formData, setFormData] = useState({
-    opportunityType,
-    visibility,
-    opportunityTitle,
-    organization,
-    websiteUrl: websiteUrl || "https://",
-    festival,
-    eventMode,
-    category,
-    skills,
-    aboutOpportunity,
+    opportunityType: existingEventData.opportunityType || "",
+    visibility: existingEventData.visibility || "",
+    opportunityTitle: existingEventData.opportunityTitle || "",
+    organization: existingEventData.organization || "",
+    websiteUrl: existingEventData.websiteUrl || "https://",
+    festival: existingEventData.festival || "",
+    eventMode: existingEventData.eventMode || "",
+    aboutOpportunity: existingEventData.aboutOpportunity || "",
   });
 
   const urlInputRef = useRef(null);
@@ -51,7 +40,7 @@ const CreateEvents = () => {
     const file = e.target.files[0];
     if (file) {
       try {
-        await dispatch(uploadImage(file)).unwrap();
+        await dispatch(uploadEventImage(file)).unwrap();
       } catch (error) {
         console.error("Image upload failed", error);
       }
@@ -62,9 +51,21 @@ const CreateEvents = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  const [isEditable, setIsEditable] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditable(true);
+  };
 
   const handleNextStep = () => {
-    dispatch(setBasicDetails(formData));
+    console.log("Final formData before dispatch:", formData);
+    dispatch(
+      setEventData({
+        ...formData,
+        imageUrl: imageUrl || null,
+      })
+    );
+
     navigate("/create-event1");
   };
 
@@ -103,10 +104,16 @@ const CreateEvents = () => {
                 name="opportunityLogo"
                 onChange={handleImageUpload}
                 accept="image/*"
+                disabled={loading}
               />
               <div className="logo-placeholder">
-                {imageUrl ? "Logo Uploaded" : "Upload Logo"}
+                {loading
+                  ? "Uploading..."
+                  : imageUrl
+                  ? "Logo Uploaded"
+                  : "Upload Logo"}
               </div>
+              {error && <div className="text-red-500">{error}</div>}
             </div>
           </div>
 
@@ -240,52 +247,41 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Categories</label>
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleInputChange}
-            >
-              <option value="">Choose category</option>
-            </select>
-          </div>
-
-          <div className="ce-form-group">
-            <label>Skill to be Accessed</label>
-            <select
-              name="skills"
-              value={formData.skills}
-              onChange={handleInputChange}
-            >
-              <option value="">Search Skills</option>
-            </select>
-          </div>
-
-          <div className="ce-form-group">
             <label>About Opportunity*</label>
-            <div className="ce-guidelines">
-              <div className="ce-edit">
-                <img src="Edit.svg"></img>Edit
-              </div>
-              <p>Guidelines:</p>
-              <ul>
-                <li>
-                  Mention all the guidelines like eligibility, format, etc.
-                </li>
-                <li>Inter-college team members allowed or not.</li>
-                <li>Inter-specialization team members allowed or not.</li>
-                <li>The number of questions/problem statements.</li>
-                <li>Duration of the rounds.</li>
-              </ul>
-              <p>Rules:</p>
-              <ul>
-                <li>Mention the rules of the competition.</li>
-              </ul>
+            <textarea
+              className="ce-guidelines"
+              name="aboutOpportunity"
+              disabled={!isEditable}
+              value={formData.aboutOpportunity}
+              onChange={handleInputChange}
+              placeholder="This field helps you to mention the details of the opportunity you are listing. It is better to include Rules, Eligibility, Process, Format, etc., in order to get the opportunity approved. The more details, the better!
+
+Guidelines:
+Mention all the guidelines like eligibility, format, etc.
+Inter-college team members allowed or not.
+Inter-specialization team members allowed or not.
+The number of questions/ problem statements.
+Duration of the rounds.
+
+Rules:
+Mention the rules of the competition."
+            ></textarea>
+            <div
+              className="ce-edit"
+              onClick={() => setIsEditable((prev) => !prev)}
+              style={{ cursor: "pointer" }}
+            >
+              <img src="Edit.svg" alt="Edit Icon" />
+              {isEditable ? "Lock" : "Edit"}
             </div>
           </div>
 
           <div className="ce-form-actions">
-            <button className="ce-next-button" onClick={handleNextStep}>
+            <button
+              className="ce-next-button"
+              onClick={handleNextStep}
+              disabled={loading}
+            >
               Next
             </button>
           </div>
