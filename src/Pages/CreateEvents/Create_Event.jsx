@@ -24,12 +24,29 @@ const Create_Events = () => {
     maxRegistrations: eventData.maxRegistrations || "",
   });
 
+  const [hostSelected, setHostSelected] = useState(false);
   const [showHostPrompt, setShowHostPrompt] = useState(false);
+  const [showAddRoomsModal, setShowAddRoomsModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const handleHostPromptResponse = (response) => {
+    setHostSelected(response);
+    setShowHostPrompt(false);
+    if (eventData.eventMode === "Offline") {
+      setShowAddRoomsModal(true);
+    } else {
+      setShowSuccessModal(true);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddRoomsModalResponse = (response) => {
+    setShowAddRoomsModal(false);
+    setShowSuccessModal(true);
   };
 
   const handleNextStep = () => {
@@ -60,7 +77,7 @@ const Create_Events = () => {
 
     dispatch(createEventApi(eventPayload))
       .then(() => {
-        setShowSuccessModal(true);
+        setShowHostPrompt(true);
       })
       .catch((error) => {
         console.error("Event creation failed", error);
@@ -335,6 +352,31 @@ const Create_Events = () => {
                   className="hover:bg-gray-100"
                 >
                   No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showAddRoomsModal && (
+          <div style={styles.modal}>
+            <div style={styles.backdrop}></div>
+            <div style={styles.modalContent}>
+              <h3 className="text-lg font-semibold mb-4">Add Rooms</h3>
+              <div style={styles.modalButtons}>
+                <button
+                  style={styles.modalButton}
+                  onClick={() => handleAddRoomsModalResponse(true)}
+                  className="bg-teal-600 text-white hover:bg-teal-700"
+                >
+                  Save
+                </button>
+                <button
+                  style={styles.modalButton}
+                  onClick={() => handleAddRoomsModalResponse(false)}
+                  className="hover:bg-gray-100"
+                >
+                  Cancel
                 </button>
               </div>
             </div>
