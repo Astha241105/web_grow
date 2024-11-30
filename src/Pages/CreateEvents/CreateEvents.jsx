@@ -254,17 +254,7 @@ const CreateEvents = () => {
               disabled={!isEditable}
               value={formData.aboutOpportunity}
               onChange={handleInputChange}
-              placeholder="This field helps you to mention the details of the opportunity you are listing. It is better to include Rules, Eligibility, Process, Format, etc., in order to get the opportunity approved. The more details, the better!
-
-Guidelines:
-Mention all the guidelines like eligibility, format, etc.
-Inter-college team members allowed or not.
-Inter-specialization team members allowed or not.
-The number of questions/ problem statements.
-Duration of the rounds.
-
-Rules:
-Mention the rules of the competition."
+              placeholder="Write description here"
             ></textarea>
             <div
               className="ce-edit"

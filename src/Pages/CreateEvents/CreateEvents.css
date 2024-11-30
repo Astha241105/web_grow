@@ -246,7 +246,7 @@ textarea {
   float: right;
   margin: 15px;
   position: relative;
-    top: -487px;
+  top: -487px;
 }
 
 /* .hr1 {
@@ -468,4 +468,20 @@ textarea:focus {
 
 .logo-upload-input {
   display: none;
+}
+
+.option-button {
+  border: 1px solid transparent;
+  padding: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.option-button.selected {
+  border: 2px solid blue;
+  color: black;
+}
+.option-button.active {
+  border: 2px solid blue;
+  color: black;
 }

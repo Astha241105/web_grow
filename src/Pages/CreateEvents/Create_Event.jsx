@@ -21,6 +21,7 @@ const Create_Events = () => {
     registrationStartTime: eventData.registrationStartTime || "",
     registrationEndDate: eventData.registrationEndDate || "",
     registrationEndTime: eventData.registrationEndTime || "",
+
     maxRegistrations: eventData.maxRegistrations || "",
   });
 
@@ -65,6 +66,14 @@ const Create_Events = () => {
       registerEnd:
         formData.registrationEndDate && formData.registrationEndTime
           ? `${formData.registrationEndDate}T${formData.registrationEndTime}:00`
+          : null,
+      startTime:
+        formData.EventStartDate && formData.EventStartTime
+          ? `${formData.EventStartDate}T${formData.EventStartTime}:00`
+          : null,
+      endTime:
+        formData.EventEndDate && formData.EventEndTime
+          ? `${formData.EventEndDate}T${formData.EventEndTime}:00`
           : null,
       capacityMax: formData.maxRegistrations,
       festival: eventData.festival || null,
@@ -205,7 +214,9 @@ const Create_Events = () => {
             <label>Participation Type</label>
             <div className="ce-button-group">
               <button
-                className="option-button"
+                className={`option-button ${
+                  formData.participationType === "Individual" ? "selected" : ""
+                }`}
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
@@ -219,7 +230,9 @@ const Create_Events = () => {
                 </div>
               </button>
               <button
-                className="option-button"
+                className={`option-button ${
+                  formData.participationType === "Team" ? "selected" : ""
+                }`}
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
@@ -303,6 +316,57 @@ const Create_Events = () => {
                   type="time"
                   name="registrationEndTime"
                   value={formData.registrationEndTime}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="ce-form-group">
+            <label>Event Start Date and Time</label>
+            <div style={styles.inputContainer}>
+              <div style={styles.inputWrapper}>
+                <label>Date</label>
+                <input
+                  className="ce-placeholder"
+                  type="date"
+                  name="EventStartDate"
+                  value={formData.EventStartDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div style={styles.inputWrapper}>
+                <label>Time</label>
+                <input
+                  className="ce-placeholder"
+                  type="time"
+                  name="EventStartTime"
+                  value={formData.EventStartTime}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="ce-form-group">
+            <label>Event End Date and Time</label>
+            <div style={styles.inputContainer}>
+              <div style={styles.inputWrapper}>
+                <label>Date</label>
+                <input
+                  className="ce-placeholder"
+                  type="date"
+                  name="EventEndDate"
+                  value={formData.EventEndDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div style={styles.inputWrapper}>
+                <label>Time</label>
+                <input
+                  className="ce-placeholder"
+                  type="time"
+                  name="EventEndTime"
+                  value={formData.EventEndTime}
                   onChange={handleInputChange}
                 />
               </div>
