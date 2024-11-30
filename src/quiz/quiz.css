@@ -32,7 +32,6 @@
 }
 #quiz-question-number{
     margin-left:10px;
-    /* position: absolute; */
     font-size:24px ;
     font-weight: 600;
     /* top:196px; */
@@ -83,29 +82,54 @@
   
   #progress-bar {
     height: 100%;
-    background-color: #4caf50; /* Green color for progress */
+    background-color:teal; /* Green color for progress */
     border-radius: 5px;
   }
   
   #quiz-next-button {
-    position:absolute;
-    top:748px;
-    background-color: #4caf50;
+    background-color: teal;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 20px;
+    position:absolute;
+    left:53%;
   }
   
   #quiz-next-button:disabled {
     background-color: #b5b5b5;
     cursor: not-allowed;
   }
-  
+ #quiz-buttons{
+    position:absolute;
+    top:748px;
+    width:100%;
+ } 
   .selected {
-    background-color: #4caf50;
+    background-color: teal;
     color: white;
   }
-  
+  #quiz-previous-button{
+    background-color: #b5b5b5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    position:absolute;
+    left:30%;
+  }
+  #quiz-finish-button{
+    background-color: #b5b5b5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    position:absolute;
+    left:82%;
+  }

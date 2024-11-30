@@ -146,22 +146,18 @@ const EventType = () => {
       <div id="filtered-events">
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event) => (
-            <div
-              key={event.id}
-              className="event-card"
-              onClick={() => handleEventClick(event.id)}
-              style={{ cursor: 'pointer' }}
-            >
-              <img
-                src={event.imageUrl || '/default-event.svg'}
-                alt={event.title}
-                className="event-card-image"
-              />
-              <div className="event-card-details">
-                <h3 className="event-card-title">{event.title}</h3>
-                <p className="event-card-date">
-                  Registration Ends: {new Date(event.registrationEndDate).toLocaleDateString()}
-                </p>
+            <div key={event.id} className="registered-event-card">
+              <div className="registered-event-card-info">
+                <img
+                  className="registered-event-card-info-image"
+                  src={event.imageUrl}
+                  alt={`${event.title} Thumbnail`}
+                />
+                <div className="registered-event-card-info-details">
+                  <div className="registered-event-card-info-title">{event.title}</div>
+                  <div className="registered-event-card-info-category">{event.category}</div>
+                  <div className="registered-event-card-info-mode">{event.mode}</div>
+                </div>
               </div>
             </div>
           ))
