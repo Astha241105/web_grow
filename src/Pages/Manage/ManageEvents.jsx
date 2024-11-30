@@ -82,6 +82,7 @@ const Event_Manage = () => {
     imageUrl,
     ...event
   }) => {
+    const navigate = useNavigate();
     const eventDate = new Date(date);
     const formattedDate = eventDate.toLocaleString("en-US", {
       day: "numeric",
@@ -99,8 +100,40 @@ const Event_Manage = () => {
       }
     };
 
+    const handleCardClick = () => {
+      if (tag === "quiz") {
+        // For quiz events, show a prompt with two options
+        const userChoice = window.confirm(
+          "Do you want to add questions to this quiz? \n\nClick OK to add questions, Cancel to view participants."
+        );
+
+        if (userChoice) {
+          navigate("/create-quiz", {
+            state: {
+              eventId: id,
+            },
+          });
+        } else {
+          navigate("/view-participants", {
+            state: {
+              eventId: id,
+            },
+          });
+        }
+      } else {
+        navigate("/view-participants", {
+          state: {
+            eventId: id,
+          },
+        });
+      }
+    };
+
     return (
-      <div className="border border-[#000] rounded-lg p-4 mb-4 bg-white">
+      <div
+        className="border border-[#000] rounded-lg p-4 mb-4 bg-white"
+        onClick={handleCardClick}
+      >
         <div className="flex items-start justify-between">
           <div className="flex space-x-4">
             <div className="w-12 h-12 bg-gray-200 rounded overflow-hidden">
@@ -137,7 +170,8 @@ const Event_Manage = () => {
               </button>
               <button
                 className="p-1 hover:bg-gray-100 rounded"
-                onClick={() =>
+                onClick={(e) => {
+                  e.stopPropagation();
                   handleEdit({
                     id,
                     title,
@@ -147,14 +181,17 @@ const Event_Manage = () => {
                     mode,
                     imageUrl,
                     ...event,
-                  })
-                }
+                  });
+                }}
               >
                 <img src="Pencil.svg" alt="Edit" />
               </button>
               <button
                 className="p-1 hover:bg-gray-100 rounded"
-                onClick={handleDelete}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete();
+                }}
               >
                 <img src="delete.svg" alt="Delete" />
               </button>

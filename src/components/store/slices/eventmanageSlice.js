@@ -20,7 +20,7 @@ export const fetchEvents = createAsyncThunk(
         id: item.data.id,
         title: item.data.title,
         college: item.data.location,
-        tag: item.data.eventType,
+        tag: item.data.category,
         date: item.data.lastUpdate,
         mode: item.data.mode,
         impressions: item.data.impressions || 0,

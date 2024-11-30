@@ -21,13 +21,14 @@ import teamsReducer from "./slices/listofteams";
 import createTeamReducer from "./slices/creatingteampart";
 import teamRequestReducer from "./slices/joinrequest";
 import updateEventReducer from "./slices/updateeventSlice";
-import notificationsReducer from './slices/notificationpart';
-import joinRequestResponseReducer from './slices/requestresponse'; 
-import quizReducer from './slices/quizpart';
-import quizStatusReducer from './slices/quizprogress';
-import quizfinalReducer from './slices/finish';
-import quizresultsReducer from "./slices/quizresult2"
-
+import quizCreateReducer from "./slices/create_quiz_Slice";
+import notificationsReducer from "./slices/notificationpart";
+import joinRequestResponseReducer from "./slices/requestresponse";
+import quizReducer from "./slices/quizpart";
+import quizStatusReducer from "./slices/quizprogress";
+import quizfinalReducer from "./slices/finish";
+import quizresultsReducer from "./slices/quizresult2";
+import participantsReducer from "./slices/ParticipantList";
 
 export const store = configureStore({
   reducer: {
@@ -54,11 +55,12 @@ export const store = configureStore({
     updateEvent: updateEventReducer,
     notifications: notificationsReducer,
     joinrequestResponse: joinRequestResponseReducer,
+    quizCreate: quizCreateReducer,
     quiz: quizReducer,
     quizStatus: quizStatusReducer,
     quizfinal: quizfinalReducer,
-    quizresults: quizresultsReducer
-     
+    quizresults: quizresultsReducer,
+    participants: participantsReducer,
   },
 });
 

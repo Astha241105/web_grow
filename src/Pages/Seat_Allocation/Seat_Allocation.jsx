@@ -1,71 +1,52 @@
 import React from "react";
+import "./Seat_Allocation.css";
 
-const Room_allocate = () => {
-  const RoomOccupancyCell = ({ status, roomLabel }) => {
-    const cellStyles = `
-      w-12 h-12 flex items-center justify-center
-      rounded-md text-white text-sm font-medium
-      ${status === "empty" ? "bg-gray-300" : "bg-blue-500"}
-    `;
-
-    return <div className={cellStyles}>{roomLabel}</div>;
-  };
+const RoomOccupancy = ({ totalRooms = 20 }) => {
+  const rooms = Array.from(
+    { length: totalRooms },
+    (_, index) => `LT-${index + 1}`
+  );
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl">
-        <div className="flex items-center justify-between mb-6">
-          <button className="flex items-center space-x-2 text-gray-500 hover:text-gray-700">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+    <div className="bg-gray-50 min-h-screen">
+      <div className="flex md:flex-row flex-col items-baseline md:items-center md:justify-between bg-[#D4E5E4] md:bg-white p-6">
+        <button className="text-black font-semibold ">&larr; Back</button>
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">Inspiron</h1>
+          <p className="text-gray-500 text-sm">
+            Ajay Kumar Garg Engineering College, Ghaziabad
+          </p>
+        </div>
+      </div>
+
+      <div className="left-part w-3 md:w-[210px]"> </div>
+      <div className="left-part w-3 md:w-[210px] right-0 "> </div>
+      <div className="flex flex-col items-center justify-center">
+        <h2 className=" text-base md:text-3xl text-medium md:font-semibold mb-6 text-left">
+          See Room Occupancy
+        </h2>
+        <div className="grid grid-cols-7 gap-2 md:gap-6 justify-center">
+          {rooms.map((room, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center p-2 md:p-4 "
             >
-              <path
-                fillRule="evenodd"
-                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span>Back</span>
-          </button>
-          <div className="flex items-center space-x-2">
-            <img
-              src="https://via.placeholder.com/40x40"
-              alt="Inspiron logo"
-              className="w-10 h-10"
-            />
-            <span className="text-gray-500">Inspiron</span>
-            <span className="text-gray-500">
-              Ajay Kumar Garg Engineering College, Ghaziabad
-            </span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-              Inspect
-            </button>
-            <button className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md">
-              Plugins
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
-              Share
-            </button>
-          </div>
+              <img src="door1.svg"></img>
+              <p className="mt-2 text-[11px] md:text-base font-semibold text-gray-700">
+                {room}
+              </p>
+            </div>
+          ))}
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-6">
-          <h2 className="text-lg font-bold mb-4">See Room Occupancy</h2>
-          <div className="grid grid-cols-7 gap-4">
-            {["LT-8", "LT-9", "LT-10", "LT-11", "LT-12", "LT-13", "LT-14"].map(
-              (room, index) => (
-                <RoomOccupancyCell
-                  key={index}
-                  status={index % 2 === 0 ? "empty" : "filled"}
-                  roomLabel={room}
-                />
-              )
-            )}
+        <div className="flex flex-col gap-4 mt-8">
+          <div className="flex items-center">
+            <img src="door1.svg"></img>
+            <span className="ml-2 text-gray-700">Empty Room</span>
+          </div>
+          <div className="flex items-center">
+            <img src="black_door.svg"></img>
+            <span className="ml-2 text-gray-700">Filled Room</span>
           </div>
         </div>
       </div>
@@ -73,4 +54,4 @@ const Room_allocate = () => {
   );
 };
 
-export default Room_allocate;
+export default RoomOccupancy;

@@ -65,6 +65,7 @@ import {
   Update_event,
   Update_Event_1,
   Room_allocate,
+  View_participants,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -128,11 +129,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/event",
-    element: (<div>
-      <ResponsiveNav2 bgColor="#D4E5E4"/>
-      <BackgroundEvent>
-       
-        {/* <div id="event-and-part">
+    element: (
+      <div>
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <BackgroundEvent>
+          {/* <div id="event-and-part">
           <div id="event-and-nav">
             <Eventname />
             <NavEvent />
@@ -145,7 +146,8 @@ const router = createBrowserRouter([
           <EventDetails />
           <Organizer />
         </Details> */}
-      </BackgroundEvent></div>
+        </BackgroundEvent>
+      </div>
     ),
   },
   {
@@ -289,6 +291,10 @@ const router = createBrowserRouter([
   {
     path: "/room-allocate",
     element: <Room_allocate />,
+  },
+  {
+    path: "/view-participants",
+    element: <View_participants />,
   },
 ]);
 

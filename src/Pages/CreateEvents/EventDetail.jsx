@@ -4,46 +4,53 @@ import EventCard from "./components/EventCard";
 import InfoCard from "./components/InfoCard";
 import TimelineCard from "./components/TimelineCard";
 
-const details = () => {
-  const stagesData = {
+const Details = () => {
+  const [stagesData, setStagesData] = useState({
     description:
       "This will be an online quiz on webgrow. You will be given 2 minutes to answer a question.",
     date: "To be announced",
-  };
+  });
 
-  const deadlinesData = {
+  const [deadlinesData] = useState({
     title: "Registration deadline",
     date: "25 Nov 24, 11:00 PM IST",
-  };
+  });
 
-  const contactData = {
+  const [contactData] = useState({
     name: "Anshika Gupta",
     email: "an@gmail.com",
     phone: "+91 9565656565",
-  };
+  });
 
-  const rewardsData = {
+  const [rewardsData, setRewardsData] = useState({
     rewards: [
       { title: "Winner", description: "" },
       { title: "First Runner-up", description: "" },
       { title: "Second Runner-up", description: "" },
     ],
+  });
+
+  const handleEditStages = (updatedData) => {
+    setStagesData(updatedData);
   };
+
+  const handleEditRewards = (updatedData) => {
+    setRewardsData(updatedData);
+  };
+
   return (
     <div className="min-h-screen bg-white ">
       <NavHost className="border-b border-gray-900" />
       <section className="flex flex-col mx-4 gap-5 mb-10">
         <div className="flex flex-col items-center justify-between mt-2 gap-1">
-          <span className=" font-medium text-base md:text-xl">
-            {" "}
-            Host Quiz | General Knowledge{" "}
+          <span className="font-medium text-base md:text-xl">
+            Host Quiz | General Knowledge
           </span>
           <span className="font-medium text-base md:text-xl">
-            {" "}
             Organizers- Anshika Gupta
           </span>
         </div>
-        <div className="flex flex-col md:flex-row gap-5  justify-between items-center  md:mx-12">
+        <div className="flex flex-col md:flex-row gap-5 justify-between items-center md:mx-12">
           <EventCard />
           <div className="flex flex-col gap-3">
             <InfoCard
@@ -67,15 +74,19 @@ const details = () => {
           <TimelineCard
             type="Stages and Timeline"
             data={stagesData}
-            onEdit={true}
+            onEdit={handleEditStages}
           />
           <TimelineCard type="Deadlines" data={deadlinesData} />
           <TimelineCard type="Contact the organiser" data={contactData} />
-          <TimelineCard type="Rewards" data={rewardsData} />
+          <TimelineCard
+            type="Rewards"
+            data={rewardsData}
+            onEdit={handleEditRewards}
+          />
         </section>
       </section>
     </div>
   );
 };
 
-export default details;
+export default Details;
