@@ -1,7 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NavHost = ({ className = "", cameFromProfile = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMyEventsDropdownOpen, setIsMyEventsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleMyEventsDropdown = () => {
+    setIsMyEventsDropdownOpen(!isMyEventsDropdownOpen);
+  };
+
+  const handleCreateEvent = () => {
+    navigate("/Create-Events");
+  };
+
+  const handleManageEvent = () => {
+    navigate("/event-manage");
+  };
 
   return (
     <header
@@ -11,23 +26,35 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
     >
       <div className={`max-w-6xl mx-auto px-4 py-4`}>
         <div className="flex justify-between items-center">
-          <img src="Web.svg" alt="Web logo" />
+          <img src="Icon.svg" alt="Web logo" />
 
           <nav className="hidden md:flex items-center space-x-4">
             <a
               href="#"
               className="text-[#008080] font-semibold flex items-center"
+              onClick={toggleMyEventsDropdown}
             >
               My Events
               <img src="down_arrow.svg" alt="down arrow" className="ml-1" />
             </a>
-            <a
-              href="#"
-              className="text-[#008080] font-semibold flex items-center"
-            >
-              Manage
-              <img src="down_arrow.svg" alt="down arrow" className="ml-1" />
-            </a>
+            {isMyEventsDropdownOpen && (
+              <div className="absolute bg-white shadow-lg p-4 mt-2 w-40">
+                <a
+                  href="#"
+                  className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
+                  onClick={handleCreateEvent}
+                >
+                  Create Event
+                </a>
+                <a
+                  href="#"
+                  className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
+                  onClick={handleManageEvent}
+                >
+                  Manage Events
+                </a>
+              </div>
+            )}
             <a href="#" className="flex items-center">
               <img src="Notify.svg" alt="notifications" />
             </a>
@@ -83,10 +110,29 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
               <a
                 href="#"
                 className="text-[#008080] font-semibold flex items-center"
+                onClick={toggleMyEventsDropdown}
               >
                 <span className="flex-grow">My Events</span>
                 <img src="down_arrow.svg" alt="down arrow" className="ml-1" />
               </a>
+              {isMyEventsDropdownOpen && (
+                <div className="absolute bg-white shadow-lg p-4 mt-2 w-40">
+                  <a
+                    href="#"
+                    className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
+                    onClick={handleCreateEvent}
+                  >
+                    Create Event
+                  </a>
+                  <a
+                    href="#"
+                    className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
+                    onClick={handleManageEvent}
+                  >
+                    Manage Events
+                  </a>
+                </div>
+              )}
               <a
                 href="#"
                 className="text-[#008080] font-semibold flex items-center"
