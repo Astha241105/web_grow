@@ -35,7 +35,7 @@ export const resendHostOtp = createAsyncThunk(
   async (hostDetails, { rejectWithValue }) => {
     console.log(hostDetails)
     try {
-      const response = await fetch("http://webgrowproject-1.onrender.com/api/v1/auth/register", {
+      const response = await fetch("http://www.arthkambhoj.me.:8080/api/v1/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(hostDetails),

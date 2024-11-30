@@ -5,7 +5,7 @@ export const fetchQuizQuestions = createAsyncThunk(
   async ({ quizId, page }, { rejectWithValue }) => {
     try {
         const authToken=localStorage.getItem("authToken")
-      const response = await fetch(`http://webgrowproject-1.onrender.com/api/participant/quiz/${quizId}/questions/${page}`, {
+      const response = await fetch(`http://www.arthkambhoj.me:8080/api/participant/quiz/${quizId}/questions/${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export const submitQuizAnswer = createAsyncThunk(
       const authToken=localStorage.getItem("authToken")
       console.log(authToken)
       const response = await fetch(
-        `http://webgrowproject-1.onrender.com/api/participant/quiz/${quizId}/questions/${questionId}/answer`,
+        `http://www.arthkambhoj.me:8080/api/participant/quiz/${quizId}/questions/${questionId}/answer`,
         {
           method: 'POST',
           headers: {

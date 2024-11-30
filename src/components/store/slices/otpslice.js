@@ -5,7 +5,7 @@ export const validateOtp = createAsyncThunk(
   async ({ email, otp }, { rejectWithValue }) => {
     console.log({ email, otp })
     try {
-      const response = await fetch("http://webgrowproject-1.onrender.com/api/v1/auth/validate", {
+      const response = await fetch("http://www.arthkambhoj.me.:8080/api/v1/auth/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -34,7 +34,7 @@ export const resendOtp = createAsyncThunk(
   async ({ firstname, lastname, email, mobile,password, organization,designation,role  }, { rejectWithValue }) => {
     try {
       console.log({ firstname, lastname, email, mobile,password, organization,designation,role  })
-      const response = await fetch("http://webgrowproject-1.onrender.com/api/v1/auth/register", {
+      const response = await fetch("http://www.arthkambhoj.me.:8080/api/v1/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstname, lastname, email, mobile, password,organization,designation,role  }),

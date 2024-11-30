@@ -11,7 +11,7 @@ export const uploadEventImage = createAsyncThunk(
       if (!token) {
         throw new Error("No authentication token found");
       }
-      const response = await fetch("http://webgrowproject-1.onrender.com/s3/upload", {
+      const response = await fetch("http://www.arthkambhoj.me.:8080/s3/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

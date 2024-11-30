@@ -14,7 +14,7 @@ export const createQuiz = createAsyncThunk(
       };
 
       const response = await fetch(
-        `http://webgrowproject-1.onrender.com/api/host/quiz/${eventId}/add-questions`,
+        `http://www.arthkambhoj.me.:8080/api/host/quiz/${eventId}/add-questions`,
         {
           method: "POST",
           headers: {
