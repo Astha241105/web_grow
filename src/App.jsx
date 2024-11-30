@@ -51,6 +51,7 @@ import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
 import Quiz from "./quiz/quiz.jsx";
 import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
+import NavbarSwitcher from "./component-2/navswitch.jsx";
 import "./index.css";
 import "./App.css";
 import {
@@ -108,11 +109,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        {localStorage.getItem("authToken") ? (
-          <ResponsiveNav2 bgColor="#FDF8EE" />
-        ) : (
-          <ResponsiveNav />
-        )}
+        <NavbarSwitcher />
         <Des />
         <Down />
         <Browsebycategory />

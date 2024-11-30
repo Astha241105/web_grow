@@ -36,11 +36,23 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const result = await dispatch(loginUser(formData)); 
-    if (!result.error) {
-
-      dispatch(fetchAllUserData()); 
-      navigate("/");
+    const result = await dispatch(loginUser(formData));
+    
+    console.log(result, "Login Result");
+    
+    if (result.payload && result.payload.status === "SUCCESS") {
+      const { message } = result.payload;
+      console.log(message)
+      if (message.includes("USER")) {
+        
+        dispatch(fetchAllUserData());
+        navigate("/");
+      } else {
+       
+        navigate("/home-host");
+      }
+    } else {
+      console.error("Authentication failed");
     
     }
   };
