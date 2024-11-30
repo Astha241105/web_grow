@@ -11,7 +11,7 @@ export const createTeam = createAsyncThunk(
       }
 
       const response = await fetch(
-        `http://www.arthkambhoj.me.:8080/api/v1/participant/events/${eventId}/teams/create`,
+        `http://webgrowproject-1.onrender.com/api/v1/participant/events/${eventId}/teams/create`,
         {
           method: 'POST',
           headers: {

@@ -5,7 +5,7 @@ export const fetchEvents = createAsyncThunk(
     const token = localStorage.getItem("authToken");
     try {
       const response = await fetch(
-        "http://www.arthkambhoj.me.:8080/api/events/list",
+        "http://webgrowproject-1.onrender.com/api/events/list",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export const deleteEvent = createAsyncThunk(
     const token = localStorage.getItem("authToken");
     try {
       const response = await fetch(
-        `http://www.arthkambhoj.me.:8080/api/events/delete/${eventId}`,
+        `http://webgrowproject-1.onrender.com/api/events/delete/${eventId}`,
         {
           method: "DELETE",
           headers: {

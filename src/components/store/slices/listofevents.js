@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const BASE_URL = 'http://www.arthkambhoj.me.:8080/api/v1/participant/events';
+const BASE_URL = 'http://webgrowproject-1.onrender.com/api/v1/participant/events';
 
 export const fetchEvents = createAsyncThunk(
   'events/fetchEvents',

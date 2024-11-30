@@ -18,11 +18,11 @@ export const fetchParticipants = createAsyncThunk(
 
       console.log(
         "Sending request to:",
-        `http://www.arthkambhoj.me:8080/api/events/${eventId}/participants`
+        `http://webgrowproject-1.onrender.com/api/events/${eventId}/participants`
       );
 
       const response = await fetch(
-        `http://www.arthkambhoj.me:8080/api/events/${eventId}/participants`,
+        `http://webgrowproject-1.onrender.com/api/events/${eventId}/participants`,
         {
           method: "GET",
           headers: {

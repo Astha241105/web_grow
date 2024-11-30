@@ -5,7 +5,7 @@ export const fetchQuizStatus = createAsyncThunk(
   async ({ quizId }, { rejectWithValue }) => {
     try {
         const token=localStorage.getItem("authToken")
-      const response = await fetch(`http://www.arthkambhoj.me.:8080/api/participant/quiz/${quizId}/progress`, {
+      const response = await fetch(`http://webgrowproject-1.onrender.com/api/participant/quiz/${quizId}/progress`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
