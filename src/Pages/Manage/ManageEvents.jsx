@@ -105,7 +105,7 @@ const Event_Manage = () => {
     };
 
     const handleCardClick = () => {
-      if (tag === "quiz") {
+      if (tag === "quiz" || tag === "Quiz") {
         const userChoice = window.confirm(
           "Do you want to add questions to this quiz? \n\nClick OK to add questions, Cancel to view participants."
         );
