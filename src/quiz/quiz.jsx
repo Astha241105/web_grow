@@ -18,7 +18,6 @@ const Quiz = () => {
 
   const { question, loading, error, finalSubmitStatus } = useSelector((state) => state.quiz);
 
-  // Fetch the question only if the current page is within the total number of questions
   useEffect(() => {
     if (quizId !== null && currentPage <= totalQuestions) {
       dispatch(fetchQuizQuestions({ quizId, page: currentPage }));
@@ -39,7 +38,6 @@ const Quiz = () => {
       }));
     }
 
-    // Move to the next question only if the total questions are not exceeded
     if (attemptedQuestions < totalQuestions) {
       setCurrentPage((prevPage) => prevPage + 1);
       setAttemptedQuestions((prevAttempted) => prevAttempted + 1);
@@ -56,7 +54,7 @@ const Quiz = () => {
 
   const handleFinishQuiz = () => {
     dispatch(submitFinalQuiz({ quizId })).then(() => {
-      // After final submission, navigate to leaderboard
+
       navigate("/leader", { state: { quizId } }); // Pass quizId to the leaderboard route
     });
   };
@@ -104,7 +102,7 @@ const Quiz = () => {
                     <li
                       id="quiz-option-list-options"
                       key={index}
-                      className={selectedOption === option ? "selected" : ""}
+                      className={selectedOption === option ? "selected1" : ""}
                       onClick={() => handleOptionSelect(option)}
                     >
                       {option}

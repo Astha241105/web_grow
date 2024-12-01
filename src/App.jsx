@@ -51,6 +51,7 @@ import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
 import Quiz from "./quiz/quiz.jsx";
 import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
+import NavbarSwitcher from "./component-2/navswitch.jsx";
 import "./index.css";
 import "./App.css";
 import {
@@ -65,6 +66,7 @@ import {
   Update_event,
   Update_Event_1,
   Room_allocate,
+  View_participants,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -107,11 +109,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        {localStorage.getItem("authToken") ? (
-          <ResponsiveNav2 bgColor="#FDF8EE" />
-        ) : (
-          <ResponsiveNav />
-        )}
+        <NavbarSwitcher />
         <Des />
         <Down />
         <Browsebycategory />
@@ -128,11 +126,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/event",
-    element: (<div>
-      <ResponsiveNav2 bgColor="#D4E5E4"/>
-      <BackgroundEvent>
-       
-        {/* <div id="event-and-part">
+    element: (
+      <div>
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <BackgroundEvent>
+          {/* <div id="event-and-part">
           <div id="event-and-nav">
             <Eventname />
             <NavEvent />
@@ -145,7 +143,8 @@ const router = createBrowserRouter([
           <EventDetails />
           <Organizer />
         </Details> */}
-      </BackgroundEvent></div>
+        </BackgroundEvent>
+      </div>
     ),
   },
   {
@@ -289,6 +288,10 @@ const router = createBrowserRouter([
   {
     path: "/room-allocate",
     element: <Room_allocate />,
+  },
+  {
+    path: "/view-participants",
+    element: <View_participants />,
   },
 ]);
 

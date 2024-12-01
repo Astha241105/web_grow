@@ -72,6 +72,10 @@ const Event_Manage = () => {
     </div>
   );
 
+  const handleRoom = () => {
+    navigate("/room-allocate");
+  };
+
   const EventCard = ({
     id,
     title,
@@ -101,8 +105,26 @@ const Event_Manage = () => {
     };
 
     const handleCardClick = () => {
-      if (tag === "quiz") {
-        navigate("/create-quiz", {
+      if (tag === "quiz" || tag === "Quiz") {
+        const userChoice = window.confirm(
+          "Do you want to add questions to this quiz? \n\nClick OK to add questions, Cancel to view participants."
+        );
+
+        if (userChoice) {
+          navigate("/create-quiz", {
+            state: {
+              eventId: id,
+            },
+          });
+        } else {
+          navigate("/view-participants", {
+            state: {
+              eventId: id,
+            },
+          });
+        }
+      } else {
+        navigate("/view-participants", {
           state: {
             eventId: id,
           },
@@ -146,7 +168,13 @@ const Event_Manage = () => {
               </span>
             </div>
             <div className="flex space-x-2">
-              <button className="p-1 hover:bg-gray-100 rounded">
+              <button
+                className="p-1 hover:bg-gray-100 rounded"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRoom();
+                }}
+              >
                 <img src="door.svg" alt="Edit" />
               </button>
               <button

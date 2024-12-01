@@ -21,15 +21,34 @@ const Create_Events = () => {
     registrationStartTime: eventData.registrationStartTime || "",
     registrationEndDate: eventData.registrationEndDate || "",
     registrationEndTime: eventData.registrationEndTime || "",
+
     maxRegistrations: eventData.maxRegistrations || "",
   });
 
+  const [hostSelected, setHostSelected] = useState(false);
   const [showHostPrompt, setShowHostPrompt] = useState(false);
+  const [showAddRoomsModal, setShowAddRoomsModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const handleHostPromptResponse = (response) => {
+    setHostSelected(response);
+    setShowHostPrompt(false);
+    if (eventData.eventMode == "offline") {
+      setShowAddRoomsModal(true);
+      console.log(showSuccessModal);
+    } else {
+      setShowSuccessModal(true);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddRoomsModalResponse = (response) => {
+    setShowAddRoomsModal(false);
+    setShowSuccessModal(true);
   };
 
   const handleNextStep = () => {
@@ -49,6 +68,14 @@ const Create_Events = () => {
         formData.registrationEndDate && formData.registrationEndTime
           ? `${formData.registrationEndDate}T${formData.registrationEndTime}:00`
           : null,
+      startTime:
+        formData.EventStartDate && formData.EventStartTime
+          ? `${formData.EventStartDate}T${formData.EventStartTime}:00`
+          : null,
+      endTime:
+        formData.EventEndDate && formData.EventEndTime
+          ? `${formData.EventEndDate}T${formData.EventEndTime}:00`
+          : null,
       capacityMax: formData.maxRegistrations,
       festival: eventData.festival || null,
       teamCreationAllowed: formData.participationType === "Team",
@@ -60,7 +87,7 @@ const Create_Events = () => {
 
     dispatch(createEventApi(eventPayload))
       .then(() => {
-        setShowSuccessModal(true);
+        setShowHostPrompt(true);
       })
       .catch((error) => {
         console.error("Event creation failed", error);
@@ -188,7 +215,9 @@ const Create_Events = () => {
             <label>Participation Type</label>
             <div className="ce-button-group">
               <button
-                className="option-button"
+                className={`option-button ${
+                  formData.participationType === "Individual" ? "selected" : ""
+                }`}
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
@@ -202,7 +231,9 @@ const Create_Events = () => {
                 </div>
               </button>
               <button
-                className="option-button"
+                className={`option-button ${
+                  formData.participationType === "Team" ? "selected" : ""
+                }`}
                 onClick={() =>
                   setFormData((prev) => ({
                     ...prev,
@@ -218,29 +249,36 @@ const Create_Events = () => {
             </div>
           </div>
           <div className="ce-form-group">
-            <label>Participation as a Team</label>
-            <div style={styles.inputContainer}>
-              <div style={styles.inputWrapper}>
-                <input
-                  className="ce-placeholder"
-                  type="number"
-                  id="numberInput"
-                  placeholder=""
-                />
-                <span style={styles.inputLabel}>Min</span>
-              </div>
-              <div style={styles.inputWrapper}>
-                <input
-                  type="number"
-                  className="ce-placeholder"
-                  id="numberInput"
-                  placeholder=""
-                />
-                <span style={styles.inputLabel}>Max</span>
-              </div>
-            </div>
+            {formData.participationType === "Team" && (
+              <>
+                <label>Participation as a Team</label>
+                <div style={styles.inputContainer}>
+                  <div style={styles.inputWrapper}>
+                    <input
+                      className="ce-placeholder"
+                      type="number"
+                      name="minTeamSize"
+                      value={formData.minTeamSize}
+                      onChange={handleInputChange}
+                      placeholder=""
+                    />
+                    <span style={styles.inputLabel}>Min</span>
+                  </div>
+                  <div style={styles.inputWrapper}>
+                    <input
+                      type="number"
+                      className="ce-placeholder"
+                      name="maxTeamSize"
+                      value={formData.maxTeamSize}
+                      onChange={handleInputChange}
+                      placeholder=""
+                    />
+                    <span style={styles.inputLabel}>Max</span>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-
           <div className="ce-form-group">
             <label>Registration Start Date and Time</label>
             <div style={styles.inputContainer}>
@@ -293,6 +331,57 @@ const Create_Events = () => {
           </div>
 
           <div className="ce-form-group">
+            <label>Event Start Date and Time</label>
+            <div style={styles.inputContainer}>
+              <div style={styles.inputWrapper}>
+                <label>Date</label>
+                <input
+                  className="ce-placeholder"
+                  type="date"
+                  name="EventStartDate"
+                  value={formData.EventStartDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div style={styles.inputWrapper}>
+                <label>Time</label>
+                <input
+                  className="ce-placeholder"
+                  type="time"
+                  name="EventStartTime"
+                  value={formData.EventStartTime}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="ce-form-group">
+            <label>Event End Date and Time</label>
+            <div style={styles.inputContainer}>
+              <div style={styles.inputWrapper}>
+                <label>Date</label>
+                <input
+                  className="ce-placeholder"
+                  type="date"
+                  name="EventEndDate"
+                  value={formData.EventEndDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div style={styles.inputWrapper}>
+                <label>Time</label>
+                <input
+                  className="ce-placeholder"
+                  type="time"
+                  name="EventEndTime"
+                  value={formData.EventEndTime}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="ce-form-group">
             <label>Number of Registrations allowed (optional)</label>
             <input
               type="number"
@@ -335,6 +424,31 @@ const Create_Events = () => {
                   className="hover:bg-gray-100"
                 >
                   No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showAddRoomsModal && (
+          <div style={styles.modal}>
+            <div style={styles.backdrop}></div>
+            <div style={styles.modalContent}>
+              <h3 className="text-lg font-semibold mb-4">Add Rooms</h3>
+              <div style={styles.modalButtons}>
+                <button
+                  style={styles.modalButton}
+                  onClick={() => handleAddRoomsModalResponse(true)}
+                  className="bg-teal-600 text-white hover:bg-teal-700"
+                >
+                  Save
+                </button>
+                <button
+                  style={styles.modalButton}
+                  onClick={() => handleAddRoomsModalResponse(false)}
+                  className="hover:bg-gray-100"
+                >
+                  Cancel
                 </button>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+//hie
 export const uploadEventImage = createAsyncThunk(
   "events/uploadImage",
   async (file, { rejectWithValue }) => {
@@ -18,7 +18,7 @@ export const uploadEventImage = createAsyncThunk(
         throw new Error("No authentication token found");
       }
 
-      const response = await fetch("http://www.arthkambhoj.me:8080/s3/upload", {
+      const response = await fetch("http://www.arthkambhoj.me.:8080/s3/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -120,7 +120,7 @@ export const updateEventApi = createAsyncThunk(
       console.debug("Payload prepared for update API", payload);
 
       const response = await fetch(
-        `http://www.arthkambhoj.me:8080/api/events/update/${eventData.eventId}`,
+        `http://www.arthkambhoj.me.:8080/api/events/update/${eventData.eventId}`,
         {
           method: "PUT",
           headers: {

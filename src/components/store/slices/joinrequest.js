@@ -7,7 +7,7 @@ export const joinTeamRequest = createAsyncThunk(
     try {
         const token = localStorage.getItem('authToken');
       const response = await fetch(
-        `http://www.arthkambhoj.me:8080/api/v1/participant/teams/${teamId}/join/request`,
+        `http://www.arthkambhoj.me.:8080/api/v1/participant/teams/${teamId}/join/request`,
         {
           method: 'POST',
           headers: {

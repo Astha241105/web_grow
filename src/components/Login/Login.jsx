@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, clearError } from "../store/slices/authSlice";
-import { fetchAllUserData } from "../action"; // Centralized function to fetch user data
+import { fetchAllUserData } from "../action";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth); // Remove token from Redux
+  const { loading, error } = useSelector((state) => state.auth); 
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -16,12 +16,12 @@ const Login = () => {
     password: "",
   });
 
-  // Check for token in localStorage and fetch user data
+ 
   useEffect(() => {
-    const token = localStorage.getItem("authToken"); // Get token from localStorage
+    const token = localStorage.getItem("authToken"); 
     if (token) {
-      dispatch(fetchAllUserData()); // Fetch all user data
-      navigate("/"); // Navigate to the home page
+      dispatch(fetchAllUserData()); 
+      navigate("/"); 
     }
     dispatch(clearError());
   }, [dispatch, navigate]);
@@ -33,14 +33,27 @@ const Login = () => {
       [name]: value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await dispatch(loginUser(formData)); // Login action
-    if (!result.error) {
-      // localStorage.setItem("authToken", result.payload.token); // Store token in localStorage
-      dispatch(fetchAllUserData()); // Fetch all user data
-      navigate("/"); // Navigate to the home page
+    
+    const result = await dispatch(loginUser(formData));
+    
+    console.log(result, "Login Result");
+    
+    if (result.payload && result.payload.status === "SUCCESS") {
+      const { message } = result.payload;
+      console.log(message)
+      if (message.includes("USER")) {
+        
+        dispatch(fetchAllUserData());
+        navigate("/");
+      } else {
+       
+        navigate("/home-host");
+      }
+    } else {
+      console.error("Authentication failed");
+    
     }
   };
 

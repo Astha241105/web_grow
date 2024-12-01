@@ -29,6 +29,8 @@ const CreateEvents = () => {
     festival: existingEventData.festival || "",
     eventMode: existingEventData.eventMode || "",
     aboutOpportunity: existingEventData.aboutOpportunity || "",
+    numberOfRooms: 0,
+    roomNames: [],
   });
 
   const urlInputRef = useRef(null);
@@ -281,6 +283,34 @@ const CreateEvents = () => {
             </div>
           </div>
 
+          {formData.eventMode === "offline" && (
+            <div className="ce-form-group">
+              <label>Number of Rooms Available</label>
+              <input
+                type="number"
+                // value={formData.numberOfRooms}
+                onChange={handleNumberOfRoomsChange}
+                placeholder="Enter number of rooms"
+                className="ce-placeholder"
+              />
+
+              {formData.roomNames.map((roomName, index) => (
+                <div key={index} className="ce-form-group">
+                  <label>Room {index + 1} Name</label>
+                  <input
+                    type="text"
+                    value={roomName}
+                    onChange={(e) =>
+                      handleRoomNameChange(index, e.target.value)
+                    }
+                    placeholder={`Enter name for Room ${index + 1}`}
+                    className="ce-placeholder"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
           <div className="ce-form-group">
             <label>About Opportunity*</label>
             <textarea
@@ -289,17 +319,7 @@ const CreateEvents = () => {
               disabled={!isEditable}
               value={formData.aboutOpportunity}
               onChange={handleInputChange}
-              placeholder="This field helps you to mention the details of the opportunity you are listing. It is better to include Rules, Eligibility, Process, Format, etc., in order to get the opportunity approved. The more details, the better!
-
-Guidelines:
-Mention all the guidelines like eligibility, format, etc.
-Inter-college team members allowed or not.
-Inter-specialization team members allowed or not.
-The number of questions/ problem statements.
-Duration of the rounds.
-
-Rules:
-Mention the rules of the competition."
+              placeholder="Write description here"
             ></textarea>
             <div
               className="ce-edit"

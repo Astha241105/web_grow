@@ -14,7 +14,7 @@ export const createQuiz = createAsyncThunk(
       };
 
       const response = await fetch(
-        `http://35.154.224.49:8080/api/host/quiz/${eventId}/add-questions`,
+        `http://www.arthkambhoj.me.:8080/api/host/quiz/${eventId}/add-questions`,
         {
           method: "POST",
           headers: {

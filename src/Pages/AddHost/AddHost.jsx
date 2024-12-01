@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import NavHost from "../Host/NavHost";
-// import { Search } from "lucide-react";
 
 const TeamManagement = () => {
   const [activeTab, setActiveTab] = useState("connections");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // List of existing connections
   const existingConnections = [
     {
       id: 1,
@@ -31,7 +29,6 @@ const TeamManagement = () => {
     },
   ];
 
-  // List of potential connections
   const connections = [
     {
       id: 1,
@@ -110,7 +107,6 @@ const TeamManagement = () => {
         </div>
 
         <div className="relative mb-8">
-          {/* Search bar container with icon */}
           <div className="relative">
             <img
               src="search-icon.svg"

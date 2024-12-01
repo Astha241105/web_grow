@@ -7,7 +7,7 @@ export const submitFinalQuiz = createAsyncThunk(
     try {
       const authToken = localStorage.getItem("authToken");
       const response = await fetch(
-        `http://35.154.224.49:8080/api/participant/quiz/${quizId}/submit`,
+        `http://www.arthkambhoj.me.:8080/api/participant/quiz/${quizId}/submit`,
         {
           method: 'POST',
           headers: {

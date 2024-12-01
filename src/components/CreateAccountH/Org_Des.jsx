@@ -65,7 +65,6 @@ const Org_Des = () => {
                 required
                 className="opt"
               >
-                <option value="">Enter Organisation</option>
                 <option value="Organization A">Organization A</option>
                 <option value="Organization B">Organization B</option>
               </select>
