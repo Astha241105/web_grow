@@ -26,16 +26,9 @@ import Browsebycategory from "./component-2/browsebycategory/browsebycategory.js
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
 import HostOtpVerification from "./components/CreateAccountH/otpforhost.jsx";
 import BackgroundEvent from "./events-page/background-event.jsx";
-import Eventname from "./events-page/event-name/eventname.jsx";
-import Details from "./events-page/details/details.jsx";
 import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
-import NavEvent from "./events-page/nav-event/navEvent.jsx";
 import Regi from "./registration-event-part/regi.jsx";
 import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
-import Stages from "./events-page/details/stages/stages.jsx";
-import Dates from "./events-page/details/Dates/dates.jsx";
-import Organizer from "./events-page/details/organizers/organizer.jsx";
-import EventDetails from "./events-page/details/event-details/event-details.jsx";
 import Upcoming from "./component-2/upcoming-events/upcoming.jsx";
 import Eventlist from "./component-2/diff-events/eventlist.jsx";
 import Eventcard from "./component-2/eventcard/eventcard.jsx";
@@ -85,7 +78,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/leader",
-    element: <Leaderboard />,
+    element: (
+      <div>
+             <ResponsiveNav2 />
+             <Leaderboard />
+             </div>),
   },
   {
     path: "/part-profile",
@@ -129,21 +126,7 @@ const router = createBrowserRouter([
     element: (
       <div>
         <ResponsiveNav2 bgColor="#D4E5E4" />
-        <BackgroundEvent>
-          {/* <div id="event-and-part">
-          <div id="event-and-nav">
-            <Eventname />
-            <NavEvent />
-          </div>
-          <ParticipantDetails />
-        </div>
-        <Details>
-          <Stages />
-          <Dates />
-          <EventDetails />
-          <Organizer />
-        </Details> */}
-        </BackgroundEvent>
+        <BackgroundEvent />
       </div>
     ),
   },

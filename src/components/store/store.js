@@ -29,6 +29,7 @@ import quizStatusReducer from "./slices/quizprogress";
 import quizfinalReducer from "./slices/finish";
 import quizresultsReducer from "./slices/quizresult2";
 import participantsReducer from "./slices/ParticipantList";
+import fetchEventsPublicReducer from "./slices/publicevents"
 
 export const store = configureStore({
   reducer: {
@@ -42,6 +43,7 @@ export const store = configureStore({
     fpchange: fpchangeReducer,
     registeredEvents: registeredEventsReducer,
     participant: participantReducer,
+    publicEvents: fetchEventsPublicReducer,
     events: eventsReducer,
     eventDetails: eventDetailsReducer,
     eventRegistration: eventRegistrationReducer,

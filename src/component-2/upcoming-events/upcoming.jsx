@@ -1,63 +1,55 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchEvents } from '../../components/store/slices/listofevents';
+import { fetchEventsPublic } from "../../components/store/slices/publicevents";
 import { addToFavorites } from '../../components/store/slices/addfavourite';
 import './upcoming.css';
 
 const Upcoming = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const contentRef = useRef(null);
 
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [favorites, setFavorites] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0); 
-  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1060); 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [eventsPerPage, setEventsPerPage] = useState(2); 
+  const authToken = localStorage.getItem("authToken");
 
-  const { events, status, error } = useSelector((state) => state.events);
+  const publicEventsState = useSelector((state) => state.publicEvents);
+  const privateEventsState = useSelector((state) => state.events);
+
+  const isAuthenticated = !!authToken;
+
+  const { events, status, error } = isAuthenticated
+    ? privateEventsState
+    : publicEventsState;
 
   useEffect(() => {
-    dispatch(fetchEvents());
-  }, [dispatch]);
+    if (isAuthenticated) {
+      dispatch(fetchEvents());
+    } else {
+      dispatch(fetchEventsPublic({ page: currentPage, limit: eventsPerPage }));
+    }
+  }, [dispatch, isAuthenticated, currentPage, eventsPerPage]);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsWideScreen(window.innerWidth > 1060);
+      const width = window.innerWidth;
+      setEventsPerPage(width <= 1060 ? 1 : 2); 
     };
     window.addEventListener('resize', handleResize);
+
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  if (status === 'loading') {
-    return <div>Loading events...</div>;
-  }
-
-  if (status === 'failed') {
-    console.error('Error fetching events:', error);
-    return <div>Error: Unable to fetch events. Please try again later.</div>;
-  }
-
-  if (!events || !Array.isArray(events)) {
-    console.error('Invalid events data structure:', events);
-    return <div>Error: Events data is not in the expected format.</div>;
-  }
-
-  if (events.length === 0) {
-    return <div>No upcoming events at the moment. Stay tuned!</div>;
-  }
-
-  const eventsPerPage = isWideScreen ? 2 : 1; 
-  const totalPages = Math.ceil(events.length / eventsPerPage);
-
-
-  const displayedEvents = events.slice(
-    currentPage * eventsPerPage,
-    (currentPage + 1) * eventsPerPage
-  );
+  const paginatedEvents = isAuthenticated
+    ? events.slice(currentPage * eventsPerPage, (currentPage + 1) * eventsPerPage)
+    : events.slice(0, (currentPage + 1) * eventsPerPage); 
 
   const handleRegisterClick = (eventId) => {
     setSelectedEventId(eventId);
@@ -80,10 +72,24 @@ const Upcoming = () => {
   };
 
   const goToNextPage = () => {
-    if (currentPage < totalPages - 1) {
+    if (isAuthenticated) {
+      if (currentPage < Math.ceil(events.length / eventsPerPage) - 1) {
+        setCurrentPage((prev) => prev + 1);
+      }
+    } else {
       setCurrentPage((prev) => prev + 1);
     }
   };
+
+  if (status === 'failed') {
+    console.error('Error fetching events:', error);
+    return <div>Error: Unable to fetch events. Please try again later.</div>;
+  }
+
+  if (!events || !Array.isArray(events)) {
+    console.error('Invalid events data structure:', events);
+    return <div>Error: Events data is not in the expected format.</div>;
+  }
 
   return (
     <div id="home-upcomimg-events-outer">
@@ -93,10 +99,14 @@ const Upcoming = () => {
           className="home-upcomimg-events-arrow"
           src="/side2.svg"
           alt="Scroll Left"
-          onClick={goToPreviousPage}
+          onClick={currentPage > 0 ? goToPreviousPage : null}
+          style={{
+            cursor: currentPage > 0 ? 'pointer' : 'not-allowed',
+            opacity: currentPage > 0 ? 1 : 0.5,
+          }}
         />
 
-        {displayedEvents.map((event) => (
+        {paginatedEvents.map((event) => (
           <article className="home-upcomimg-events-info" key={event.id}>
             <img
               className="home-upcomimg-events-info-image"
@@ -126,7 +136,11 @@ const Upcoming = () => {
           className="home-upcomimg-events-arrow"
           src="/side.svg"
           alt="Scroll Right"
-          onClick={goToNextPage}
+          onClick={events.length > 0 ? goToNextPage : null}
+          style={{
+            cursor: events.length > 0 ? 'pointer' : 'not-allowed',
+            opacity: events.length > 0 ? 1 : 0.5,
+          }}
         />
       </div>
     </div>

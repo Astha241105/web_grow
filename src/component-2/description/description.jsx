@@ -16,7 +16,7 @@ const Des = () => {
             Events
           </span>
         </div>
-        <input id="home-search" placeholder="Search" />
+        {/* <input id="home-search" placeholder="Search" /> */}
       </div>
       <img id="eclipse" src={ib}></img>
       <img id="ia" src="/group2.png" alt="Event illustration" />

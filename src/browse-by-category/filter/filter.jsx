@@ -88,8 +88,7 @@ const EventType = () => {
         </div>
       </div>
       <div id="event-skill-0">
-        <div className="event-skill-1">Coding challenge</div>
-        <div className="event-skill-1">Social Media and Digital</div>
+        Coding challenge
       </div>
       <div
         id="register-for-the-event"

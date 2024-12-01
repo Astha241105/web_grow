@@ -1,11 +1,11 @@
 #nav-event{
     height: 94px;
-    width:848px;
+    width:50%;
     background-color: white;
     border-radius: 10px;
-    position: relative;
+    position:absolute;
     left:80px;
-    top:460px;
+    top:500px;
     display: flex;
     justify-content: space-around;
     align-items: center;

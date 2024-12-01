@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeams } from '../../components/store/slices/listofteams';
-import { fetchEvents } from '../../components/store/slices/listofevents';
 import { joinTeamRequest } from '../../components/store/slices/joinrequest';
 import { createTeam } from '../../components/store/slices/creatingteampart'; 
 import './creatingteam.css';
@@ -100,6 +99,13 @@ const Creatingteam = () => {
             onChange={(e) => setTeamName(e.target.value)}
             placeholder="Enter team name"
           />
+          <div className="create-team-name-label">Team Members</div>
+          <div id="team-members">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+          <div></div>
         </div>
       )}
 
@@ -128,7 +134,7 @@ const Creatingteam = () => {
       {errorMessage && <div className="error-message">{errorMessage}</div>}
 
       {selected === 'create' && (
-        <button onClick={handleCreateTeam}>Create Team</button>
+        <button onClick={handleCreateTeam} id="create-team">Create Team</button>
       )}
     </div>
   );

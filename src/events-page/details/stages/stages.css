@@ -1,7 +1,8 @@
-#stages-and-timeline{
-    position: absolute;
-    height:340px;
+/* #stages-and-timeline{
+    position: relative;
+    height:fit-content;
     width:848px;
+    top:20px;
 }
  #stages-and-timeline-head{
     position: absolute;
@@ -25,18 +26,18 @@
     width:848px;
 }
 #stages-and-timeline-date{
-    /* position:absolute; */
+
     width:90px;
     height:90px;
     border-radius: 10px;
     background: linear-gradient(to bottom, #D4E5E4 50%, #76DBEE 50%);
 }
 .stages-and-timeline-1{
-    /* position: absolute; */
+    
     height:205px;
     width:666px;
     border-radius: 10px;
     border:1px solid black;
     font-size: 28px;
     font-weight:600;
-}
+} */
