@@ -25,6 +25,8 @@ const CreateEvents = () => {
     festival: existingEventData.festival || "",
     eventMode: existingEventData.eventMode || "",
     aboutOpportunity: existingEventData.aboutOpportunity || "",
+    numberOfRooms: 0,
+    roomNames: [],
   });
 
   const urlInputRef = useRef(null);
@@ -245,6 +247,34 @@ const CreateEvents = () => {
               </button>
             </div>
           </div>
+
+          {formData.eventMode === "offline" && (
+            <div className="ce-form-group">
+              <label>Number of Rooms Available</label>
+              <input
+                type="number"
+                // value={formData.numberOfRooms}
+                onChange={handleNumberOfRoomsChange}
+                placeholder="Enter number of rooms"
+                className="ce-placeholder"
+              />
+
+              {formData.roomNames.map((roomName, index) => (
+                <div key={index} className="ce-form-group">
+                  <label>Room {index + 1} Name</label>
+                  <input
+                    type="text"
+                    value={roomName}
+                    onChange={(e) =>
+                      handleRoomNameChange(index, e.target.value)
+                    }
+                    placeholder={`Enter name for Room ${index + 1}`}
+                    className="ce-placeholder"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="ce-form-group">
             <label>About Opportunity*</label>
