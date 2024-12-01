@@ -5,11 +5,15 @@ import {
   uploadEventImage,
   setEventData,
 } from "../../components/store/slices/create_event_Slice";
+import { createroomSlice } from "../../components/store/slices/createroomSlice";
 import "./CreateEvents.css";
 
 const CreateEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const roomsLoading = useSelector((state) => state.rooms?.loading);
+  const roomsError = useSelector((state) => state.rooms?.error);
 
   const existingEventData = useSelector((state) => state.createEvent.eventData);
   const imageUrl = useSelector((state) => state.createEvent.imageUrl);
@@ -28,6 +32,24 @@ const CreateEvents = () => {
   });
 
   const urlInputRef = useRef(null);
+
+  const handleNumberOfRoomsChange = (e) => {
+    const roomCount = parseInt(e.target.value, 10) || 0;
+    setFormData((prev) => ({
+      ...prev,
+      numberOfRooms: roomCount,
+      roomNames: Array(roomCount).fill(""),
+    }));
+  };
+
+  const handleRoomNameChange = (index, value) => {
+    const updatedRoomNames = [...formData.roomNames];
+    updatedRoomNames[index] = value;
+    setFormData((prev) => ({
+      ...prev,
+      roomNames: updatedRoomNames,
+    }));
+  };
 
   const handleUrlFocus = () => {
     if (urlInputRef.current) {
@@ -66,8 +88,21 @@ const CreateEvents = () => {
       })
     );
 
+    if (formData.eventMode === "offline" && formData.numberOfRooms > 0) {
+      
+      const eventId = eventAction.payload.id || "your-event-id"; 
+      await dispatch(createEventRooms({
+        eventId,
+        roomCount: formData.numberOfRooms,
+        roomNames: formData.roomNames
+      })).unwrap();
+    }
+
     navigate("/create-event1");
-  };
+   catch (error) {
+    console.error("Error in handling next step:", error);
+  }
+};
 
   return (
     <div className="ce">
