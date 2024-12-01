@@ -33,8 +33,9 @@ const Create_Events = () => {
   const handleHostPromptResponse = (response) => {
     setHostSelected(response);
     setShowHostPrompt(false);
-    if (eventData.eventMode === "Offline") {
+    if (eventData.eventMode == "offline") {
       setShowAddRoomsModal(true);
+      console.log(showSuccessModal);
     } else {
       setShowSuccessModal(true);
     }
@@ -248,29 +249,36 @@ const Create_Events = () => {
             </div>
           </div>
           <div className="ce-form-group">
-            <label>Participation as a Team</label>
-            <div style={styles.inputContainer}>
-              <div style={styles.inputWrapper}>
-                <input
-                  className="ce-placeholder"
-                  type="number"
-                  id="numberInput"
-                  placeholder=""
-                />
-                <span style={styles.inputLabel}>Min</span>
-              </div>
-              <div style={styles.inputWrapper}>
-                <input
-                  type="number"
-                  className="ce-placeholder"
-                  id="numberInput"
-                  placeholder=""
-                />
-                <span style={styles.inputLabel}>Max</span>
-              </div>
-            </div>
+            {formData.participationType === "Team" && (
+              <>
+                <label>Participation as a Team</label>
+                <div style={styles.inputContainer}>
+                  <div style={styles.inputWrapper}>
+                    <input
+                      className="ce-placeholder"
+                      type="number"
+                      name="minTeamSize"
+                      value={formData.minTeamSize}
+                      onChange={handleInputChange}
+                      placeholder=""
+                    />
+                    <span style={styles.inputLabel}>Min</span>
+                  </div>
+                  <div style={styles.inputWrapper}>
+                    <input
+                      type="number"
+                      className="ce-placeholder"
+                      name="maxTeamSize"
+                      value={formData.maxTeamSize}
+                      onChange={handleInputChange}
+                      placeholder=""
+                    />
+                    <span style={styles.inputLabel}>Max</span>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-
           <div className="ce-form-group">
             <label>Registration Start Date and Time</label>
             <div style={styles.inputContainer}>
