@@ -33,8 +33,9 @@ const Create_Events = () => {
   const handleHostPromptResponse = (response) => {
     setHostSelected(response);
     setShowHostPrompt(false);
-    if (eventData.eventMode === "Offline") {
+    if (eventData.eventMode == "offline") {
       setShowAddRoomsModal(true);
+      console.log(showSuccessModal);
     } else {
       setShowSuccessModal(true);
     }
