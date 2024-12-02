@@ -6,7 +6,7 @@ export const fetchEventDetailsPublic = createAsyncThunk(
     try {
 
       const response = await fetch(
-        `http://www.arthkambhoj.me.:8080/api/v1/public/homepage/events/details/${eventId}`,
+        `https://arthkambhoj.me/api/v1/public/homepage/events/details/${eventId}`,
         {
           method: 'GET',
           headers: {

@@ -10,7 +10,7 @@ export const fetchQuizResults = createAsyncThunk(
     try {
       const authToken = localStorage.getItem("authToken");
       const response = await fetch(
-        `http://www.arthkambhoj.me.:8080/api/participant/quiz/${quizId}/results`,
+        `https://arthkambhoj.me/api/participant/quiz/${quizId}/results`,
         {
           method: 'GET',
           headers: {
@@ -38,7 +38,7 @@ export const fetchLeaderboard = createAsyncThunk(
     try {
         const authToken = localStorage.getItem("authToken");
       const response = await fetch(
-        `http://www.arthkambhoj.me.:8080/api/participant/quiz/${quizId}/leaderboard-and-scores`,
+        `https://arthkambhoj.me/api/participant/quiz/${quizId}/leaderboard-and-scores`,
         {
           method: 'GET',
           headers: {

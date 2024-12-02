@@ -8,7 +8,7 @@ export const fetchParticipantProfile = createAsyncThunk(
       const authToken = localStorage.getItem('authToken');
       if (!authToken) throw new Error('Auth token not found');
 
-      const response = await fetch('http://www.arthkambhoj.me:8080/api/v1/participant/profile', {
+      const response = await fetch('https://arthkambhoj.me/api/v1/participant/profile', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -38,7 +38,7 @@ export const updateParticipantProfile = createAsyncThunk(
       const authToken = localStorage.getItem('authToken');
       if (!authToken) throw new Error('Auth token not found');
 
-      const response = await fetch('http://www.arthkambhoj.me:8080/api/v1/participant/profile', {
+      const response = await fetch('https://arthkambhoj.me/api/v1/participant/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

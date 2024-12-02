@@ -31,9 +31,7 @@ import Regi from "./registration-event-part/regi.jsx";
 import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
 import Upcoming from "./component-2/upcoming-events/upcoming.jsx";
 import Eventlist from "./component-2/diff-events/eventlist.jsx";
-import Eventcard from "./component-2/eventcard/eventcard.jsx";
 import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
-import Reviews from "./component-2/reviews/reviews.jsx";
 import Footer from "./component-2/footer/footer.jsx";
 import Navpart from "./component-2/nav-participant/navpart.jsx";
 import ResponsiveNav from "./component-2/condnav/condnav.jsx";
@@ -114,9 +112,7 @@ const router = createBrowserRouter([
         <Browsebycategory />
         <Upcoming />
         <Eventlist />
-        {/* <Eventcard /> */}
         <Hostnow />
-        {/* <Reviews /> */}
         <Footer />
       </Backgroundhome>
 

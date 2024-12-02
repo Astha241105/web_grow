@@ -5,7 +5,7 @@ export const fetchNotifications = createAsyncThunk(
   async ({ page}, { rejectWithValue }) => {
     const authToken=localStorage.getItem("authToken")
     try {
-      const response = await fetch(`http://www.arthkambhoj.me.:8080/api/v1/participant/notifications/${page}/5`, {
+      const response = await fetch(`https://arthkambhoj.me/api/v1/participant/notifications/${page}/5`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

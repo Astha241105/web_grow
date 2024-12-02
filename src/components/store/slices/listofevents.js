@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const PARTICIPANT_BASE_URL = 'http://www.arthkambhoj.me.:8080/api/v1/participant/events';
+const PARTICIPANT_BASE_URL = 'https://arthkambhoj.me/api/v1/participant/events';
 
 export const fetchEvents = createAsyncThunk(
   'events/fetchEvents',

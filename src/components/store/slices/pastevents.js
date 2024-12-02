@@ -9,7 +9,7 @@ export const fetchPastEvents = createAsyncThunk(
         throw new Error('Authentication token is missing');
       }
 
-      const response = await fetch('http://www.arthkambhoj.me.:8080/api/v1/participant/past-events', {
+      const response = await fetch('https://arthkambhoj.me/api/v1/participant/past-events', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

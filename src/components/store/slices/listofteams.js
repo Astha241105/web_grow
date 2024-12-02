@@ -12,7 +12,7 @@ export const fetchTeams = createAsyncThunk(
       }
 
       const response = await fetch(
-        `http://www.arthkambhoj.me.:8080/api/v1/participant/events/${eventId}/teams/search`, 
+        `https://arthkambhoj.me/api/v1/participant/events/${eventId}/teams/search`, 
         {
           method: 'GET',
           headers: {

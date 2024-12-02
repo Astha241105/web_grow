@@ -6,7 +6,7 @@ export const forgotPassword = createAsyncThunk(
     console.log(email);
     try {
       const response = await fetch(
-        "http://www.arthkambhoj.me.:8080/api/v1/auth/forgot-password",
+        "https://arthkambhoj.me/api/v1/auth/forgot-password",
         {
           method: "POST",
           headers: {
