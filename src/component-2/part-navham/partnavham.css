@@ -40,6 +40,7 @@
     position: absolute;
     width: 167px;
     top: 0px; 
+    height:500px;
     left: 0;
     background-color: white; 
     list-style: none;
@@ -53,6 +54,7 @@
   .menu li {
     margin: 10px 0;
     cursor: pointer;
+    height:25px;
   }
   @media(max-width:560px){
     #nav-bar-with-hamburger {

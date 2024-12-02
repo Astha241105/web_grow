@@ -18,7 +18,7 @@ const ResponsiveNav2 = ({bgColor}) => {
 
   return (
     <div>
-      {isLargeScreen ? <Navpart bgColor={bgColor} /> : <Partnavham  bgColor="white"/>}
+      {isLargeScreen ? <Navpart bgColor={bgColor} /> : <Partnavham  bgColor=""/>}
     </div>
   );
 };

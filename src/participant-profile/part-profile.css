@@ -8,6 +8,7 @@
 }
 #part-profile{
     position: relative;
+    top:74px;
     max-height:930px;
     height: 100vh;
     max-width:28.68%;
@@ -52,7 +53,7 @@
 }
 #part-profile-details-details{
     position: absolute;
-    left:169px;
+    left:150px;
 
 }
 #part-profile-details-name{

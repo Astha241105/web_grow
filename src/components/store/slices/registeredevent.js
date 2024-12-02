@@ -29,7 +29,7 @@ export const fetchRegisteredEvents = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data)
+      console.log(data.data)
       return data.data; 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch registered events');

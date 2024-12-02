@@ -29,7 +29,9 @@ import quizStatusReducer from "./slices/quizprogress";
 import quizfinalReducer from "./slices/finish";
 import quizresultsReducer from "./slices/quizresult2";
 import participantsReducer from "./slices/ParticipantList";
-import fetchEventsPublicReducer from "./slices/publicevents"
+import fetchEventsPublicReducer from "./slices/publicevents";
+import eventDetailsPublicReducer from './slices/publiceventdetails';
+import pastEventsReducer from './slices/pastevents';
 
 export const store = configureStore({
   reducer: {
@@ -63,6 +65,8 @@ export const store = configureStore({
     quizfinal: quizfinalReducer,
     quizresults: quizresultsReducer,
     participants: participantsReducer,
+    eventDetailsPublic: eventDetailsPublicReducer,
+    pastEvents: pastEventsReducer,
   },
 });
 

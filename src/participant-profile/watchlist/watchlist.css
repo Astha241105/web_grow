@@ -5,12 +5,13 @@
     width: 100%;
     position: relative;
     background-color: white;
+    top:74px;
 }
 #part-profile-watchlist-head{
     position: absolute;
     left:20px;
     font-size: 24px;
     font-weight: 500;
-    top:140px;
+    top:50px;
     color:black;
 }

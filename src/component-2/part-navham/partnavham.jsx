@@ -30,13 +30,17 @@ const Partnavham = ({bgColor}) => {
           <li className="nav-ham-options-list"
           onClick={handleLoginClick} >My Profile</li>
           <li className="nav-ham-options-list">Notification</li>
-          <li className="nav-ham-options-list">Reviews</li>
+          <li className="nav-ham-options-list">Registrations</li>
+          <li className="nav-ham-options-list">Watchlist</li>
+          <li className="nav-ham-options-list">Badges and Coins</li>
+          <li className="nav-ham-options-list">Certificates</li>
           <li className="nav-ham-options-list">Quiz</li>
           <li className="nav-ham-options-list">Seminar</li>
           <li className="nav-ham-options-list">Webinar</li>
           <li className="nav-ham-options-list">Hackathon</li>
           <li className="nav-ham-options-list">Past Events</li>
           <li className="nav-ham-options-list">Registered Events</li>
+          <li className="nav-ham-options-list">Logout</li>
         </ul>
       )}
     </div>

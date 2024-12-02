@@ -145,20 +145,26 @@ const EventType = () => {
       <div id="filtered-events">
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event) => (
-            <div key={event.id} className="registered-event-card">
-              <div className="registered-event-card-info">
-                <img
-                  className="registered-event-card-info-image"
-                  src={event.imageUrl}
-                  alt={`${event.title} Thumbnail`}
-                />
-                <div className="registered-event-card-info-details">
-                  <div className="registered-event-card-info-title">{event.title}</div>
-                  <div className="registered-event-card-info-category">{event.category}</div>
-                  <div className="registered-event-card-info-mode">{event.mode}</div>
-                </div>
-              </div>
+            <div className="event-list-card">
+            <div className="event-list-card-upperpart">
+               <img src={`${event.imageUrl}` }  className="event-list-card-upperpart-image"/>
+               <div className="event-list-card-upperpart-side2">
+                  <div className="event-list-card-upperpart-title">{event.title}</div>
+                  <div className="event-list-card-organization">org</div>
+                  <div className="event-list-card-regi-and-dead">
+                      <div className="event-list-card-regi">
+                           <div className="event-list-card-regi-head">Maximum Registeration</div>
+                           <div className="event-list-card-regi-num">400</div>
+                      </div>
+                      <div className="event-list-card-regi-dead">  
+                         <div className="event-list-card-dead-head">Deadline</div>
+                         <div className="event-list-card-dead-num">dead</div>
+                      </div>
+                  </div>
+               </div>
             </div>
+            <div></div>
+          </div>
           ))
         ) : (
           <p>No events match your selection.</p>

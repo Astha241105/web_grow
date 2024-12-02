@@ -45,6 +45,7 @@ import Filter from "./browse-by-category/filter/filter.jsx";
 import Quiz from "./quiz/quiz.jsx";
 import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
 import NavbarSwitcher from "./component-2/navswitch.jsx";
+import Pastevents from "./participant-profile/pastevents/past.jsx";
 import "./index.css";
 import "./App.css";
 import {
@@ -61,6 +62,7 @@ import {
   Room_allocate,
   View_participants,
 } from "./Pages";
+import Past from "./participant-profile/pastevents/past.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -111,8 +113,8 @@ const router = createBrowserRouter([
         <Down />
         <Browsebycategory />
         <Upcoming />
-        {/* <Eventlist />
-        <Eventcard /> */}
+        <Eventlist />
+        {/* <Eventcard /> */}
         <Hostnow />
         {/* <Reviews /> */}
         <Footer />
@@ -184,6 +186,15 @@ const router = createBrowserRouter([
   {
     path: "/create-account-host",
     element: <CreateAccountH />,
+  },
+  
+  {
+    path: "/past",
+    element: (
+      <>
+      <ResponsiveNav2 bgColor="white" />
+      <Pastevents /></>
+    )
   },
 
   {

@@ -51,7 +51,7 @@ const Navham = () => {
         <img src="/logo.svg" alt="Logo" className="nav-logo-ham" />
       </div>
       {isMenuOpen && (
-        <ul className="menu">
+        <ul className="menu2">
           <li className="close-menu" onClick={toggleMenu}>
             <img src="/cross2.svg" alt="Close Menu" className="menu-close-icon" />
           </li>
@@ -66,9 +66,6 @@ const Navham = () => {
             onClick={() => handleNavigation("/areu")} 
           >
             Sign Up
-          </li>
-          <li className="nav-ham-options-list" onClick={handleScrollToReviews}>
-            Reviews
           </li>
           <li className="nav-ham-options-list" onClick={openPopup}>
             Registered Events

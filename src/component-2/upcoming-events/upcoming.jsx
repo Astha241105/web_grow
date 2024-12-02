@@ -64,8 +64,10 @@ const Upcoming = () => {
       dispatch(addToFavorites({ eventId }));
     }
   };
-
-  const goToPreviousPage = () => {
+ const handleimageclick=(eventId)=>{
+   navigate("/event",{state:{eventId}})
+ }
+    const goToPreviousPage = () => {
     if (currentPage > 0) {
       setCurrentPage((prev) => prev - 1);
     }
@@ -112,6 +114,7 @@ const Upcoming = () => {
               className="home-upcomimg-events-info-image"
               src={event.imageUrl || '/default-event.svg'}
               alt={event.title}
+              onClick={()=>handleimageclick(event.id)}
             />
             <div className="home-upcomimg-events-info-title">
               <h3 className="home-upcomimg-events-info-title1">{event.title}</h3>

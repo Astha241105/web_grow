@@ -40,11 +40,12 @@
     font-size:12px;
     font-weight:600;
  } 
-  .menu {
+  .menu2 {
     position: absolute;
     width: 167px;
     top: 0px; 
     left: 0;
+    height:300px;
     background-color: white; 
     list-style: none;
     margin: 0;
@@ -54,9 +55,10 @@
     z-index:3;
   }
   
-  .menu li {
+  .menu2 li {
     margin: 10px 0;
     cursor: pointer;
+    height:25px;
   }
   @media(max-width:560px){
     #nav-bar-with-hamburger {

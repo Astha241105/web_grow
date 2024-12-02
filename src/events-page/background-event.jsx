@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { fetchEventDetailsPublic } from '../components/store/slices/publiceventdetails'
 import "./background-event.css"
 import "./event-name/eventname.css"
 import "./nav-event/navEvent.css"
@@ -7,15 +10,46 @@ import "./details/details.css"
 import "./details/Dates/dates.css"
 
 const BackgroundEvent = () => {
+  const location = useLocation();
+  const { eventId } = location.state || {}; 
+
+  const dispatch = useDispatch();
+  
+  const { event, status, error } = useSelector((state) => state.eventDetailsPublic);
+
+  useEffect(() => {
+    if (eventId) {
+      console.log('Registering for event ID:', eventId);
+      dispatch(fetchEventDetailsPublic(eventId));
+    }
+  }, [dispatch, eventId]);
+
+ 
+  if (status === 'loading') {
+    return <div>Loading event details...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!event) {
+    return <div>No event details available</div>;
+  }
+  const lastUpdate = event.lastUpdate;
+
+const date = new Date(lastUpdate);
+const formattedDate = date.toLocaleDateString("en-US");
+
   return (
     <div id="background-event">
     <div id="background-event-all-details">
     <div id="for-content-and-image">
       <div id="eventname-back">
-        <div id="name-of-event">UX Hackathon</div>
+        <div id="name-of-event">{event.title}</div>
         <div id="institute">
           <img className="event-name-images" src="/college.svg" alt="college" />
-          <div className="eventname-text">Ajay Kumar Garg Engineering College</div>
+          <div className="eventname-text">{event.host.organization}</div>
         </div>
         <div id="type-event">
           <img className="event-name-images" src="/eventtype.svg" alt="event type" />
@@ -27,20 +61,20 @@ const BackgroundEvent = () => {
         </div>
         <div id="event-updatedon">
           <div id="event-updatedon-1">Updated on:&nbsp;</div>
-          <div>15</div>
+          <div>{formattedDate}</div>
         </div>
-        <div id="event-skill">Designing</div>
+        <div id="event-skill">{event.mode}</div>
       </div>
       <div>
-        <img id="logo-of-event" src="/eventlogo.svg" alt="Event Logo" />
+        <img id="logo-of-event" src={`${event.imageUrl}`} alt="Event Logo" />
       </div>
     </div>
-    <div id="nav-event">
-      <div className='nav-event-options'>Stages & Timelines</div>
+    {/* <div id="nav-event">
+      <div className='nav-event-options'></div>
       <div className='nav-event-options'>Dates & Deadlines</div>
       <div className='nav-event-options'>Details</div>
       <div className='nav-event-options'>FAQs</div>
-    </div>
+    </div> */}
     <div id="event-details">
     <div id="stages-and-timeline">
         <div id="stages-and-timeline-head">Stages and timeline</div>
@@ -50,7 +84,7 @@ const BackgroundEvent = () => {
         </div>
         <div id="stages-and-timeline">
         <div  id="stages-and-timeline-head">Date and Deadline</div>
-            <div className="stages-and-timeline-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto mollitia maxime, omnis porro eaque incidunt deserunt ipsum voluptatem quam fugiat debitis dolorem esse ratione accusantium consectetur quod dicta voluptatum, repellendus recusandae, accusamus hic animi? Ipsa eaque odit facilis, vel rerum et quia? Praesentium cumque, nemo incidunt impedit maiores ullam voluptatem, nesciunt voluptatum officia pariatur et. Tempora asperiores doloremque nulla odit, quis deleniti dolorem voluptas nobis voluptate, ad distinctio temporibus.</div>
+            <div className="stages-and-timeline-1"></div>
         </div>
     </div>
     </div>

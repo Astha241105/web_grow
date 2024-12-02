@@ -24,16 +24,15 @@ const Notifications = () => {
   };
 
   if (loading) {
-    return <div>Loading notifications...</div>;
+    return <div></div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div></div>;
   }
 
   return (
     <div id="notification">
-      <h3>Notifications</h3>
       <ul>
         {notifications.map((notification) => {
           const requestId = extractRequestId(notification.message);

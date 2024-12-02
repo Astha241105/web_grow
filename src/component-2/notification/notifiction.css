@@ -21,6 +21,5 @@
   
   .action-buttons button:disabled {
     cursor: not-allowed;
-    background-color: #ddd;
-  } 
+    background-color: #ddd;}
   

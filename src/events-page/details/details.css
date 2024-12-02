@@ -7,7 +7,7 @@
     border-radius: 10px;
     background-color:white;
     position:absolute;
-    top:600px;
+    top:500px;
     left:80px;
 }
 
@@ -41,7 +41,6 @@
     align-items: center;
 }
 
-/* Date inside stages and timeline content */
 #stages-and-timeline-date {
     font-size: 1em;
     color: #555;
@@ -52,7 +51,6 @@
     background: linear-gradient(to bottom, #D4E5E4 50%, #76DBEE 50%);
 }
 
-/* Additional content inside stages and timeline */
 .stages-and-timeline-1 {
     font-size: 0.9em;
     width:80%;
