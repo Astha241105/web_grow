@@ -3,15 +3,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const registerHost = createAsyncThunk(
   "host/register",
   async (hostDetails, { rejectWithValue }) => {
-    console.log(hostDetails)
+    console.log(hostDetails);
     try {
       console.log("Request payload:", hostDetails);
 
-      const response = await fetch("http://www.arthkambhoj.me.:8080/api/v1/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(hostDetails),
-      });
+      const response = await fetch(
+        "https://arthkambhoj.me/api/v1/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(hostDetails),
+        }
+      );
 
       console.log("Response object:", response);
 
@@ -33,13 +36,16 @@ export const registerHost = createAsyncThunk(
 export const resendHostOtp = createAsyncThunk(
   "host/resendOtp",
   async (hostDetails, { rejectWithValue }) => {
-    console.log(hostDetails)
+    console.log(hostDetails);
     try {
-      const response = await fetch("https://arthkambhoj.me/api/v1/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(hostDetails),
-      });
+      const response = await fetch(
+        "https://arthkambhoj.me/api/v1/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(hostDetails),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Resending OTP failed");
@@ -63,7 +69,7 @@ const hostSlice = createSlice({
     organization: "",
     designation: "",
     password: "",
-    role:"host",
+    role: "host",
     status: null,
     error: null,
   },
@@ -105,4 +111,3 @@ const hostSlice = createSlice({
 
 export const { updateHostDetails } = hostSlice.actions;
 export default hostSlice.reducer;
-
