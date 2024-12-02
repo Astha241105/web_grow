@@ -4,7 +4,7 @@ export const changePassword = createAsyncThunk(
   "fpchange/changePassword",
   async ({ email, newPassword }) => {
     const response = await fetch(
-      "http://www.arthkambhoj.me.:8080/api/v1/auth/change-password",
+      "https://arthkambhoj.me/api/v1/auth/change-password",
       {
         method: "PUT",
         headers: {

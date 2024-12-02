@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const BASE_URL = 'http://www.arthkambhoj.me.:8080/api/v1/participant/events/registered';
+const BASE_URL = 'https://arthkambhoj.me/api/v1/participant/events/registered';
 
 
 export const fetchRegisteredEvents = createAsyncThunk(
@@ -29,7 +29,7 @@ export const fetchRegisteredEvents = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data)
+      console.log(data.data)
       return data.data; 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message || 'Failed to fetch registered events');

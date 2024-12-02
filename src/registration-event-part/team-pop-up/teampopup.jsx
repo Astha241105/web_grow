@@ -4,12 +4,13 @@ import "./teampopup.css"
 const Teampopup = ({ handlePopupClick }) => {
   return (
     <div id="team-ask-pop-up">
-      <div id="create-team" onClick={handlePopupClick}>
+      <img src="/createteampop.svg" id="create-team" onClick={handlePopupClick}>
         Create a team
-      </div>
-      <div id="join-a-team" onClick={handlePopupClick}>
+        </img>
+      <img src="/jointeampop.svg" id="join-a-team" onClick={handlePopupClick}>
         Join a team
-      </div>
+      </img>
+      
     </div>
   );
 };

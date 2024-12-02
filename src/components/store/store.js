@@ -30,6 +30,9 @@ import quizfinalReducer from "./slices/finish";
 import quizresultsReducer from "./slices/quizresult2";
 import participantsReducer from "./slices/ParticipantList";
 import roomsReducer from "./slices/createroomSlice";
+import fetchEventsPublicReducer from "./slices/publicevents";
+import eventDetailsPublicReducer from './slices/publiceventdetails';
+import pastEventsReducer from './slices/pastevents';
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -42,6 +45,7 @@ export const store = configureStore({
     fpchange: fpchangeReducer,
     registeredEvents: registeredEventsReducer,
     participant: participantReducer,
+    publicEvents: fetchEventsPublicReducer,
     events: eventsReducer,
     eventDetails: eventDetailsReducer,
     eventRegistration: eventRegistrationReducer,
@@ -62,6 +66,8 @@ export const store = configureStore({
     quizresults: quizresultsReducer,
     participants: participantsReducer,
     rooms: roomsReducer,
+    eventDetailsPublic: eventDetailsPublicReducer,
+    pastEvents: pastEventsReducer,
   },
 });
 

@@ -2,22 +2,88 @@
     position: relative;
     z-index:2;
     width:100vw;
-    height:100px;
+    height:auto;
 
 }
-#eventlist-options{
-    position: absolute;
-    left:80px;
-    height:72px;
-    width:489px;
-    border-radius: 50px;
-    background-color: #F1F1F1;
+#eventlist-options {
     display: flex;
-    justify-content: space-around;
+    padding-left:40px;
+    gap: 20px;
+  }
+  
+  .eventlist-options1 {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .eventlist-options1 img {
+    margin-right: 8px;
+    height: 20px;
+    width: 20px;
+  }
+  
+  .eventlist-options1 div {
     font-size: 16px;
-    font-weight:500 ;
-}
-.eventlist-options1{
-    display: flex;
-}
+    font-weight: bold;
+  }
+  
+  .eventlist-options1.active {
+    background-color: teal;
+    color: white; 
+  }
+  .event-list-cards{
+    height:400px;
+    display:flex;
+    align-items:center;
+    gap:30px;
+    width:100vw;
+    padding:40px;
+    overflow-y:scroll; }
+  .event-list-card{
+  height:200px;
+  width:440px;
+  border-radius:10px;
+  border:1px solid black;
+  }
+  .event-list-card-upperpart{
+    height:170px;
+    width:440px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:10px;
+  }
+  .event-list-card-upperpart-image{
+    height:80px;
+    width:84px;
+  }
+  .event-list-card-upperpart-side2{
+    width:341px;
+    display:flex;
+    flex-direction:column;
+  }
+  .event-list-card-upperpart-title{
+    font-weight:600;
+    font-size:24px;
+    padding-left:25px;
+  }
+  .event-list-card-organization{
+    font-weight:500;
+    font-size:14px;
+    padding-left:25px;
+  }
+  .event-list-card-regi-and-dead{
+    display:flex;
+    justify-content: space-around;
+  }
+  .event-list-card-regi-head,
+  .event-list-card-dead-head{
+    font-weight:500;
+    font-size:14px;
+  }

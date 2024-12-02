@@ -12,7 +12,7 @@ export const uploadEventImage = createAsyncThunk(
         throw new Error("No authentication token found");
       }
       const response = await fetch(
-        "http://www.arthkambhoj.me.:8080/s3/upload",
+        "https://arthkambhoj.me/s3/upload",
         {
           method: "POST",
           headers: {
@@ -79,7 +79,7 @@ export const createEventApi = createAsyncThunk(
       });
 
       const response = await fetch(
-        "http://www.arthkambhoj.me:8080/api/events/create",
+        "https://arthkambhoj.me/api/events/create",
         {
           method: "POST",
           headers: {

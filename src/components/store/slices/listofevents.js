@@ -1,32 +1,31 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const BASE_URL = 'http://www.arthkambhoj.me.:8080/api/v1/participant/events';
+const PARTICIPANT_BASE_URL = 'https://arthkambhoj.me/api/v1/participant/events';
 
 export const fetchEvents = createAsyncThunk(
   'events/fetchEvents',
-  async (_, thunkAPI) => { 
+  async (_,{ rejectWithValue}) => {
     try {
       const authToken = localStorage.getItem('authToken');
-      console.log(authToken);
+      if (!authToken) throw new Error('No authentication token found');
 
-      const response = await fetch(BASE_URL, {
+      const response = await fetch(PARTICIPANT_BASE_URL, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`,
+          Authorization: `Bearer ${authToken}`,
         },
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log(data.data);
+      console.log(data)
       return data.data; 
     } catch (error) {
-      console.error('Error fetching events:', error);
-      return thunkAPI.rejectWithValue(error.message || 'Failed to fetch events');
+      return rejectWithValue(error.message || 'Failed to fetch events');
     }
   }
 );
@@ -35,7 +34,7 @@ const eventsSlice = createSlice({
   name: 'events',
   initialState: {
     events: [],
-    status: 'idle',
+    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
   },
   reducers: {},
@@ -47,11 +46,11 @@ const eventsSlice = createSlice({
       })
       .addCase(fetchEvents.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.events = action.payload; 
+        state.events = action.payload;
       })
       .addCase(fetchEvents.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload || 'Something went wrong';
+        state.error = action.payload;
       });
   },
 });

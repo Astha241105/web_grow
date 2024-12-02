@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "http://www.arthkambhoj.me.:8080/api/v1/auth/authenticate",
+        "https://arthkambhoj.me/api/v1/auth/authenticate",
         {
           method: "POST",
           headers: {

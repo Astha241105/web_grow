@@ -7,7 +7,7 @@ export const handleJoinRequestResponse = createAsyncThunk(
         console.log(response)
       const token = localStorage.getItem('authToken'); 
       
-      const responseFromAPI = await fetch(`http://www.arthkambhoj.me.:8080/api/v1/participant/teams/join/request/${requestId}?response=${response}`, {
+      const responseFromAPI = await fetch(`https://arthkambhoj.me/api/v1/participant/teams/join/request/${requestId}?response=${response}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`, 

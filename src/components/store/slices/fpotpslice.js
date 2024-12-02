@@ -5,7 +5,7 @@ export const verifyOtp = createAsyncThunk(
   async ({ email, otp }) => {
     console.log({ email, otp })
     const response = await fetch(
-      "http://www.arthkambhoj.me.:8080/api/v1/auth/verify-otp",
+      "https://arthkambhoj.me/api/v1/auth/verify-otp",
       {
         method: "POST",
         headers: {

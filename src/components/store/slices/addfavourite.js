@@ -10,7 +10,7 @@ export const addToFavorites = createAsyncThunk(
           throw new Error('Authorization token not found.');
         }
       const response = await fetch(
-        `http://www.arthkambhoj.me.:8080/api/v1/participant/events/${eventId}/favourites`,
+        `https://arthkambhoj.me/api/v1/participant/events/${eventId}/favourites`,
         {
           method: 'POST',
           headers: {

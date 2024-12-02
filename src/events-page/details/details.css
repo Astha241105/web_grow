@@ -1,8 +1,61 @@
-#event-details{
-    position: relative;
-    background-color: white;
+#event-details {
+    display: flex;
+    width:50%;
+    flex-direction: column;
+    margin: 20px auto; 
+    padding: 20px;
     border-radius: 10px;
+    background-color:white;
+    position:absolute;
+    top:500px;
     left:80px;
-    height:200vh;
-    width:848px;
+}
+
+#stages-and-timeline {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    padding: 10px;
+    border-radius: 6px;
+    overflow: auto;
+}
+#stages-and-timeline-head {
+    margin-bottom: 10px;
+    padding-left:80px;
+    top:39px;
+    height:66px;
+    font-size: 28px;
+    font-weight:600;
+    padding-top:10px;
+    background: url('/smallrec.svg') left center no-repeat;
+    background-size: 9px;
+}
+
+/* Content inside stages and timeline */
+#stages-and-timeline-content {
+    display: flex;
+    width: auto;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#stages-and-timeline-date {
+    font-size: 1em;
+    color: #555;
+    padding: 5px;
+    width:90px;
+    height:90px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #D4E5E4 50%, #76DBEE 50%);
+}
+
+.stages-and-timeline-1 {
+    font-size: 0.9em;
+    width:80%;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid black;
+    border-radius:10px;
 }

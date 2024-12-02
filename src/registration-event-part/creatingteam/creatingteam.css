@@ -84,6 +84,17 @@
     left: 50%;
     transform: translate(-50%);
 }
+#create-team{
+    background-color: teal;
+    height: 50px;
+    width:fit-content;
+    margin-top:20px;
+    padding:10px;
+    color:white;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight:500;
+}
 @media(max-width:450px){
   
 #create-add-members{
@@ -99,6 +110,6 @@
         font-weight: 400;
         border:1px solid red ;
         border-radius:10px;
-        padding: 10px 0px;
+        /* padding: 10px 0px; */
     }
     }

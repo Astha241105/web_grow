@@ -2,6 +2,7 @@
     max-height: 930px;
     height: 100vh;
     max-width: 847px;
+    top:74px;
     width: 100%;
     position: relative;
     background-color:white;
@@ -11,13 +12,19 @@
     left:20px;
     font-size: 24px;
     font-weight: 500;
-    top:100px;
+    top:50px;
     color:black;
 }
 #registered-events-cards{
     position: absolute;
-    top:200px;
+    top:140px;
     width:100%;
+    height:80%;
+    left:50%;
+    /* display:flex;
+    flex-direction:column;
+    align-items: center; */
+    transform: translate(-50%);
     overflow-y:scroll
 }
 .registered-event-card {
@@ -72,6 +79,12 @@
     padding:10px;
     color:white;
     right:70px;
+  }
+  @media(max-width:1000px){
+    .registered-event-card-info-view-more{
+      margin-top:20px;
+      right:90px;
+    }
   }
   @media(max-width:520px){
     .registered-event-card {

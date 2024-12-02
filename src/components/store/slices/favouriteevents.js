@@ -10,7 +10,7 @@ export const fetchFavoriteEvents = createAsyncThunk(
         throw new Error('Authorization token not found.');
       }
 
-      const response = await fetch('http://www.arthkambhoj.me.:8080/api/v1/participant/events/favourites', {
+      const response = await fetch('https://arthkambhoj.me/api/v1/participant/events/favourites', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -23,8 +23,8 @@ export const fetchFavoriteEvents = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data)
-      return data;
+      console.log(data.data)
+      return data.data;
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
     }

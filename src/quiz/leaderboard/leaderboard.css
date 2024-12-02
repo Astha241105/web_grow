@@ -1,0 +1,141 @@
+#leaderboard{
+    position:relative;
+    height:100vh;
+    width:100vw;
+    top:70px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+#leaderboard-head{
+    margin-top:40px;
+   height:40px;
+   width:100%;
+   display:flex;
+   align-items: center;
+   margin-left: 80px;
+}
+#leaderboard-head-1{
+    font-size:32px;
+    font-weight:600;
+    margin-left:20px;
+}
+#leaderboard-details{
+    margin-top:40px;
+    height:475px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    align-items:center;
+}
+#leaderboard-details-leaderboaard{
+    height:96%;
+    width:50%;
+    position:relative;
+    background-color: teal;
+    border-radius:10px;
+    display:flex;
+    /* justify-content: center; */
+    gap:30px;
+}
+.leaderboard-positions{
+    width:20.36%;
+    background-color:#00D0C9;
+    position: absolute;
+    bottom:0px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+#leaderboard-positions-2{
+    height:313px;
+    left:94px;
+}
+#leaderboard-positions-1{
+    height:100%;
+    left:286px;
+}
+#leaderboard-positions-3{
+    height:235px;
+    left:478px;
+}
+.leaderboard-positions-image{
+    height: 77px;
+    width:77px;
+    border-radius: 50%;
+    background-color:white;
+    margin-top:20px;
+}
+.leaderboard-positions-name{
+    color:white;
+    margin-top:5px;
+    font-size: 16px;;
+    font-weight:500
+}
+.leaderboard-positions-score{
+    color:white;
+    font-size: 16px;
+    font-weight:500;
+}
+.leaderboard-positions-number{
+    font-weight:600;
+    font-size:60px;
+    color:white;
+}
+#leaderboard-details-your-score{
+    height:96%;
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#leaderboard-details-result{
+    width:90%;
+    height:50px;
+    border-radius:10px;
+    background-color:#78E078;
+    color:black;
+    font-size: 30px;
+    font-weight:600px;
+    text-align:center;
+}
+#leaderboard-details-result-rank{
+    width:90%;
+    height:54px;
+    border-radius:10px;
+    background-color:#412DB2;
+    color:white;
+    font-size: 18px;
+    font-weight:700px;
+    text-align:center;
+}
+#leaderboard-details-result-score{
+    width:90%;
+    height:54px;
+    border-radius:10px;
+    background-color:#412DB2;
+    color:white;
+    font-size: 18px;
+    font-weight:700px;
+    text-align:center;
+}
+#leaderboard-details-result-score-details{
+    width:90%;
+    height:120px;
+    border-radius:10px;
+    background-color:#412DB2;
+    color:white;
+    font-size: 18px;
+    font-weight:700px;
+    text-align:center;
+}
+#leaderboard-all-participants{
+    height: 324px;
+    width:90%;
+    margin-top: 50px;
+    border-radius:10px;
+    border:1px solid black;
+    overflow-x:scroll;
+}
