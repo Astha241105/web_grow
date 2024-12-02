@@ -5,7 +5,7 @@ import {
   uploadEventImage,
   setEventData,
 } from "../../components/store/slices/create_event_Slice";
-import { createroomSlice } from "../../components/store/slices/createroomSlice";
+import { createEventRooms } from "../../components/store/slices/createroomSlice";
 import "./CreateEvents.css";
 
 const CreateEvents = () => {
@@ -81,30 +81,37 @@ const CreateEvents = () => {
     setIsEditable(true);
   };
 
-  const handleNextStep = () => {
-    console.log("Final formData before dispatch:", formData);
-    dispatch(
-      setEventData({
-        ...formData,
-        imageUrl: imageUrl || null,
-      })
-    );
+  const handleNextStep = async () => {
+    try {
+      // Dispatch event data
+      const eventAction = await dispatch(
+        setEventData({
+          ...formData,
+          imageUrl: imageUrl || null,
+        })
+      ).unwrap();
 
-    if (formData.eventMode === "offline" && formData.numberOfRooms > 0) {
-      
-      const eventId = eventAction.payload.id || "your-event-id"; 
-      await dispatch(createEventRooms({
-        eventId,
-        roomCount: formData.numberOfRooms,
-        roomNames: formData.roomNames
-      })).unwrap();
+      // If event mode is offline and rooms are specified, create rooms
+      if (formData.eventMode === "offline" && formData.numberOfRooms > 0) {
+        // Assuming the eventId is returned from setEventData or you have a way to get it
+        const eventId = eventAction.payload.id || "your-event-id"; // Replace with actual event ID retrieval
+
+        await dispatch(
+          createEventRooms({
+            eventId,
+            roomCount: formData.numberOfRooms,
+            roomNames: formData.roomNames,
+          })
+        ).unwrap();
+      }
+
+      // Navigate to next step
+      navigate("/create-event1");
+    } catch (error) {
+      console.error("Error in handling next step:", error);
+      // Optionally show error to user
     }
-
-    navigate("/create-event1");
-   catch (error) {
-    console.error("Error in handling next step:", error);
-  }
-};
+  };
 
   return (
     <div className="ce">
@@ -288,7 +295,7 @@ const CreateEvents = () => {
               <label>Number of Rooms Available</label>
               <input
                 type="number"
-                // value={formData.numberOfRooms}
+                value={formData.numberOfRooms}
                 onChange={handleNumberOfRoomsChange}
                 placeholder="Enter number of rooms"
                 className="ce-placeholder"

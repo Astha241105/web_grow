@@ -29,7 +29,7 @@ import quizStatusReducer from "./slices/quizprogress";
 import quizfinalReducer from "./slices/finish";
 import quizresultsReducer from "./slices/quizresult2";
 import participantsReducer from "./slices/ParticipantList";
-
+import roomsReducer from "./slices/createroomSlice";
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -61,6 +61,7 @@ export const store = configureStore({
     quizfinal: quizfinalReducer,
     quizresults: quizresultsReducer,
     participants: participantsReducer,
+    rooms: roomsReducer,
   },
 });
 
