@@ -7,7 +7,7 @@ export const createEventRooms = createAsyncThunk(
     try {
       // Construct the API endpoint with the eventId
       const response = await fetch(
-        `http://www.arthkambhoj.me:8080/api/events/events/${eventId}/rooms/create`,
+        `https://arthkambhoj.me/api/events/events/${eventId}/rooms/create`,
         {
           method: "POST",
           headers: {
