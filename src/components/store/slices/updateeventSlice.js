@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-//hie
 export const uploadEventImage = createAsyncThunk(
   "events/uploadImage",
   async (file, { rejectWithValue }) => {
