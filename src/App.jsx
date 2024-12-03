@@ -13,7 +13,6 @@ import {
   Org_Des,
   CreatePass,
   CreatePassP,
-  Home,
   Otp,
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
@@ -26,7 +25,6 @@ import Browsebycategory from "./component-2/browsebycategory/browsebycategory.js
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
 import HostOtpVerification from "./components/CreateAccountH/otpforhost.jsx";
 import BackgroundEvent from "./events-page/background-event.jsx";
-import ParticipantDetails from "./events-page/participant-details/participantDetails.jsx";
 import Regi from "./registration-event-part/regi.jsx";
 import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
 import Upcoming from "./component-2/upcoming-events/upcoming.jsx";
@@ -60,7 +58,6 @@ import {
   Room_allocate,
   View_participants,
 } from "./Pages";
-import Past from "./participant-profile/pastevents/past.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");

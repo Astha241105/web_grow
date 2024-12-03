@@ -72,7 +72,7 @@
 #location{
     position:absolute;
     height:20px;
-    top:170px;
+    /* top:170px; */
     display: flex;
     flex-direction: row;
 }
@@ -182,8 +182,6 @@
     flex-direction: column;
     align-items:center;
     overflow-y: scroll;
-    /* display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
     gap: 20px;
     padding: 20px;
 }

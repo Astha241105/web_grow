@@ -5,9 +5,11 @@
     width:100vw;
     min-height:100vh;
     overflow-y:scroll;
-    overflow-x:hidden;
+    overflow-x:scroll;
     background-color:#D4E5E4;
     z-index:1;
+    justify-content: center;
+    display: flex;;
 }
 #background-event-all-details{
     width:60vw;
@@ -16,4 +18,17 @@
 #background-event-all-details-participant{
     width:40vw;
     min-height:100vh;  
+}
+@media(max-width:1150px){
+    #background-event-all-details-participant{
+        display:none; 
+    }  
+    #background-event-all-details{
+        width:100vw;
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
+        align-items: center; 
+    }
+
 }

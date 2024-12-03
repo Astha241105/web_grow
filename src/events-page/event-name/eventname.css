@@ -1,8 +1,8 @@
 #for-content-and-image{
     display:flex;
-    position:absolute;
-    top:175px;
-    width:60%;
+    /* position:absolute; */
+    margin-top:175px;
+    width:100%;
     align-items:center;
     justify-content: space-between;
 }
@@ -83,6 +83,83 @@
     height:158px;
     background-color: aliceblue;
     border-radius:10px;
+    margin-right:30px;
     /* margin-left:200px; */
+}
+#phone-register-now{
+    position: absolute;
+    width:fit-content;
+    height:50px;
+    padding: 5px;
+    border-radius:10px;
+    background-color: teal;
+    color:white;
+    font-size:16px;
+    font-weight: 700;
+    top:248px;
+    margin-left:170px;;
+}
+@media(max-width:1150px){
+    #for-content-and-image{
+        display:flex;
+        margin-top:175px;
+        width:100%;
+        align-items:center;
+        justify-content: space-between;
+    }
+    #eventname-back{
+        position:relative;
+        left:20px;
+        height:320px;
+        width:500px;
+        padding-left: 20px;
+        background: url('/border.svg') left center no-repeat;
+        background-size: 9px;
+    }
+    
+#logo-of-event{
+    width:156px;
+    height:158px;
+    background-color: aliceblue;
+    border-radius:10px;
+    margin-right:100px;
+}
+}
+@media(max-width:700px){
+    #logo-of-event{
+        width:156px;
+        height:158px;
+        background-color: aliceblue;
+        border-radius:10px;
+        margin-right:50px;
+        /* margin-left:200px; */
+    }
+}
+@media(max-width:600px){
+    #for-content-and-image{
+        display:flex;
+        /* position:absolute; */
+        margin-top:50px;
+        width:100%;
+        align-items:center;
+        justify-content: space-between;
+    }
+    #eventname-back{
+        position:relative;
+        left:16px;
+        height:320px;
+        width:500px;
+        padding-left: 20px;
+        background: url('/border.svg') left center no-repeat;
+        background-size: 9px 200px;
+    }
+    #name-of-event{
+         font-size:30px;
+         font-weight:600;}
+
+    #logo-of-event{
+        display:none;
+    }
+     
 }
 

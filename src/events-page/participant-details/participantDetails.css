@@ -1,10 +1,11 @@
 #part-details{
     position:relative;
     height: 489px;
-    width:416px;
+    width:90%;
+    margin-top:130px;
     background-color: white;
-    top:-30px;
-    left:944px;
+    left:50%;
+    transform: translate(-50%);
     border-radius:10px;
 }
 #part-details-1{
