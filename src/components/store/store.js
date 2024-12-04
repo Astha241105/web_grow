@@ -50,6 +50,7 @@ export const store = configureStore({
     publicEvents: fetchEventsPublicReducer,
     events: eventsReducer,
     eventDetails: eventDetailsReducer,
+    eventDetailsPublic:eventDetailsPublicReducer,
     eventRegistration: eventRegistrationReducer,
     favorites: favoritesReducer,
     addToFavorites: addToFavoritesReducer,
