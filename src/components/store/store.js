@@ -33,6 +33,7 @@ import roomsReducer from "./slices/createroomSlice";
 import fetchEventsPublicReducer from "./slices/publicevents";
 import eventDetailsPublicReducer from "./slices/publiceventdetails";
 import pastEventsReducer from "./slices/pastevents";
+import eventNotificationsReducer from "./slices/notificationSlice";
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -69,6 +70,7 @@ export const store = configureStore({
     eventDetailsPublic: eventDetailsPublicReducer,
     pastEvents: pastEventsReducer,
     timeline: timelineReducer,
+    eventNotifications: eventNotificationsReducer,
   },
 });
 
