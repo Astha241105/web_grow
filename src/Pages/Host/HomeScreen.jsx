@@ -1,9 +1,12 @@
 import React from "react";
 import Footer from "../../component-2/footer/footer";
 import NavHost from "./NavHost";
+import { useNavigate } from "react-router-dom";
 import "./HomeScreen.css";
 
 const HomeScreen = () => {
+  const navigate = useNavigate();
+
   const categories = [
     {
       id: 1,
@@ -64,6 +67,7 @@ const HomeScreen = () => {
             <div
               key={category.id}
               className="bg-[#D9D9D9] p-4 rounded-lg border hover:shadow-lg transition-shadow cursor-pointer flex items-start"
+              onClick={() => navigate("/create-events")}
             >
               <div className="mr-3">{category.icon}</div>
               <div className="flex flex-col flex-1">
