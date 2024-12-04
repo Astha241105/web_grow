@@ -58,6 +58,7 @@ import {
   Update_Event_1,
   Room_allocate,
   View_participants,
+  NotificationsPage,
 } from "./Pages";
 
 const ProtectedRoute = ({ children }) => {
@@ -78,9 +79,10 @@ const router = createBrowserRouter([
     path: "/leader",
     element: (
       <div>
-             <ResponsiveNav2 />
-             <Leaderboard />
-             </div>),
+        <ResponsiveNav2 />
+        <Leaderboard />
+      </div>
+    ),
   },
   {
     path: "/part-profile",
@@ -181,14 +183,15 @@ const router = createBrowserRouter([
     path: "/create-account-host",
     element: <CreateAccountH />,
   },
-  
+
   {
     path: "/past",
     element: (
       <>
-      <ResponsiveNav2 bgColor="white" />
-      <Pastevents /></>
-    )
+        <ResponsiveNav2 bgColor="white" />
+        <Pastevents />
+      </>
+    ),
   },
   
   {
@@ -290,6 +293,7 @@ const router = createBrowserRouter([
     path: "/view-participants",
     element: <View_participants />,
   },
+  { path: "/notifications", element: <NotificationsPage /> },
 ]);
 
 function App() {
