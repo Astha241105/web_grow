@@ -11,16 +11,13 @@ export const uploadEventImage = createAsyncThunk(
       if (!token) {
         throw new Error("No authentication token found");
       }
-      const response = await fetch(
-        "https://arthkambhoj.me/s3/upload",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
+      const response = await fetch("https://arthkambhoj.me/s3/upload", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Upload Error Response:", errorText);
@@ -79,7 +76,7 @@ export const createEventApi = createAsyncThunk(
       });
 
       const response = await fetch(
-        "https://arthkambhoj.me/api/events/create",
+        "http://www.arthkambhoj.me:8080/api/events/create",
         {
           method: "POST",
           headers: {

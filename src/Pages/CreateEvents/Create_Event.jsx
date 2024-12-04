@@ -5,13 +5,23 @@ import {
   createEventApi,
   resetState,
 } from "../../components/store/slices/create_event_Slice";
+import {
+  createEventRooms,
+  resetRoomState,
+} from "../../components/store/slices/createroomSlice";
 
 const Create_Events = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const eventState = useSelector((state) => state.createEvent);
+  const roomState = useSelector((state) => state.rooms);
   const { eventData, imageUrl, loading, error, success } = eventState;
+  const {
+    loading: roomLoading,
+    error: roomError,
+    success: roomSuccess,
+  } = roomState;
 
   const [formData, setFormData] = useState({
     participationType: eventData.participationType || "",
@@ -21,34 +31,39 @@ const Create_Events = () => {
     registrationStartTime: eventData.registrationStartTime || "",
     registrationEndDate: eventData.registrationEndDate || "",
     registrationEndTime: eventData.registrationEndTime || "",
-
+    capacityMin: 0,
     maxRegistrations: eventData.maxRegistrations || "",
+    roomCount: 0,
+    roomNames: [],
   });
 
   const [hostSelected, setHostSelected] = useState(false);
   const [showHostPrompt, setShowHostPrompt] = useState(false);
-  const [showAddRoomsModal, setShowAddRoomsModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [createdEventId, setCreatedEventId] = useState(null);
 
   const handleHostPromptResponse = (response) => {
     setHostSelected(response);
     setShowHostPrompt(false);
-    if (eventData.eventMode == "offline") {
-      setShowAddRoomsModal(true);
-      console.log(showSuccessModal);
-    } else {
-      setShowSuccessModal(true);
-    }
+    setShowSuccessModal(true);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "roomsAvailable") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+        roomNames: Array(Number(value)).fill(""),
+      }));
+    }
   };
 
-  const handleAddRoomsModalResponse = (response) => {
-    setShowAddRoomsModal(false);
-    setShowSuccessModal(true);
+  const handleRoomNameChange = (index, value) => {
+    const newRoomNames = [...formData.roomNames];
+    newRoomNames[index] = value;
+    setFormData((prev) => ({ ...prev, roomNames: newRoomNames }));
   };
 
   const handleNextStep = () => {
@@ -77,17 +92,39 @@ const Create_Events = () => {
           ? `${formData.EventEndDate}T${formData.EventEndTime}:00`
           : null,
       capacityMax: formData.maxRegistrations,
+      capacityMin: formData.capacityMin,
       festival: eventData.festival || null,
       teamCreationAllowed: formData.participationType === "Team",
       maxTeamSize: formData.maxTeamSize,
       minTeamSize: formData.minTeamSize,
     };
 
-    console.log("Payload before dispatch:", eventPayload);
-
     dispatch(createEventApi(eventPayload))
-      .then(() => {
-        setShowHostPrompt(true);
+      .then((response) => {
+        const eventId = response.payload.id;
+        console.log("Created Event ID:", eventId);
+        setCreatedEventId(eventId);
+
+        // Check if rooms exist before dispatching
+        if (formData.roomNames.length > 0) {
+          const roomPayload = {
+            eventId: eventId,
+            roomNames: formData.roomNames,
+          };
+
+          console.log("Room Creation Payload:", roomPayload);
+
+          dispatch(createEventRooms(roomPayload))
+            .then((roomResponse) => {
+              console.log("Room Creation Response:", roomResponse);
+              setShowHostPrompt(true);
+            })
+            .catch((roomError) => {
+              console.error("Room creation failed", roomError);
+            });
+        } else {
+          setShowHostPrompt(true);
+        }
       })
       .catch((error) => {
         console.error("Event creation failed", error);
@@ -96,9 +133,11 @@ const Create_Events = () => {
 
   const handleResetAndClose = () => {
     dispatch(resetState());
+    dispatch(resetRoomState());
     setShowSuccessModal(false);
     navigate("/event-manage");
   };
+
   const styles = {
     inputContainer: {
       display: "flex",
@@ -280,6 +319,34 @@ const Create_Events = () => {
             )}
           </div>
           <div className="ce-form-group">
+            <label>Number of Rooms Available</label>
+            <input
+              type="number"
+              placeholder="Enter number of rooms"
+              name="roomsAvailable"
+              value={formData.roomsAvailable}
+              onChange={handleInputChange}
+              min="0"
+            />
+          </div>
+
+          {/* Dynamic Room Name Input Fields */}
+          {formData.roomsAvailable > 0 && (
+            <div className="ce-form-group">
+              <label>Room Names</label>
+              {formData.roomNames.map((roomName, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  placeholder={`Room ${index + 1} Name`}
+                  value={roomName}
+                  onChange={(e) => handleRoomNameChange(index, e.target.value)}
+                  className="mb-2"
+                />
+              ))}
+            </div>
+          )}
+          <div className="ce-form-group">
             <label>Registration Start Date and Time</label>
             <div style={styles.inputContainer}>
               <div style={styles.inputWrapper}>
@@ -424,31 +491,6 @@ const Create_Events = () => {
                   className="hover:bg-gray-100"
                 >
                   No
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {showAddRoomsModal && (
-          <div style={styles.modal}>
-            <div style={styles.backdrop}></div>
-            <div style={styles.modalContent}>
-              <h3 className="text-lg font-semibold mb-4">Add Rooms</h3>
-              <div style={styles.modalButtons}>
-                <button
-                  style={styles.modalButton}
-                  onClick={() => handleAddRoomsModalResponse(true)}
-                  className="bg-teal-600 text-white hover:bg-teal-700"
-                >
-                  Save
-                </button>
-                <button
-                  style={styles.modalButton}
-                  onClick={() => handleAddRoomsModalResponse(false)}
-                  className="hover:bg-gray-100"
-                >
-                  Cancel
                 </button>
               </div>
             </div>
