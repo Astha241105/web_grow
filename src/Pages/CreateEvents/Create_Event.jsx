@@ -104,8 +104,6 @@ const Create_Events = () => {
         const eventId = response.payload.id;
         console.log("Created Event ID:", eventId);
         setCreatedEventId(eventId);
-
-        // Check if rooms exist before dispatching
         if (formData.roomNames.length > 0) {
           const roomPayload = {
             eventId: eventId,
@@ -330,7 +328,6 @@ const Create_Events = () => {
             />
           </div>
 
-          {/* Dynamic Room Name Input Fields */}
           {formData.roomsAvailable > 0 && (
             <div className="ce-form-group">
               <label>Room Names</label>

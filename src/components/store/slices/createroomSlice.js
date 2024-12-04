@@ -4,22 +4,20 @@ export const createEventRooms = createAsyncThunk(
   "rooms/createEventRooms",
   async (roomData, { rejectWithValue }) => {
     try {
-      // CHANGED: Removed separate eventId, roomCount parameters
       const token = localStorage.getItem("authToken");
       if (!token) {
         throw new Error("No authentication token found");
       }
 
-      // CHANGED: Updated API endpoint
       const response = await fetch(
         `https://www.arthkambhoj.me/api/events/events/${roomData.eventId}/rooms/create?roomCount=${roomData.roomNames.length}`,
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json", // ADDED: Specify JSON content type
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          // CHANGED: Simplified payload structure
+
           body: JSON.stringify({
             roomNames: roomData.roomNames,
           }),
