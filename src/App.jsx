@@ -42,6 +42,7 @@ import Quiz from "./quiz/quiz.jsx";
 import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
 import NavbarSwitcher from "./component-2/navswitch.jsx";
 import Pastevents from "./participant-profile/pastevents/past.jsx";
+import Registered1 from "./participant-profile/pastevents/register1.jsx";
 import "./index.css";
 import "./App.css";
 import {
@@ -187,6 +188,15 @@ const router = createBrowserRouter([
       <>
       <ResponsiveNav2 bgColor="white" />
       <Pastevents /></>
+    )
+  },
+  
+  {
+    path: "/registered-events",
+    element: (
+      <>
+      <ResponsiveNav2 bgColor="white" />
+      <Registered1 /></>
     )
   },
 

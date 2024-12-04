@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchEvents } from '../../components/store/slices/listofevents';
+import { fetchFavoriteEvents } from '../../components/store/slices/favouriteevents';
 import { fetchEventsPublic } from '../../components/store/slices/publicevents';
 import { addToFavorites } from '../../components/store/slices/addfavourite';
+import { removeFavouriteEvent } from '../../components/store/slices/removefromfav'; 
 import './upcoming.css';
 import Loginpopup from "../login-popup/login-popup"
 
@@ -12,30 +14,38 @@ const Upcoming = () => {
   const navigate = useNavigate();
 
   const [selectedEventId, setSelectedEventId] = useState(null);
-  const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [eventsPerPage, setEventsPerPage] = useState(2);
   const authToken = localStorage.getItem("authToken");
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [favoriteEvents, setFavoriteEvents] = useState([]);
+
+  const isAuthenticated = !!authToken;
 
   const publicEventsState = useSelector((state) => state.publicEvents);
   console.log(publicEventsState)
   const privateEventsState = useSelector((state) => state.events);
 
-  const isAuthenticated = !!authToken;
-
-  const { events, status, error } = isAuthenticated
-    ? privateEventsState
-    : publicEventsState;
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchEvents());
-    } else {
-      dispatch(fetchEventsPublic());
-      console.log("dispatched")
-    }
-  }, [dispatch, isAuthenticated]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          if (isAuthenticated) {
+            const eventsResponse = await dispatch(fetchEvents()).unwrap();
+            const favoritesResponse = await dispatch(fetchFavoriteEvents()).unwrap();
+            setEvents(eventsResponse);
+            setFavoriteEvents(favoritesResponse.data || []);
+          } else {
+            const publicEventsResponse = await dispatch(fetchEventsPublic()).unwrap();
+            setEvents(publicEventsResponse);
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+    
+      fetchData();
+    }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -68,11 +78,12 @@ const Upcoming = () => {
     if (!isAuthenticated) {
       setShowLoginPopup(true);
     } else {
-      if (favorites.includes(eventId)) {
-        setFavorites(favorites.filter((id) => id !== eventId));
+      if (favoriteEvents.includes(eventId)) {
+        dispatch(removeFavouriteEvent({ eventId })); 
+        setFavoriteEvents((prev) => prev.filter(id => id !== eventId)); 
       } else {
-        setFavorites([...favorites, eventId]);
-        dispatch(addToFavorites({ eventId }));
+        dispatch(addToFavorites({ eventId })); 
+        setFavoriteEvents((prev) => [...prev, eventId]); 
       }
     }
   };
@@ -118,38 +129,35 @@ const Upcoming = () => {
           }}
         />
 
-        {paginatedEvents.map((event) => (
-          
-          <article className="home-upcomimg-events-info" key={event.id}>
-            <div>{showLoginPopup && <Loginpopup onClose={() => setShowLoginPopup(false)} />}</div>
-            <img
-              className="home-upcomimg-events-info-image"
-              src={event.imageUrl || '/default-event.svg'}
-              alt={event.title}
-              onClick={() => handleImageClick(event.id)}
-            />
-            <div className="home-upcomimg-events-info-title">
-              <h3 className="home-upcomimg-events-info-title1">{event.title}</h3>
-              <div className="home-upcomimg-events-button-and-like">
-                <button
-                  className="home-upcomimg-events-button"
-                  onClick={() => handleRegisterClick(event.id)}
-                >
-                  Register Now
-                </button>
-                
-                <img
-                  src={favorites.includes(event.id) ? '/liked2.svg' : '/like.svg'}
-                  className="home-upcomimg-events-like"
-                  alt="Like"
-                  onClick={() => handleFavoriteClick(event.id)}
-                />
-                
-              </div>
-              
-            </div>
-          </article>
-        ))}
+{paginatedEvents.map((event) => (
+  <article className="home-upcomimg-events-info" key={event.id}>
+    <div>{showLoginPopup && <Loginpopup onClose={() => setShowLoginPopup(false)} />}</div>
+    <img
+      className="home-upcomimg-events-info-image"
+      src={event.imageUrl || '/default-event.svg'}
+      alt={event.title}
+      onClick={() => handleImageClick(event.id)}
+    />
+    <div className="home-upcomimg-events-info-title">
+      <h3 className="home-upcomimg-events-info-title1">{event.title}</h3>
+      <div className="home-upcomimg-events-button-and-like">
+        <button
+          className="home-upcomimg-events-button"
+          onClick={() => handleRegisterClick(event.id)}
+        >
+          Register Now
+        </button>
+        
+        <img
+  src={favoriteEvents.includes(event.id) ? '/liked2.svg' : '/like.svg'}
+  className="home-upcomimg-events-like"
+  alt="Like"
+  onClick={() => handleFavoriteClick(event.id)}
+/>
+      </div>
+    </div>
+  </article>
+))}
         <img
           className="home-upcomimg-events-arrow"
           src="/side.svg"

@@ -4,6 +4,12 @@ import Loginpopup from '../login-popup/login-popup';
 
 const Hostnow = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const authToken = localStorage.getItem("authToken"); 
+
+  if (authToken) {
+    return null; 
+  }
+
 
   const handleHostNowClick = () => {
     setShowLoginPopup(true);

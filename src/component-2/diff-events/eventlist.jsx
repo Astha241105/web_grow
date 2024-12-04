@@ -39,8 +39,10 @@ const EventListOptions = () => {
     setActiveOption(option);
   };
 
-  if (!hasToken) {
-    return <div></div>;
+  const hasEvents = (registeredEvents && registeredEvents.length > 0) || (favoriteEvents && favoriteEvents.length > 0);
+
+  if (!hasToken || !hasEvents) {
+    return null; 
   }
 
   return (
@@ -68,11 +70,11 @@ const EventListOptions = () => {
               <img src={event.imageUrl || '/default-event.svg'} className="event-list-card-upperpart-image" alt={event.title} />
               <div className="event-list-card-upperpart-side2">
                 <div className="event-list-card-upperpart-title">{event.title}</div>
-                <div className="event-list-card-organization">Organization Name</div>
+                <div className="event-list-card-organization">{event.location}</div>
                 <div className="event-list-card-regi-and-dead">
                   <div className="event-list-card-regi">
                     <div className="event-list-card-regi-head">Maximum Registration</div>
-                    <div className="event-list-card-regi-num">400</div>
+                    <div className="event-list-card-regi-num">{event.capacityMax}</div>
                   </div>
                   <div className="event-list-card-regi-dead">
                     <div className="event-list-card-dead-head">Deadline</div>

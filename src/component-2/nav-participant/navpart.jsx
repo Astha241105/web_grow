@@ -39,7 +39,7 @@ const Navpart = ({ bgColor }) => {
               <div className="dropdown-item" onClick={() => navigate("/registered-events")}>
                 Registered Events
               </div>
-              <div className="dropdown-item" onClick={() => navigate("/past-events")}>
+              <div className="dropdown-item" onClick={() => navigate("/past")}>
                 Past Events
               </div>
             </div>

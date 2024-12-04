@@ -20,6 +20,10 @@ const Partnavham = ({bgColor}) => {
   const handleViewMore = (category) => {
     navigate1('/event-type', { state: { category: category } });
   };
+  const handleLogout = () => {
+    localStorage.clear(); // Clear all local storage
+    window.location.reload(); // Refresh the page
+  }
 
   return (
     <div id="nav-bar-with-hamburger" style={{backgroundColor:bgColor}}>
@@ -53,9 +57,14 @@ const Partnavham = ({bgColor}) => {
           <li className="nav-ham-options-list"
           onClick={() => handleViewMore('hackathon')}
           >Hackathon</li>
-          <li className="nav-ham-options-list">Past Events</li>
-          <li className="nav-ham-options-list">Registered Events</li>
-          <li className="nav-ham-options-list">Logout</li>
+          <li 
+        className="nav-ham-options-list" 
+        onClick={() => navigate('/past')} 
+      >
+        Past Events
+      </li>
+          <li className="nav-ham-options-list" onClick={() => navigate('/registered-events')}>Registered Events</li>
+          <li className="nav-ham-options-list"  onClick={handleLogout}>Logout</li>
         </ul>
       )}
     </div>

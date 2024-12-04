@@ -23,7 +23,7 @@ export const fetchFavoriteEvents = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data.data)
+      console.log(data.data,"faaaavs")
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');

@@ -33,6 +33,7 @@ import roomsReducer from "./slices/createroomSlice";
 import fetchEventsPublicReducer from "./slices/publicevents";
 import eventDetailsPublicReducer from './slices/publiceventdetails';
 import pastEventsReducer from './slices/pastevents';
+import removeFavouriteReducer from "./slices/removefromfav"
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -68,6 +69,7 @@ export const store = configureStore({
     rooms: roomsReducer,
     eventDetailsPublic: eventDetailsPublicReducer,
     pastEvents: pastEventsReducer,
+    favourite: removeFavouriteReducer,
   },
 });
 

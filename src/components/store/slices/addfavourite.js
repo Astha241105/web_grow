@@ -25,6 +25,7 @@ export const addToFavorites = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data,"favs")
       return data;
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
