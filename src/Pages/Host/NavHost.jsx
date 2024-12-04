@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NotificationsDropdown from "./notification";
 
 const NavHost = ({ className = "", cameFromProfile = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMyEventsDropdownOpen, setIsMyEventsDropdownOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleMyEventsDropdown = () => {
@@ -16,6 +18,14 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
 
   const handleManageEvent = () => {
     navigate("/event-manage");
+  };
+
+  const handleNotificationsClick = () => {
+    navigate("/notifications");
+  };
+
+  const toggleNotifications = () => {
+    setIsNotificationsOpen(!isNotificationsOpen);
   };
 
   return (
@@ -55,9 +65,18 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
                 </a>
               </div>
             )}
-            <a href="#" className="flex items-center">
-              <img src="Notify.svg" alt="notifications" />
-            </a>
+            <div className="relative">
+              <button
+                onClick={toggleNotifications}
+                className="flex items-center"
+              >
+                <img src="Notify.svg" alt="notifications" />
+              </button>
+              <NotificationsDropdown
+                isOpen={isNotificationsOpen}
+                onClose={() => setIsNotificationsOpen(false)}
+              />
+            </div>
             <a
               href="#"
               className="text-[#008080] font-semibold flex items-center"
@@ -140,10 +159,18 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
                 <span className="flex-grow">Manage</span>
                 <img src="down_arrow.svg" alt="down arrow" className="ml-1" />
               </a>
-              <a href="#" className="flex items-center">
-                <span className="flex-grow">Notifications</span>
-                <img src="Notify.svg" alt="notifications" />
-              </a>
+              <div className="relative">
+                <button
+                  onClick={toggleNotifications}
+                  className="flex items-center"
+                >
+                  <img src="Notify.svg" alt="notifications" />
+                </button>
+                <NotificationsDropdown
+                  isOpen={isNotificationsOpen}
+                  onClose={() => setIsNotificationsOpen(false)}
+                />
+              </div>
               <a
                 href="#"
                 className="text-[#008080] font-semibold flex items-center"

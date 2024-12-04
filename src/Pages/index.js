@@ -10,3 +10,4 @@ export { default as Update_event } from "./UpdateEvent/UpdateEvent.jsx";
 export { default as Update_Event_1 } from "./UpdateEvent/Update_Event_1.jsx";
 export { default as Room_allocate } from "./Seat_Allocation/Seat_Allocation.jsx";
 export { default as View_participants } from "./Manage/View_Participants.jsx";
+export { default as NotificationsPage } from "./Host/notification.jsx";
