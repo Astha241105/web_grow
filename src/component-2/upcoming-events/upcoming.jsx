@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchEvents } from '../../components/store/slices/listofevents';
-import { fetchEventsPublic } from "../../components/store/slices/publicevents";
+import { fetchEventsPublic } from '../../components/store/slices/publicevents';
 import { addToFavorites } from '../../components/store/slices/addfavourite';
 import './upcoming.css';
 
@@ -13,10 +13,11 @@ const Upcoming = () => {
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [eventsPerPage, setEventsPerPage] = useState(2); 
+  const [eventsPerPage, setEventsPerPage] = useState(2);
   const authToken = localStorage.getItem("authToken");
 
   const publicEventsState = useSelector((state) => state.publicEvents);
+  console.log(publicEventsState)
   const privateEventsState = useSelector((state) => state.events);
 
   const isAuthenticated = !!authToken;
@@ -29,14 +30,15 @@ const Upcoming = () => {
     if (isAuthenticated) {
       dispatch(fetchEvents());
     } else {
-      dispatch(fetchEventsPublic({ page: currentPage, limit: eventsPerPage }));
+      dispatch(fetchEventsPublic());
+      console.log("dispatched")
     }
-  }, [dispatch, isAuthenticated, currentPage, eventsPerPage]);
+  }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      setEventsPerPage(width <= 1060 ? 1 : 2); 
+      setEventsPerPage(width <= 1060 ? 1 : 2);
     };
     window.addEventListener('resize', handleResize);
 
@@ -47,9 +49,10 @@ const Upcoming = () => {
     };
   }, []);
 
-  const paginatedEvents = isAuthenticated
-    ? events.slice(currentPage * eventsPerPage, (currentPage + 1) * eventsPerPage)
-    : events.slice(0, (currentPage + 1) * eventsPerPage); 
+  const paginatedEvents = events.slice(
+    currentPage * eventsPerPage,
+    (currentPage + 1) * eventsPerPage
+  );
 
   const handleRegisterClick = (eventId) => {
     setSelectedEventId(eventId);
@@ -64,21 +67,19 @@ const Upcoming = () => {
       dispatch(addToFavorites({ eventId }));
     }
   };
- const handleimageclick=(eventId)=>{
-   navigate("/event",{state:{eventId}})
- }
-    const goToPreviousPage = () => {
+
+  const handleImageClick = (eventId) => {
+    navigate('/event', { state: { eventId } });
+  };
+
+  const goToPreviousPage = () => {
     if (currentPage > 0) {
       setCurrentPage((prev) => prev - 1);
     }
   };
 
   const goToNextPage = () => {
-    if (isAuthenticated) {
-      if (currentPage < Math.ceil(events.length / eventsPerPage) - 1) {
-        setCurrentPage((prev) => prev + 1);
-      }
-    } else {
+    if (currentPage < Math.ceil(events.length / eventsPerPage) - 1) {
       setCurrentPage((prev) => prev + 1);
     }
   };
@@ -114,7 +115,7 @@ const Upcoming = () => {
               className="home-upcomimg-events-info-image"
               src={event.imageUrl || '/default-event.svg'}
               alt={event.title}
-              onClick={()=>handleimageclick(event.id)}
+              onClick={() => handleImageClick(event.id)}
             />
             <div className="home-upcomimg-events-info-title">
               <h3 className="home-upcomimg-events-info-title1">{event.title}</h3>
@@ -139,10 +140,10 @@ const Upcoming = () => {
           className="home-upcomimg-events-arrow"
           src="/side.svg"
           alt="Scroll Right"
-          onClick={events.length > 0 ? goToNextPage : null}
+          onClick={events.length > (currentPage + 1) * eventsPerPage ? goToNextPage : null}
           style={{
-            cursor: events.length > 0 ? 'pointer' : 'not-allowed',
-            opacity: events.length > 0 ? 1 : 0.5,
+            cursor: events.length > (currentPage + 1) * eventsPerPage ? 'pointer' : 'not-allowed',
+            opacity: events.length > (currentPage + 1) * eventsPerPage ? 1 : 0.5,
           }}
         />
       </div>

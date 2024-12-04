@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
+import { useNavigate } from 'react-router-dom';
 import './part-profile.css';
 import Edit from "./edit-profile/edit";
 import Registered from './registered/registered';
@@ -13,11 +14,11 @@ import { fetchParticipantProfile } from '../components/store/slices/participantp
 const Partprofile = () => {
   const [selectedOption, setSelectedOption] = useState('Edit');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchParticipantProfile());
   }, [dispatch]);
-
 
   useEffect(() => {
     if (selectedOption === 'Registrations') {
@@ -28,6 +29,11 @@ const Partprofile = () => {
   }, [selectedOption, dispatch]);
 
   const { profile, isLoading, error } = useSelector((state) => state.participant);
+
+  const handleLogout = () => {
+    localStorage.clear(); // Clear all local storage data
+    navigate('/'); // Redirect to the home page
+  };
 
   const renderContent = () => {
     switch (selectedOption) {
@@ -54,18 +60,19 @@ const Partprofile = () => {
           <div>Error: {error}</div>
         ) : profile ? (
           <div id="part-profile-details">
-            <img
-            id="part-profile-details-img"
-            src={profile.imageUrl}
-/>
+            <img id="part-profile-details-img" src={profile.imageUrl} alt="Profile" />
             <div id="part-profile-details-details">
               <div id="part-profile-details-name">
-                {profile.firstname || "First Name"} {profile.lastname}
+                {profile.firstname || 'First Name'} {profile.lastname}
               </div>
-              <div className="part-profile-details-e-and-i">{profile.email || "Email"}</div>
+              <div className="part-profile-details-e-and-i">{profile.email || 'Email'}</div>
             </div>
-            <img id="edit-part-profile" src="/edit-profile.svg" alt="Edit Profile"
-            onClick={() => setSelectedOption('Edit')} />
+            <img
+              id="edit-part-profile"
+              src="/edit-profile.svg"
+              alt="Edit Profile"
+              onClick={() => setSelectedOption('Edit')}
+            />
           </div>
         ) : (
           <div>No profile data available.</div>
@@ -100,10 +107,7 @@ const Partprofile = () => {
             <img src="/certificate.svg" alt="Certificates" />
             <div className="part-profile-options-list-1">Certificates</div>
           </div>
-          <div
-            className="part-profile-options-list"
-            onClick={() => setSelectedOption('Logout')}
-          >
+          <div className="part-profile-options-list" onClick={handleLogout}>
             <img src="/logout.svg" alt="Logout" />
             <div className="part-profile-options-list-1">Log out</div>
           </div>

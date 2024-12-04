@@ -140,10 +140,7 @@
     background-color: #D9D9D9;
 }
 @media(max-width:1150px){
-  
-#phone-block-event{
-    display: flex;
-}  
+    
 #phone-block-event{
     display: flex;
     width:90%;

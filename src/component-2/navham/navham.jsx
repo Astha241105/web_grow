@@ -39,7 +39,7 @@ const Navham = () => {
   
     const handleViewMore = (category) => {
       setSelectedCategory(category); 
-      navigate1('/event-type'); 
+      navigate1('/event-type', { state: { category: category } });
     };
   
   return (

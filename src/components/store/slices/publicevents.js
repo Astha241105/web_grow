@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const PUBLIC_BASE_URL = 'https://arthkambhoj.me/api/v1/public/homepage';
+const PUBLIC_BASE_URL = 'https://arthkambhoj.me/api/v1/public/homepage/events';
 
 export const fetchEventsPublic = createAsyncThunk(
   'events/fetchEventsPublic',
-  async ({ page ,limit}, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${PUBLIC_BASE_URL}/${page}/${limit}`, {
+      const response = await fetch(PUBLIC_BASE_URL, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -19,13 +19,11 @@ export const fetchEventsPublic = createAsyncThunk(
 
       const data = await response.json();
 
-      // If `data.content` is empty, throw an error
-      if (!data.content || data.content.length === 0) {
-        throw new Error('No events available for this page');
+      if (!data || data.length === 0) {
+        throw new Error('No events available');
       }
 
-      console.log(data.content);
-      return data.content;
+      return data; 
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
     }
@@ -53,7 +51,7 @@ const fetchEventsPublicSlice = createSlice({
       })
       .addCase(fetchEventsPublic.fulfilled, (state, action) => {
         state.loading = false;
-        state.events = action.payload;
+        state.events = action.payload; 
       })
       .addCase(fetchEventsPublic.rejected, (state, action) => {
         state.loading = false;
@@ -63,5 +61,4 @@ const fetchEventsPublicSlice = createSlice({
 });
 
 export const { clearEventsPublic } = fetchEventsPublicSlice.actions;
-
 export default fetchEventsPublicSlice.reducer;

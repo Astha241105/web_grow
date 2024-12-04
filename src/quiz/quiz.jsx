@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchQuizQuestions, submitQuizAnswer } from "../components/store/slices/quizpart";
+import {
+  fetchQuizQuestions,
+  submitQuizAnswer,
+} from "../components/store/slices/quizpart";
 import { submitFinalQuiz } from "../components/store/slices/finish";
+import { fetchEventDetails } from "../components/store/slices/eventdetails"; 
 import "./quiz.css";
 
 const Quiz = () => {
@@ -10,13 +14,27 @@ const Quiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { totalQuestions, quizId } = location.state || { totalQuestions: 0, quizId: null };
+  const { totalQuestions, quizId, eventId } = location.state || {
+    totalQuestions: 0,
+    quizId: null,
+    eventId: null,
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [attemptedQuestions, setAttemptedQuestions] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const { question, loading, error, finalSubmitStatus } = useSelector((state) => state.quiz);
+  const { question, loading, error, finalSubmitStatus } = useSelector(
+    (state) => state.quiz
+  );
+
+  const eventDetails = useSelector((state) => state.eventDetails.data);
+
+  useEffect(() => {
+    if (eventId) {
+      dispatch(fetchEventDetails(eventId));
+    }
+  }, [dispatch, eventId]);
 
   useEffect(() => {
     if (quizId !== null && currentPage <= totalQuestions) {
@@ -30,12 +48,14 @@ const Quiz = () => {
 
   const handleNextQuestion = () => {
     if (selectedOption && question?.id) {
-      dispatch(submitQuizAnswer({
-        quizId,
-        questionId: question.id,
-        answer: selectedOption,
-        selectedOption,
-      }));
+      dispatch(
+        submitQuizAnswer({
+          quizId,
+          questionId: question.id,
+          answer: selectedOption,
+          selectedOption,
+        })
+      );
     }
 
     if (attemptedQuestions < totalQuestions) {
@@ -54,8 +74,7 @@ const Quiz = () => {
 
   const handleFinishQuiz = () => {
     dispatch(submitFinalQuiz({ quizId })).then(() => {
-
-      navigate("/leader", { state: { quizId } }); // Pass quizId to the leaderboard route
+      navigate("/leader", { state: { quizId } });
     });
   };
 
@@ -126,7 +145,9 @@ const Quiz = () => {
           <button
             id="quiz-next-button"
             onClick={handleNextQuestion}
-            disabled={loading || attemptedQuestions >= totalQuestions || !selectedOption}
+            disabled={
+              loading || attemptedQuestions >= totalQuestions || !selectedOption
+            }
           >
             Next
           </button>
@@ -145,6 +166,18 @@ const Quiz = () => {
             {finalSubmitStatus === "success"
               ? "Quiz submitted successfully!"
               : finalSubmitStatus}
+          </div>
+        )}
+
+        {eventDetails && (
+          <div id="event-details">
+            <h3>Event Details:</h3>
+            <p>
+              <strong>Title:</strong> {eventDetails.title}
+            </p>
+            <p>
+              <strong>Description:</strong> {eventDetails.description}
+            </p>
           </div>
         )}
       </div>

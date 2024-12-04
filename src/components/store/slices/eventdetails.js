@@ -4,28 +4,29 @@ export const fetchEventDetails = createAsyncThunk(
   'eventDetails/fetchEventDetails',
   async (eventId, { rejectWithValue }) => {
     try {
-        const token = localStorage.getItem('authToken'); 
+      const token = localStorage.getItem('authToken'); 
 
       if (!token) {
         throw new Error('Authorization token not found.');
       }
       const response = await fetch(
         `https://arthkambhoj.me/api/v1/participant/events/details/${eventId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-      },
-    });
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log(data);
-      return data;
+      console.log(data.data); 
+      return data.data; 
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
     }
@@ -54,7 +55,7 @@ const eventDetailsSlice = createSlice({
       })
       .addCase(fetchEventDetails.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload;
+        state.data = action.payload; // This will now contain the correct event data
       })
       .addCase(fetchEventDetails.rejected, (state, action) => {
         state.status = 'failed';

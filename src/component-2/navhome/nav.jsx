@@ -3,16 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "./nav.css";
 
 const Nav = ({ bgColor }) => {
-  const [activeDropdown, setActiveDropdown] = useState(null); // Track which dropdown is active
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 }); // Position of dropdown
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const navigate = useNavigate();
 
-  const handleScrollToReviews = () => {
-    const reviewsSection = document.getElementById("review-box");
-    if (reviewsSection) {
-      reviewsSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -24,11 +19,11 @@ const Nav = ({ bgColor }) => {
 
   const toggleDropdown = (type, event) => {
     if (activeDropdown === type) {
-      setActiveDropdown(null); // Close if already open
+      setActiveDropdown(null); 
     } else {
-      const rect = event.currentTarget.getBoundingClientRect(); // Get the position of the clicked element
-      setDropdownPosition({ top: rect.bottom, left: rect.left }); // Set dropdown position
-      setActiveDropdown(type); // Open the new dropdown
+      const rect = event.currentTarget.getBoundingClientRect(); 
+      setDropdownPosition({ top: rect.bottom, left: rect.left });
+      setActiveDropdown(type);
     }
   };
 
@@ -54,12 +49,6 @@ const Nav = ({ bgColor }) => {
           <div className="nav-option-text">Explore</div>
           <img src="/down-nav.svg" alt="Dropdown Icon" />
         </div>
-        <div
-          className="home-nav-options1"
-          onClick={handleScrollToReviews}
-        >
-          Reviews
-        </div>
         <div className="home-nav-buttons">
           <button
             className="button-home-nav"
@@ -78,11 +67,10 @@ const Nav = ({ bgColor }) => {
         </div>
       </div>
 
-      {/* Dropdown Menus */}
       {activeDropdown === "compete" && (
         <div
           className="dropdown-menu"
-          style={{ top: dropdownPosition.top, left: dropdownPosition.left }} // Position dynamically
+          style={{ top: dropdownPosition.top, left: dropdownPosition.left }}
         >
           <img
             src="/cross2.svg"
@@ -91,9 +79,10 @@ const Nav = ({ bgColor }) => {
             onClick={closeDropdown}
           />
           <ul>
-            <li onClick={() => navigate("/quiz")}>Quiz</li>
-            <li onClick={() => navigate("/hackathon")}>Hackathon</li>
-            <li onClick={() => navigate("/contest")}>Contest</li>
+            <li onClick={() => navigate('/event-type', { state: { category: "quiz" } })}>Quiz</li>
+            <li onClick={() => navigate('/event-type', { state: { category: "hackathon" } })}>Hackathon</li>
+            <li onClick={() => navigate('/event-type', { state: { category: "seminar" } })}>Seminar</li>
+            <li onClick={() => navigate('/event-type', { state: { category: "webinar" } })}>Webinar</li>
           </ul>
         </div>
       )}

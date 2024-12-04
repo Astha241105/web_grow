@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { fetchEventDetailsPublic } from '../components/store/slices/publiceventdetails';
 import './background-event.css';
 import './event-name/eventname.css';
@@ -8,21 +8,56 @@ import './nav-event/navEvent.css';
 import './details/details.css';
 import './details/Dates/dates.css';
 import "./participant-details/participantDetails.css"
+import { fetchParticipantProfile } from '../components/store/slices/participantprofile';
+import { fetchRegisteredEvents } from '../components/store/slices/registeredevent';
+import Loginpopup from "../component-2/login-popup/login-popup"
+ 
 
 const BackgroundEvent = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { eventId } = location.state || {};
-
+  const [isEventRegistered, setIsEventRegistered] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const dispatch = useDispatch();
   const { event, status, error } = useSelector((state) => state.eventDetailsPublic);
-
+  const { profile} = useSelector((state) => state.participant);
+  const { events} = useSelector((state) => state.registeredEvents);
+  const authToken = localStorage.getItem('authToken');
   useEffect(() => {
     if (eventId) {
-      console.log('Registering for event ID:', eventId);
       dispatch(fetchEventDetailsPublic(eventId));
+      if (authToken) {
+        dispatch(fetchParticipantProfile());
+        dispatch(fetchRegisteredEvents()); 
+      }
     }
-  }, [dispatch, eventId]);
+  }, [dispatch, eventId])
 
+  useEffect(() => {
+    if (events && eventId) {
+      const isRegistered = events.some((event) => event.id === eventId);
+      setIsEventRegistered(isRegistered);
+    }
+  }, [events, eventId]);
+
+  useEffect(() => {
+    if (event && event.category === 'quiz') {
+      setIsQuizEvent(true);
+    }
+  }, [event]);
+
+  const handleRegisterClick = () => {
+    if (!authToken) {
+      setShowLoginPopup(true);
+      console.log("show") 
+    } else {
+      navigate('/regifore', { state: { eventId } }); 
+    }
+  };
+  const handleStartQuizClick = () => {
+    navigate('/quiz', { state: { eventId } });
+  };
   if (status === 'loading') {
     return <div>Loading event details...</div>;
   }
@@ -88,7 +123,28 @@ const BackgroundEvent = () => {
               <div>{formattedDate}</div>
             </div>
             <div id="event-skill">{capitalizeFirstLetter(event.mode)}</div>
-            <button id="phone-register-now">Register Now</button>
+            <button className="phone-register-now" 
+              id={
+                isEventRegistered
+                  ? event.category.toLowerCase() === 'quiz'
+                    ? "start-quiz"
+                    : "already-registered"
+                  : "register-now"
+              }
+              onClick={
+                isEventRegistered
+                  ? event.category.toLowerCase() === 'quiz'
+                    ? handleStartQuizClick
+                    : null 
+                  : handleRegisterClick
+              }
+              disabled={isEventRegistered && event.category.toLowerCase() !== 'quiz'}
+            >
+              {isEventRegistered
+                ? event.category.toLowerCase() === 'quiz'
+                  ? 'Start Quiz'
+                  : 'Already Registered'
+                : 'Register Now'}</button>
           </div>
           <div>
             <img id="logo-of-event" src={`${event.imageUrl}`} alt="Event Logo" />
@@ -98,7 +154,7 @@ const BackgroundEvent = () => {
         <div  id="registered1"className='part-details-info1'>
         <img className="part-details-img1" src="/people.svg" alt="Registered Icon" />
         <div className="minor-details1">
-        <div  >Registered Candidates</div>
+        <div style={{  fontWeight: "500" }} >Registered Candidates</div>
         <div>400</div></div>
       </div>
       <div id="team1" className='part-details-info1'>
@@ -246,15 +302,54 @@ const BackgroundEvent = () => {
 
       <div id="background-event-all-details-participant">
       <div id="part-details">
-      <div id="part-details-1">
-        <div>
-          <div id="name-part">Name</div>
-          <div id="email-part">Email</div>
-        </div>
-        <div id="part-eligible"><img id="tick-svg"src="/tick.svg"></img>Eligible</div>
-      </div>
-      <button id="see-details"><span>See Details<br></br>
-          (Check your team status)</span></button>
+      {profile && authToken ? (
+            <div id="part-details">
+              <div id="part-details-1">
+                <div>
+                  <div id="name-part">{profile.firstname}</div>
+                  <div id="email-part">{profile.email}</div>
+                </div>
+                <div id="part-eligible">
+                  <img id="tick-svg" src="/tick.svg" alt="Eligible Icon" />
+                  Eligible
+                </div>
+              </div>
+              <button className="see-details"
+  id={
+    isEventRegistered
+      ? event.category.toLowerCase() === 'quiz'
+        ? "start-quiz"
+        : "already-registered"
+      : "register-now"
+  }
+  onClick={
+    isEventRegistered
+      ? event.category.toLowerCase() === 'quiz'
+        ? handleStartQuizClick
+        : null
+      : handleRegisterClick
+  }
+  disabled={isEventRegistered && event.category.toLowerCase() !== 'quiz'}
+>
+  {isEventRegistered
+    ? event.category.toLowerCase() === 'quiz'
+      ? 'Start Quiz'
+      : 'Already Registered'
+    : 'Register Now'}
+</button>
+
+            </div>
+          ) : (
+            <div id="part-details">
+              <div id="login-prompt">Login to register for the event</div>
+              <button id="register-now" onClick={handleRegisterClick}>
+                Register Now
+              </button>
+            </div>
+          )}
+          {showLoginPopup && !authToken && (
+            <Loginpopup onClose={() => setShowLoginPopup(false)} />
+          )}
           <div id="line"></div>
       <div  id="registered"className='part-details-info'>
         <img className="part-details-img" src="/people.svg" alt="Registered Icon" />

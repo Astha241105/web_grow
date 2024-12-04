@@ -86,7 +86,7 @@
     margin-right:30px;
     /* margin-left:200px; */
 }
-#phone-register-now{
+.phone-register-now{
     position: absolute;
     width:fit-content;
     height:50px;
@@ -107,15 +107,6 @@
         align-items:center;
         justify-content: space-between;
     }
-    #eventname-back{
-        position:relative;
-        left:20px;
-        height:320px;
-        width:500px;
-        padding-left: 20px;
-        background: url('/border.svg') left center no-repeat;
-        background-size: 9px;
-    }
     
 #logo-of-event{
     width:156px;
@@ -123,6 +114,10 @@
     background-color: aliceblue;
     border-radius:10px;
     margin-right:100px;
+}
+#eventname-back{
+    position:relative;
+    left:16px;
 }
 }
 @media(max-width:700px){
@@ -138,7 +133,6 @@
 @media(max-width:600px){
     #for-content-and-image{
         display:flex;
-        /* position:absolute; */
         margin-top:50px;
         width:100%;
         align-items:center;
@@ -155,11 +149,98 @@
     }
     #name-of-event{
          font-size:30px;
-         font-weight:600;}
+         font-weight:600;
+        top:70px;}
 
     #logo-of-event{
         display:none;
     }
+    #event-updatedon{
+        display:flex;
+        position:absolute;
+        top:190px;
+        left:54px;
+        font-size:16px;
+    }
+    #event-skill{
+        position:absolute;
+        top:220px;
+        left:54px;
+        border: teal solid 1px;
+        border-radius:10px;
+        height:40px;
+        width:83px;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        padding-top:10px;
+      
+      }
+      .phone-register-now{
+          position: absolute;
+          width:fit-content;
+          height:40px;
+          padding: 5px;
+          border-radius:10px;
+          background-color: teal;
+          color:white;
+          font-size:16px;
+          font-weight: 700;
+          top:220px;
+          margin-left:170px;;
+      }
      
 }
+@media(max-width:500px){
+    #for-content-and-image{
+        display:flex;
+        /* position:absolute; */
+        margin-top:50px;
+        width:100%;
+        align-items:center;
+        justify-content: space-between;
+    }
+    #name-of-event{
+         font-size:30px;
+         font-weight:600;
+        top:70px;}
+
+    #logo-of-event{
+        display:none;
+    }
+ 
+    #event-updatedon-1{
+       font-weight: 700;
+    }
+    #event-skill{
+      position:absolute;
+      top:220px;
+      left:54px;
+      border: teal solid 1px;
+      border-radius:10px;
+      height:40px;
+      width:83px;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      padding-top:10px;
+    
+    }
+    .phone-register-now{
+        position: absolute;
+        width:fit-content;
+        height:40px;
+        padding: 5px;
+        border-radius:10px;
+        background-color: teal;
+        color:white;
+        font-size:16px;
+        font-weight: 700;
+        top:220px;
+        margin-left:170px;;
+    }
+    
+     
+}
+
 

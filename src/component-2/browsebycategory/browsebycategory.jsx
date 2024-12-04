@@ -8,11 +8,11 @@ import i3 from './webinar.png';
 import i4 from './meeting.png';
 
 const Browsebycategory = () => {
-  const navigate = useNavigate();
 
+  const navigate1 = useNavigate();
+  
   const handleViewMore = (category) => {
-    setSelectedCategory(category); 
-    navigate('/event-type'); 
+    navigate1('/event-type', { state: { category: category } });
   };
 
   return (
@@ -26,7 +26,7 @@ const Browsebycategory = () => {
           <div className="home-browse-by-category-content-box-name">QUIZZES</div>
           <button
             className="home-browse-by-category-content-box-button"
-            onClick={() => handleViewMore('quizzes')}
+            onClick={() => handleViewMore('Quiz')}
           >
             View More
           </button>
@@ -36,7 +36,7 @@ const Browsebycategory = () => {
           <div className="home-browse-by-category-content-box-name">HACKATHONS</div>
           <button
             className="home-browse-by-category-content-box-button"
-            onClick={() => handleViewMore('hackathons')}
+            onClick={() => handleViewMore('hackathon')}
           >
             View More
           </button>
@@ -46,7 +46,7 @@ const Browsebycategory = () => {
           <div className="home-browse-by-category-content-box-name">WEBINARS</div>
           <button
             className="home-browse-by-category-content-box-button"
-            onClick={() => handleViewMore('webinars')}
+            onClick={() => handleViewMore('webinar')}
           >
             View More
           </button>
@@ -56,7 +56,7 @@ const Browsebycategory = () => {
           <div className="home-browse-by-category-content-box-name">SEMINARS</div>
           <button
             className="home-browse-by-category-content-box-button"
-            onClick={() => handleViewMore('seminars')}
+            onClick={() => handleViewMore('seminar')}
           >
             View More
           </button>
