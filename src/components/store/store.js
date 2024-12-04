@@ -31,7 +31,6 @@ import quizresultsReducer from "./slices/quizresult2";
 import participantsReducer from "./slices/ParticipantList";
 import roomsReducer from "./slices/createroomSlice";
 import fetchEventsPublicReducer from "./slices/publicevents";
-import eventDetailsPublicReducer from "./slices/publiceventdetails";
 import pastEventsReducer from "./slices/pastevents";
 import eventNotificationsReducer from "./slices/notificationSlice";
 import eventDetailsPublicReducer from './slices/publiceventdetails';
@@ -69,7 +68,6 @@ export const store = configureStore({
     quizresults: quizresultsReducer,
     participants: participantsReducer,
     rooms: roomsReducer,
-    eventDetailsPublic: eventDetailsPublicReducer,
     pastEvents: pastEventsReducer,
     timeline: timelineReducer,
     eventNotifications: eventNotificationsReducer,
