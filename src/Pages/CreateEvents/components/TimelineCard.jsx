@@ -60,47 +60,7 @@ const TimelineCard = ({ type, data, onEdit }) => {
             </div>
           </section>
         );
-      case "Rewards":
-        return (
-          <div className="space-y-4">
-            {data.rewards.map((reward, index) => (
-              <div
-                key={index}
-                className="p-4 border border-black rounded-lg shadow-sm flex flex-col"
-              >
-                {isEditing ? (
-                  <>
-                    <input
-                      type="text"
-                      className="w-full bg-transparent border-b text-black border-gray-400 focus:outline-none focus:border-blue-500 text-lg font-medium"
-                      placeholder="Add description"
-                      value={reward.description}
-                      onChange={(e) =>
-                        onEdit({
-                          rewards: data.rewards.map((r, i) =>
-                            i === index
-                              ? { ...r, description: e.target.value }
-                              : r
-                          ),
-                        })
-                      }
-                    />
-                    <h5 className="font-bold text-black text-lg mt-2">
-                      {reward.title}
-                    </h5>
-                  </>
-                ) : (
-                  <>
-                    <h5 className="font-bold text-lg">{reward.title}</h5>
-                    <p className="text-gray-600 mt-2">
-                      {reward.description || "Add Description"}
-                    </p>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-        );
+
       default:
         return <p>No data available</p>;
     }

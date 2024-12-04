@@ -9,7 +9,7 @@ import fpotpReducer from "./slices/fpotpslice";
 import fpchangeReducer from "./slices/fpchangeslice";
 import createEventReducer from "./slices/create_event_Slice";
 import eventmanageReducer from "./slices/eventmanageSlice";
-
+import timelineReducer from "./slices/TimelineSlice";
 import registeredEventsReducer from "./slices/registeredevent";
 import participantReducer from "./slices/participantprofile";
 import eventsReducer from "./slices/listofevents";
@@ -31,8 +31,8 @@ import quizresultsReducer from "./slices/quizresult2";
 import participantsReducer from "./slices/ParticipantList";
 import roomsReducer from "./slices/createroomSlice";
 import fetchEventsPublicReducer from "./slices/publicevents";
-import eventDetailsPublicReducer from './slices/publiceventdetails';
-import pastEventsReducer from './slices/pastevents';
+import eventDetailsPublicReducer from "./slices/publiceventdetails";
+import pastEventsReducer from "./slices/pastevents";
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -68,6 +68,7 @@ export const store = configureStore({
     rooms: roomsReducer,
     eventDetailsPublic: eventDetailsPublicReducer,
     pastEvents: pastEventsReducer,
+    timeline: timelineReducer,
   },
 });
 

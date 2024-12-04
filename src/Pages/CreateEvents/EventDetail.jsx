@@ -22,20 +22,8 @@ const Details = () => {
     phone: "+91 9565656565",
   });
 
-  const [rewardsData, setRewardsData] = useState({
-    rewards: [
-      { title: "Winner", description: "" },
-      { title: "First Runner-up", description: "" },
-      { title: "Second Runner-up", description: "" },
-    ],
-  });
-
   const handleEditStages = (updatedData) => {
     setStagesData(updatedData);
-  };
-
-  const handleEditRewards = (updatedData) => {
-    setRewardsData(updatedData);
   };
 
   return (
@@ -78,11 +66,6 @@ const Details = () => {
           />
           <TimelineCard type="Deadlines" data={deadlinesData} />
           <TimelineCard type="Contact the organiser" data={contactData} />
-          <TimelineCard
-            type="Rewards"
-            data={rewardsData}
-            onEdit={handleEditRewards}
-          />
         </section>
       </section>
     </div>
