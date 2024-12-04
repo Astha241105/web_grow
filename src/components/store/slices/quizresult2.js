@@ -6,11 +6,11 @@ const getAuthToken = () => {
 
 export const fetchQuizResults = createAsyncThunk(
   "quizresults/fetchQuizResults",
-  async ({ quizId }, { rejectWithValue }) => {
+  async ({ eventId }, { rejectWithValue }) => {
     try {
       const authToken = localStorage.getItem("authToken");
       const response = await fetch(
-        `https://arthkambhoj.me/api/participant/quiz/${quizId}/results`,
+        `https://arthkambhoj.me/api/participant/quiz/${eventId}/results`,
         {
           method: 'GET',
           headers: {
@@ -24,7 +24,7 @@ export const fetchQuizResults = createAsyncThunk(
         throw new Error('Failed to fetch quiz results');
       }
      const data =await response.json();
-      console.log(data)
+      console.log(data,"result")
       return data
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
@@ -34,11 +34,11 @@ export const fetchQuizResults = createAsyncThunk(
 
 export const fetchLeaderboard = createAsyncThunk(
   "quizresults/fetchLeaderboard", 
-  async ({ quizId }, { rejectWithValue }) => {
+  async ({ eventId }, { rejectWithValue }) => {
     try {
         const authToken = localStorage.getItem("authToken");
       const response = await fetch(
-        `https://arthkambhoj.me/api/participant/quiz/${quizId}/leaderboard-and-scores`,
+        `https://arthkambhoj.me/api/participant/quiz/${eventId}/leaderboard-and-scores`,
         {
           method: 'GET',
           headers: {
@@ -52,7 +52,7 @@ export const fetchLeaderboard = createAsyncThunk(
         throw new Error('Failed to fetch leaderboard');
       }
      const data =await response.json();
-      console.log(data)
+      console.log(data,"leader")
       return data
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');

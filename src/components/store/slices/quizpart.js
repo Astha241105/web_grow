@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchQuizQuestions = createAsyncThunk(
   'quiz/fetchQuizQuestions',
-  async ({ quizId, page }, { rejectWithValue }) => {
+  async ({ eventId, page }, { rejectWithValue }) => {
     try {
         const authToken=localStorage.getItem("authToken")
-      const response = await fetch(`https://arthkambhoj.me/api/participant/quiz/${quizId}/questions/${page}`, {
+      const response = await fetch(`https://arthkambhoj.me/api/participant/quiz/${eventId}/questions/${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -27,16 +27,16 @@ export const fetchQuizQuestions = createAsyncThunk(
 
 export const submitQuizAnswer = createAsyncThunk(
   'quiz/submitQuizAnswer',
-  async ({ quizId, questionId, answer ,selectedOption}, { rejectWithValue }) => {
+  async ({ eventId, questionId, answer ,selectedOption}, { rejectWithValue }) => {
     try {
-        console.log(quizId)
+        console.log(eventId)
         console.log(questionId)
         console.log(answer)
         console.log(selectedOption)
       const authToken=localStorage.getItem("authToken")
       console.log(authToken)
       const response = await fetch(
-        `https://arthkambhoj.me/api/participant/quiz/${quizId}/questions/${questionId}/answer`,
+        `https://arthkambhoj.me/api/participant/quiz/${eventId}/questions/${questionId}/answer`,
         {
           method: 'POST',
           headers: {
@@ -44,7 +44,7 @@ export const submitQuizAnswer = createAsyncThunk(
             Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify({
-            quizId,
+            eventId,
             questionId,
             selectedOption,
           }),

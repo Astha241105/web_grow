@@ -3,11 +3,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const submitFinalQuiz = createAsyncThunk(
   'quizfinal/submitFinalQuiz',
-  async ({ quizId }, { rejectWithValue }) => {
+  async ({ eventId }, { rejectWithValue }) => {
     try {
       const authToken = localStorage.getItem("authToken");
       const response = await fetch(
-        `https://arthkambhoj.me/api/participant/quiz/${quizId}/submit`,
+        `https://arthkambhoj.me/api/participant/quiz/${eventId}/submit`,
         {
           method: 'POST',
           headers: {
@@ -20,7 +20,7 @@ export const submitFinalQuiz = createAsyncThunk(
         throw new Error('Failed to submit quiz');
       }
       const data= await response.json();
-      console.log(data)
+      console.log(data,"yesyes")
       return data
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');

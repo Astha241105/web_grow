@@ -10,6 +10,7 @@ import './details/Dates/dates.css';
 import "./participant-details/participantDetails.css"
 import { fetchParticipantProfile } from '../components/store/slices/participantprofile';
 import { fetchRegisteredEvents } from '../components/store/slices/registeredevent';
+import { fetchQuizStatus } from '../components/store/slices/quizprogress';
 import Loginpopup from "../component-2/login-popup/login-popup"
  
 
@@ -19,10 +20,13 @@ const BackgroundEvent = () => {
   const { eventId } = location.state || {};
   const [isEventRegistered, setIsEventRegistered] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [isQuizEvent, setIsQuizEvent] = useState(false);
+
   const dispatch = useDispatch();
   const { event, status, error } = useSelector((state) => state.eventDetailsPublic);
   const { profile} = useSelector((state) => state.participant);
   const { events} = useSelector((state) => state.registeredEvents);
+  const { status2, loading: statusLoading, error: statusError } = useSelector((state) => state.quizStatus);
   const authToken = localStorage.getItem('authToken');
   useEffect(() => {
     if (eventId) {
@@ -46,6 +50,7 @@ const BackgroundEvent = () => {
       setIsQuizEvent(true);
     }
   }, [event]);
+  
 
   const handleRegisterClick = () => {
     if (!authToken) {
@@ -55,9 +60,34 @@ const BackgroundEvent = () => {
       navigate('/regifore', { state: { eventId } }); 
     }
   };
-  const handleStartQuizClick = () => {
-    navigate('/quiz', { state: { eventId } });
+  const handleStartQuizClick = async () => {
+    const currentTime = new Date();
+    const startTime = new Date(event.startTime);
+    const endTime = new Date(event.endTime);
+  
+    if (currentTime < startTime) {
+      alert('The quiz has not started yet!');
+      return;
+    }
+  
+    if (currentTime > endTime) {
+      alert('The quiz is over!');
+      return;
+    }
+  
+    try {
+      const result = await dispatch(fetchQuizStatus({ eventId }));
+      if (result.payload) {
+        const { totalQuestions } = result.payload;
+        navigate('/quiz', { state: { totalQuestions, eventId } });
+      }
+    } catch (error) {
+      console.error("Error fetching quiz status:", error);
+    }
   };
+  
+  
+  
   if (status === 'loading') {
     return <div>Loading event details...</div>;
   }
@@ -314,29 +344,28 @@ const BackgroundEvent = () => {
                   Eligible
                 </div>
               </div>
-              <button className="see-details"
-  id={
-    isEventRegistered
-      ? event.category.toLowerCase() === 'quiz'
-        ? "start-quiz"
-        : "already-registered"
-      : "register-now"
-  }
-  onClick={
-    isEventRegistered
-      ? event.category.toLowerCase() === 'quiz'
-        ? handleStartQuizClick
-        : null
-      : handleRegisterClick
-  }
-  disabled={isEventRegistered && event.category.toLowerCase() !== 'quiz'}
->
-  {isEventRegistered
-    ? event.category.toLowerCase() === 'quiz'
-      ? 'Start Quiz'
-      : 'Already Registered'
-    : 'Register Now'}
-</button>
+              <button className="see-details" 
+              id={
+                isEventRegistered
+                  ? event.category.toLowerCase() === 'quiz'
+                    ? "start-quiz"
+                    : "already-registered"
+                  : "register-now"
+              }
+              onClick={
+                isEventRegistered
+                  ? event.category.toLowerCase() === 'quiz'
+                    ? handleStartQuizClick
+                    : null 
+                  : handleRegisterClick
+              }
+              disabled={isEventRegistered && event.category.toLowerCase() !== 'quiz'}
+            >
+              {isEventRegistered
+                ? event.category.toLowerCase() === 'quiz'
+                  ? 'Start Quiz'
+                  : 'Already Registered'
+                : 'Register Now'}</button>
 
             </div>
           ) : (

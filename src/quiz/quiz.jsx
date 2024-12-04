@@ -6,7 +6,7 @@ import {
   submitQuizAnswer,
 } from "../components/store/slices/quizpart";
 import { submitFinalQuiz } from "../components/store/slices/finish";
-import { fetchEventDetails } from "../components/store/slices/eventdetails"; 
+import { fetchEventDetails } from "../components/store/slices/eventdetails";
 import "./quiz.css";
 
 const Quiz = () => {
@@ -14,15 +14,15 @@ const Quiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { totalQuestions, quizId, eventId } = location.state || {
-    totalQuestions: 0,
-    quizId: null,
-    eventId: null,
-  };
+  const { totalQuestions, eventId } = location.state || { totalQuestions: 0, eventId: null };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [attemptedQuestions, setAttemptedQuestions] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [timerInterval, setTimerInterval] = useState(null);
+  const [questionsAnswered, setQuestionsAnswered] = useState([]);
+  const [showFinishConfirmation, setShowFinishConfirmation] = useState(false);
 
   const { question, loading, error, finalSubmitStatus } = useSelector(
     (state) => state.quiz
@@ -37,10 +37,37 @@ const Quiz = () => {
   }, [dispatch, eventId]);
 
   useEffect(() => {
-    if (quizId !== null && currentPage <= totalQuestions) {
-      dispatch(fetchQuizQuestions({ quizId, page: currentPage }));
+    if (eventDetails) {
+      const endTime = new Date(eventDetails.endTime);
+      const currentTime = new Date();
+      const remainingTime = Math.max(0, endTime - currentTime);
+      setTimeLeft(remainingTime);
+
+      const interval = setInterval(() => {
+        const newTimeLeft = Math.max(0, endTime - new Date());
+        setTimeLeft(newTimeLeft);
+
+        if (newTimeLeft <= 0) {
+          clearInterval(interval);
+          handleFinishQuiz();
+        }
+      }, 1000);
+
+      setTimerInterval(interval);
     }
-  }, [dispatch, quizId, currentPage, totalQuestions]);
+
+    return () => {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+    };
+  }, [eventDetails]);
+
+  useEffect(() => {
+    if (eventId && currentPage <= totalQuestions) {
+      dispatch(fetchQuizQuestions({ eventId, page: currentPage }));
+    }
+  }, [dispatch, eventId, currentPage, totalQuestions]);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
@@ -48,23 +75,32 @@ const Quiz = () => {
 
   const handleNextQuestion = () => {
     if (selectedOption && question?.id) {
-      dispatch(
-        submitQuizAnswer({
-          quizId,
-          questionId: question.id,
-          answer: selectedOption,
-          selectedOption,
-        })
-      );
-    }
-
-    if (attemptedQuestions < totalQuestions) {
-      setCurrentPage((prevPage) => prevPage + 1);
-      setAttemptedQuestions((prevAttempted) => prevAttempted + 1);
-      setSelectedOption(null);
+      // Only submit answer and mark as answered if not already answered
+      if (!questionsAnswered.includes(currentPage)) {
+        dispatch(
+          submitQuizAnswer({
+            eventId,
+            questionId: question.id,
+            answer: selectedOption,
+            selectedOption,
+          })
+        );
+  
+      
+        setQuestionsAnswered((prev) => [...prev, currentPage]);
+        setAttemptedQuestions((prevAttempted) => prevAttempted + 1);
+      }
+  
+   
+      if (currentPage < totalQuestions) {
+        setCurrentPage((prevPage) => prevPage + 1);
+        setSelectedOption(null);
+      } else {
+        setSelectedOption(null);
+      }
     }
   };
-
+  
   const handlePreviousQuestion = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
@@ -72,20 +108,38 @@ const Quiz = () => {
     }
   };
 
+  const confirmFinishQuiz = () => {
+    if (window.confirm("Are you sure you want to submit the quiz?")) {
+      handleFinishQuiz();
+    }
+  };
+  
   const handleFinishQuiz = () => {
-    dispatch(submitFinalQuiz({ quizId })).then(() => {
-      navigate("/leader", { state: { quizId } });
+    dispatch(submitFinalQuiz({ eventId })).then(() => {
+      navigate("/leader", { state: { eventId } });
     });
   };
 
+  const handleCancelFinish = () => {
+    setShowFinishConfirmation(false);
+  };
+
   const progressPercentage = (attemptedQuestions / totalQuestions) * 100;
+
+  const formatTime = (timeInMs) => {
+    const minutes = Math.floor(timeInMs / 60000);
+    const seconds = Math.floor((timeInMs % 60000) / 1000);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
 
   return (
     <div id="quiz-component-background">
       <div id="quiz-component">
         <div id="time-quiz">
           <img src="/quizclock.svg" alt="Quiz Timer" />
-          <div id="time-quiz-time-left">Time Left</div>
+          <div id="time-quiz-time-left">
+            Time Left: {formatTime(timeLeft)}
+          </div>
         </div>
 
         <div id="quiz-progress">
@@ -143,18 +197,17 @@ const Quiz = () => {
           </button>
 
           <button
-            id="quiz-next-button"
-            onClick={handleNextQuestion}
-            disabled={
-              loading || attemptedQuestions >= totalQuestions || !selectedOption
-            }
-          >
-            Next
-          </button>
+  id="quiz-next-button"
+  onClick={handleNextQuestion}
+  disabled={loading || !selectedOption}
+>
+  {currentPage === totalQuestions ? "Submit Answer" : "Next"}
+</button>
+
 
           <button
             id="quiz-finish-button"
-            onClick={handleFinishQuiz}
+            onClick={confirmFinishQuiz}
             disabled={finalSubmitStatus === "loading"}
           >
             Finish
@@ -180,6 +233,8 @@ const Quiz = () => {
             </p>
           </div>
         )}
+
+       
       </div>
     </div>
   );

@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchQuizStatus = createAsyncThunk(
   'quizStatus/fetchQuizStatus',
-  async ({ quizId }, { rejectWithValue }) => {
+  async ({ eventId }, { rejectWithValue }) => {
     try {
         const token=localStorage.getItem("authToken")
-      const response = await fetch(`https://arthkambhoj.me/api/participant/quiz/${quizId}/progress`, {
+      const response = await fetch(`https://arthkambhoj.me/api/participant/quiz/${eventId}/progress`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const fetchQuizStatus = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data)
+      console.log(data,"logged")
       return data; 
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');

@@ -7,18 +7,18 @@ import "./leaderboard.css"
 const Leaderboard = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { quizId } = location.state || { quizId: null };
-  console.log(quizId)
+  const { eventId } = location.state || { eventId: null };
+  console.log(eventId)
 
   const { result, leaderboard, status, error } = useSelector((state) => state.quizfinal);
 
   useEffect(() => {
-    if (quizId) {
-      dispatch(fetchQuizResults({ quizId }));
-      dispatch(fetchLeaderboard({ quizId }));
+    if (eventId) {
+      dispatch(fetchQuizResults({ eventId }));
+      dispatch(fetchLeaderboard({ eventId }));
       console.log("yes")
     }
-  }, [dispatch, quizId]);
+  }, [dispatch, eventId]);
 
   return (
     <div id="leaderboard">
@@ -48,15 +48,15 @@ const Leaderboard = () => {
           </div>
         </div>
         <div id="leaderboard-details-your-score">
-          <div id="leaderboard-details-result">Your Result</div>
           <div id="leaderboard-details-result-rank">Your Rank  {}</div>
           <div id="leaderboard-details-result-score">Your Score  {}</div>
-          <div id="leaderboard-details-result-score-details"></div>
+          <div id="leaderboard-details-result-score-details">
+            <div></div>
+          </div>
           <div></div>
         </div>
       </div>
        <div id="leaderboard-all-participants">
-        {/* <div  id="leaderboard-all-participants"></div> */}
        </div>
     </div>
   );

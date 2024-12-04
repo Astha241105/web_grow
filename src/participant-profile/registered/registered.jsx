@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchRegisteredEvents } from '../../components/store/slices/registeredevent';
-import { fetchQuizStatus } from '../../components/store/slices/quizprogress';
 import './registered.css';
 
 const Registered = () => {
