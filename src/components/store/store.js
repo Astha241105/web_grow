@@ -35,7 +35,6 @@ import eventDetailsPublicReducer from "./slices/publiceventdetails";
 import pastEventsReducer from "./slices/pastevents";
 import eventNotificationsReducer from "./slices/notificationSlice";
 import eventDetailsPublicReducer from './slices/publiceventdetails';
-import pastEventsReducer from './slices/pastevents';
 import removeFavouriteReducer from "./slices/removefromfav"
 export const store = configureStore({
   reducer: {
