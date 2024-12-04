@@ -5,15 +5,11 @@ import {
   uploadEventImage,
   setEventData,
 } from "../../components/store/slices/create_event_Slice";
-import { createEventRooms } from "../../components/store/slices/createroomSlice";
 import "./CreateEvents.css";
 
 const CreateEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const roomsLoading = useSelector((state) => state.rooms?.loading);
-  const roomsError = useSelector((state) => state.rooms?.error);
 
   const existingEventData = useSelector((state) => state.createEvent.eventData);
   const imageUrl = useSelector((state) => state.createEvent.imageUrl);
@@ -34,24 +30,6 @@ const CreateEvents = () => {
   });
 
   const urlInputRef = useRef(null);
-
-  const handleNumberOfRoomsChange = (e) => {
-    const roomCount = parseInt(e.target.value, 10) || 0;
-    setFormData((prev) => ({
-      ...prev,
-      numberOfRooms: roomCount,
-      roomNames: Array(roomCount).fill(""),
-    }));
-  };
-
-  const handleRoomNameChange = (index, value) => {
-    const updatedRoomNames = [...formData.roomNames];
-    updatedRoomNames[index] = value;
-    setFormData((prev) => ({
-      ...prev,
-      roomNames: updatedRoomNames,
-    }));
-  };
 
   const handleUrlFocus = () => {
     if (urlInputRef.current) {
@@ -81,36 +59,16 @@ const CreateEvents = () => {
     setIsEditable(true);
   };
 
-  const handleNextStep = async () => {
-    try {
-      // Dispatch event data
-      const eventAction = await dispatch(
-        setEventData({
-          ...formData,
-          imageUrl: imageUrl || null,
-        })
-      ).unwrap();
+  const handleNextStep = () => {
+    console.log("Final formData before dispatch:", formData);
+    dispatch(
+      setEventData({
+        ...formData,
+        imageUrl: imageUrl || null,
+      })
+    );
 
-      // If event mode is offline and rooms are specified, create rooms
-      if (formData.eventMode === "offline" && formData.numberOfRooms > 0) {
-        // Assuming the eventId is returned from setEventData or you have a way to get it
-        const eventId = eventAction.payload.id || "your-event-id"; // Replace with actual event ID retrieval
-
-        await dispatch(
-          createEventRooms({
-            eventId,
-            roomCount: formData.numberOfRooms,
-            roomNames: formData.roomNames,
-          })
-        ).unwrap();
-      }
-
-      // Navigate to next step
-      navigate("/create-event1");
-    } catch (error) {
-      console.error("Error in handling next step:", error);
-      // Optionally show error to user
-    }
+    navigate("/create-event1");
   };
 
   return (
@@ -289,35 +247,6 @@ const CreateEvents = () => {
               </button>
             </div>
           </div>
-
-          {formData.eventMode === "offline" && (
-            <div className="ce-form-group">
-              <label>Number of Rooms Available</label>
-              <input
-                type="number"
-                value={formData.numberOfRooms}
-                onChange={handleNumberOfRoomsChange}
-                placeholder="Enter number of rooms"
-                className="ce-placeholder"
-              />
-
-              {formData.roomNames.map((roomName, index) => (
-                <div key={index} className="ce-form-group">
-                  <label>Room {index + 1} Name</label>
-                  <input
-                    type="text"
-                    value={roomName}
-                    onChange={(e) =>
-                      handleRoomNameChange(index, e.target.value)
-                    }
-                    placeholder={`Enter name for Room ${index + 1}`}
-                    className="ce-placeholder"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-
           <div className="ce-form-group">
             <label>About Opportunity*</label>
             <textarea

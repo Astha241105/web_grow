@@ -1,26 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Async thunk for creating rooms for an event using Fetch API
 export const createEventRooms = createAsyncThunk(
   "rooms/createEventRooms",
-  async ({ eventId, roomCount, roomNames }, { rejectWithValue }) => {
+  async (roomData, { rejectWithValue }) => {
     try {
-      // Construct the API endpoint with the eventId
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        throw new Error("No authentication token found");
+      }
+
       const response = await fetch(
-        `https://arthkambhoj.me/api/events/events/${eventId}/rooms/create`,
+        `https://www.arthkambhoj.me/api/events/events/${roomData.eventId}/rooms/create?roomCount=${roomData.roomNames.length}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
+
           body: JSON.stringify({
-            roomCount,
-            roomNames,
+            roomNames: roomData.roomNames,
           }),
         }
       );
 
-      // Check if the response is ok (status in the range 200-299)
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Room creation failed");
@@ -28,13 +31,11 @@ export const createEventRooms = createAsyncThunk(
 
       return await response.json();
     } catch (error) {
-      // Handle any errors during room creation
       return rejectWithValue(error.message || "An error occurred");
     }
   }
 );
 
-// Create a slice for room management
 const roomsSlice = createSlice({
   name: "rooms",
   initialState: {
@@ -44,7 +45,6 @@ const roomsSlice = createSlice({
     success: false,
   },
   reducers: {
-    // Additional reducers if needed
     resetRoomState: (state) => {
       state.loading = false;
       state.error = null;
