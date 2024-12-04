@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./description.css";
 import ib from "./eclipse-des.png";
-import { fetchEvents } from "../../components/store/slices/listofevents"; 
+import { fetchEventsPublic } from '../../components/store/slices/publicevents';
 
 const Des = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +14,7 @@ const Des = () => {
   console.log(allEvents)
 
   useEffect(() => {
-    dispatch(fetchEvents());
+    dispatch(fetchEventsPublic());
   }, [dispatch]);
 
   useEffect(() => {

@@ -74,16 +74,16 @@ const Navham = () => {
             Create Events
           </li>
           <li className="nav-ham-options-list"
-          onClick={() => handleViewMore('quizzes')}
+          onClick={() => handleViewMore('quiz')}
           >Quiz</li>
           <li className="nav-ham-options-list"
-          onClick={() => handleViewMore('seminars')}
+          onClick={() => handleViewMore('seminar')}
           >Seminar</li>
           <li className="nav-ham-options-list"
-          onClick={() => handleViewMore('webinars')}
+          onClick={() => handleViewMore('webinar')}
           >Webinar</li>
           <li className="nav-ham-options-list"
-          onClick={() => handleViewMore('hackathons')}
+          onClick={() => handleViewMore('hackathon')}
           >Hackathon</li>
         </ul>
       )}

@@ -5,6 +5,7 @@ import { fetchEvents } from '../../components/store/slices/listofevents';
 import { fetchEventsPublic } from '../../components/store/slices/publicevents';
 import { addToFavorites } from '../../components/store/slices/addfavourite';
 import './upcoming.css';
+import Loginpopup from "../login-popup/login-popup"
 
 const Upcoming = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Upcoming = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [eventsPerPage, setEventsPerPage] = useState(2);
   const authToken = localStorage.getItem("authToken");
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const publicEventsState = useSelector((state) => state.publicEvents);
   console.log(publicEventsState)
@@ -55,16 +57,23 @@ const Upcoming = () => {
   );
 
   const handleRegisterClick = (eventId) => {
-    setSelectedEventId(eventId);
-    navigate('/regifore', { state: { eventId } });
-  };
-
-  const handleFavoriteClick = (eventId) => {
-    if (favorites.includes(eventId)) {
-      setFavorites(favorites.filter((id) => id !== eventId));
+    if (!isAuthenticated) {
+      setShowLoginPopup(true); 
     } else {
-      setFavorites([...favorites, eventId]);
-      dispatch(addToFavorites({ eventId }));
+      setSelectedEventId(eventId);
+      navigate('/regifore', { state: { eventId } });
+    }
+  };
+  const handleFavoriteClick = (eventId) => {
+    if (!isAuthenticated) {
+      setShowLoginPopup(true);
+    } else {
+      if (favorites.includes(eventId)) {
+        setFavorites(favorites.filter((id) => id !== eventId));
+      } else {
+        setFavorites([...favorites, eventId]);
+        dispatch(addToFavorites({ eventId }));
+      }
     }
   };
 
@@ -89,10 +98,10 @@ const Upcoming = () => {
     return <div>Error: Unable to fetch events. Please try again later.</div>;
   }
 
-  if (!events || !Array.isArray(events)) {
-    console.error('Invalid events data structure:', events);
-    return <div>Error: Events data is not in the expected format.</div>;
+  if (!events || !Array.isArray(events) || events.length === 0) {
+    return null; 
   }
+
 
   return (
     <div id="home-upcomimg-events-outer">
@@ -110,7 +119,9 @@ const Upcoming = () => {
         />
 
         {paginatedEvents.map((event) => (
+          
           <article className="home-upcomimg-events-info" key={event.id}>
+            <div>{showLoginPopup && <Loginpopup onClose={() => setShowLoginPopup(false)} />}</div>
             <img
               className="home-upcomimg-events-info-image"
               src={event.imageUrl || '/default-event.svg'}
@@ -126,13 +137,16 @@ const Upcoming = () => {
                 >
                   Register Now
                 </button>
+                
                 <img
                   src={favorites.includes(event.id) ? '/liked2.svg' : '/like.svg'}
                   className="home-upcomimg-events-like"
                   alt="Like"
                   onClick={() => handleFavoriteClick(event.id)}
                 />
+                
               </div>
+              
             </div>
           </article>
         ))}

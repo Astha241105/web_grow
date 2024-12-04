@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import "./nav.css";
+import Loginpopup from "../login-popup/login-popup";
 
 const Nav = ({ bgColor }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const navigate = useNavigate();
-
-  
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -19,12 +18,26 @@ const Nav = ({ bgColor }) => {
 
   const toggleDropdown = (type, event) => {
     if (activeDropdown === type) {
-      setActiveDropdown(null); 
+      setActiveDropdown(null);
     } else {
-      const rect = event.currentTarget.getBoundingClientRect(); 
+      const rect = event.currentTarget.getBoundingClientRect();
       setDropdownPosition({ top: rect.bottom, left: rect.left });
       setActiveDropdown(type);
     }
+  };
+
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  const handleCreateEventsClick = () => {
+    setShowLoginPopup(true);
+  };
+
+  const handleRegisteredEventsClick = () => {
+    setShowLoginPopup(true);
+  };
+
+  const handleCloseLoginPopup = () => {
+    setShowLoginPopup(false); 
   };
 
   const closeDropdown = () => {
@@ -37,14 +50,14 @@ const Nav = ({ bgColor }) => {
       <div id="home-nav-options">
         <div
           className="home-nav-options1"
-          onClick={(e) => toggleDropdown("compete", e)} // Pass event to get position
+          onClick={(e) => toggleDropdown("compete", e)}
         >
           <div className="nav-option-text">Compete</div>
           <img src="/down-nav.svg" alt="Dropdown Icon" />
         </div>
         <div
           className="home-nav-options1"
-          onClick={(e) => toggleDropdown("explore", e)} // Pass event to get position
+          onClick={(e) => toggleDropdown("explore", e)}
         >
           <div className="nav-option-text">Explore</div>
           <img src="/down-nav.svg" alt="Dropdown Icon" />
@@ -79,10 +92,10 @@ const Nav = ({ bgColor }) => {
             onClick={closeDropdown}
           />
           <ul>
-            <li onClick={() => navigate('/event-type', { state: { category: "quiz" } })}>Quiz</li>
-            <li onClick={() => navigate('/event-type', { state: { category: "hackathon" } })}>Hackathon</li>
-            <li onClick={() => navigate('/event-type', { state: { category: "seminar" } })}>Seminar</li>
-            <li onClick={() => navigate('/event-type', { state: { category: "webinar" } })}>Webinar</li>
+            <li onClick={() => navigate("/event-type", { state: { category: "quiz" } })}>Quiz</li>
+            <li onClick={() => navigate("/event-type", { state: { category: "hackathon" } })}>Hackathon</li>
+            <li onClick={() => navigate("/event-type", { state: { category: "seminar" } })}>Seminar</li>
+            <li onClick={() => navigate("/event-type", { state: { category: "webinar" } })}>Webinar</li>
           </ul>
         </div>
       )}
@@ -90,7 +103,7 @@ const Nav = ({ bgColor }) => {
       {activeDropdown === "explore" && (
         <div
           className="dropdown-menu"
-          style={{ top: dropdownPosition.top, left: dropdownPosition.left }} // Position dynamically
+          style={{ top: dropdownPosition.top, left: dropdownPosition.left }}
         >
           <img
             src="/cross2.svg"
@@ -99,12 +112,13 @@ const Nav = ({ bgColor }) => {
             onClick={closeDropdown}
           />
           <ul>
-            <li onClick={() => navigate("/events")}>Events</li>
-            <li onClick={() => navigate("/webinars")}>Webinars</li>
-            <li onClick={() => navigate("/seminars")}>Seminars</li>
+            <li onClick={handleCreateEventsClick}>Create Events</li>
+            <li onClick={handleRegisteredEventsClick}>Registered Events</li>
           </ul>
         </div>
       )}
+
+      {showLoginPopup && <Loginpopup onClose={handleCloseLoginPopup} />}
     </div>
   );
 };

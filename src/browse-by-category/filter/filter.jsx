@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate} from 'react-router-dom';
 import { fetchEventsPublic } from '../../components/store/slices/publicevents';
 import { fetchEventDetailsPublic } from '../../components/store/slices/publiceventdetails';
+import Loginpopup from '../../component-2/login-popup/login-popup'; 
 import './filter.css';
 
 const EventType = () => {
@@ -11,10 +12,12 @@ const EventType = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const navigate=useNavigate()
 
   const { events } = useSelector((state) => state.publicEvents);
   console.log(events)
-  const { event, status, error } = useSelector((state) => state.eventDetailsPublic); // Data from slice is now named 'event'
+  const { event, status, error } = useSelector((state) => state.eventDetailsPublic);
 
   useEffect(() => {
     dispatch(fetchEventsPublic());
@@ -34,7 +37,14 @@ const EventType = () => {
     return categoryMatch;
   });
   
-
+  const handleRegisterClick = () => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      navigate('/regifore', { state: { eventId: selectedEvent } });
+    } else {
+      setShowLoginPopup(true);
+    }
+  };
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
@@ -47,8 +57,18 @@ const EventType = () => {
     setSelectedEvent(eventId);
     dispatch(fetchEventDetailsPublic(eventId));
   };
+  useEffect(() => {
+    if (location.state && location.state.category) {
+      setSelectedCategory(location.state.category);
+    }
+  }, [location.state]);
+  const handleOneEventDetailsClick = () => {
+    if (window.innerWidth < 920) {
+      navigate('/event', { state: { eventId: selectedEvent } });
+    }
+  };
 
-// Safely access event details properties
+
 const lastUpdate = event && event.lastUpdate ? new Date(event.lastUpdate).toLocaleDateString('en-US') : '';
 const registerStart = event && event.registerStart ? new Date(event.registerStart).toLocaleDateString('en-US') : '';
 const registerEnd = event && event.registerEnd ? new Date(event.registerEnd).toLocaleDateString('en-US') : '';
@@ -79,22 +99,13 @@ const formattedTimeend = event && event.endTime ? new Date(event.endTime).toLoca
             <option value="webinar">Webinars</option>
             <option value="seminar">Seminars</option>
           </select>
-          <select
-            id="dropdown-event"
-            value={selectedType}
-            onChange={handleTypeChange}
-          >
-            <option value="offline">Offline</option>
-            <option value="online">Online</option>
-          </select>
         </div>
 
-        {/* <div id="one-event-details"> */}
           {status === 'loading' && <div></div>}
           {status === 'failed' && <div>Error loading event details</div>}
           {status === 'succeeded' && event && (
             <>
-<div id="one-event-details">
+<div id="one-event-details" onClick={handleOneEventDetailsClick}>
   <div id="one-event-details-image-and-info">
   <div id="name-of-event-1">{event.title}</div>
   <div id="one-event-details1">
@@ -129,38 +140,57 @@ const formattedTimeend = event && event.endTime ? new Date(event.endTime).toLoca
     {capitalizeFirstLetter(event.category)}
   </div>
   <div
-    id="register-for-the-event"
-    // onClick={handleRegisterClick}
-    style={{ cursor: "pointer" }}
-  >
-    Register
-  </div>
+        id="register-for-the-event"
+        onClick={handleRegisterClick}
+        style={{ cursor: "pointer" }}
+      >
+        Register
+      </div>
+      <div>
+      {showLoginPopup && <Loginpopup onClose={() => setShowLoginPopup(false)} />}
+    </div>
 </div>
 
 <div id="nav-card-event-page">
   <div id="registered1" className="part-details-info-1">
     <img className="part-details-img" src="/people.svg" alt="Registered Icon" />
     <div className="minor-details">
-      <div>Registered Candidates</div>
-      <div>400</div>
+      <div>Maximum Registerations</div>
+      <div>{event.capacityMax}</div>
     </div>
   </div>
 
-  <div id="team1" className="part-details-info-1">
-    <img className="part-details-img" src="/team.svg" alt="Team Size Icon" />
-    <div className="minor-details">
-      <div>Team Size</div>
-      <div>400</div>
+  {event.teamCreationAllowed ? (
+    <div id="team1" className="part-details-info-1">
+      <img className="part-details-img" src="/team.svg" alt="Team Size Icon" />
+      <div className="minor-details">
+        <div>Team Size</div>
+        <div>{event.maxTeamSize ? event.maxTeamSize : 'N/A'}</div>
+      </div>
     </div>
-  </div>
+  ) : (
+    <div id="individual-participation" className="part-details-info-1">
+      <img className="part-details-img" src="/team.svg" alt="Individual Participation Icon" />
+      <div className="minor-details">
+        <div>Participation</div>
+        <div>Individual participation.</div>
+      </div>
+    </div>
+  )}
 
-  <div id="deadline1" className="part-details-info-1">
-    <img className="part-details-img" src="/deadline.svg" alt="Deadline Icon" />
-    <div className="minor-details">
-      <div>Deadline</div>
-      <div>400</div>
+<div id="deadline1" className="part-details-info-1">
+  <img className="part-details-img" src="/deadline.svg" alt="Deadline Icon" />
+  <div className="minor-details">
+    <div>Deadline</div>
+    <div>
+      {registerEnd ? (
+        new Date(registerEnd).toLocaleDateString('en-US')
+      ) : (
+        'N/A'
+      )}
     </div>
   </div>
+</div>
 </div>
 
 <div id="event-details-updated-on">Updated on:</div>
@@ -176,7 +206,7 @@ const formattedTimeend = event && event.endTime ? new Date(event.endTime).toLoca
     <div id="stages-and-timeline-head">Stages and timeline</div>
     <div id="stages-and-timeline-content">
       {event.timelineEntries
-        .filter((entry) => entry) // Filter out null or undefined entries
+        .filter((entry) => entry) 
         .map((entry, index) => (
           <div className="stages-and-timeline-1" key={index}>
             <div>

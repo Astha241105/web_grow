@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import "./hostnow.css";
-// Import your Loginpopup component
-import Loginpopup from '../login-popup/login-popup'; // Adjust the import path if necessary
+import Loginpopup from '../login-popup/login-popup';
 
 const Hostnow = () => {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const handleHostNowClick = () => {
     setShowLoginPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowLoginPopup(false);
   };
 
   return (
@@ -22,7 +25,7 @@ const Hostnow = () => {
       </div>
       <img id="hostnow-image" src="./hostnow.svg" alt="Host now" />
       
-      {showLoginPopup && <Loginpopup />}
+      {showLoginPopup && <Loginpopup onClose={handleClosePopup} />}
     </div>
   );
 };
