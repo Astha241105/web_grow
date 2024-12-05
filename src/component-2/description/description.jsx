@@ -11,16 +11,19 @@ const Des = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { events: allEvents, status } = useSelector((state) => state.events); // Updated to include `status`
+  const { events: allEvents, status } = useSelector((state) => state.publicEvents);
+  
 
+  // Fetch events only once when the component mounts
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchEventsPublic()); // Fetch events only if the state is idle
+      dispatch(fetchEventsPublic());
     }
   }, [dispatch, status]);
 
+  // Update filtered results based on search query
   useEffect(() => {
-    if (searchQuery.length > 0 && allEvents.length > 0) {
+    if (searchQuery.length > 0) {
       const results = allEvents.filter((event) =>
         event.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -72,7 +75,7 @@ const Des = () => {
             ))}
           </ul>
         ) : searchQuery && filteredResults.length === 0 ? (
-          <div>No events found.</div>
+          <div className="search-results">No events found.</div>
         ) : null}
       </div>
       <img id="eclipse" src={ib} alt="Eclipse" />

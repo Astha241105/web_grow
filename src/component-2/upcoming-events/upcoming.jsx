@@ -27,6 +27,7 @@ const Upcoming = () => {
   console.log(publicEventsState)
   const privateEventsState = useSelector((state) => state.events);
 
+
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -34,7 +35,7 @@ const Upcoming = () => {
             const eventsResponse = await dispatch(fetchEvents()).unwrap();
             const favoritesResponse = await dispatch(fetchFavoriteEvents()).unwrap();
             setEvents(eventsResponse);
-            setFavoriteEvents(favoritesResponse.data || []);
+            setFavoriteEvents(favoritesResponse.data || []); // Assuming favorites are in data
           } else {
             const publicEventsResponse = await dispatch(fetchEventsPublic()).unwrap();
             setEvents(publicEventsResponse);
@@ -79,11 +80,11 @@ const Upcoming = () => {
       setShowLoginPopup(true);
     } else {
       if (favoriteEvents.includes(eventId)) {
-        dispatch(removeFavouriteEvent({ eventId })); 
-        setFavoriteEvents((prev) => prev.filter(id => id !== eventId)); 
+        dispatch(removeFavouriteEvent({ eventId })); // Dispatch remove action
+        setFavoriteEvents((prev) => prev.filter(id => id !== eventId)); // Update local state
       } else {
-        dispatch(addToFavorites({ eventId })); 
-        setFavoriteEvents((prev) => [...prev, eventId]); 
+        dispatch(addToFavorites({ eventId })); // Dispatch add action
+        setFavoriteEvents((prev) => [...prev, eventId]); // Update local state
       }
     }
   };
@@ -106,7 +107,7 @@ const Upcoming = () => {
 
   if (status === 'failed') {
     console.error('Error fetching events:', error);
-    return <div>Error: Unable to fetch events. Please try again later.</div>;
+    return <div></div>;
   }
 
   if (!events || !Array.isArray(events) || events.length === 0) {
@@ -116,6 +117,7 @@ const Upcoming = () => {
 
   return (
     <div id="home-upcomimg-events-outer">
+      <div>{showLoginPopup && <Loginpopup onClose={() => setShowLoginPopup(false)} />}</div>
       <h2 id="home-upcomimg-events-head">Upcoming Events :</h2>
       <div id="home-upcomimg-events-content">
         <img
@@ -131,7 +133,7 @@ const Upcoming = () => {
 
 {paginatedEvents.map((event) => (
   <article className="home-upcomimg-events-info" key={event.id}>
-    <div>{showLoginPopup && <Loginpopup onClose={() => setShowLoginPopup(false)} />}</div>
+    
     <img
       className="home-upcomimg-events-info-image"
       src={event.imageUrl || '/default-event.svg'}
