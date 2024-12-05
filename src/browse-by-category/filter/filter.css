@@ -49,6 +49,7 @@
     font-size:18px ;
     font-weight:700 ;
     color:white;
+    top:100px;
     padding-left: 15px;
 }
 #one-event-details1{
@@ -72,7 +73,7 @@
 #location{
     position:absolute;
     height:20px;
-    /* top:170px; */
+    top:170px;
     display: flex;
     flex-direction: row;
 }

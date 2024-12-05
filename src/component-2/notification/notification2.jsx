@@ -2,7 +2,7 @@ import React from 'react'
 
 const Notification2= () => {
   return (
-    <div>
+    <div id="notification2">
       
     </div>
   )

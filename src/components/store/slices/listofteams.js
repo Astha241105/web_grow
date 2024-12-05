@@ -27,6 +27,7 @@ export const fetchTeams = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data)
       return data; 
     } catch (error) {
       return rejectWithValue(error.message || 'Something went wrong');
