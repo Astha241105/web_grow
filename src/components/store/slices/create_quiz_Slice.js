@@ -3,15 +3,28 @@ export const addQuizQuestions = createAsyncThunk(
   "quiz/addQuestions",
   async ({ eventId, questions }, { rejectWithValue }) => {
     try {
-      const formattedQuestions = questions.map((q) => ({
-        questionText: q.question,
-        options: q.options,
-        correctAnswer: q.options[q.correctOption],
-      }));
+      const formattedQuestions = questions.map((q) => {
+        const correctAnswer =
+          q.correctOption !== null ? q.options[q.correctOption] : null;
+        const questionObject = {
+          questionText: q.question,
+          options: q.options,
+          correctAnswer: correctAnswer,
+        };
+        console.log("Formatted Question:", questionObject);
+
+        return questionObject;
+      });
+
+      console.log("Full Payload:", {
+        eventId,
+        questions: formattedQuestions,
+      });
 
       const token = localStorage.getItem("authToken");
 
       if (!token) {
+        console.error("No authentication token found");
         return rejectWithValue("No authentication token found");
       }
 
@@ -23,17 +36,25 @@ export const addQuizQuestions = createAsyncThunk(
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(formattedQuestions),
+          body: JSON.stringify({
+            eventId,
+            questions: formattedQuestions,
+          }),
         }
       );
+
+      console.log("Response Status:", response.status);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message || "Failed to add questions");
+        const errorText = await response.text();
+        console.error("Error Response:", errorText);
+        return rejectWithValue(errorText || "Failed to add questions");
       }
 
       const responseData = await response.json();
       return responseData;
     } catch (error) {
+      console.error("Catch Block Error:", error);
       return rejectWithValue(error.message || "An unexpected error occurred");
     }
   }
