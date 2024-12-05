@@ -2,59 +2,85 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const addQuizQuestions = createAsyncThunk(
   "quiz/addQuestions",
   async ({ eventId, questions }, { rejectWithValue }) => {
+    console.group("Quiz Questions Submission");
+    console.log("Event ID:", eventId);
+    console.log("Questions Count:", questions.length);
+
     try {
+      questions.forEach((q, index) => {
+        console.log(`Question ${index + 1}:`, {
+          questionText: q.question,
+          options: q.options,
+          correctOption: q.correctOption,
+          correctAnswer:
+            q.correctOption !== null ? q.options[q.correctOption] : null,
+        });
+      });
+      const token = localStorage.getItem("authToken");
+      console.log("Authentication Token:", token ? "Present" : "Missing");
+
+      const API_URL = `https://www.arthkambhoj.me/api/host/quiz/${eventId}/add-questions`;
+      console.log("API URL:", API_URL);
+
       const formattedQuestions = questions.map((q) => ({
         questionText: q.question,
         options: q.options,
         correctAnswer:
           q.correctOption !== null ? q.options[q.correctOption] : null,
       }));
-      const token = localStorage.getItem("authToken");
-      if (!token) {
-        console.error("No authentication token found");
-        return rejectWithValue("No authentication token found");
-      }
-      console.log("Sending Payload:", {
-        eventId,
-        questions: formattedQuestions,
-        token: token ? "Token Present" : "No Token",
+
+      const fetchConfig = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : undefined,
+        },
+        body: JSON.stringify({
+          eventId,
+          questions: formattedQuestions,
+        }),
+      };
+      console.log("Fetch Configuration:", fetchConfig);
+
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : undefined,
+        },
+        body: JSON.stringify({
+          eventId,
+          questions: formattedQuestions,
+        }),
       });
-      const response = await fetch(
-        `https://www.arthkambhoj.me/api/host/quiz/${eventId}/add-questions`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            eventId,
-            questions: formattedQuestions,
-          }),
-        }
-      );
+
+      console.log("Response Status:", response.status);
+
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Error Response Status:", response.status);
-        console.error("Error Response Text:", errorText);
+        console.error("Error Response:", {
+          status: response.status,
+          statusText: response.statusText,
+          body: errorText,
+        });
 
         return rejectWithValue(
           `HTTP error! status: ${response.status}, message: ${errorText}`
         );
       }
+
       const responseData = await response.json();
+      console.log("Response Data:", responseData);
+      console.groupEnd();
+
       return responseData;
     } catch (error) {
-      console.error("Network Error Details:", {
+      console.error("Submission Error:", {
         name: error.name,
         message: error.message,
         stack: error.stack,
       });
-      if (error instanceof TypeError) {
-        return rejectWithValue(
-          "Network error. Please check your internet connection."
-        );
-      }
+      console.groupEnd();
 
       return rejectWithValue(
         error.message || "An unexpected error occurred during quiz submission"
