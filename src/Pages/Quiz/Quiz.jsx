@@ -121,6 +121,8 @@ const QuizCreator = () => {
 
     console.log("Questions to submit:", questions);
 
+    console.log(eventId);
+
     dispatch(
       addQuizQuestions({
         eventId,
