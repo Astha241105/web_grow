@@ -58,8 +58,15 @@ const Leaderboard = () => {
               </div>
               <div></div>
               <div id="leaderboard-details-result-score">
-                Your Score: {participantDetails.correctAnswers}/
-                {participantDetails.totalQuestions}
+                <div>Total number of question {participantDetails.totalQuestions}</div>
+                <div>Total number of correct answers {participantDetails.correctAnswers}</div>
+                <div>Total number of question {participantDetails.totalQuestions-participantDetails.correctAnswers}</div>
+              </div>
+              <div id="coins-collected">
+                <div id="coins-collected-text">Coins collected</div>
+                <div style={{display: "flex", alignItems: "center"}}>
+                <img id="coins-collected-image2" src="/coins.svg"></img>
+                <div id="coins-collected-text">10 coins are collected for the quiz</div></div>
               </div>
               <div></div>
             </>
@@ -67,32 +74,34 @@ const Leaderboard = () => {
         </div>
       </div>
       <div id="leaderboard-all-participants">
-        <table>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topScores.map((score, index) => (
-              <tr key={index}>
-                <td>
-                  <img
-                    src={score.imageUrl || "/default-avatar.png"}
-                    alt={`${score.participantName}'s Avatar`}
-                    className="leaderboard-participant-image"
-                  />
-                </td>
-                <td>{score.participantName}</td>
-                <td>
-                  {score.correctAnswers}/{score.totalQuestions}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {topScores.map((score, index) => (
+      <tr key={index}>
+        {/* Rank column */}
+        <td>{index + 1}</td>
+        <td>
+          <img
+            src={score.imageUrl || "/default-avatar.png"}
+            alt={`${score.participantName}'s Avatar`}
+            className="leaderboard-participant-image"
+          />
+        </td>
+        <td>{score.participantName}</td>
+        <td>{score.correctAnswers}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
       </div>
     </div>
   );

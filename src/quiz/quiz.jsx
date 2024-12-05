@@ -75,7 +75,6 @@ const Quiz = () => {
 
   const handleNextQuestion = () => {
     if (selectedOption && question?.id) {
-      // Only submit answer and mark as answered if not already answered
       if (!questionsAnswered.includes(currentPage)) {
         dispatch(
           submitQuizAnswer({
@@ -143,13 +142,6 @@ const Quiz = () => {
         </div>
 
         <div id="quiz-progress">
-          <div>
-            <strong>Total Questions:</strong> {totalQuestions}
-          </div>
-          <div>
-            <strong>Questions Attempted:</strong> {attemptedQuestions}
-          </div>
-
           <div id="progress-bar-container">
             <div
               id="progress-bar"
@@ -157,14 +149,15 @@ const Quiz = () => {
                 width: `${progressPercentage}%`,
               }}
             ></div>
+            <div id="no-of-ques">{attemptedQuestions}/{totalQuestions}</div>
           </div>
         </div>
 
         <div id="quiz-question">
           {loading ? (
-            <div>Loading question...</div>
+            <div></div>
           ) : error ? (
-            <div>Error loading question: {error}</div>
+            <div></div>
           ) : (
             question && (
               <div id="full-ques">
@@ -201,7 +194,7 @@ const Quiz = () => {
   onClick={handleNextQuestion}
   disabled={loading || !selectedOption}
 >
-  {currentPage === totalQuestions ? "Submit Answer" : "Next"}
+  {currentPage === totalQuestions ? "Submit" : "Next"}
 </button>
 
 
@@ -222,19 +215,6 @@ const Quiz = () => {
           </div>
         )}
 
-        {eventDetails && (
-          <div id="event-details">
-            <h3>Event Details:</h3>
-            <p>
-              <strong>Title:</strong> {eventDetails.title}
-            </p>
-            <p>
-              <strong>Description:</strong> {eventDetails.description}
-            </p>
-          </div>
-        )}
-
-       
       </div>
     </div>
   );

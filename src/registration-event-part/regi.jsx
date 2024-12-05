@@ -40,27 +40,29 @@ const Regi = () => {
         try {
           const resultAction = await dispatch(registerInEvent({ eventId })).unwrap();
           console.log(resultAction);
-
+  
           if (resultAction.success) {
             console.log("Registration successful");
             // Fetch event details after successful registration
-            dispatch(fetchEventDetailsPublic(eventId));
+            await dispatch(fetchEventDetailsPublic(eventId)).unwrap();
             console.log("Event details fetched successfully");
-
-            // Check if team creation is allowed and show the popup
+  
+            // Check if team creation is allowed
             if (event?.teamCreationAllowed) {
               setShowTeamPopup(true); // Show team popup if team creation is allowed
+            } else {
+              navigate('/'); // Navigate to /home if team creation is not allowed
             }
           }
         } catch (error) {
           console.error("Registration failed:", error);
         }
       };
-
+  
       registerAndFetchDetails(); // Trigger the async function
     }
-  }, [isSubmitted, eventId, dispatch, event?.teamCreationAllowed]); // Depend on isSubmitted, eventId, and event.teamCreationAllowed
-
+  }, [isSubmitted, eventId, dispatch, event?.teamCreationAllowed, navigate]); // Depend on isSubmitted, eventId, event.teamCreationAllowed, and navigate
+  
   useEffect(() => {
     // Scroll to the Teampopup when it is rendered
     if (showTeamPopup && teamPopupRef.current) {

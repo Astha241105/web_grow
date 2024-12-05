@@ -1,6 +1,6 @@
 #leaderboard{
     position:relative;
-    height:100vh;
+    /* height:150vh; */
     width:100vw;
     top:70px;
     display:flex;
@@ -22,16 +22,17 @@
 }
 #leaderboard-details{
     margin-top:40px;
-    height:475px;
+    /* height:475px; */
     width:100%;
     display:flex;
     justify-content:center;
+    flex-wrap:wrap;
     gap:30px;
     align-items:center;
 }
 #leaderboard-details-leaderboaard{
-    height:96%;
-    width:50%;
+    height:400px;
+    width:700px;
     position:relative;
     background-color: teal;
     border-radius:10px;
@@ -40,7 +41,7 @@
     gap:30px;
 }
 .leaderboard-positions{
-    width:20.36%;
+    width:140px;
     background-color:#00D0C9;
     position: absolute;
     bottom:0px;
@@ -50,15 +51,15 @@
 }
 #leaderboard-positions-2{
     height:313px;
-    left:94px;
+    left:13.4%;
 }
 #leaderboard-positions-1{
     height:100%;
-    left:286px;
+    left:40%;
 }
 #leaderboard-positions-3{
     height:235px;
-    left:478px;
+    left:68%;
 }
 .leaderboard-positions-image{
     height: 77px;
@@ -84,7 +85,7 @@
     color:white;
 }
 #leaderboard-details-your-score{
-    height:96%;
+    height:400px;
     width:40%;
     display: flex;
     flex-direction: column;
@@ -113,13 +114,33 @@
 }
 #leaderboard-details-result-score{
     width:90%;
-    height:54px;
+    min-height:120px;
     border-radius:10px;
     background-color:#412DB2;
+    padding:20px;
     color:white;
     font-size: 18px;
     font-weight:700px;
     text-align:center;
+    font-display: flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+#coins-collected{
+    border-radius:10px;
+    border:1px solid black;
+    height:120px;
+    width:90%;
+    /* display: flex;
+    flex-direction:column; */
+}
+#coins-collected-text{
+    font-size:20px;
+    font-weight:700;
+    width:100%;
+}
+#coins-collected-image2{
+    scale:calc(.8)
 }
 #leaderboard-details-result-score-details{
     width:90%;
@@ -140,13 +161,13 @@
     overflow-x:scroll;
 }
 #leaderboard-all-participants {
-    max-height: 300px; /* Adjust height as needed */
     overflow-y: auto;
     border: 1px solid #ddd;
     margin-top: 20px;
   }
   
   #leaderboard-all-participants table {
+    height: 324px;
     width: 100%;
     border-collapse: collapse;
     position: relative;
@@ -159,6 +180,7 @@
     border: 1px solid #ddd;
     background-color: white;
   }
+  
   
   #leaderboard-all-participants th {
     position: sticky;
@@ -174,7 +196,191 @@
     margin-bottom: 20px;
   }
   
-  /* .leaderboard-positions {
-    text-align: center;
-    padding: 10px;
-  }   */
+@media(max-width:1220px){
+    #leaderboard-details-your-score{
+        height:400px;
+        width:60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+@media(max-width:770px){
+    #leaderboard-details-leaderboaard{
+        height:400px;
+        width:600px;
+        position:relative;
+        background-color: teal;
+        border-radius:10px;
+        display:flex;
+        gap:30px;
+    }
+    .leaderboard-positions{
+        width:120px;
+        background-color:#00D0C9;
+        position: absolute;
+        bottom:0px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    #leaderboard-details-your-score{
+        height:400px;
+        width:90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+@media(max-width:620px){
+    #leaderboard-details-leaderboaard{
+        height:400px;
+        width:500px;
+        position:relative;
+        background-color: teal;
+        border-radius:10px;
+        display:flex;
+        gap:30px;
+    }
+    .leaderboard-positions{
+        width:120px;
+        background-color:#00D0C9;
+        position: absolute;
+        bottom:0px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    #leaderboard-details-your-score{
+        height:400px;
+        width:90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+@media(max-width:520px){
+    #leaderboard-details-leaderboaard{
+        height:328px;
+        width:400px;
+        position:relative;
+        background-color: teal;
+        border-radius:10px;
+        display:flex;
+        gap:30px;
+    }
+    .leaderboard-positions{
+        width:100px;
+        background-color:#00D0C9;
+        position: absolute;
+        bottom:0px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    #leaderboard-details-your-score{
+        height:400px;
+        width:90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #leaderboard-positions-2{
+        height:224px;
+        left:13.4%;
+    }
+    #leaderboard-positions-1{
+        height:328px;
+        left:40%;
+    }
+    #leaderboard-positions-3{
+        height:190px;
+        left:68%;
+    }
+    .leaderboard-positions-image{
+        height: 60px;
+        width:60px;
+        border-radius: 50%;
+        background-color:white;
+        margin-top:20px;
+    }
+    .leaderboard-positions-name{
+        color:white;
+        margin-top:5px;
+        font-size: 16px;;
+        font-weight:500
+    }
+    .leaderboard-positions-score{
+        color:white;
+        font-size: 16px;
+        font-weight:500;
+    }
+    .leaderboard-positions-number{
+        font-weight:600;
+        font-size:40px;
+        color:white;
+    }
+    
+}
+@media(max-width:420px){
+    #leaderboard-details-leaderboaard{
+        height:328px;
+        width:340px;
+        position:relative;
+        background-color: teal;
+        border-radius:10px;
+        display:flex;
+        gap:30px;
+    }
+    .leaderboard-positions{
+        width:82px;
+        background-color:#00D0C9;
+        position: absolute;
+        bottom:0px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    #leaderboard-details-your-score{
+        height:400px;
+        width:90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #leaderboard-positions-2{
+        height:224px;
+        left:13.4%;
+    }
+    #leaderboard-positions-1{
+        height:328px;
+        left:40%;
+    }
+    #leaderboard-positions-3{
+        height:190px;
+        left:68%;
+    }
+    .leaderboard-positions-image{
+        height: 60px;
+        width:60px;
+        border-radius: 50%;
+        background-color:white;
+        margin-top:20px;
+    }
+    .leaderboard-positions-name{
+        color:white;
+        margin-top:5px;
+        font-size: 16px;;
+        font-weight:500
+    }
+    .leaderboard-positions-score{
+        color:white;
+        font-size: 16px;
+        font-weight:500;
+    }
+}
