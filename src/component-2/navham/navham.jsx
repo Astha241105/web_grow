@@ -4,7 +4,7 @@ import Loginpopup from "../login-popup/login-popup";
 import { setSelectedCategory } from '../../browse-by-category/selected';  
 import "./navham.css";
 
-const Navham = () => {
+const Navham = ({bgColor}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false); 
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const Navham = () => {
     };
   
   return (
-    <div id="nav-bar-with-hamburger">
+    <div id="nav-bar-with-hamburger" style={{ background: bgColor }}>
       <div id="nav-bar-with-hamburger-icon">
         <div className="hamburger" onClick={toggleMenu}>
           <img id="nav-ham-icon" src="/hambuger.svg" />

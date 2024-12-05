@@ -106,7 +106,7 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        <NavbarSwitcher />
+        <NavbarSwitcher bgColor="#FDF8EE"/>
         <Des />
         <Down />
         <Browsebycategory />
@@ -123,7 +123,7 @@ const router = createBrowserRouter([
     path: "/event",
     element: (
       <div>
-        <ResponsiveNav2 bgColor="#D4E5E4" />
+          <NavbarSwitcher bgColor="#D4E5E4"/>
         <BackgroundEvent />
       </div>
     ),
@@ -153,7 +153,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <div className="event-type-page">
-          <Nav />
+        <NavbarSwitcher bgColor="#ffffff"/>
           <Filter />
         </div>
       </>

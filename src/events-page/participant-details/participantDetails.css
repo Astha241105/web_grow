@@ -56,8 +56,8 @@
     height:1px;
     width:400px;
     border:.5px solid black;
-    left:8px;
-    /* transform:translate(-50%); */
+    left:50%;
+    transform:translate(-50%);
 }
 .part-details-info{
     display: flex;  

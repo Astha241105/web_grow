@@ -128,7 +128,11 @@ const BackgroundEvent = () => {
 
   return (
     <div id="background-event">
+      
       <div id="background-event-all-details">
+      {showLoginPopup && !authToken && (
+            <Loginpopup onClose={() => setShowLoginPopup(false)} />
+          )}
         <div id="for-content-and-image">
           <div id="eventname-back">
             <div id="name-of-event">{capitalizeFirstLetter(event.title)}</div>
@@ -184,20 +188,26 @@ const BackgroundEvent = () => {
         <div  id="registered1"className='part-details-info1'>
         <img className="part-details-img1" src="/people.svg" alt="Registered Icon" />
         <div className="minor-details1">
-        <div style={{  fontWeight: "500" }} >Registered Candidates</div>
-        <div>400</div></div>
+        <div style={{  fontWeight: "500" }} >Maximum Registeration</div>
+        <div>{event.capacityMax}</div></div>
       </div>
-      <div id="team1" className='part-details-info1'>
-        <img className="part-details-img1" src="/team.svg" alt="Team Size Icon" />
-        <div  className="minor-details1">
-        <div>Team Size</div>
-        <div>400</div></div>
-      </div>
+      <div id="team1" className="part-details-info1">
+  <img className="part-details-img1" src="/team.svg" alt="Team Size Icon" />
+  <div className="minor-details1">
+    <div>
+      {event.teamCreationAllowed ? "Team Size" : "Participation Type"}
+    </div>
+    <div>
+      {event.teamCreationAllowed ? `Up to ${event.maxTeamSize}` : "Individual Participation"}
+    </div>
+  </div>
+</div>
+
       <div id="deadline1" className='part-details-info1'>
         <img className="part-details-img1" src="/deadline.svg" alt="Deadline Icon" />
         <div className="minor-details1">
         <div  >Deadline</div>
-        <div>400</div></div>
+        <div>{registerend}</div></div>
       </div>
         </div>
         <div id="event-details">
@@ -370,33 +380,36 @@ const BackgroundEvent = () => {
             </div>
           ) : (
             <div id="part-details">
-              <div id="login-prompt">Login to register for the event</div>
-              <button id="register-now" onClick={handleRegisterClick}>
+              <div id="name-part1">Login to register for the event</div>
+              <button id="register-now-1" onClick={handleRegisterClick}>
                 Register Now
               </button>
             </div>
           )}
-          {showLoginPopup && !authToken && (
-            <Loginpopup onClose={() => setShowLoginPopup(false)} />
-          )}
+         
           <div id="line"></div>
       <div  id="registered"className='part-details-info'>
         <img className="part-details-img" src="/people.svg" alt="Registered Icon" />
         <div className="minor-details">
-        <div  >Registered Candidates</div>
-        <div>400</div></div>
+        <div  >Maximum Registrations</div>
+        <div>{event.capacityMax}</div></div>
       </div>
-      <div id="team" className='part-details-info'>
-        <img className="part-details-img" src="/team.svg" alt="Team Size Icon" />
-        <div  className="minor-details">
-        <div>Team Size</div>
-        <div>400</div></div>
-      </div>
+      <div id="team1" className="part-details-info">
+  <img className="part-details-img" src="/team.svg" alt="Team Size Icon" />
+  <div className="minor-details1">
+    <div>
+      {event.teamCreationAllowed ? "Team Size" : "Participation Type"}
+    </div>
+    <div>
+      {event.teamCreationAllowed ? `Up to ${event.maxTeamSize}` : "Individual Participation"}
+    </div>
+  </div>
+</div>
       <div id="deadline" className='part-details-info'>
         <img className="part-details-img" src="/deadline.svg" alt="Deadline Icon" />
         <div className="minor-details">
         <div  >Deadline</div>
-        <div>400</div></div>
+        <div>{registerend}</div></div>
       </div>
     </div>
       </div>

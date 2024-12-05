@@ -3,22 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./description.css";
 import ib from "./eclipse-des.png";
-import { fetchEventsPublic } from '../../components/store/slices/publicevents';
+import { fetchEventsPublic } from "../../components/store/slices/publicevents";
 
 const Des = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const allEvents = useSelector((state) => state.events.events);
-  console.log(allEvents)
+
+  const { events: allEvents, status } = useSelector((state) => state.events); // Updated to include `status`
 
   useEffect(() => {
-    dispatch(fetchEventsPublic());
-  }, [dispatch]);
+    if (status === "idle") {
+      dispatch(fetchEventsPublic()); // Fetch events only if the state is idle
+    }
+  }, [dispatch, status]);
 
   useEffect(() => {
-    if (searchQuery.length > 0) {
+    if (searchQuery.length > 0 && allEvents.length > 0) {
       const results = allEvents.filter((event) =>
         event.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -33,7 +35,7 @@ const Des = () => {
   };
 
   const handleResultClick = (eventId) => {
-    navigate('/event', { state: { eventId } });
+    navigate("/event", { state: { eventId } });
   };
 
   return (
@@ -55,7 +57,9 @@ const Des = () => {
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
         />
-        {filteredResults.length > 0 && (
+        {status === "loading" ? (
+          <div>Loading...</div>
+        ) : filteredResults.length > 0 ? (
           <ul className="search-results">
             {filteredResults.map((event) => (
               <li
@@ -67,7 +71,9 @@ const Des = () => {
               </li>
             ))}
           </ul>
-        )}
+        ) : searchQuery && filteredResults.length === 0 ? (
+          <div>No events found.</div>
+        ) : null}
       </div>
       <img id="eclipse" src={ib} alt="Eclipse" />
       <img id="ia" src="/group2.png" alt="Event illustration" />

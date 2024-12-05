@@ -89,6 +89,7 @@
 .phone-register-now{
     position: absolute;
     width:fit-content;
+    display:none;
     height:50px;
     padding: 5px;
     border-radius:10px;
@@ -119,6 +120,22 @@
     position:relative;
     left:16px;
 }
+}
+@media(max-width:1150px){
+    .phone-register-now{
+        position: absolute;
+        width:fit-content;
+        height:40px;
+        display:inline;
+        padding: 5px;
+        border-radius:10px;
+        background-color: teal;
+        color:white;
+        font-size:16px;
+        font-weight: 700;
+        top:250px;
+        margin-left:170px;;
+    }
 }
 @media(max-width:700px){
     #logo-of-event{
@@ -180,6 +197,7 @@
           position: absolute;
           width:fit-content;
           height:40px;
+          display:inline;
           padding: 5px;
           border-radius:10px;
           background-color: teal;

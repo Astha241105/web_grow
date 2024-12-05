@@ -286,7 +286,7 @@ const formattedTimeend = event && event.endTime ? new Date(event.endTime).toLoca
           </div>
         </div>
 
-        {/* <div className="organizer-details111">
+        {/* <div className="organizer-details1111">
           <div id="stages-and-timeline-head">Organizers</div>
           <div id="stages-and-timeline-content">
             <div className="stages-and-timeline-1">
@@ -327,8 +327,8 @@ const formattedTimeend = event && event.endTime ? new Date(event.endTime).toLoca
                   ))}
                 </div>
               )}
-            </div> */}
-          {/* </div>
+            </div>
+          </div>
         </div> */}
         </div>
       {/* </div> */}
@@ -338,7 +338,7 @@ const formattedTimeend = event && event.endTime ? new Date(event.endTime).toLoca
           filteredEvents.map((event) => (
             <div
               key={event.id}
-              className="registered-event-card"
+              className="registered-event-card1"
               onClick={() => handleEventClick(event.id)}
             >
               <div className="registered-event-card-info">
