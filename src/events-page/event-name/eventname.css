@@ -22,14 +22,14 @@
      top:41px;
      font-size:40px;
      font-weight:600;}
-#institute{
+#institute1{
     position:absolute;
      height:20px;
      top:112px;
      display: flex;
      flex-direction: row;
 }
-#type-event{
+#type-event1{
     position:absolute;
      height:20px;
      top:141px;
@@ -37,14 +37,14 @@
      flex-direction: row;
 
 }
-#location{
+#location1{
     position:absolute;
     height:20px;
     top:170px;
     display: flex;
     flex-direction: row;
 }
-.eventname-text{
+.eventname-text1{
     font-size:16px;
     font-weight: 500;
     padding-left: 15px;

@@ -136,19 +136,19 @@ const BackgroundEvent = () => {
         <div id="for-content-and-image">
           <div id="eventname-back">
             <div id="name-of-event">{capitalizeFirstLetter(event.title)}</div>
-            <div id="institute">
+            <div id="institute1">
               <img className="event-name-images" src="/college.svg" alt="college" />
-              <div className="eventname-text">
+              <div className="eventname-text1">
                 {capitalizeFirstLetter(event.host.organization)}
               </div>
             </div>
-            <div id="type-event">
+            <div id="type-event1">
               <img className="event-name-images" src="/deadline.svg" alt="event type" />
-              <div className="eventname-text">Deadline : {registerend}</div>
+              <div className="eventname-text1">Deadline : {registerend}</div>
             </div>
-            <div id="location">
+            <div id="location1">
               <img className="event-name-images" src="/location.svg" alt="location" />
-              <div className="eventname-text">
+              <div className="eventname-text1">
                 {capitalizeFirstLetter(event.location)}
               </div>
             </div>
