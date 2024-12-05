@@ -9,6 +9,9 @@ import "./HomeScreen.css";
 const HomeScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const handleManageEvent = () => {
+    navigate("/event-manage");
+  };
   useEffect(() => {
     dispatch(fetchEvents());
   }, [dispatch]);
@@ -103,7 +106,11 @@ const HomeScreen = () => {
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">My Events</h2>
-            <a href="#" className="text-sm text-black font-medium">
+            <a
+              href="#"
+              className="text-sm text-black font-medium"
+              onClick={handleManageEvent}
+            >
               See all
             </a>
           </div>
