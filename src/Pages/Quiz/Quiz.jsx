@@ -98,7 +98,6 @@ const QuizCreator = () => {
   };
 
   const handleSubmitQuiz = () => {
-    // Validation checks
     if (!eventId) {
       alert("No event selected. Please go back and select an event.");
       return;
