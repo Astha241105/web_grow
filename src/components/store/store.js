@@ -21,7 +21,7 @@ import teamsReducer from "./slices/listofteams";
 import createTeamReducer from "./slices/creatingteampart";
 import teamRequestReducer from "./slices/joinrequest";
 import updateEventReducer from "./slices/updateeventSlice";
-import quizCreateReducer from "./slices/create_quiz_Slice";
+import quizQuestionsReducer from "./slices/create_quiz_Slice";
 import notificationsReducer from "./slices/notificationpart";
 import joinRequestResponseReducer from "./slices/requestresponse";
 import quizReducer from "./slices/quizpart";
@@ -33,8 +33,8 @@ import roomsReducer from "./slices/createroomSlice";
 import fetchEventsPublicReducer from "./slices/publicevents";
 import pastEventsReducer from "./slices/pastevents";
 import eventNotificationsReducer from "./slices/notificationSlice";
-import eventDetailsPublicReducer from './slices/publiceventdetails';
-import removeFavouriteReducer from "./slices/removefromfav"
+import eventDetailsPublicReducer from "./slices/publiceventdetails";
+import removeFavouriteReducer from "./slices/removefromfav";
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -50,7 +50,7 @@ export const store = configureStore({
     publicEvents: fetchEventsPublicReducer,
     events: eventsReducer,
     eventDetails: eventDetailsReducer,
-    eventDetailsPublic:eventDetailsPublicReducer,
+    eventDetailsPublic: eventDetailsPublicReducer,
     eventRegistration: eventRegistrationReducer,
     favorites: favoritesReducer,
     addToFavorites: addToFavoritesReducer,
@@ -62,7 +62,7 @@ export const store = configureStore({
     updateEvent: updateEventReducer,
     notifications: notificationsReducer,
     joinrequestResponse: joinRequestResponseReducer,
-    quizCreate: quizCreateReducer,
+    quizQuestions: quizQuestionsReducer,
     quiz: quizReducer,
     quizStatus: quizStatusReducer,
     quizfinal: quizfinalReducer,

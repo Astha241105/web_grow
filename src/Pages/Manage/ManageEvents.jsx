@@ -103,6 +103,23 @@ const Event_Manage = () => {
         dispatch(deleteEvent(id));
       }
     };
+    const handleCreateQuiz = (e) => {
+      e.stopPropagation();
+      navigate("/create-quiz", {
+        state: {
+          eventId: id,
+          eventData: {
+            id,
+            title,
+            college,
+            tag,
+            date,
+            mode,
+            ...event,
+          },
+        },
+      });
+    };
 
     const handleCardClick = () => {
       navigate("/event-detail", {
@@ -167,6 +184,14 @@ const Event_Manage = () => {
               >
                 <img src="door.svg" alt="Edit" />
               </button>
+              {mode === "online" && tag === "Quiz" && (
+                <button
+                  className="p-1 hover:bg-gray-100 rounded"
+                  onClick={handleCreateQuiz}
+                >
+                  <img src="pen.svg" alt="Create Quiz" />
+                </button>
+              )}
               <button
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={(e) => {
