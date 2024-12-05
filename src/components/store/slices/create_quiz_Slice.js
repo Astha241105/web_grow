@@ -1,51 +1,53 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-export const createQuiz = createAsyncThunk(
-  "quiz/createQuiz",
-  async ({ eventId, title, description, questions }, { rejectWithValue }) => {
+export const addQuizQuestions = createAsyncThunk(
+  "quiz/addQuestions",
+  async ({ eventId, questions }, { rejectWithValue }) => {
     try {
-      const payload = {
-        title,
-        description,
-        questions: questions.map((q) => ({
-          questionText: q.question,
-          options: q.options,
-          correctAnswer: q.options[q.correctOption],
-        })),
-      };
+      const formattedQuestions = questions.map((q) => ({
+        questionText: q.question,
+        options: q.options,
+        correctAnswer: q.options[q.correctOption],
+      }));
+
+      const token = localStorage.getItem("authToken");
+
+      if (!token) {
+        return rejectWithValue("No authentication token found");
+      }
 
       const response = await fetch(
-        `https://arthkambhoj.me/api/host/quiz/${eventId}/add-questions`,
+        `https://www.arthkambhoj.me/api/host/quiz/${eventId}/add-questions`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(formattedQuestions),
         }
       );
-
       if (!response.ok) {
         const errorData = await response.json();
-        return rejectWithValue(errorData);
+        return rejectWithValue(errorData.message || "Failed to add questions");
       }
 
-      return await response.json();
+      const responseData = await response.json();
+      return responseData;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || "An unexpected error occurred");
     }
   }
 );
 
-const quizCreateSlice = createSlice({
-  name: "quizCreate",
+const quizQuestionsSlice = createSlice({
+  name: "quizQuestions",
   initialState: {
     loading: false,
     success: false,
     error: null,
   },
   reducers: {
-    resetQuizCreateState: (state) => {
+    resetQuizQuestionsState: (state) => {
       state.loading = false;
       state.success = false;
       state.error = null;
@@ -53,23 +55,24 @@ const quizCreateSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createQuiz.pending, (state) => {
+      .addCase(addQuizQuestions.pending, (state) => {
         state.loading = true;
         state.success = false;
         state.error = null;
       })
-      .addCase(createQuiz.fulfilled, (state) => {
+      .addCase(addQuizQuestions.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
         state.error = null;
       })
-      .addCase(createQuiz.rejected, (state, action) => {
+      .addCase(addQuizQuestions.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
-        state.error = action.payload;
+        state.error = action.payload || "Failed to add questions";
       });
   },
 });
 
-export const { resetQuizCreateState } = quizCreateSlice.actions;
-export default quizCreateSlice.reducer;
+export const { resetQuizQuestionsState } = quizQuestionsSlice.actions;
+
+export default quizQuestionsSlice.reducer;

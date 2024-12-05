@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavHost from "../Host/NavHost";
 import {
-  createQuiz,
-  resetQuizCreateState,
+  addQuizQuestions,
+  resetQuizQuestionsState,
 } from "../../components/store/slices/create_quiz_Slice";
 
 const QuizCreator = () => {
-  const { eventId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, success, error } = useSelector((state) => state.quizCreate);
+  const { loading, success, error } = useSelector(
+    (state) => state.quizQuestions
+  );
 
-  const [title, setTitle] = useState("");
+  // Extract event data from navigation state
+  const { eventId, eventData } = location.state || {};
+
+  const [title, setTitle] = useState(eventData?.title || "");
   const [description, setDescription] = useState("");
   const [questions, setQuestions] = useState([
     {
@@ -22,6 +28,7 @@ const QuizCreator = () => {
       correctOption: null,
     },
   ]);
+
   const handleAddQuestion = () => {
     setQuestions([
       ...questions,
@@ -29,6 +36,7 @@ const QuizCreator = () => {
         id: questions.length + 1,
         question: "",
         options: ["", "", "", ""],
+        correctOption: null,
       },
     ]);
   };
@@ -81,6 +89,7 @@ const QuizCreator = () => {
     }
     setQuestions(updatedQuestions);
   };
+
   const handleCorrectOptionChange = (questionId, optionIndex) => {
     setQuestions(
       questions.map((q) =>
@@ -90,6 +99,12 @@ const QuizCreator = () => {
   };
 
   const handleSubmitQuiz = () => {
+    // Validation checks
+    if (!eventId) {
+      alert("No event selected. Please go back and select an event.");
+      return;
+    }
+
     if (!title.trim()) {
       alert("Please enter a quiz title");
       return;
@@ -104,38 +119,45 @@ const QuizCreator = () => {
       alert("Please select a correct answer for each question");
       return;
     }
+
+    // Dispatch action to add quiz questions
     dispatch(
-      createQuiz({
+      addQuizQuestions({
         eventId,
-        title,
-        description,
         questions,
       })
     );
   };
 
+  // Handle success and error states
   useEffect(() => {
     if (success) {
-      alert("Quiz created successfully!");
-      setTitle("");
-      setDescription("");
-      setQuestions([
-        {
-          id: 1,
-          question: "",
-          options: ["", "", "", ""],
-          correctOption: null,
-        },
-      ]);
-      dispatch(resetQuizCreateState());
+      alert("Quiz questions added successfully!");
+      // Reset form or navigate
+      navigate(-1); // Go back to previous page
+      dispatch(resetQuizQuestionsState());
     }
-  }, [success, dispatch]);
+  }, [success, dispatch, navigate]);
+
   useEffect(() => {
     if (error) {
-      alert(`Quiz creation failed: ${error}`);
-      dispatch(resetQuizCreateState());
+      alert(`Failed to add quiz questions: ${error}`);
+      dispatch(resetQuizQuestionsState());
     }
   }, [error, dispatch]);
+
+  // If no event data is passed, show an error message
+  if (!eventId) {
+    return (
+      <div className="max-w-3xl mx-auto bg-white">
+        <NavHost />
+        <div className="p-5 text-red-500">
+          No event selected. Please go back and select an event to create a
+          quiz.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto bg-white">
@@ -145,7 +167,7 @@ const QuizCreator = () => {
         <div className="flex items-center mb-4">
           <input
             type="text"
-            placeholder="Opportunity Title"
+            placeholder="Quiz Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full p-2 text-lg text-black font-semibold bg-transparent border-none focus:outline-none focus:ring-0 placeholder:text-black"
@@ -153,16 +175,17 @@ const QuizCreator = () => {
           <img
             src="pen.svg"
             className="absolute left-[38%] cursor-pointer"
+            alt="Edit"
           ></img>
         </div>
-        <label className="p-2  text-lg text-black font-semibold">
+        <label className="p-2 text-lg text-black font-semibold">
           Add Description
         </label>
         <textarea
           placeholder="Write something"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="resize-none placeholder:text-black w-full p-2 mt-2 min-h-[100px]  rounded-md focus:outline-none focus:border-teal-600 font-semibold"
+          className="resize-none placeholder:text-black w-full p-2 mt-2 min-h-[100px] rounded-md focus:outline-none focus:border-teal-600 font-semibold"
         />
       </div>
       {questions.map((q, qIndex) => (
@@ -181,6 +204,7 @@ const QuizCreator = () => {
                 <img
                   src="Arrow_up.svg"
                   className={qIndex === 0 ? "opacity-50" : ""}
+                  alt="Move Up"
                 />
               </button>
               <button
@@ -193,19 +217,20 @@ const QuizCreator = () => {
                   className={
                     qIndex === questions.length - 1 ? "opacity-50" : ""
                   }
+                  alt="Move Down"
                 />
               </button>
               <button
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={() => handleCopyQuestion(q)}
               >
-                <img src="copy.svg"></img>
+                <img src="copy.svg" alt="Copy"></img>
               </button>
               <button
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={() => handleDeleteQuestion(q.id)}
               >
-                <img src="dustbin.svg"></img>
+                <img src="dustbin.svg" alt="Delete"></img>
               </button>
             </div>
           </div>
@@ -268,4 +293,5 @@ const QuizCreator = () => {
     </div>
   );
 };
+
 export default QuizCreator;
