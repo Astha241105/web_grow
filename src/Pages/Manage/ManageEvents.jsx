@@ -208,12 +208,17 @@ const Event_Manage = () => {
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold mt-8">
-            <span className="text-[#008080] font-semibold">Manage</span> Your
-            Events with ease
+            <span className="text-[#008080] font-semibold text-2xl">
+              Manage
+            </span>
+            <span className="font-semibold text-xl">
+              {" "}
+              Your Events with ease
+            </span>
           </h1>
         </div>
 
-        <div className="flex space-x-4 mb-8">
+        <div className="flex md:flex-row flex-col gap-2  mb-8">
           {metrics.map((metric, index) => (
             <MetricCard key={index} {...metric} />
           ))}

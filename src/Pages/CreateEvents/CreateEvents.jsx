@@ -72,9 +72,11 @@ const CreateEvents = () => {
   };
 
   return (
-    <div className="ce">
-      <div className="ce-gradient z-[-1]"> </div>
-      <div className="ce-gradient2 z-[-1]"></div>
+    <div className="ce overflow-hidden">
+      <div className="ce-gradient z-[-1] w-[200px] md:w-[875px] h-[1800px]">
+        {" "}
+      </div>
+      <div className="ce-gradient2 z-[-1]  w-[200px] md:w-[875px] h-[1800px] "></div>
       <div className="ce-form">
         <div className="ce-progress-bar">
           <div className="ce-back-button">
@@ -95,7 +97,7 @@ const CreateEvents = () => {
             </div>
           </div>
         </div>
-        <hr />
+        <hr className="w-full" />
         <div className="ce-form-content">
           <h1 className="bd-head">Basic Details</h1>
           <div className="ce-form-group">
