@@ -152,7 +152,7 @@ const BackgroundEvent = () => {
                 {capitalizeFirstLetter(event.location)}
               </div>
             </div>
-            <div id="event-updatedon">
+            <div id="event-updatedon-1">
               <div id="event-updatedon-1">Updated on:&nbsp;</div>
               <div>{formattedDate}</div>
             </div>

@@ -1,8 +1,35 @@
-#team-ask-pop-up{
-    height:343px;
-    max-width:343px;
-    width:90%;
-    background-color: aqua;
+#team-ask-pop-up {
+    height: 343px;
+    width: 90%;
+    max-width:800px;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 100000;
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    display: flex;
+    flex-direction: row;
+    border:1px solid black;
+    justify-content: space-around;
+    align-items: center;
+  }
+  #team-ask-pop-up-inside{
+    height: 200px;
+    width:300px;
     border-radius:10px;
-    z-index:10;
-}
+    border:1px solid black;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+  #team-ask-pop-up img {
+    cursor: pointer;
+  }
+  #team-ask-pop-up-inside div{
+    font-size: 20px;
+    font-weight:600;
+  }

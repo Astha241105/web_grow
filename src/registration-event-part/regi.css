@@ -1,183 +1,232 @@
 #form-for-event {
-  position: absolute;
+  position: relative; /* changed from absolute to relative for proper positioning */
   left: 50%;
   transform: translate(-50%);
   width: 65%;
-  padding: 80px 40px; 
-  box-sizing: border-box; 
+  padding: 80px 40px;
+  box-sizing: border-box;
+  z-index: 1; /* Ensures it stays below the popup */
 }
-#form-for-event1{
-    font-size:24px ;
-    font-weight: 600;
-    left:296px;
+
+.blur-background {
+  filter: blur(5px);
+  pointer-events: none;
 }
-.form-for-events-labels{
+
+#form-for-event1 {
+  font-size: 24px;
+  font-weight: 600;
+  left: 296px;
+}
+
+.form-for-events-labels {
   font-size: 18px;
   font-weight: 500;
   display: block;
-  margin-top:58px;
-  margin-bottom: 26px;;
+  margin-top: 58px;
+  margin-bottom: 26px;
 }
-.form-for-events-input{
+
+.form-for-events-input {
   font-size: 16px;
   font-weight: 400;
-  width:100%;
-  height:50px;
-  background-color: #D9D9D9;
-  border-radius:10px;
-  padding-left:20px
+  width: 100%;
+  height: 50px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  padding-left: 20px;
 }
-#button-for-options{
-  width:100%;
+
+#button-for-options {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size:18px;
+  font-size: 18px;
   font-weight: 500;
 }
-.button-for-type{
-  width:20%;
+
+.button-for-type {
+  width: 20%;
   padding: 10px;
-  height:77px;
+  height: 77px;
   display: flex;
-  gap:5%;
+  gap: 5%;
   justify-content: center;
   align-items: center;
   border: 1px teal solid;
   border-radius: 10px;
 }
-.form-for-events-input1{
+
+.form-for-events-input1 {
   font-size: 16px;
   font-weight: 400;
-  width:100%;
-  height:50px;
-  background-color: #D9D9D9;
-  border-radius:10px;
-  padding-left:20px
+  width: 100%;
+  height: 50px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  padding-left: 20px;
 }
-#last-options{
-  display:flex;
-  gap:20px;
-  width:100%;
+
+#last-options {
+  display: flex;
+  gap: 20px;
+  width: 100%;
   justify-content: space-between;
 }
-.last-options-parts{
-  width:100%;
+
+.last-options-parts {
+  width: 100%;
 }
-#form-for-event-next{
-  width:106px;
-  height:46px;
+
+#form-for-event-next {
+  width: 106px;
+  height: 46px;
   background-color: teal;
-  color:white;
+  color: white;
   font-size: 20px;
   font-weight: 700;
   border-radius: 10px;
-  margin-top:30px;
-  margin-left:calc(100% - 106px);
+  margin-top: 30px;
+  margin-left: calc(100% - 106px);
 }
-@media(max-width:1080px){
-  #button-for-options{
-    font-size:16px;
+
+@media (max-width: 1080px) {
+  #button-for-options {
+    font-size: 16px;
     font-weight: 500;
   }
-  .button-for-type{
-    width:20%;
+
+  .button-for-type {
+    width: 20%;
     padding: 20px;
-    height:70px;
-    gap:2%;
+    height: 70px;
+    gap: 2%;
   }
 }
-@media(max-width:910px){
-  #button-for-options{
-    font-size:14px;
+
+@media (max-width: 910px) {
+  #button-for-options {
+    font-size: 14px;
     font-weight: 500;
   }
-  .button-for-type{
-    width:22%;
+
+  .button-for-type {
+    width: 22%;
     padding: 20px;
-    height:70px;
+    height: 70px;
   }
 }
-@media(max-width:700px){
+
+@media (max-width: 700px) {
   #form-for-event {
     width: 80%;
   }
 }
-@media(max-width:600px){
-  #button-for-options{
-    flex-wrap:wrap;
-    font-size:14px;
+
+@media (max-width: 600px) {
+  #button-for-options {
+    flex-wrap: wrap;
+    font-size: 14px;
     justify-content: space-between;
     font-weight: 500;
   }
-    .button-for-type{
-    width:153px;
-    height:46px;
+
+  .button-for-type {
+    width: 153px;
+    height: 46px;
     padding: 5px;
     margin-top: 10px;
   }
 }
-@media(max-width:500px){
+
+@media (max-width: 500px) {
   #form-for-event {
     width: 90%;
   }
-  #form-for-event1{
-    font-size:16px ;
+
+  #form-for-event1 {
+    font-size: 16px;
     font-weight: 500;
-    left:296px;
-}
-  .form-for-events-labels{
-    margin-top:25px;
+    left: 296px;
+  }
+
+  .form-for-events-labels {
+    margin-top: 25px;
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: 500;
   }
-#last-options{
-  display:flex;
-  gap:20px;
-  width:100%;
-  justify-content: space-between;
-  flex-wrap:wrap;
-}
-}
-@media(max-width:430px){
-  #form-for-event {
-    width: 95%;
-    padding: 0 30px; 
+
+  #last-options {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
-@media(max-width:390px){
-  .button-for-type{
-    width:120px;
-    height:46px;
+
+@media (max-width: 430px) {
+  #form-for-event {
+    width: 95%;
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 390px) {
+  .button-for-type {
+    width: 120px;
+    height: 46px;
     padding: 5px;
     margin-top: 10px;
   }
-  
-}
-@media(max-width:360px){
- 
-#form-for-event {
-  top: 173px;
-  width: 100%;
-  padding: 0 19px; 
-}
-#form-for-event1{
-    font-size:16px ;
-    font-weight: 500;
-    left:296px;
-}
-.form-for-events-labels{
-  font-size: 18px;
-  font-weight: 500;
-  display: block;
-  margin-top:25px;
-  margin-bottom: 20px;;
-}
-.form-for-events-input{
-  font-size: 16px;
-  font-weight: 400;
-  width:100%;
-  height:50px;
 }
 
+@media (max-width: 360px) {
+  #form-for-event {
+    top: 173px;
+    width: 100%;
+    padding: 0 19px;
+  }
+
+  #form-for-event1 {
+    font-size: 16px;
+    font-weight: 500;
+    left: 296px;
+  }
+
+  .form-for-events-labels {
+    font-size: 18px;
+    font-weight: 500;
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 20px;
+  }
+
+  .form-for-events-input {
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    height: 50px;
+  }
 }
+/* Add this to your existing CSS */
+
+/* Style to blur background when popup is visible */
+.blur-background {
+  filter: blur(5px);
+  pointer-events: none; /* Disables interaction with background content */
+}
+
+/* Pop-up styling */
+
+#form-for-event {
+  position: relative; /* changed from absolute to relative for proper positioning */
+  left: 50%;
+  transform: translate(-50%);
+  width: 65%;
+  padding: 80px 40px;
+  box-sizing: border-box;
+  z-index: 1; /* Ensures it stays below the popup */
+}
+

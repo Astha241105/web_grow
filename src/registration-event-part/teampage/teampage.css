@@ -40,6 +40,10 @@
     width:100%;
     margin-top:10px;
     border-radius:10px;
+    padding-left:20px;
+    display: flex;
+    flex-wrap: column;
+    align-items: center;
     background: url('/smallrec.svg') left center no-repeat;
     background-size: 9px;
     background-color: #C8FAC8;
