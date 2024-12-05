@@ -6,15 +6,19 @@ export const addQuizQuestions = createAsyncThunk(
       const formattedQuestions = questions.map((q) => ({
         questionText: q.question,
         options: q.options,
-        correctAnswer: q.options[q.correctOption],
+        correctAnswer:
+          q.correctOption !== null ? q.options[q.correctOption] : null,
       }));
-
       const token = localStorage.getItem("authToken");
-
       if (!token) {
+        console.error("No authentication token found");
         return rejectWithValue("No authentication token found");
       }
-
+      console.log("Sending Payload:", {
+        eventId,
+        questions: formattedQuestions,
+        token: token ? "Token Present" : "No Token",
+      });
       const response = await fetch(
         `https://www.arthkambhoj.me/api/host/quiz/${eventId}/add-questions`,
         {
@@ -23,18 +27,38 @@ export const addQuizQuestions = createAsyncThunk(
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(formattedQuestions),
+          body: JSON.stringify({
+            eventId,
+            questions: formattedQuestions,
+          }),
         }
       );
       if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message || "Failed to add questions");
-      }
+        const errorText = await response.text();
+        console.error("Error Response Status:", response.status);
+        console.error("Error Response Text:", errorText);
 
+        return rejectWithValue(
+          `HTTP error! status: ${response.status}, message: ${errorText}`
+        );
+      }
       const responseData = await response.json();
       return responseData;
     } catch (error) {
-      return rejectWithValue(error.message || "An unexpected error occurred");
+      console.error("Network Error Details:", {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      });
+      if (error instanceof TypeError) {
+        return rejectWithValue(
+          "Network error. Please check your internet connection."
+        );
+      }
+
+      return rejectWithValue(
+        error.message || "An unexpected error occurred during quiz submission"
+      );
     }
   }
 );
