@@ -103,6 +103,23 @@ const Event_Manage = () => {
         dispatch(deleteEvent(id));
       }
     };
+    const handleCreateQuiz = (e) => {
+      e.stopPropagation();
+      navigate("/create-quiz", {
+        state: {
+          eventId: id,
+          eventData: {
+            id,
+            title,
+            college,
+            tag,
+            date,
+            mode,
+            ...event,
+          },
+        },
+      });
+    };
 
     const handleCardClick = () => {
       navigate("/event-detail", {
@@ -167,6 +184,14 @@ const Event_Manage = () => {
               >
                 <img src="door.svg" alt="Edit" />
               </button>
+              {mode === "online" && tag === "Quiz" && (
+                <button
+                  className="p-1 hover:bg-gray-100 rounded"
+                  onClick={handleCreateQuiz}
+                >
+                  <img src="pen.svg" alt="Create Quiz" />
+                </button>
+              )}
               <button
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={(e) => {
@@ -208,12 +233,17 @@ const Event_Manage = () => {
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold mt-8">
-            <span className="text-[#008080] font-semibold">Manage</span> Your
-            Events with ease
+            <span className="text-[#008080] font-semibold text-2xl">
+              Manage
+            </span>
+            <span className="font-semibold text-xl">
+              {" "}
+              Your Events with ease
+            </span>
           </h1>
         </div>
 
-        <div className="flex space-x-4 mb-8">
+        <div className="flex md:flex-row flex-col gap-2  mb-8">
           {metrics.map((metric, index) => (
             <MetricCard key={index} {...metric} />
           ))}
