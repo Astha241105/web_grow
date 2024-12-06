@@ -35,6 +35,7 @@ import pastEventsReducer from "./slices/pastevents";
 import eventNotificationsReducer from "./slices/notificationSlice";
 import eventDetailsPublicReducer from "./slices/publiceventdetails";
 import removeFavouriteReducer from "./slices/removefromfav";
+import event_DetailsReducer from "./slices/eventDetailSlice";
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -73,7 +74,9 @@ export const store = configureStore({
     timeline: timelineReducer,
     eventNotifications: eventNotificationsReducer,
     favourite: removeFavouriteReducer,
+    event_details: event_DetailsReducer,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;
