@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, clearError } from "../store/slices/authSlice";
 import { fetchAllUserData } from "../action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth); 
+  const { loading, error } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -16,12 +18,11 @@ const Login = () => {
     password: "",
   });
 
- 
   useEffect(() => {
-    const token = localStorage.getItem("authToken"); 
+    const token = localStorage.getItem("authToken");
     if (token) {
-      dispatch(fetchAllUserData()); 
-      navigate("/"); 
+      dispatch(fetchAllUserData());
+      navigate("/");
     }
     dispatch(clearError());
   }, [dispatch, navigate]);
@@ -33,27 +34,47 @@ const Login = () => {
       [name]: value,
     }));
   };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    if (!validateEmail(formData.email)) {
+      toast.error("Invalid email format");
+      return;
+    }
+
+    if (!validatePassword(formData.password)) {
+      toast.error(
+        "Password must be 8-16 characters, include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
+      );
+      return;
+    }
+
     const result = await dispatch(loginUser(formData));
-    
-    console.log(result, "Login Result");
-    
+
     if (result.payload && result.payload.status === "SUCCESS") {
       const { message } = result.payload;
-      console.log(message)
+      toast.success("Login successful");
       if (message.includes("USER")) {
-        
         dispatch(fetchAllUserData());
         navigate("/");
       } else {
-       
         navigate("/home-host");
       }
     } else {
-      console.error("Authentication failed");
-    
+      const errorMessage = result.payload || "An unexpected error occurred.";
+    toast.error(errorMessage);
     }
   };
 
@@ -73,6 +94,17 @@ const Login = () => {
 
   return (
     <div className="login">
+      <ToastContainer 
+       position="top-center"
+       autoClose={5000}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       pauseOnFocusLoss
+       draggable
+       pauseOnHover
+       theme="dark"/>
       <img
         src="/Rectangle2.png"
         className="white-bg hidden md:block"
@@ -92,12 +124,6 @@ const Login = () => {
 
         <div className="form-section">
           <h3 className="heading w-[300px] md:w-[392px]">Welcome Back!</h3>
-          {error && (
-            <div className="error-message">
-              <img src="/caution.png" alt="Error" />
-              {error}
-            </div>
-          )}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label className="label">Email:</label>

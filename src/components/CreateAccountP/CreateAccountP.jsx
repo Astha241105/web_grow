@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPersonalDetails } from "../store/slices/accountslice.js";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Import toast
 import "./CreateAccountP.css";
 
 const CreateAccountP = () => {
@@ -12,14 +13,41 @@ const CreateAccountP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Regex for name, email, and mobile validation
+  const nameRegex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Default email regex
+  const mobileRegex = /^[0-9]{10}$/; // Only 10 digits
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Name Validation
+    if (!nameRegex.test(name.trim())) {
+      toast.error("Name should only contain alphabets and spaces.");
+      setLoading(false);
+      return;
+    }
+
+    // Email Validation
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
+
+    // Mobile Validation
+    if (!mobileRegex.test(mobile)) {
+      toast.error("Please enter a valid 10-digit mobile number.");
+      setLoading(false);
+      return;
+    }
+
+    // If all validations pass
     const [firstName, ...lastNameParts] = name.trim().split(" ");
     const lastName = lastNameParts.join(" ");
 
     dispatch(setPersonalDetails({ firstName, lastName, email, mobile }));
-
     navigate("/create-pass-participant");
   };
 
@@ -83,7 +111,7 @@ const CreateAccountP = () => {
               />
             </div>
             <button type="submit" className="cn-continue" disabled={loading}>
-              Continue
+              {loading ? "Processing..." : "Continue"}
             </button>
 
             <p className="signin-link">

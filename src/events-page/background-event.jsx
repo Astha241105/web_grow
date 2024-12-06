@@ -12,7 +12,7 @@ import { fetchParticipantProfile } from '../components/store/slices/participantp
 import { fetchRegisteredEvents } from '../components/store/slices/registeredevent';
 import { fetchQuizStatus } from '../components/store/slices/quizprogress';
 import Loginpopup from "../component-2/login-popup/login-popup"
- 
+import {toast} from "react-toastify";
 
 const BackgroundEvent = () => {
   const navigate = useNavigate();
@@ -66,23 +66,24 @@ const BackgroundEvent = () => {
     const endTime = new Date(event.endTime);
   
     if (currentTime < startTime) {
-      alert('The quiz has not started yet!');
+      toast.info('The quiz has not started yet!');
       return;
     }
   
     if (currentTime > endTime) {
-      alert('The quiz is over!');
+      toast.info('The quiz is over!');
       return;
     }
   
     try {
-      const result = await dispatch(fetchQuizStatus({ eventId }));
+      const result =  dispatch(fetchQuizStatus({ eventId }));
       if (result.payload) {
         const { totalQuestions } = result.payload;
         navigate('/quiz', { state: { totalQuestions, eventId } });
       }
     } catch (error) {
       console.error("Error fetching quiz status:", error);
+      alert("Your have already submitted the quiz")
     }
   };
   

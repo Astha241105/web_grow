@@ -179,7 +179,6 @@
   margin-bottom: 29px;
 }
 
-/* Responsive Design */
 @media screen and (max-width: 360px) {
   .image-section {
     top: -15px;
@@ -307,9 +306,9 @@
   }
 
   .image-section {
-    height: auto;
-    max-height: 200px;
-    width: 238px;
+    height: 400px;
+    max-height: 400px;
+    width: 400px;
   }
 }
 

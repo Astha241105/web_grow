@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateHostDetails, registerHost } from "../store/slices/hostslice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";  // Import Toastify
+import "react-toastify/dist/ReactToastify.css";  // Import CSS for Toastify
 import "./CreatePass.css";
 
 const CreatePass = () => {
@@ -17,6 +19,9 @@ const CreatePass = () => {
   const navigate = useNavigate();
 
   const existingHostDetails = useSelector((state) => state.host);
+
+  // Regex for Password Validation
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/;
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -38,18 +43,32 @@ const CreatePass = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  const validatePassword = () => {
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "Password must be 8-16 characters, include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
+      );
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      toast.error("Passwords do not match.");
       return;
     }
 
     if (!acceptTerms) {
       setError("Please accept the terms and conditions.");
+      toast.error("Please accept the terms and conditions.");
       return;
     }
+
+    if (!validatePassword()) return;
 
     setError("");
     setIsSubmitting(true);
@@ -61,11 +80,14 @@ const CreatePass = () => {
     };
 
     dispatch(updateHostDetails(updatedHostDetails));
+
     dispatch(registerHost(updatedHostDetails))
       .then(() => {
         navigate("/otp-host");
       })
-      .finally(() => {
+      .catch((error) => {
+        // Handle errors from the API call
+        toast.error(`Error: ${error.response?.data?.message || "Something went wrong"}`);
         setIsSubmitting(false);
       });
   };
@@ -89,9 +111,7 @@ const CreatePass = () => {
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
             <div className="cnform">
-            {error && <p className="error-message">
-              <img src="/caution.png"></img>{error}
-              </p>}
+
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>
@@ -133,8 +153,6 @@ const CreatePass = () => {
                   onClick={toggleConfirmPasswordVisibility}
                 />
               </div>
-
-              
             </div>
 
             <label className="square">

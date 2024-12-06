@@ -24,7 +24,6 @@ import HostOtpVerification from "./components/CreateAccountH/otpforhost.jsx";
 import BackgroundEvent from "./events-page/background-event.jsx";
 import Regi from "./registration-event-part/regi.jsx";
 import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
-import ResponsiveNav from "./component-2/condnav/condnav.jsx";
 import ResponsiveNav2 from "./component-2/condnavpart/contnavpart.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
 import Partprofile from "./participant-profile/partprofile.jsx";

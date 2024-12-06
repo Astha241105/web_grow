@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { updateHostDetails } from "../store/slices/hostslice";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +14,11 @@ const CreateAccountH = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Regex patterns
+  const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+  const mobileRegex = /^[0-9]{10}$/; // 10 digit number only
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -21,11 +27,47 @@ const CreateAccountH = () => {
     }));
   };
 
+  const validateInputs = () => {
+    if (!formData.name.trim()) {
+      console.log("Name is required error triggered."); // Debugging
+      toast.error("Name is required.");
+      return false;
+    
+    }
+    if (!nameRegex.test(formData.name)) {
+      toast.error("Name must contain alphabets only, no spaces or special characters.");
+      return false;
+    }
+
+    if (!formData.email.trim()) {
+      toast.error("Email is required.");
+      return false;
+    }
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Invalid email format.");
+      return false;
+    }
+
+    if (!formData.mobile.trim()) {
+      toast.error("Mobile number is required.");
+      console.log("Name is required error triggered."); // Debugging
+      return false;
+    }
+    if (!mobileRegex.test(formData.mobile)) {
+      toast.error("Mobile number must be a 10-digit number.");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!validateInputs()) return; // Exit if any validation fails
+
     const [firstname, ...lastNameParts] = formData.name.split(" ");
-    const lastname = lastNameParts.join(" ");
+    const lastname = lastNameParts.join(" ") || ""; // Handle single-word names
 
     dispatch(
       updateHostDetails({
@@ -36,6 +78,7 @@ const CreateAccountH = () => {
       })
     );
 
+    toast.success("Validation successful. Proceeding...");
     navigate("/create-account-host-options");
   };
 
@@ -51,7 +94,7 @@ const CreateAccountH = () => {
         <div className="image-section">
           <img src="/create_account.svg" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/")}>
-            <img src="home.svg" className="cn-home hidden md:block" />
+            <img src="home.svg" className="cn-home hidden md:block" alt="home" />
           </a>
         </div>
         <div className="form-sec">

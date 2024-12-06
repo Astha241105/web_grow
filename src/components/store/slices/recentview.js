@@ -7,7 +7,7 @@ export const fetchRecentViews = createAsyncThunk(
       const state = getState();
       const authToken = localStorage.getItem("authToken")
 
-      const response = await fetch('http://www.arthkambhoj.me.:8080/api/v1/participant/viewed?page=0&size=3', {
+      const response = await fetch('https://arthkambhoj.me/api/v1/participant/viewed?page=0&size=10', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

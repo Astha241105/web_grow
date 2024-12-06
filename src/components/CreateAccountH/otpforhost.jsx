@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateHostOtp } from "../store/slices/hostotp";
 import { resendHostOtp } from "../store/slices/hostslice";
+import { toast } from "react-toastify"; // Import Toastify
 import "./otpforhost.css";
 
 const HostOtpVerification = () => {
@@ -43,6 +44,15 @@ const HostOtpVerification = () => {
 
   const handleVerify = () => {
     const otpValue = otp.join("");
+
+    // Apply regex to check if the OTP consists of only digits
+    const otpRegex = /^[0-9]{4}$/;
+
+    if (!otpRegex.test(otpValue)) {
+      toast.error("Please enter a valid 4-digit OTP."); // Show error toast
+      return;
+    }
+
     dispatch(validateHostOtp({ email, otp: otpValue }));
   };
 
@@ -111,8 +121,11 @@ const HostOtpVerification = () => {
         </button>
         {status === "loading" && <p>Validating...</p>}
         {status === "failed" && (
-          <p style={{ color: "red" ,fontSize: "20px"}}>
-            <b>Incorrect code!</b><br></br>Try again.</p>
+          <p style={{ color: "red", fontSize: "20px" }}>
+            <b>Incorrect code!</b>
+            <br />
+            Try again.
+          </p>
         )}
         {status === "success" && (
           <p style={{ color: "green" }}>OTP Verified!</p>

@@ -5,6 +5,7 @@ import {
   forgotPassword,
   clearPasswordResetState,
 } from "../store/slices/ForgotPassSlice";
+import { toast } from "react-toastify"; // Import Toastify
 import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
@@ -35,6 +36,12 @@ const ForgotPassword = () => {
     }
   };
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error); // Display error using Toastify
+    }
+  }, [error]);
+
   return (
     <div className="forgot-pass">
       <img src="/Rectangle2.png" className="white-bg" alt="background" />
@@ -54,12 +61,6 @@ const ForgotPassword = () => {
           <h3 className="fphead">Forgot Password</h3>
           <p className="fpp">Enter your registered email</p>
 
-          {error && (
-            <p className="error-message" style={{ color: "red" }}>
-              <img src="/caution.png"></img>
-              {error}
-            </p>
-          )}
           {success && (
             <p className="success-message" style={{ color: "green" }}>
               {message}
@@ -70,7 +71,7 @@ const ForgotPassword = () => {
             <div className="fpform">
               <label htmlFor="contact">Email:</label>
               <input
-                type="text"
+                type="email"
                 id="contact"
                 name="contact"
                 value={contact}

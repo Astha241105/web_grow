@@ -5,12 +5,13 @@ import {
   setPasswordDetails,
 } from "../store/slices/accountslice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./CreateAccountP.css";
 
 const CreatePassP = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -28,20 +29,28 @@ const CreatePassP = () => {
     status,
   } = useSelector((state) => state.account);
 
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "Password must be 8-16 characters, include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
+      );
+      return;
+    }
+
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
     if (!acceptTerms) {
-      setError("Please agree to terms and conditions.");
+      toast.error("Please agree to terms and conditions.");
       return;
     }
-
-    setError("");
 
     dispatch(setPasswordDetails({ password, confirmPassword }));
     dispatch(
@@ -59,14 +68,11 @@ const CreatePassP = () => {
       .then(() => {
         navigate("/otpWithMail");
       })
-      .catch((err) => setError("Failed to register. Try again."));
+      .catch(() => toast.error("Failed to register. Try again."));
   };
 
   const handleCheckboxChange = (e) => {
     setAcceptTerms(e.target.checked);
-    if (e.target.checked) {
-      setError("");
-    }
   };
 
   const togglePasswordVisibility = () => {
@@ -96,7 +102,6 @@ const CreatePassP = () => {
           <h3 className="cnhead">Create your account</h3>
           <form onSubmit={handleSubmit}>
             <div className="cnform">
-              {error && <p className="error-message"><img src="/caution.png"></img>{error}</p>}
               <label htmlFor="Password" className="block mb-1">
                 Password:
               </label>
@@ -158,10 +163,9 @@ const CreatePassP = () => {
               type="submit"
               className="pass-button"
               disabled={status === "loading"}
-              style={{ opacity:status === "loading"  ? 0.7 : 1 }}
+              style={{ opacity: status === "loading" ? 0.7 : 1 }}
             >
               {status === "loading" ? "Sending OTP..." : "GET OTP"}
-            
             </button>
 
             <p className="signin-link">

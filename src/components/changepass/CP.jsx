@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changePassword } from "../store/slices/fpchangeslice";
+import { toast } from "react-toastify"; // Import Toastify
 import "./changepass.css";
 
 const Changepass = () => {
@@ -17,6 +18,10 @@ const Changepass = () => {
   const { email, verifiedOtp } = useSelector((state) => state.fpotp);
   const { isLoading, error } = useSelector((state) => state.fpchange);
   const [localError, setLocalError] = useState("");
+
+  // Regular expression for password validation
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
 
   const handleChange = (e) => {
     setLocalError("");
@@ -39,14 +44,21 @@ const Changepass = () => {
       setLocalError("Both password fields are required");
       return false;
     }
-    if (passwords.newPassword.length < 6) {
-      setLocalError("Password must be at least 6 characters long");
+
+    // Check if the password meets the required pattern
+    if (!passwordRegex.test(passwords.newPassword)) {
+      setLocalError(
+        "Password must be 8-16 characters long, include at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character."
+      );
+      toast.error(localError); // Show error toast
       return false;
     }
+
     if (passwords.newPassword !== passwords.confirmPassword) {
       setLocalError("Passwords don't match!");
       return false;
     }
+
     return true;
   };
 
@@ -107,8 +119,8 @@ const Changepass = () => {
       <div className="image-section1">
         <img src="/fpass.svg" alt="logo" className="logo" />
         <a href="#" onClick={() => navigate("/home")}>
-            <img src="back.svg" className="cn-home" />
-          </a>
+          <img src="back.svg" className="cn-home" />
+        </a>
       </div>
       <div id="container4">
         <h1 id="change">Change Password</h1>

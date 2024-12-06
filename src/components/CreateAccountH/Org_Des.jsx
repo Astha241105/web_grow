@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateHostDetails } from "../store/slices/hostslice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";  // Import Toastify
+import "react-toastify/dist/ReactToastify.css";  // Import CSS for Toastify
 import "./Org_Des.css";
 
 const Org_Des = () => {
@@ -15,6 +17,9 @@ const Org_Des = () => {
 
   const existingHostDetails = useSelector((state) => state.host);
 
+  // Regex for Organization and Designation (allows only alphabets and spaces)
+  const orgDesRegex = /^[A-Za-z\s]+$/;
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -23,8 +28,34 @@ const Org_Des = () => {
     }));
   };
 
+  const validateInputs = () => {
+    // Validate Organization
+    if (!formData.organization.trim()) {
+      toast.error("Organization is required.");
+      return false;
+    }
+    if (!orgDesRegex.test(formData.organization)) {
+      toast.error("Organization must contain only alphabets and spaces.");
+      return false;
+    }
+
+    // Validate Designation
+    if (!formData.designation.trim()) {
+      toast.error("Designation is required.");
+      return false;
+    }
+    if (!orgDesRegex.test(formData.designation)) {
+      toast.error("Designation must contain only alphabets and spaces.");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateInputs()) return; // Exit if validation fails
 
     const updatedHostDetails = {
       ...existingHostDetails,
@@ -33,6 +64,7 @@ const Org_Des = () => {
 
     dispatch(updateHostDetails(updatedHostDetails));
 
+    toast.success("Validation successful. Proceeding...");
     navigate("/create-pass-host");
   };
 
@@ -56,35 +88,30 @@ const Org_Des = () => {
           <form onSubmit={handleSubmit}>
             <div className="cnform2">
               <label htmlFor="organization" className="block mb-1">
-                Organisation:
+                Organization:
               </label>
-              <select
+              <input
+                type="text"
                 id="organization"
                 value={formData.organization}
                 onChange={handleInputChange}
+                placeholder="Enter Organization"
                 required
                 className="opt"
-              >
-                <option value="Organization A">Organization A</option>
-                <option value="Organization B">Organization B</option>
-              </select>
-              <img src="/down-arrow.svg" alt="arrow" className="arrow1" />
+              />
 
               <label htmlFor="designation" className="block mb-1">
                 Designation:
               </label>
-              <select
+              <input
+                type="text"
                 id="designation"
                 value={formData.designation}
                 onChange={handleInputChange}
+                placeholder="Enter Designation"
                 required
                 className="opt"
-              >
-                <option value="">Enter Designation</option>
-                <option value="Manager">Manager</option>
-                <option value="Head">Head</option>
-              </select>
-              <img src="/down-arrow.svg" alt="arrow" className="arrow2" />
+              />
             </div>
 
             <button type="submit" id="org-continue" className="opt">

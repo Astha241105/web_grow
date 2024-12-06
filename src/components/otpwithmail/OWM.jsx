@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { validateOtp, resendOtp } from "../store/slices/otpslice";
+import { toast } from "react-toastify"; // Import Toastify
 import "./OtpWithMail.css";
 
 const OtpWithMail = () => {
@@ -12,6 +13,12 @@ const OtpWithMail = () => {
     (state) => state.account
   );
   const { status, error } = useSelector((state) => state.otp);
+
+  // Function to check if OTP format is correct (4 digits)
+  const isOtpValid = () => {
+    const otpValue = otp.join("");
+    return /^\d{4}$/.test(otpValue); // Check if OTP is a 4-digit number
+  };
 
   const handleChange = (e, index) => {
     const { value } = e.target;
@@ -33,6 +40,11 @@ const OtpWithMail = () => {
   };
 
   const handleVerify = () => {
+    if (!isOtpValid()) {
+      toast.error("Please enter a valid 4-digit OTP."); // Show error if OTP is invalid
+      return;
+    }
+
     const otpValue = otp.join("");
     dispatch(validateOtp({ email, otp: otpValue }));
   };
@@ -58,6 +70,12 @@ const OtpWithMail = () => {
     }
   }, [status, navigate]);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error); // Show error toast if there's an error
+    }
+  }, [error]);
+
   return (
     <div className="forgot-pass">
       <img
@@ -65,7 +83,6 @@ const OtpWithMail = () => {
         className="white-bg hidden md:block"
         alt="background"
       />
-
       <img src="/home.svg" alt="cross" className="cross hidden md:block" />
       <img
         src="/bgMobile.png"
@@ -100,8 +117,11 @@ const OtpWithMail = () => {
         </button>
         {status === "loading" && <p>Validating...</p>}
         {status === "failed" && (
-          <p style={{ color: "red" ,fontSize: "20px"}}>
-            <b>Incorrect code!</b><br></br>Try again.</p>
+          <p style={{ color: "red", fontSize: "20px" }}>
+            <b>Incorrect code!</b>
+            <br />
+            Try again.
+          </p>
         )}
         {status === "success" && (
           <p style={{ color: "green" }}>OTP Verified!</p>

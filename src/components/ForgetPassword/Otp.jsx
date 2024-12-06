@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { verifyOtp } from "../store/slices/fpotpslice";
 import { forgotPassword } from "../store/slices/ForgotPassSlice";
+import { toast } from "react-toastify"; // Import toast
 import "../otpwithmail/OtpWithMail.css";
 import "./otp.css";
+
 
 const Otp = () => {
   const dispatch = useDispatch();
@@ -32,10 +34,14 @@ const Otp = () => {
 
   const handleChange = (e, index) => {
     const { value } = e.target;
-    if (value.length > 1) return;
+
+    // Allow only numeric values (0-9)
+    if (/[^0-9]/.test(value)) return;
+
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
+
     if (value && index < otp.length - 1) {
       document.getElementById(`otp-input-${index + 1}`).focus();
     }
@@ -49,34 +55,41 @@ const Otp = () => {
 
   const handleVerify = async () => {
     const otpValue = otp.join("");
+
     console.log("Starting OTP verification with:", {
       email: recoveryEmail,
       otp: otpValue,
     });
 
+    // Check if OTP is valid (4 digits)
     if (otpValue.length !== 4) {
       alert("Please enter a complete 4-digit OTP");
       return;
     }
 
     try {
+      // Send OTP for verification
       await dispatch(
         verifyOtp({ email: recoveryEmail, otp: otpValue })
       ).unwrap();
       console.log("OTP verified successfully, navigating to change password");
       navigate("/change-password");
     } catch (err) {
-      console.error("Verification failed:", err.message);
+      toast.error("Verification failed:", err.message);
+      // Show toast error message on OTP verification failure
+      toast.error("Invalid OTP. Please try again.");
     }
   };
 
   const handleResendOtp = async () => {
     console.log("Resending OTP to:", recoveryEmail);
     try {
+      // Send request to resend OTP
       await dispatch(forgotPassword(recoveryEmail));
       console.log("OTP resent successfully");
     } catch (err) {
       console.error("Failed to resend OTP:", err.message);
+      toast.error("Failed to resend OTP. Please try again.");
     }
   };
 
