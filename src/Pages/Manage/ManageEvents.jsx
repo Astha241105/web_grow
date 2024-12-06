@@ -121,6 +121,23 @@ const Event_Manage = () => {
       });
     };
 
+    const handleHost = () => {
+      navigate("/host-manage", {
+        state: {
+          eventId: id,
+          eventData: {
+            id,
+            title,
+            college,
+            tag,
+            date,
+            mode,
+            ...event,
+          },
+        },
+      });
+    };
+
     const handleCardClick = () => {
       navigate("/event-detail", {
         state: {
@@ -179,6 +196,15 @@ const Event_Manage = () => {
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={(e) => {
                   e.stopPropagation();
+                  handleHost();
+                }}
+              >
+                <img src="teams.svg" alt="Delete" />
+              </button>
+              <button
+                className="p-1 hover:bg-gray-100 rounded"
+                onClick={(e) => {
+                  e.stopPropagation();
                   handleRoom();
                 }}
               >
@@ -189,7 +215,7 @@ const Event_Manage = () => {
                   className="p-1 hover:bg-gray-100 rounded"
                   onClick={handleCreateQuiz}
                 >
-                  <img src="pen.svg" alt="Create Quiz" />
+                  <img src="Quiz.svg" alt="Create Quiz" />
                 </button>
               )}
               <button

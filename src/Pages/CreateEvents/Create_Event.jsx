@@ -220,10 +220,10 @@ const Create_Events = () => {
 
   return (
     <div className="ce">
-      <div className="ce-gradient z-[-1] w-[200px] md:w-[875px] h-[1800px]">
+      <div className="ce-gradient z-[-1] w-[200px] md:w-[875px] h-[1024px]">
         {" "}
       </div>
-      <div className="ce-gradient2 z-[-1]w-[200px] md:w-[875px] h-[1800px]"></div>
+      <div className="ce-gradient2 z-[-1] w-[200px] md:w-[875px] h-[1024px]"></div>
       <div className="ce-form">
         <div className="ce-progress-bar">
           <div className="ce-back-button">
