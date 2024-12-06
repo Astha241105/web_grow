@@ -17,21 +17,13 @@ import {
 } from "./components";
 import OtpWithMail from "./components/otpwithmail/OWM.jsx";
 import Changepass from "./components/changepass/CP.jsx";
-import Down from "./component-2/down/down.jsx";
 import Areu from "./components/areu/Are.jsx";
 import Nav from "./component-2/navhome/nav.jsx";
-import Des from "./component-2/description/description.jsx";
-import Browsebycategory from "./component-2/browsebycategory/browsebycategory.jsx";
 import Backgroundhome from "./component-2/background/backgroundhome.jsx";
 import HostOtpVerification from "./components/CreateAccountH/otpforhost.jsx";
 import BackgroundEvent from "./events-page/background-event.jsx";
 import Regi from "./registration-event-part/regi.jsx";
 import Navregister from "./registration-event-part/nav-register/nav-register.jsx";
-import Upcoming from "./component-2/upcoming-events/upcoming.jsx";
-import Eventlist from "./component-2/diff-events/eventlist.jsx";
-import Hostnow from "./component-2/hostAnOpportunity/hostnow.jsx";
-import Footer from "./component-2/footer/footer.jsx";
-import Navpart from "./component-2/nav-participant/navpart.jsx";
 import ResponsiveNav from "./component-2/condnav/condnav.jsx";
 import ResponsiveNav2 from "./component-2/condnavpart/contnavpart.jsx";
 import Creatingteam from "./registration-event-part/creatingteam/creatingteam.jsx";
@@ -39,6 +31,9 @@ import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
 import Quiz from "./quiz/quiz.jsx";
+import Badges from "./participant-profile/badges/badges.jsx";
+import Watchlist from "./participant-profile/watchlist/watchlist.jsx";
+import Edit from "./participant-profile/edit-profile/edit.jsx";
 import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
 import NavbarSwitcher from "./component-2/navswitch.jsx";
 import Pastevents from "./participant-profile/pastevents/past.jsx";
@@ -60,6 +55,8 @@ import {
   View_participants,
   NotificationsPage,
 } from "./Pages";
+import Registered from "./participant-profile/registered/registered.jsx";
+import Notification2 from "./component-2/notification/notification2.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -94,6 +91,53 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/registration2",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Registered />
+      </div>
+    ),
+  },
+  {
+    path: "/watchlist",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Watchlist />
+      </div>
+    ),
+  },
+  {
+    path: "/notification2",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Notification2 />
+      </div>
+    ),
+  },
+  {
+    path: "/coins",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Badges />
+      </div>
+    ),
+  },
+  {
+    path: "/edit",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Edit />
+      </div>
+    ),
+  },
+  
+
+  {
     path: "/create-account-participant",
     element: <CreateAccountP />,
   },
@@ -106,14 +150,6 @@ const router = createBrowserRouter([
     element: (
       // <ProtectedRoute>
       <Backgroundhome>
-        <NavbarSwitcher bgColor="#FDF8EE"/>
-        <Des />
-        <Down />
-        <Browsebycategory />
-        <Upcoming />
-        <Eventlist />
-        <Hostnow />
-        <Footer />
       </Backgroundhome>
 
       // </ProtectedRoute>

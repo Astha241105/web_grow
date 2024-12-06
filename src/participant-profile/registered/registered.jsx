@@ -9,22 +9,15 @@ const Registered = () => {
   const navigate = useNavigate(); 
 
   const { events, loading, error } = useSelector((state) => state.registeredEvents);
-  const { status, loading: statusLoading, error: statusError } = useSelector((state) => state.quizStatus);
 
   useEffect(() => {
     dispatch(fetchRegisteredEvents());
   }, [dispatch]);
 
-  const handleViewDetails = (quizId) => {
-    dispatch(fetchQuizStatus({ quizId })).then((result) => {
-      if (result.payload) {
-        const { totalQuestions } = result.payload;
-        navigate('/quiz', {
-          state: { totalQuestions,quizId}, 
-        });
-      }
-    });
-  };
+  const handleViewDetails = (eventId) => {
+        navigate('/event', {
+          state: {eventId}, 
+        }); };
 
   if (loading) {
     return <div></div>;
@@ -65,8 +58,6 @@ const Registered = () => {
           ))
         )}
       </div>
-      {statusLoading && <div>Loading quiz status...</div>}
-      {statusError && <div>Error fetching quiz status: {statusError}</div>}
     </div>
   );
 };

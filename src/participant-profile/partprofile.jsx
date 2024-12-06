@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './part-profile.css';
 import Edit from "./edit-profile/edit";
 import Registered from './registered/registered';
@@ -13,13 +13,18 @@ import { fetchParticipantProfile } from '../components/store/slices/participantp
 
 const Partprofile = () => {
   const [selectedOption, setSelectedOption] = useState('Edit');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { profile, isLoading, error } = useSelector((state) => state.participant);
 
   useEffect(() => {
     dispatch(fetchParticipantProfile());
   }, [dispatch]);
 
+  // Handle fetching data for selected options
   useEffect(() => {
     if (selectedOption === 'Registrations') {
       dispatch(fetchRegisteredEvents());
@@ -28,7 +33,34 @@ const Partprofile = () => {
     }
   }, [selectedOption, dispatch]);
 
-  const { profile, isLoading, error } = useSelector((state) => state.participant);
+  // Handle screen resizing
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1000);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Handle navigation based on selected option
+  const navigateToOption = (option) => {
+    setSelectedOption(option);
+    if (isMobile) {
+      switch (option) {
+        case 'Registrations':
+          navigate('/registration2');
+          break;
+        case 'Badges':
+          navigate('/coins');
+          break;
+        case 'Watchlist':
+          navigate('/watchlist');
+          break;
+        default:
+          navigate('/edit');
+      }
+    }
+  };
 
   const handleLogout = () => {
     localStorage.clear(); // Clear all local storage data
@@ -36,17 +68,32 @@ const Partprofile = () => {
   };
 
   const renderContent = () => {
-    switch (selectedOption) {
-      case 'Registrations':
-        return <Registered />;
-      case 'Badges':
-        return <Badges />;
-      case 'Watchlist':
-        return <Watchlist />;
-      case 'Certificates':
-        return <Certificate />;
-      default:
-        return <Edit />;
+    if (isMobile) {
+      // On mobile screens, render based on routes
+      switch (location.pathname) {
+        case '/registration2':
+          return <Registered />;
+        case '/coins':
+          return <Badges />;
+        case '/watchlist':
+          return <Watchlist />;
+        case '/edit':
+          return <Edit />;
+        default:
+          return <Edit />;
+      }
+    } else {
+      // On larger screens, render content based on selectedOption
+      switch (selectedOption) {
+        case 'Registrations':
+          return <Registered />;
+        case 'Badges':
+          return <Badges />;
+        case 'Watchlist':
+          return <Watchlist />;
+        default:
+          return <Edit />;
+      }
     }
   };
 
@@ -63,7 +110,7 @@ const Partprofile = () => {
             <img id="part-profile-details-img" src={profile.imageUrl} alt="Profile" />
             <div id="part-profile-details-details">
               <div id="part-profile-details-name">
-                {profile.firstname || 'First Name'} {profile.lastname}
+                {profile.firstname} {profile.lastname}
               </div>
               <div className="part-profile-details-e-and-i">{profile.email || 'Email'}</div>
             </div>
@@ -71,7 +118,7 @@ const Partprofile = () => {
               id="edit-part-profile"
               src="/edit-profile.svg"
               alt="Edit Profile"
-              onClick={() => setSelectedOption('Edit')}
+              onClick={() => navigateToOption('Edit')}
             />
           </div>
         ) : (
@@ -81,31 +128,24 @@ const Partprofile = () => {
         <div id="part-profile-options">
           <div
             className="part-profile-options-list"
-            onClick={() => setSelectedOption('Registrations')}
+            onClick={() => navigateToOption('Registrations')}
           >
             <img src="/registered.svg" alt="Registrations" />
             <div className="part-profile-options-list-1">Registrations/Applications</div>
           </div>
           <div
             className="part-profile-options-list"
-            onClick={() => setSelectedOption('Badges')}
+            onClick={() => navigateToOption('Badges')}
           >
             <img src="/badge.svg" alt="Badges" />
             <div className="part-profile-options-list-1">Badges and Coins</div>
           </div>
           <div
             className="part-profile-options-list"
-            onClick={() => setSelectedOption('Watchlist')}
+            onClick={() => navigateToOption('Watchlist')}
           >
             <img src="/liked.svg" alt="Watchlist" />
             <div className="part-profile-options-list-1">Watchlist</div>
-          </div>
-          <div
-            className="part-profile-options-list"
-            onClick={() => setSelectedOption('Certificates')}
-          >
-            <img src="/certificate.svg" alt="Certificates" />
-            <div className="part-profile-options-list-1">Certificates</div>
           </div>
           <div className="part-profile-options-list" onClick={handleLogout}>
             <img src="/logout.svg" alt="Logout" />

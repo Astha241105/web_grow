@@ -1,6 +1,6 @@
 #part-profile-render{
     width:100vw;
-    height:100vh;
+    /* height:auto; */
     background-color: #D4E5E4;
     position: relative;
     display:flex;
@@ -78,7 +78,7 @@
 .part-profile-options-list{
     display: flex;
     flex-direction: row;
-
+    cursor:pointer;
 }
 .part-profile-options-list-1{
     font-size: 16px;
@@ -92,14 +92,11 @@
         max-width:350px;  
     }}
 @media(max-width:1000px){
-    #part-profile{
-        display:none;
-    }
     #part-profile-render{
         background-color:white;
     }
     #part-profile-content{
-        width:1000%;
+        display:none;
     }
     #part-profile{
         max-width:417px;  
