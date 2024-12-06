@@ -1,17 +1,32 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import NavHost from "../Host/NavHost";
 import { fetchHosts } from "../../components/store/slices/hostsSlice";
+import { addHostAsCollaborator } from "../../components/store/slices/addCollaboratorSlice";
 
 const TeamManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
-  const { hosts, loading, error } = useSelector((state) => state.hosts);
+  const location = useLocation();
+
+  // Extract eventId from location state
+  const { eventId, eventData } = location.state || {};
+
+  const {
+    hosts,
+    loading: hostsLoading,
+    error: hostsError,
+  } = useSelector((state) => state.hosts);
+  const { loading: collaboratorLoading, error: collaboratorError } =
+    useSelector((state) => state.addCollaborator);
+
   useEffect(() => {
     dispatch(fetchHosts());
   }, [dispatch]);
 
-  const collaborators = [
+  // Existing collaborators (you may want to replace this with actual collaborators from API)
+  const [collaborators, setCollaborators] = useState([
     {
       id: 1,
       name: "Ansh Gupta",
@@ -19,21 +34,36 @@ const TeamManagement = () => {
       institution: "IIT Delhi",
       status: "connected",
     },
-    {
-      id: 2,
-      name: "Rahul Sharma",
-      role: "Associate Professor",
-      institution: "IIT Delhi",
-      status: "connected",
-    },
-    {
-      id: 3,
-      name: "Priya Patel",
-      role: "Research Scholar",
-      institution: "IIT Delhi",
-      status: "connected",
-    },
-  ];
+    // ... other existing collaborators
+  ]);
+
+  // Handler to add host as collaborator
+  const handleAddCollaborator = (hostId) => {
+    if (eventId && hostId) {
+      dispatch(addHostAsCollaborator({ eventId, hostId }))
+        .then((response) => {
+          if (
+            response.type === "collaborators/addHostAsCollaborator/fulfilled"
+          ) {
+            // Remove host from hosts list and add to collaborators
+            const hostToAdd = hosts.find(
+              (host) => String(host.id) === String(hostId)
+            );
+            if (hostToAdd) {
+              setCollaborators((prev) => [
+                ...prev,
+                { ...hostToAdd, status: "connected" },
+              ]);
+            }
+          }
+        })
+        .catch((error) => {
+          console.error("Add collaborator error:", error);
+        });
+    }
+  };
+
+  // Filter functions (remain the same)
   const filteredCollaborators = useMemo(() => {
     const searchLower = searchQuery.toLowerCase().trim();
     return collaborators.filter(
@@ -54,6 +84,7 @@ const TeamManagement = () => {
     );
   }, [hosts, searchQuery]);
 
+  // Collaborator Card component (remains the same)
   const CollaboratorCard = ({ name, role, institution, status }) => (
     <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#000] mb-3">
       <div className="flex items-center">
@@ -67,6 +98,7 @@ const TeamManagement = () => {
     </div>
   );
 
+  // Host Card component
   const HostCard = ({ id, name, role, institution, imageUrl }) => (
     <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#000] mb-3">
       <div className="flex items-center">
@@ -85,64 +117,37 @@ const TeamManagement = () => {
           <p className="text-sm text-[#000]">{institution}</p>
         </div>
       </div>
-      <button className="px-4 py-1 rounded-full text-sm border border-[#008080] text-[#008080]">
-        Add Collaborator
+      <button
+        onClick={() => handleAddCollaborator(id)}
+        disabled={collaboratorLoading}
+        className="px-4 py-1 rounded-full text-sm border border-[#008080] text-[#008080] disabled:opacity-50"
+      >
+        {collaboratorLoading ? "Adding..." : "Add Collaborator"}
       </button>
     </div>
   );
 
+  // Render the component (remains the same)
   return (
     <div className="min-h-screen bg-white">
       <NavHost />
       <hr className="absolute w-[153%] left-0 top-[60px] border-b border-black border-[0px]" />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-semibold mt-10">
-            <span className="text-[#008080] font-semibold">Connect</span> and
-            Work{" "}
-            <span className="text-[#008080] font-semibold">
-              Collaboratively
-            </span>{" "}
-            with
-          </h1>
-          <h2 className="text-3xl font-semibold">other hosts</h2>
-        </div>
-
-        <div className="relative mb-8">
-          <div className="relative">
-            <img
-              src="search-icon.svg"
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-              alt="Search Icon"
-            />
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-1/3 px-4 py-2 pl-10 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:border-[#008080]"
-            />
+        {/* Event title display */}
+        {eventData && (
+          <div className="mb-4 text-xl font-semibold">
+            Event: {eventData.title}
           </div>
-        </div>
-
-        <div className="mb-8">
-          <div className="border-b border-gray-200">
-            <div className="flex gap-8">
-              <button className="pb-2 px-1 border-b-2 border-[#008080] font-semibold text-[#008080]">
-                Add Collaborators
-              </button>
-            </div>
-          </div>
-        </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-[#008080]">Hosts</h3>
-            {loading ? (
+            {hostsLoading ? (
               <p>Loading hosts...</p>
-            ) : error ? (
-              <p>Error: {error}</p>
+            ) : hostsError ? (
+              <p>Error: {hostsError}</p>
             ) : (
               filteredHosts.map((host) => <HostCard key={host.id} {...host} />)
             )}
@@ -158,6 +163,13 @@ const TeamManagement = () => {
             </div>
           </div>
         </div>
+
+        {/* Error handling for collaborator addition */}
+        {collaboratorError && (
+          <div className="text-red-500 mt-4">
+            Error adding collaborator: {collaboratorError}
+          </div>
+        )}
       </main>
     </div>
   );

@@ -252,7 +252,7 @@ const CreateEvents = () => {
           <div className="ce-form-group">
             <label>About Opportunity*</label>
             <textarea
-              className="ce-guidelines"
+              className="ce-guidelines pr-[6rem]"
               name="aboutOpportunity"
               disabled={!isEditable}
               value={formData.aboutOpportunity}
