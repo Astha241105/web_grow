@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchEventDetails } from "../../components/store/slices/eventDetailSlice";
@@ -12,6 +12,48 @@ const Details = () => {
   const { eventId } = location.state || {};
   const dispatch = useDispatch();
   const { event, loading, error } = useSelector((state) => state.event_details);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleToggle = () => {
+    setIsClicked((prev) => !prev);
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "Loading...";
+    const date = new Date(dateString);
+    const options = {
+      day: "2-digit",
+      month: "short",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "Asia/Kolkata",
+    };
+    return new Intl.DateTimeFormat("en-GB", options).format(date) + " IST";
+  };
+
+  const stagesData = [
+    {
+      description: "This is stage 1.",
+      day: "Day 1",
+    },
+    {
+      description: "This is stage 2.",
+      day: "Day 2",
+    },
+  ];
+
+  const deadlinesData = {
+    title: "Registration deadline",
+    date: formatDate(event?.registerEnd),
+  };
+
+  const contactData = {
+    name: "Anshika Gupta",
+    email: "an@gmail.com",
+    phone: "+91 9565656565",
+  };
 
   useEffect(() => {
     if (eventId) {
@@ -23,7 +65,7 @@ const Details = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="min-h-screen bg-white ">
+    <div className="min-h-screen bg-white">
       <NavHost className="border-b border-gray-900" />
       <section className="flex flex-col mx-4 gap-5 mb-10">
         <div className="flex flex-col items-center justify-between mt-2 gap-1">
@@ -40,11 +82,8 @@ const Details = () => {
             <InfoCard
               iconSrc="calendar.svg"
               title="Registration deadline"
-              value={
-                new Date(event?.registerEnd).toLocaleString() || "Loading..."
-              }
+              value={formatDate(event?.registerEnd)}
             />
-
             <InfoCard
               iconSrc="calendar.svg"
               title="Location"
@@ -53,17 +92,18 @@ const Details = () => {
             <InfoCard
               iconSrc="calendar.svg"
               title="Event Date"
-              value={
-                new Date(event?.startTime).toLocaleString() || "Loading..."
-              }
+              value={formatDate(event?.startTime)}
             />
           </div>
         </div>
         <section className="flex flex-col justify-between gap-5">
           <TimelineCard
-            type="Event Description"
-            data={{ description: event?.description || "Loading..." }}
+            type="Stages and Timeline"
+            data={stagesData}
+            onEdit={handleToggle}
           />
+          <TimelineCard type="Deadlines" data={deadlinesData} />
+          <TimelineCard type="Contact the organiser" data={contactData} />
         </section>
       </section>
     </div>
