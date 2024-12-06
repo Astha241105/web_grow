@@ -1,8 +1,15 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import NavHost from "../Host/NavHost";
+import { fetchHosts } from "../../components/store/slices/hostsSlice";
 
 const TeamManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+  const { hosts, loading, error } = useSelector((state) => state.hosts);
+  useEffect(() => {
+    dispatch(fetchHosts());
+  }, [dispatch]);
 
   const collaborators = [
     {
@@ -27,23 +34,6 @@ const TeamManagement = () => {
       status: "connected",
     },
   ];
-
-  const hosts = [
-    {
-      id: 1,
-      name: "Ansh Gupta",
-      role: "Assistant Professor",
-      institution: "IIT Delhi",
-    },
-    {
-      id: 2,
-      name: "Rahul Sharma",
-      role: "Associate Professor",
-      institution: "IIT Delhi",
-    },
-  ];
-
-  // Filter function to search across name, role, and institution
   const filteredCollaborators = useMemo(() => {
     const searchLower = searchQuery.toLowerCase().trim();
     return collaborators.filter(
@@ -77,10 +67,18 @@ const TeamManagement = () => {
     </div>
   );
 
-  const HostCard = ({ name, role, institution }) => (
+  const HostCard = ({ id, name, role, institution, imageUrl }) => (
     <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#000] mb-3">
       <div className="flex items-center">
-        <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={`${name}'s profile`}
+            className="w-10 h-10 rounded-full mr-3 object-cover"
+          />
+        ) : (
+          <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+        )}
         <div>
           <p className="font-medium">{name}</p>
           <p className="text-sm text-[#000]">{role}</p>
@@ -141,11 +139,14 @@ const TeamManagement = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-[#008080]">Hosts</h3>
-            {filteredHosts.map((host) => (
-              <HostCard key={host.id} {...host} />
-            ))}
+            {loading ? (
+              <p>Loading hosts...</p>
+            ) : error ? (
+              <p>Error: {error}</p>
+            ) : (
+              filteredHosts.map((host) => <HostCard key={host.id} {...host} />)
+            )}
           </div>
-
           <div>
             <div className="bg-white p-6 rounded-lg border border-[#000]">
               <h3 className="text-lg font-semibold mb-4 text-[#008080]">

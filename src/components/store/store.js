@@ -37,7 +37,8 @@ import eventDetailsPublicReducer from "./slices/publiceventdetails";
 import removeFavouriteReducer from "./slices/removefromfav";
 import event_DetailsReducer from "./slices/eventDetailSlice";
 import stagesTimelineReducer from "./slices/stagesTimelineSlice";
-import recentViewsReducer from './slices/recentview.js';
+import recentViewsReducer from "./slices/recentview.js";
+import hostsReducer from "./slices/hostsSlice";
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -79,6 +80,7 @@ export const store = configureStore({
     event_details: event_DetailsReducer,
     stagesTimeline: stagesTimelineReducer,
     recentViews: recentViewsReducer,
+    hosts: hostsReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
 });
