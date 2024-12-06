@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./description.css";
 import ib from "./eclipse-des.png";
-import { fetchEventsPublic } from "../../components/store/slices/publicevents";
 
-const Des = () => {
+
+const Des = ({ events, status }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { events: allEvents, status } = useSelector((state) => state.publicEvents);
-  
-
-  // Fetch events only once when the component mounts
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchEventsPublic());
+    if (status === "succeeded") {
+      setFilteredResults(events);
     }
-  }, [dispatch, status]);
+  }, [status, events]);
 
-  // Update filtered results based on search query
   useEffect(() => {
-    if (searchQuery.length > 0) {
-      const results = allEvents.filter((event) =>
-        event.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredResults(results);
-    } else {
-      setFilteredResults([]);
-    }
-  }, [searchQuery, allEvents]);
+    const handler = setTimeout(() => {
+      if (searchQuery.length > 0) {
+        const results = events.filter((event) =>
+          event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (event.description && event.description.toLowerCase().includes(searchQuery.toLowerCase()))
+        );
+        setFilteredResults(results);
+      } else {
+        setFilteredResults([]);
+      }
+    }, 300);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery, events]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);

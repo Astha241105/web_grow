@@ -69,10 +69,11 @@ const Creatingteam = () => {
   };
 
   const handleRequestToJoinTeam = (teamId) => {
-    dispatch(joinTeamRequest(teamId)) 
+    dispatch(joinTeamRequest(teamId))
       .unwrap()
       .then(() => {
-        console.log('Request to join team sent');
+        console.log('Request to join team sent successfully');
+        navigate('/'); // Redirect to the home page after successful request
       })
       .catch((error) => {
         console.error('Failed to send join request:', error);

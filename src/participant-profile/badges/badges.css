@@ -1,29 +1,169 @@
-#part-profile-coins-and-badges{
+#part-profile-coins-and-badges {
     max-height: 930px;
     height: 100vh;
     max-width: 847px;
     width: 100%;
-    border:1px solid black;
     position: relative;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent overflow */
 }
-#part-profile-coins{
-    position: absolute;
-    left:20px;
+
+#part-profile-coins {
     font-size: 24px;
     font-weight: 500;
-    top:30px; 
+    margin-top: 20px;
+    align-self: flex-start; /* Aligns to the left */
+    margin-left: 20px;
 }
-#coins-info{
-    position:absolute;
-    top: 130px;
-    left:50%;
-    transform: translate(-50%);
+
+#coins-info {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 40px auto;
+    text-align: center;
 }
-#part-profile-badges{
-    position: absolute;
-    left:20px;
+
+#coins-info img {
+    width: 100px;
+    height: 100px;
+}
+
+#coin-loader {
+    width: 80%; /* Make progress bar responsive */
+    margin: 20px auto;
+}
+
+#coin-progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+#coin-progress-fill {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0; /* Default width */
+    transition: width 0.5s ease-in-out;
+}
+
+#part-profile-badges {
     font-size: 24px;
     font-weight: 500;
-    top:500px; 
+    margin-top: 50px;
+    align-self: flex-start; /* Aligns to the left */
+    margin-left: 20px;
 }
+
+#badge-container {
+    display: flex;
+    gap: 20px;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+#badge-container img {
+    width: 60px;
+    height: 60px;
+}
+#part-profile-coins-and-badges {
+    max-height: 930px;
+    height: 100vh;
+    max-width: 847px;
+    width: 100%;
+    position: relative;
+    top:74px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  #coins-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 40px auto;
+    text-align: center;
+  }
+  #part-profile-badges {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 50px;
+    align-self: flex-start;
+    margin-left: 20px;
+    width: 100%;
+  }
+  
+  #badge-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin: 20px auto;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .badge-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .badge-details {
+    flex-grow: 1;
+  }
+  
+  .badge-name {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .badge-loader {
+    width: 100%;
+  }
+  
+  .badge-progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  .badge-progress-fill {
+    height: 100%;
+    background-color:teal;
+    width: 0;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  .coins-away {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  #coins-away-statement {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+  }
+  

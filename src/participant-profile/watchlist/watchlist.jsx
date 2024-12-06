@@ -11,6 +11,11 @@ const Watchlist = () => {
     dispatch(fetchFavoriteEvents());
   }, [dispatch]);
 
+  const handleViewDetails = (eventId) => {
+    navigate('/event', {
+      state: {eventId}, 
+    }); };
+    
   if (status === 'loading') {
     return <div>Loading...</div>;
   }

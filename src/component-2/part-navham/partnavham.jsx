@@ -14,7 +14,10 @@ const Partnavham = ({bgColor}) => {
 
     navigate("/part-profile");
   };
-
+  const handleNotifyClick=() => {
+    
+    navigate("/notification2");
+  }
   const navigate1 = useNavigate();
   
   const handleViewMore = (category) => {
@@ -24,6 +27,22 @@ const Partnavham = ({bgColor}) => {
     localStorage.clear(); // Clear all local storage
     window.location.reload(); // Refresh the page
   }
+  
+    const handleNavigation = (page) => {
+      switch (page) {
+        case 'Registrations':
+          navigate('/registration2');
+          break;
+        case 'Watchlist':
+          navigate('/watchlist');
+          break;
+        case 'Badges and Coins':
+          navigate('/coins');
+          break;
+        default:
+          break;
+      }
+    };
 
   return (
     <div id="nav-bar-with-hamburger" style={{backgroundColor:bgColor}}>
@@ -40,11 +59,26 @@ const Partnavham = ({bgColor}) => {
           </li>
           <li className="nav-ham-options-list"
           onClick={handleLoginClick} >My Profile</li>
-          <li className="nav-ham-options-list">Notification</li>
-          <li className="nav-ham-options-list">Registrations</li>
-          <li className="nav-ham-options-list">Watchlist</li>
-          <li className="nav-ham-options-list">Badges and Coins</li>
-          <li className="nav-ham-options-list">Certificates</li>
+          <li className="nav-ham-options-list"
+          onClick={handleNotifyClick}>Notification</li>
+          <li
+        className="nav-ham-options-list"
+        onClick={() => handleNavigation('Registrations')}
+      >
+        Registrations
+      </li>
+      <li
+        className="nav-ham-options-list"
+        onClick={() => handleNavigation('Watchlist')}
+      >
+        Watchlist
+      </li>
+      <li
+        className="nav-ham-options-list"
+        onClick={() => handleNavigation('Badges and Coins')}
+      >
+        Badges and Coins
+      </li>
           <li className="nav-ham-options-list"
           onClick={() => handleViewMore('quiz')}
           >Quiz</li>
