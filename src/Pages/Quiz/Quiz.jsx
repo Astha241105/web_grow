@@ -239,7 +239,7 @@ const QuizCreator = () => {
             placeholder="Question"
             value={q.question}
             onChange={(e) => handleQuestionChange(q.id, e.target.value)}
-            className="w-full bg-[#F1F1F1] box-border p-2 m-4 border border-gray-200 placeholder-black focus:border-2 placeholder:font-medium rounded-[10px] focus:outline-none focus:border-teal-600"
+            className="w-[95%] bg-[#F1F1F1] box-border p-2 my-4 ml-4 border border-gray-200 placeholder-black focus:border-2 placeholder:font-medium rounded-[10px] focus:outline-none focus:border-teal-600"
           />
 
           <label className="m-4 py-6">Answers</label>
