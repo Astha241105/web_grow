@@ -19,7 +19,7 @@ export const addQuizQuestions = createAsyncThunk(
       const token = localStorage.getItem("authToken");
       console.log("Authentication Token:", token ? "Present" : "Missing");
 
-      const API_URL = `https://www.arthkambhoj.me/api/host/quiz/${eventId}/add-questions`;
+      const API_URL = `https://arthkambhoj.me/api/host/quiz/${eventId}/add-questions`;
       console.log("API URL:", API_URL);
 
       const formattedQuestions = questions.map((q) => ({

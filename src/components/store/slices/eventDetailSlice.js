@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchEventDetails = createAsyncThunk(
-  "eventDetails/fetchEventDetails",
+  "event_details/fetchEventDetails",
   async (eventId, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("authToken");
@@ -9,8 +9,9 @@ export const fetchEventDetails = createAsyncThunk(
       if (!token) {
         throw new Error("Authorization token not found.");
       }
+      console.log(eventId);
       const response = await fetch(
-        `https://arthkambhoj.me/api/v1/participant/events/details/${eventId}`,
+        `https://arthkambhoj.me/api/events/${eventId}`,
         {
           method: "GET",
           headers: {
@@ -19,50 +20,42 @@ export const fetchEventDetails = createAsyncThunk(
           },
         }
       );
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(data.message || "Failed to fetch event details");
       }
 
-      const data = await response.json();
-      console.log(data.data);
       return data.data;
     } catch (error) {
-      return rejectWithValue(error.message || "Something went wrong");
+      return rejectWithValue(error.message);
     }
   }
 );
 
-const eventDetailsSlice = createSlice({
-  name: "eventDetails",
+const event_DetailsSlice = createSlice({
+  name: "event_details",
   initialState: {
-    data: null,
-    status: "idle",
+    event: null,
+    loading: false,
     error: null,
   },
-  reducers: {
-    clearEventDetails: (state) => {
-      state.data = null;
-      state.status = "idle";
-      state.error = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchEventDetails.pending, (state) => {
-        state.status = "loading";
+        state.loading = true;
         state.error = null;
       })
       .addCase(fetchEventDetails.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.data = action.payload; // This will now contain the correct event data
+        state.loading = false;
+        state.event = action.payload;
       })
       .addCase(fetchEventDetails.rejected, (state, action) => {
-        state.status = "failed";
+        state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-export const { clearEventDetails } = eventDetailsSlice.actions;
-export default eventDetailsSlice.reducer;
+export default event_DetailsSlice.reducer;
