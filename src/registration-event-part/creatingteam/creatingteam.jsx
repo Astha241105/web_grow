@@ -110,6 +110,7 @@ const Creatingteam = () => {
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
             placeholder="Enter team name"
+            required
           />
           <div className="create-team-name-label">Team Members</div>
           <div id="team-members">

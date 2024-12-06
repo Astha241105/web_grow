@@ -32,7 +32,7 @@ const Notification2= () => {
     }
   
     return (
-      <div id="notification2">
+      <div id="notification2" >
         <ul>
           {notifications.map((notification) => {
             const requestId = extractRequestId(notification.message);
