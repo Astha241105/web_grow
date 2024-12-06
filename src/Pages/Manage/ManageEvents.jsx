@@ -34,22 +34,6 @@ const Event_Manage = () => {
       bgColor: "bg-[#B72A7E]",
       textColor: "text-white",
     },
-    {
-      label: "Total Impressions",
-      value: events
-        .reduce((total, event) => total + (event.impressions || 0), 0)
-        .toString(),
-      bgColor: "bg-[#26A69A]",
-      textColor: "text-white",
-    },
-    {
-      label: "Total Registrations",
-      value: events
-        .reduce((total, event) => total + (event.registrations || 0), 0)
-        .toString(),
-      bgColor: "bg-[#7E57C2]",
-      textColor: "text-white",
-    },
   ];
 
   const MetricCard = ({ label, value, bgColor, textColor }) => (
@@ -58,12 +42,6 @@ const Event_Manage = () => {
     >
       <div className="w-6 h-6 flex">
         {label === "Total Events" && <img src="GG.svg" alt="Events" />}
-        {label === "Total Impressions" && (
-          <img src="star.svg" alt="Impressions" />
-        )}
-        {label === "Total Registrations" && (
-          <img src="notes.svg" alt="Registrations" />
-        )}
       </div>
       <div className="flex gap-[10px]">
         <div className="text-lg font-semibold">{label}</div>
@@ -72,8 +50,12 @@ const Event_Manage = () => {
     </div>
   );
 
-  const handleRoom = () => {
-    navigate("/room-allocate");
+  const handleParticipants = (id) => {
+    navigate("/view-participants", {
+      state: {
+        eventId: id,
+      },
+    });
   };
 
   const EventCard = ({
@@ -199,16 +181,16 @@ const Event_Manage = () => {
                   handleHost();
                 }}
               >
-                <img src="teams.svg" alt="Delete" />
+                <img src="addHost.svg" alt="Delete" />
               </button>
               <button
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleRoom();
+                  handleParticipants(id);
                 }}
               >
-                <img src="door.svg" alt="Edit" />
+                <img src="teams.svg" alt="View Participants" />
               </button>
               {mode === "online" && tag === "Quiz" && (
                 <button
