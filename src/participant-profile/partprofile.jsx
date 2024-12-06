@@ -110,7 +110,7 @@ const Partprofile = () => {
             <img id="part-profile-details-img" src={profile.imageUrl} alt="Profile" />
             <div id="part-profile-details-details">
               <div id="part-profile-details-name">
-                {profile.firstname || 'First Name'} {profile.lastname}
+                {profile.firstname} {profile.lastname}
               </div>
               <div className="part-profile-details-e-and-i">{profile.email || 'Email'}</div>
             </div>

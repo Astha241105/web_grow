@@ -35,6 +35,7 @@ import pastEventsReducer from "./slices/pastevents";
 import eventNotificationsReducer from "./slices/notificationSlice";
 import eventDetailsPublicReducer from "./slices/publiceventdetails";
 import removeFavouriteReducer from "./slices/removefromfav";
+import recentViewsReducer from './slices/recentview.js';
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -73,6 +74,8 @@ export const store = configureStore({
     timeline: timelineReducer,
     eventNotifications: eventNotificationsReducer,
     favourite: removeFavouriteReducer,
+    recentViews: recentViewsReducer,
+    
   },
 });
 
