@@ -11,6 +11,20 @@
     z-index: 1000; 
     padding: 15px; 
   }
+  #notification2{
+    position: absolute;
+    top: 100px;
+    left:50%;
+    transform:translate(-50%);
+    width: 400px;
+    height:fit-content;
+    background-color: white;
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    z-index: 1000; 
+    padding: 15px; 
+  }
   .action-buttons button {
     margin-left: 5px;
     padding: 5px 10px;

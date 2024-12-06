@@ -78,7 +78,14 @@ const EventListOptions = () => {
                   </div>
                   <div className="event-list-card-regi-dead">
                     <div className="event-list-card-dead-head">Deadline</div>
-                    <div className="event-list-card-dead-num">12-12-2024</div>
+                    <div className="event-list-card-dead-num">
+  {new Date(event.registerEnd).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })}
+</div>
+
                   </div>
                 </div>
               </div>

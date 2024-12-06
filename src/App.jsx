@@ -39,6 +39,9 @@ import Partprofile from "./participant-profile/partprofile.jsx";
 import Teampage from "./registration-event-part/teampage/teampage.jsx";
 import Filter from "./browse-by-category/filter/filter.jsx";
 import Quiz from "./quiz/quiz.jsx";
+import Badges from "./participant-profile/badges/badges.jsx";
+import Watchlist from "./participant-profile/watchlist/watchlist.jsx";
+import Edit from "./participant-profile/edit-profile/edit.jsx";
 import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
 import NavbarSwitcher from "./component-2/navswitch.jsx";
 import Pastevents from "./participant-profile/pastevents/past.jsx";
@@ -60,6 +63,8 @@ import {
   View_participants,
   NotificationsPage,
 } from "./Pages";
+import Registered from "./participant-profile/registered/registered.jsx";
+import Notification2 from "./component-2/notification/notification2.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -93,6 +98,53 @@ const router = createBrowserRouter([
       </div>
     ),
   },
+  {
+    path: "/registration2",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Registered />
+      </div>
+    ),
+  },
+  {
+    path: "/watchlist",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Watchlist />
+      </div>
+    ),
+  },
+  {
+    path: "/notification2",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Notification2 />
+      </div>
+    ),
+  },
+  {
+    path: "/coins",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Badges />
+      </div>
+    ),
+  },
+  {
+    path: "/edit",
+    element: (
+      <div id="part-profile-container">
+        <ResponsiveNav2 bgColor="#D4E5E4" />
+        <Edit />
+      </div>
+    ),
+  },
+  
+
   {
     path: "/create-account-participant",
     element: <CreateAccountP />,
