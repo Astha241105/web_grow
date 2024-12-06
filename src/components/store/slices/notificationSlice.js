@@ -3,7 +3,7 @@ export const fetchEventNotifications = createAsyncThunk(
   "eventNotifications/fetchEventNotifications",
   async ({ page = 0, size = 10 }, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
 
       const response = await fetch(
         `https://arthkambhoj.me/api/events/notifications/${page}/${size}`,
@@ -56,11 +56,13 @@ const eventNotificationsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchEventNotifications.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.status = "succeeded";
-        state.notifications = action.payload.content;
-        state.totalPages = action.payload.totalPages;
-        state.currentPage = action.payload.number;
+        state.notifications = action.payload.content || [];
+        state.totalPages = action.payload.totalPages || 0;
+        state.currentPage = action.payload.number || 0;
       })
+
       .addCase(fetchEventNotifications.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
