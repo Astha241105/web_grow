@@ -100,7 +100,7 @@ const Details = () => {
           <TimelineCard
             type="Stages and Timeline"
             data={stagesData}
-            onEdit={handleToggle}
+            eventId={eventId}
           />
           <TimelineCard type="Deadlines" data={deadlinesData} />
           <TimelineCard type="Contact the organiser" data={contactData} />
