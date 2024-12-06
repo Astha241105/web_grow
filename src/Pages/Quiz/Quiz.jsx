@@ -15,7 +15,6 @@ const QuizCreator = () => {
     (state) => state.quizQuestions
   );
 
-  // Extract event data from navigation state
   const { eventId, eventData } = location.state || {};
 
   const [title, setTitle] = useState(eventData?.title || "");
@@ -120,7 +119,10 @@ const QuizCreator = () => {
       return;
     }
 
-    // Dispatch action to add quiz questions
+    console.log("Questions to submit:", questions);
+
+    console.log(eventId);
+
     dispatch(
       addQuizQuestions({
         eventId,
@@ -129,12 +131,11 @@ const QuizCreator = () => {
     );
   };
 
-  // Handle success and error states
   useEffect(() => {
     if (success) {
       alert("Quiz questions added successfully!");
-      // Reset form or navigate
-      navigate(-1); // Go back to previous page
+
+      navigate(-1);
       dispatch(resetQuizQuestionsState());
     }
   }, [success, dispatch, navigate]);
@@ -146,7 +147,6 @@ const QuizCreator = () => {
     }
   }, [error, dispatch]);
 
-  // If no event data is passed, show an error message
   if (!eventId) {
     return (
       <div className="max-w-3xl mx-auto bg-white">

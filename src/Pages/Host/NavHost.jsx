@@ -20,8 +20,8 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
     navigate("/event-manage");
   };
 
-  const handleNotificationsClick = () => {
-    navigate("/notifications");
+  const handleProfile = () => {
+    navigate("/host-profile");
   };
 
   const toggleNotifications = () => {
@@ -79,9 +79,15 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
             </div>
             <a
               href="#"
+              onClick={handleProfile}
               className="text-[#008080] font-semibold flex items-center"
             >
-              <img src="Prof.svg" className="w-7 h-7 mr-2" alt="profile" />
+              <img
+                src="Prof.svg"
+                className="w-7 h-7 mr-2"
+                alt="profile"
+                // onClick={handleManageEvent}
+              />
               My Profile
             </a>
           </nav>
@@ -173,6 +179,7 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
               </div>
               <a
                 href="#"
+                onClick={handleProfile}
                 className="text-[#008080] font-semibold flex items-center"
               >
                 <img src="Prof.svg" className="w-7 h-7 mr-2" alt="profile" />
