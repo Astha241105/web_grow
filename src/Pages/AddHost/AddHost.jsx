@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import NavHost from "../Host/NavHost";
+import { fetchHosts } from "../../components/store/slices/hostsSlice";
 
 const TeamManagement = () => {
-  const [activeTab, setActiveTab] = useState("connections");
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+  const { hosts, loading, error } = useSelector((state) => state.hosts);
+  useEffect(() => {
+    dispatch(fetchHosts());
+  }, [dispatch]);
 
-  const existingConnections = [
+  const collaborators = [
     {
       id: 1,
       name: "Ansh Gupta",
@@ -28,49 +34,27 @@ const TeamManagement = () => {
       status: "connected",
     },
   ];
+  const filteredCollaborators = useMemo(() => {
+    const searchLower = searchQuery.toLowerCase().trim();
+    return collaborators.filter(
+      (collaborator) =>
+        collaborator.name.toLowerCase().includes(searchLower) ||
+        collaborator.role.toLowerCase().includes(searchLower) ||
+        collaborator.institution.toLowerCase().includes(searchLower)
+    );
+  }, [collaborators, searchQuery]);
 
-  const connections = [
-    {
-      id: 1,
-      name: "Ansh Gupta",
-      role: "Assistant Professor",
-      institution: "IIT Delhi",
-      status: "pending",
-    },
-    {
-      id: 2,
-      name: "Ansh Gupta",
-      role: "Assistant Professor",
-      institution: "IIT Delhi",
-      status: "pending",
-    },
-    {
-      id: 3,
-      name: "Ansh Gupta",
-      role: "Assistant Professor",
-      institution: "IIT Delhi",
-      status: "pending",
-    },
-  ];
+  const filteredHosts = useMemo(() => {
+    const searchLower = searchQuery.toLowerCase().trim();
+    return hosts.filter(
+      (host) =>
+        host.name.toLowerCase().includes(searchLower) ||
+        host.role.toLowerCase().includes(searchLower) ||
+        host.institution.toLowerCase().includes(searchLower)
+    );
+  }, [hosts, searchQuery]);
 
-  const connectionRequests = [
-    {
-      id: 1,
-      name: "Ansh Gupta",
-      role: "Assistant Professor",
-      institution: "IIT Delhi",
-      status: "waiting",
-    },
-    {
-      id: 2,
-      name: "Ansh Gupta",
-      role: "Assistant Professor",
-      institution: "IIT Delhi",
-      status: "waiting",
-    },
-  ];
-
-  const ConnectionCard = ({ name, role, institution, status }) => (
+  const CollaboratorCard = ({ name, role, institution, status }) => (
     <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#000] mb-3">
       <div className="flex items-center">
         <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
@@ -80,11 +64,30 @@ const TeamManagement = () => {
           <p className="text-sm text-[#000]">{institution}</p>
         </div>
       </div>
-      {status !== "connected" && (
-        <button className="px-4 py-1 rounded-full text-sm border border-[#008080] text-[#008080]">
-          {status === "pending" ? "Request" : "Approve"}
-        </button>
-      )}
+    </div>
+  );
+
+  const HostCard = ({ id, name, role, institution, imageUrl }) => (
+    <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#000] mb-3">
+      <div className="flex items-center">
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={`${name}'s profile`}
+            className="w-10 h-10 rounded-full mr-3 object-cover"
+          />
+        ) : (
+          <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+        )}
+        <div>
+          <p className="font-medium">{name}</p>
+          <p className="text-sm text-[#000]">{role}</p>
+          <p className="text-sm text-[#000]">{institution}</p>
+        </div>
+      </div>
+      <button className="px-4 py-1 rounded-full text-sm border border-[#008080] text-[#008080]">
+        Add Collaborator
+      </button>
     </div>
   );
 
@@ -126,25 +129,8 @@ const TeamManagement = () => {
         <div className="mb-8">
           <div className="border-b border-gray-200">
             <div className="flex gap-8">
-              <button
-                className={`pb-2 px-1 ${
-                  activeTab === "connections"
-                    ? "border-b-2 border-[#008080] font-semibold text-[#008080]"
-                    : "text-gray-600"
-                }`}
-                onClick={() => setActiveTab("connections")}
-              >
-                Your Connections
-              </button>
-              <button
-                className={`pb-2 px-1 ${
-                  activeTab === "connect"
-                    ? "border-b-2 border-[#008080] font-semibold text-[#008080]"
-                    : "text-gray-600"
-                }`}
-                onClick={() => setActiveTab("connect")}
-              >
-                Connect with others
+              <button className="pb-2 px-1 border-b-2 border-[#008080] font-semibold text-[#008080]">
+                Add Collaborators
               </button>
             </div>
           </div>
@@ -152,29 +138,22 @@ const TeamManagement = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
-            {activeTab === "connect" && (
-              <>
-                {connections.map((connection) => (
-                  <ConnectionCard key={connection.id} {...connection} />
-                ))}
-              </>
-            )}
-            {activeTab === "connections" && (
-              <>
-                {existingConnections.map((connection) => (
-                  <ConnectionCard key={connection.id} {...connection} />
-                ))}
-              </>
+            <h3 className="text-lg font-semibold text-[#008080]">Hosts</h3>
+            {loading ? (
+              <p>Loading hosts...</p>
+            ) : error ? (
+              <p>Error: {error}</p>
+            ) : (
+              filteredHosts.map((host) => <HostCard key={host.id} {...host} />)
             )}
           </div>
-
           <div>
             <div className="bg-white p-6 rounded-lg border border-[#000]">
               <h3 className="text-lg font-semibold mb-4 text-[#008080]">
-                Connection Requests
+                Collaborators
               </h3>
-              {connectionRequests.map((request) => (
-                <ConnectionCard key={request.id} {...request} />
+              {filteredCollaborators.map((collaborator) => (
+                <CollaboratorCard key={collaborator.id} {...collaborator} />
               ))}
             </div>
           </div>
