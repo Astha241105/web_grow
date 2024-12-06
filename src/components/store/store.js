@@ -36,6 +36,7 @@ import eventNotificationsReducer from "./slices/notificationSlice";
 import eventDetailsPublicReducer from "./slices/publiceventdetails";
 import removeFavouriteReducer from "./slices/removefromfav";
 import event_DetailsReducer from "./slices/eventDetailSlice";
+import stagesTimelineReducer from "./slices/stagesTimelineSlice";
 import recentViewsReducer from './slices/recentview.js';
 export const store = configureStore({
   reducer: {
@@ -76,8 +77,8 @@ export const store = configureStore({
     eventNotifications: eventNotificationsReducer,
     favourite: removeFavouriteReducer,
     event_details: event_DetailsReducer,
+    stagesTimeline: stagesTimelineReducer,
     recentViews: recentViewsReducer,
-    
   },
   devTools: process.env.NODE_ENV !== "production",
 });

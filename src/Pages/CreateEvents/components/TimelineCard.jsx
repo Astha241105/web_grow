@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postStagesData } from "../../../components/store/slices/stagesTimelineSlice"; // import the async thunk
 
-const TimelineCard = ({ type, data }) => {
+const TimelineCard = ({ type, data, eventId }) => {
+  const dispatch = useDispatch();
+  const { stages, loading, error } = useSelector(
+    (state) => state.stagesTimeline
+  );
+
   const initialStages = Array.isArray(data) ? data : [data];
 
-  const [stages, setStages] = useState(
-    initialStages.map((stage) => ({
+  const [stagesData, setStagesData] = useState(
+    initialStages.map((stage, index) => ({
       ...stage,
       isEditable: false,
-      day: stage.day || "Day 1",
+      day: stage.day || `Day ${index + 1}`, // Ensure Day is in string format for display
     }))
   );
 
   // Toggle edit mode for a specific stage
   const toggleEditMode = (index) => {
-    setStages((prevStages) =>
+    setStagesData((prevStages) =>
       prevStages.map((stage, i) =>
         i === index ? { ...stage, isEditable: !stage.isEditable } : stage
       )
@@ -22,7 +29,7 @@ const TimelineCard = ({ type, data }) => {
 
   // Handle input changes
   const handleChange = (index, key, value) => {
-    setStages((prevStages) =>
+    setStagesData((prevStages) =>
       prevStages.map((stage, i) =>
         i === index ? { ...stage, [key]: value } : stage
       )
@@ -36,12 +43,22 @@ const TimelineCard = ({ type, data }) => {
       day: "Day",
       isEditable: true, // New stage starts in edit mode
     };
-    setStages((prevStages) => [...prevStages, newStage]);
+    setStagesData((prevStages) => [...prevStages, newStage]);
   };
 
   // Delete a stage
   const deleteStage = (index) => {
-    setStages((prevStages) => prevStages.filter((_, i) => i !== index));
+    setStagesData((prevStages) => prevStages.filter((_, i) => i !== index));
+  };
+
+  // Submit stages data to API
+  const submitStages = () => {
+    if (eventId) {
+      // Log the stages data before dispatching the action
+      console.log("Submitting Stages Data:", stagesData);
+
+      dispatch(postStagesData({ eventId, stages: stagesData }));
+    }
   };
 
   const renderContent = () => {
@@ -49,7 +66,7 @@ const TimelineCard = ({ type, data }) => {
       case "Stages and Timeline":
         return (
           <div>
-            {stages.map((stage, index) => (
+            {stagesData.map((stage, index) => (
               <section key={index} className="flex items-center gap-5 mb-4">
                 <div
                   className="w-20 h-12 flex items-center justify-center"
@@ -111,11 +128,17 @@ const TimelineCard = ({ type, data }) => {
             >
               Add New Stage
             </button>
+            <button
+              onClick={submitStages}
+              className="bg-green-500 text-white px-4 py-2 rounded mt-4"
+            >
+              Submit Stages
+            </button>
           </div>
         );
       case "Deadlines":
         return (
-          <section className="flex items-center  gap-5">
+          <section className="flex items-center gap-5">
             <img
               src="https://via.placeholder.com/100x60"
               alt="Event Logo"
@@ -129,7 +152,7 @@ const TimelineCard = ({ type, data }) => {
         );
       case "Contact the organiser":
         return (
-          <section className="flex items-center  gap-5">
+          <section className="flex items-center gap-5">
             <img
               src="https://via.placeholder.com/100x60"
               alt="Event Logo"
