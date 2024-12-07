@@ -448,7 +448,7 @@ const Create_Events = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Number of Registrations allowed (optional)</label>
+            <label>Number of Registrations allowed </label>
             <input
               type="number"
               placeholder="Enter count"
@@ -468,33 +468,6 @@ const Create_Events = () => {
             </button>
           </div>
         </div>
-
-        {showHostPrompt && (
-          <div style={styles.modal}>
-            <div style={styles.backdrop}></div>
-            <div style={styles.modalContent}>
-              <h3 className="text-lg font-semibold mb-4">
-                Do You want to add Host?
-              </h3>
-              <div style={styles.modalButtons}>
-                <button
-                  style={styles.modalButton}
-                  onClick={() => handleHostPromptResponse(true)}
-                  className="bg-teal-600 text-white hover:bg-teal-700"
-                >
-                  Yes
-                </button>
-                <button
-                  style={styles.modalButton}
-                  onClick={() => handleHostPromptResponse(false)}
-                  className="hover:bg-gray-100"
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
         {showSuccessModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
