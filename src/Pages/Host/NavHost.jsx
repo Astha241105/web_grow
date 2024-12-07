@@ -21,7 +21,8 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
   };
 
   const handleProfile = () => {
-    navigate("/host-profile");
+    localStorage.clear();
+    navigate("/");
   };
 
   const toggleNotifications = () => {
@@ -85,13 +86,7 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
               onClick={handleProfile}
               className="text-[#008080] font-semibold flex items-center"
             >
-              <img
-                src="Prof.svg"
-                className="w-7 h-7 mr-2"
-                alt="profile"
-                // onClick={handleManageEvent}
-              />
-              My Profile
+              Logout
             </a>
           </nav>
 
