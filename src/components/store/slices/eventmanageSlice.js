@@ -23,7 +23,7 @@ export const fetchEvents = createAsyncThunk(
         impressions: item.data.impressions || 0,
         registrations: item.data.registrations || 0,
         imageUrl: item.data.imageUrl || "",
-        endTime: item.endTime,
+        endTime: item.data.endTime,
       }));
     } catch (error) {
       return rejectWithValue(error.message);
