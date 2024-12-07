@@ -1,23 +1,26 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { fetchRegisteredEvents } from '../../components/store/slices/registeredevent';
 import "./past.css";
 
 const Registered1 = () => {
   const dispatch = useDispatch();
-
-  const events = useSelector((state) =>state.registeredEvents.events);
+  const navigate = useNavigate(); // Initialize navigate
+  const events = useSelector((state) => state.registeredEvents.events);
 
   useEffect(() => {
     dispatch(fetchRegisteredEvents());
   }, [dispatch]);
 
   const handleRegisterClick = (id) => {
-    console.log(`Register for event with id: ${id}`);
+    // Redirect to /event with eventId in state
+    navigate('/event', { state: { eventId: id } });
   };
 
   const handleImageClick = (id) => {
-    console.log(`Navigate to event details for id: ${id}`);
+    // Redirect to /event with eventId in state
+    navigate('/event', { state: { eventId: id } });
   };
 
   return (

@@ -1,11 +1,11 @@
 #form-for-event {
-  position: relative; /* changed from absolute to relative for proper positioning */
+  position: relative; 
   left: 50%;
   transform: translate(-50%);
   width: 65%;
   padding: 80px 40px;
   box-sizing: border-box;
-  z-index: 1; /* Ensures it stays below the popup */
+  z-index: 1; 
 }
 
 .blur-background {
@@ -142,6 +142,7 @@
 @media (max-width: 500px) {
   #form-for-event {
     width: 90%;
+    top:150px;
   }
 
   #form-for-event1 {
@@ -210,23 +211,7 @@
     height: 50px;
   }
 }
-/* Add this to your existing CSS */
-
-/* Style to blur background when popup is visible */
 .blur-background {
   filter: blur(5px);
-  pointer-events: none; /* Disables interaction with background content */
+  pointer-events: none;
 }
-
-/* Pop-up styling */
-
-#form-for-event {
-  position: relative; /* changed from absolute to relative for proper positioning */
-  left: 50%;
-  transform: translate(-50%);
-  width: 65%;
-  padding: 80px 40px;
-  box-sizing: border-box;
-  z-index: 1; /* Ensures it stays below the popup */
-}
-

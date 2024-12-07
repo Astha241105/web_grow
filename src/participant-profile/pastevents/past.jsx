@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { fetchPastEvents } from '../../components/store/slices/pastevents';
 import "./past.css";
 
 const Pastevents = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize navigate
 
   const { events: pastEvents, loading, error } = useSelector((state) => state.pastEvents);
 
@@ -12,13 +14,9 @@ const Pastevents = () => {
     dispatch(fetchPastEvents());
   }, [dispatch]);
 
-  const handleRegisterClick = (id) => {
-    console.log(`Register for event with id: ${id}`);
-  };
-
-  const handleImageClick = (id) => {
-    console.log(`Navigate to event details for id: ${id}`);
-    // Add navigation logic here
+  const handleViewDetails = (id) => {
+    // Redirect to /event with eventId in state
+    navigate('/event', { state: { eventId: id } });
   };
 
   if (loading) return <p>Loading...</p>;
@@ -34,14 +32,14 @@ const Pastevents = () => {
               className="home-upcomimg-events-info-image"
               src={event.imageUrl || '/default-event.svg'}
               alt={event.title}
-              onClick={() => handleImageClick(event.id)}
+              onClick={() => handleViewDetails(event.id)} // Navigate on image click
             />
             <div className="home-upcomimg-events-info-title">
               <h3 className="home-upcomimg-events-info-title1">{event.title}</h3>
               <div className="home-upcomimg-events-button-and-like">
                 <button
                   className="home-upcomimg-events-button"
-                  onClick={() => handleRegisterClick(event.id)}
+                  onClick={() => handleViewDetails(event.id)} // Navigate on button click
                 >
                   View Details
                 </button>

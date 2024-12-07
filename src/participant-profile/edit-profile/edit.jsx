@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateParticipantProfile } from '../../components/store/slices/participantprofile'; // Adjust the path as needed
+import {
+  updateParticipantProfile,
+  fetchParticipantProfile, // Add this to refetch the profile
+} from '../../components/store/slices/participantprofile'; // Adjust the path as needed
 import Imgoption from '../imgoptions/imgoption';
-import "./edit.css";
+import './edit.css';
 
 const Edit = () => {
   const { profile, isLoading, error } = useSelector((state) => state.participant);
@@ -12,10 +15,15 @@ const Edit = () => {
     firstName: '',
     lastName: '',
     mobile: '',
-    imageUrl: ''
+    imageUrl: '',
   });
 
   const [isEditingImage, setIsEditingImage] = useState(false);
+
+  useEffect(() => {
+    // Fetch profile data when the component mounts
+    dispatch(fetchParticipantProfile());
+  }, [dispatch]);
 
   useEffect(() => {
     if (profile) {
@@ -23,7 +31,7 @@ const Edit = () => {
         firstName: profile?.firstname || '',
         lastName: profile?.lastname || '',
         mobile: profile?.mobile || '',
-        imageUrl: profile?.imageUrl || ''
+        imageUrl: profile?.imageUrl || '',
       });
     }
   }, [profile]);
@@ -32,26 +40,30 @@ const Edit = () => {
     const { id, value } = e.target;
     setEditedProfile((prevState) => ({
       ...prevState,
-      [id]: value
+      [id]: value,
     }));
   };
 
   const handleSave = () => {
-    dispatch(updateParticipantProfile(editedProfile));
+    dispatch(updateParticipantProfile(editedProfile))
+      .unwrap()
+      .then(() => {
+        // Refetch the updated profile after successful save
+        dispatch(fetchParticipantProfile());
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
   };
 
   const handleImageClick = () => {
     setIsEditingImage(true);
   };
 
-  const handleImageSave = () => {
-    setIsEditingImage(false);
-  };
-
   const handleImageOptionClick = (url) => {
-    setEditedProfile(prevState => ({
+    setEditedProfile((prevState) => ({
       ...prevState,
-      imageUrl: url
+      imageUrl: url,
     }));
     setIsEditingImage(false);
   };
@@ -70,15 +82,14 @@ const Edit = () => {
       <div id="edit-my-profile-1">
         <img
           id="part-profile-details-image"
-          src={editedProfile.imageUrl || "/default-profile.svg"} 
+          src={editedProfile.imageUrl || '/default-profile.svg'}
           onClick={handleImageClick}
+          alt="Profile"
         />
         <div id="change-profile">Change profile</div>
       </div>
 
-      {isEditingImage && (
-        <Imgoption onImageClick={handleImageOptionClick} />
-      )}
+      {isEditingImage && <Imgoption onImageClick={handleImageOptionClick} />}
 
       <div id="edit-profile-options">
         <label htmlFor="firstName" className="edit-profile-options-labels">
@@ -100,7 +111,7 @@ const Edit = () => {
           value={editedProfile.lastName}
           onChange={handleInputChange}
         />
-        
+
         <label htmlFor="mobile" className="edit-profile-options-labels">
           Mobile:
         </label>
@@ -110,7 +121,6 @@ const Edit = () => {
           value={editedProfile.mobile}
           onChange={handleInputChange}
         />
-
       </div>
       <div>
         <button id="save-profile-button" onClick={handleSave}>

@@ -20,7 +20,7 @@ const NavbarSwitcher = ({bgColor}) => {
   return (
     <>
       {authToken ? (
-        <ResponsiveNav2 bgColor="#FDF8EE" />
+        <ResponsiveNav2 bgColor={bgColor} />
       ) : (
         <ResponsiveNav bgColor={bgColor}/>
       )}

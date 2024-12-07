@@ -31,11 +31,14 @@ const Notifications = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   if (error) {
-    return <div>Error loading notifications.</div>;
+    return <div></div>;
+  }
+  if (notifications.length === 0) {
+    return <div></div>;
   }
 
   return (
@@ -66,7 +69,7 @@ const Notifications = () => {
           );
         })}
       </ul>
-      <button onClick={handleNextPage} disabled={loading || actionLoading || notifications.length === 0}>Next</button>
+      <button onClick={handleNextPage} disabled={loading || actionLoading || notifications.length === 0 } id="next-notification">Next</button>
     </div>
   );
 };

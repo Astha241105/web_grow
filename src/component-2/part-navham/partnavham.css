@@ -6,7 +6,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; 
+    z-index: 100000; 
     background-color: #FDF8EE;
     
      }
@@ -48,7 +48,7 @@
     padding: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
     border-radius: 5px;
-    z-index:3;
+    z-index: 100000; 
   }
   
   .menu li {

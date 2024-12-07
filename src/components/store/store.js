@@ -38,6 +38,7 @@ import removeFavouriteReducer from "./slices/removefromfav";
 import event_DetailsReducer from "./slices/eventDetailSlice";
 import stagesTimelineReducer from "./slices/stagesTimelineSlice";
 import recentViewsReducer from "./slices/recentview.js";
+import teamDetailsReducer from './slices/teamdetails';
 import hostsReducer from "./slices/hostsSlice";
 import addCollaboratorReducer from "./slices/addCollaboratorSlice";
 
@@ -83,7 +84,9 @@ export const store = configureStore({
     stagesTimeline: stagesTimelineReducer,
     recentViews: recentViewsReducer,
     hosts: hostsReducer,
+    teamDetails: teamDetailsReducer,
     addCollaborator: addCollaboratorReducer,
+
   },
   devTools: process.env.NODE_ENV !== "production",
 });

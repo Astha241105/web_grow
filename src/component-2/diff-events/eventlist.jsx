@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 import './eventlist.css'; 
 import { fetchRegisteredEvents } from '../../components/store/slices/registeredevent';
 import { fetchFavoriteEvents } from '../../components/store/slices/favouriteevents';
@@ -9,6 +10,7 @@ const EventListOptions = () => {
   const [activeOption, setActiveOption] = useState('registered');
   const [hasToken, setHasToken] = useState(!!localStorage.getItem('authToken'));
   const dispatch = useDispatch();
+  const navigate = useNavigate();  // Initialize navigate
 
   const registeredEvents = useSelector((state) => state.registeredEvents.events);
   const { data: favoriteEvents } = useSelector((state) => state.favorites);
@@ -54,6 +56,11 @@ const EventListOptions = () => {
     (favoriteEvents && favoriteEvents.length > 0) ||
     (recentEvents && recentEvents.length > 0);
 
+  const handleCardClick = (eventId) => {
+    // Navigate to /event with eventId in state
+    navigate('/event', { state: { eventId } });
+  };
+
   if (!hasToken || !hasEvents) {
     return null; 
   }
@@ -85,7 +92,11 @@ const EventListOptions = () => {
       </div>
       <div className="event-list-cards">
         {eventsToDisplay.map((event) => (
-          <div className="event-list-card" key={event.id}>
+          <div
+            className="event-list-card"
+            key={event.id}
+            onClick={() => handleCardClick(event.id)}  // Add onClick handler to navigate
+          >
             <div className="event-list-card-upperpart">
               <img
                 src={event.imageUrl || '/default-event.svg'}

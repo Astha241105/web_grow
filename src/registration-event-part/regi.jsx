@@ -24,17 +24,15 @@ const Regi = () => {
     graduationYear: '',
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false); // Track form submission
-  const [showTeamPopup, setShowTeamPopup] = useState(false); // Track if team popup should be shown
+  const [isSubmitted, setIsSubmitted] = useState(false); 
+  const [showTeamPopup, setShowTeamPopup] = useState(false);
 
   const { event, status, error } = useSelector((state) => state.eventDetailsPublic);
   console.log(event?.teamCreationAllowed, "yea");
 
-  // Create a reference to the Teampopup
   const teamPopupRef = useRef(null);
 
   useEffect(() => {
-    // Trigger registration and event details fetch after submission
     if (isSubmitted && eventId) {
       const registerAndFetchDetails = async () => {
         try {
@@ -43,15 +41,13 @@ const Regi = () => {
   
           if (resultAction.success) {
             console.log("Registration successful");
-            // Fetch event details after successful registration
             await dispatch(fetchEventDetailsPublic(eventId)).unwrap();
             console.log("Event details fetched successfully");
   
-            // Check if team creation is allowed
             if (event?.teamCreationAllowed) {
-              setShowTeamPopup(true); // Show team popup if team creation is allowed
+              setShowTeamPopup(true);
             } else {
-              navigate('/'); // Navigate to /home if team creation is not allowed
+              navigate('/'); 
             }
           }
         } catch (error) {
@@ -59,12 +55,12 @@ const Regi = () => {
         }
       };
   
-      registerAndFetchDetails(); // Trigger the async function
+      registerAndFetchDetails();
     }
-  }, [isSubmitted, eventId, dispatch, event?.teamCreationAllowed, navigate]); // Depend on isSubmitted, eventId, event.teamCreationAllowed, and navigate
+  }, [isSubmitted, eventId, dispatch, event?.teamCreationAllowed, navigate]);
   
   useEffect(() => {
-    // Scroll to the Teampopup when it is rendered
+
     if (showTeamPopup && teamPopupRef.current) {
       teamPopupRef.current.scrollIntoView({ behavior: 'smooth' });
     }
@@ -86,7 +82,7 @@ const Regi = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitted(true); // Set submission flag to true
+    setIsSubmitted(true);
   };
 
   const handlePopupClick = () => {
@@ -98,7 +94,6 @@ const Regi = () => {
        {showTeamPopup && (
             <Teampopup handlePopupClick={handlePopupClick} ref={teamPopupRef} />
           )}
-      {/* Apply the blur class to the form background container only */}
       <div className={showTeamPopup ? "blur-background" : ""}>
         <form id="form-for-event" onSubmit={handleSubmit}>
           <div id="form-for-event1">Fill your Details</div>

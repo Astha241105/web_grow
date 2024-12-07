@@ -10,7 +10,7 @@
     width:893px;
     background-color: white;
     border-radius:10px;
-    margin-top:23px;
+    margin-top:80px;
 }
 #my-team{
     width:100%;
@@ -36,16 +36,31 @@
     font-weight:600;
 }
 #team-members{
+ height:auto;
+ display:flex;
+ flex-direction:column;
+ gap:20px;    
+}
+.team-member{
     height:78px;
     width:100%;
     margin-top:10px;
     border-radius:10px;
     padding-left:20px;
     display: flex;
-    flex-wrap: column;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
     background: url('/smallrec.svg') left center no-repeat;
     background-size: 9px;
     background-color: #C8FAC8;
-    
+}
+@media(max-width:640px){
+    #team-details-1{
+        height:543px;
+        width:893px;
+        background-color: white;
+        border-radius:10px;
+        margin-top:141px;
+    }
 }

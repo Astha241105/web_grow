@@ -12,7 +12,7 @@ import { fetchParticipantProfile } from '../components/store/slices/participantp
 import { fetchRegisteredEvents } from '../components/store/slices/registeredevent';
 import { fetchQuizStatus } from '../components/store/slices/quizprogress';
 import Loginpopup from "../component-2/login-popup/login-popup"
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
 
 const BackgroundEvent = () => {
   const navigate = useNavigate();
@@ -76,18 +76,23 @@ const BackgroundEvent = () => {
     }
   
     try {
-      const result =  dispatch(fetchQuizStatus({ eventId }));
-      if (result.payload) {
-        const { totalQuestions } = result.payload;
+      const result = await dispatch(fetchQuizStatus({ eventId })).unwrap(); // Unwrap to handle success/error
+      if (result && result.totalQuestions) {
+        const { totalQuestions } = result;
         navigate('/quiz', { state: { totalQuestions, eventId } });
+      } else {
+        toast.error('Unable to fetch quiz details. Please try again later.');
       }
     } catch (error) {
-      console.error("Error fetching quiz status:", error);
-      alert("Your have already submitted the quiz")
+      console.error('Error fetching quiz status:', error);
+      toast.error(error.message || 'You have already submitted the quiz.');
+      console.log("toast")
     }
   };
   
-  
+  const handleSeeDetailsClick = () => {
+    navigate('/team', { state: { eventId: event.id } });
+  };
   
   if (status === 'loading') {
     return <div>Loading event details...</div>;
@@ -355,38 +360,50 @@ const BackgroundEvent = () => {
                   Eligible
                 </div>
               </div>
-              <button className="see-details" 
-              id={
-                isEventRegistered
-                  ? event.category.toLowerCase() === 'quiz'
-                    ? "start-quiz"
-                    : "already-registered"
-                  : "register-now"
-              }
-              onClick={
-                isEventRegistered
-                  ? event.category.toLowerCase() === 'quiz'
-                    ? handleStartQuizClick
-                    : null 
-                  : handleRegisterClick
-              }
-              disabled={isEventRegistered && event.category.toLowerCase() !== 'quiz'}
-            >
-              {isEventRegistered
-                ? event.category.toLowerCase() === 'quiz'
-                  ? 'Start Quiz'
-                  : 'Already Registered'
-                : 'Register Now'}</button>
+              <button
+  className="see-details"
+  id={
+    isEventRegistered
+      ? event.category.toLowerCase() === 'quiz'
+        ? "start-quiz"
+        : event.category.toLowerCase() === 'hackathon'
+        ? "see-details"
+        : "already-registered"
+      : "register-now"
+  }
+  onClick={
+    isEventRegistered
+      ? event.category.toLowerCase() === 'quiz'
+        ? handleStartQuizClick
+        : event.category.toLowerCase() === 'hackathon'
+        ? handleSeeDetailsClick
+        : null
+      : handleRegisterClick
+  }
+  disabled={
+    isEventRegistered &&
+    event.category.toLowerCase() !== 'quiz' &&
+    event.category.toLowerCase() !== 'hackathon'
+  }
+>
+  {isEventRegistered
+    ? event.category.toLowerCase() === 'quiz'
+      ? 'Start Quiz'
+      : event.category.toLowerCase() === 'hackathon'
+      ? 'See Details'
+      : 'Already Registered'
+    : 'Register Now'}
+</button>
+</div>
+) : (
+<div id="part-details">
+  <div id="name-part1">Login to register for the event</div>
+  <button id="register-now-1" onClick={handleRegisterClick}>
+    Register Now
+  </button>
+</div>
+)}
 
-            </div>
-          ) : (
-            <div id="part-details">
-              <div id="name-part1">Login to register for the event</div>
-              <button id="register-now-1" onClick={handleRegisterClick}>
-                Register Now
-              </button>
-            </div>
-          )}
          
           <div id="line"></div>
       <div  id="registered"className='part-details-info'>

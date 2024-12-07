@@ -146,7 +146,19 @@
   }
   
   .team-card button:hover:not(:disabled) {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
+  }
+  @media(max-width:640px){
+    #create-or-join {
+        position: relative;
+        height: 100vh;
+        max-width: 846px;
+        width: 100%;
+        left: 50%;
+        top:141px;
+        transform: translate(-50%);
+        padding:20px;
+    }
   }
   
 @media(max-width:450px){
