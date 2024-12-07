@@ -52,6 +52,7 @@ const CreatePassP = () => {
       return;
     }
 
+ 
     dispatch(setPasswordDetails({ password, confirmPassword }));
     dispatch(
       createAccount({
@@ -65,10 +66,22 @@ const CreatePassP = () => {
         role,
       })
     )
-      .then(() => {
-        navigate("/otpWithMail");
+      .then((response) => {
+       
+        if (response?.status === "SUCCESS") {
+          navigate("/otpWithMail"); 
+        } else {
+     
+          const errorMessage = response?.data?.message || "Failed to register. Try again.";
+          toast.error(errorMessage);
+        }
       })
-      .catch(() => toast.error("Failed to register. Try again."));
+      .catch((error) => {
+   
+        const errorMessage = error.response?.data?.message || "Failed to register. Try again.";
+        toast.error(errorMessage);
+      });
+    
   };
 
   const handleCheckboxChange = (e) => {

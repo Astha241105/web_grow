@@ -14,10 +14,9 @@ const CreateAccountH = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Regex patterns
   const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
-  const mobileRegex = /^[0-9]{10}$/; // 10 digit number only
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+  const mobileRegex = /^[0-9]{10}$/; 
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -29,7 +28,7 @@ const CreateAccountH = () => {
 
   const validateInputs = () => {
     if (!formData.name.trim()) {
-      console.log("Name is required error triggered."); // Debugging
+      console.log("Name is required error triggered.");
       toast.error("Name is required.");
       return false;
     

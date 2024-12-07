@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPersonalDetails } from "../store/slices/accountslice.js";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; // Import toast
+import { toast } from "react-toastify"; 
 import "./CreateAccountP.css";
 
 const CreateAccountP = () => {
@@ -13,10 +13,9 @@ const CreateAccountP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Regex for name, email, and mobile validation
-  const nameRegex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Default email regex
-  const mobileRegex = /^[0-9]{10}$/; // Only 10 digits
+  const nameRegex = /^[A-Za-z\s]+$/; 
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+  const mobileRegex = /^[0-9]{10}$/; 
 
   const handleSubmit = (e) => {
     e.preventDefault();
