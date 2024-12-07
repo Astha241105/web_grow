@@ -38,10 +38,11 @@ import removeFavouriteReducer from "./slices/removefromfav";
 import event_DetailsReducer from "./slices/eventDetailSlice";
 import stagesTimelineReducer from "./slices/stagesTimelineSlice";
 import recentViewsReducer from "./slices/recentview.js";
-import teamDetailsReducer from './slices/teamdetails';
+import teamDetailsReducer from "./slices/teamdetails";
 import hostsReducer from "./slices/hostsSlice";
 import addCollaboratorReducer from "./slices/addCollaboratorSlice";
-import hostProfileReducer from "./slices/updatehostprofile.js"
+import hostProfileReducer from "./slices/updatehostprofile.js";
+import administratorsReducer from "./slices/administratorsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -88,7 +89,7 @@ export const store = configureStore({
     teamDetails: teamDetailsReducer,
     addCollaborator: addCollaboratorReducer,
     hostProfile: hostProfileReducer,
-
+    administrators: administratorsReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
 });
