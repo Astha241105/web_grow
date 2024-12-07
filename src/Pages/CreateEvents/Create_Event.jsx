@@ -61,68 +61,68 @@ const Create_Events = () => {
     setFormData((prev) => ({ ...prev, roomNames: newRoomNames }));
   };
 
-  const handleNextStep = () => {
-    const eventPayload = {
-      imageUrl:
-        imageUrl || "https://webgrowbucket.s3.ap-south-1.amazonaws.com/default",
-      title: eventData.opportunityTitle,
-      category: eventData.opportunityType,
-      description: eventData.aboutOpportunity,
-      location: eventData.organization,
-      mode: eventData.eventMode,
-      registerStart:
-        formData.registrationStartDate && formData.registrationStartTime
-          ? `${formData.registrationStartDate}T${formData.registrationStartTime}:00`
-          : null,
-      registerEnd:
-        formData.registrationEndDate && formData.registrationEndTime
-          ? `${formData.registrationEndDate}T${formData.registrationEndTime}:00`
-          : null,
-      startTime:
-        formData.EventStartDate && formData.EventStartTime
-          ? `${formData.EventStartDate}T${formData.EventStartTime}:00`
-          : null,
-      endTime:
-        formData.EventEndDate && formData.EventEndTime
-          ? `${formData.EventEndDate}T${formData.EventEndTime}:00`
-          : null,
-      capacityMax: formData.maxRegistrations,
-      capacityMin: formData.capacityMin,
-      festival: eventData.festival || null,
-      teamCreationAllowed: formData.participationType === "Team",
-      maxTeamSize: formData.maxTeamSize,
-      minTeamSize: formData.minTeamSize,
-    };
-
-    dispatch(createEventApi(eventPayload))
-      .then((response) => {
-        const eventId = response.payload.id;
-        console.log("Created Event ID:", eventId);
-        setCreatedEventId(eventId);
-        if (formData.roomNames.length > 0) {
-          const roomPayload = {
-            eventId: eventId,
-            roomNames: formData.roomNames,
-          };
-
-          console.log("Room Creation Payload:", roomPayload);
-
-          dispatch(createEventRooms(roomPayload))
-            .then((roomResponse) => {
-              console.log("Room Creation Response:", roomResponse);
-              setShowHostPrompt(true);
-            })
-            .catch((roomError) => {
-              console.error("Room creation failed", roomError);
-            });
-        } else {
-          setShowHostPrompt(true);
-        }
-      })
-      .catch((error) => {
-        console.error("Event creation failed", error);
-      });
+const handleNextStep = () => {
+  const eventPayload = {
+    imageUrl:
+      imageUrl || "https://webgrowbucket.s3.ap-south-1.amazonaws.com/default",
+    title: eventData.opportunityTitle,
+    category: eventData.opportunityType,
+    description: eventData.aboutOpportunity,
+    location: eventData.organization,
+    mode: eventData.eventMode,
+    registerStart:
+      formData.registrationStartDate && formData.registrationStartTime
+        ? `${formData.registrationStartDate}T${formData.registrationStartTime}:00`
+        : null,
+    registerEnd:
+      formData.registrationEndDate && formData.registrationEndTime
+        ? `${formData.registrationEndDate}T${formData.registrationEndTime}:00`
+        : null,
+    startTime:
+      formData.EventStartDate && formData.EventStartTime
+        ? `${formData.EventStartDate}T${formData.EventStartTime}:00`
+        : null,
+    endTime:
+      formData.EventEndDate && formData.EventEndTime
+        ? `${formData.EventEndDate}T${formData.EventEndTime}:00`
+        : null,
+    capacityMax: formData.maxRegistrations,
+    capacityMin: formData.capacityMin,
+    festival: eventData.festival || null,
+    teamCreationAllowed: formData.participationType === "Team",
+    maxTeamSize: formData.maxTeamSize,
+    minTeamSize: formData.minTeamSize,
   };
+
+  dispatch(createEventApi(eventPayload))
+    .then((response) => {
+      const eventId = response.payload.id;
+      console.log("Created Event ID:", eventId);
+      setCreatedEventId(eventId);
+
+      if (formData.roomNames && formData.roomNames.length > 0) {
+        const roomPayload = {
+          eventId: eventId,
+          roomNames: formData.roomNames,
+        };
+
+        console.log("Room Creation Payload:", roomPayload);
+
+        dispatch(createEventRooms(roomPayload))
+          .then(() => {
+            setShowSuccessModal(true); // Show success modal after room creation is successful
+          })
+          .catch((roomError) => {
+            console.error("Room creation failed", roomError);
+          });
+      } else {
+        setShowSuccessModal(true); // Show success modal if no rooms are to be created
+      }
+    })
+    .catch((error) => {
+      console.error("Event creation failed", error);
+    });
+};
 
   const handleResetAndClose = () => {
     dispatch(resetState());
