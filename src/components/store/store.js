@@ -84,8 +84,12 @@ export const store = configureStore({
     stagesTimeline: stagesTimelineReducer,
     recentViews: recentViewsReducer,
     hosts: hostsReducer,
+    teamDetails: teamDetailsReducer,
+    addCollaborator: addCollaboratorReducer,
+
   },
   devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;
+z
