@@ -18,15 +18,12 @@ const CreateEvents = () => {
 
   const [formData, setFormData] = useState({
     opportunityType: existingEventData.opportunityType || "",
-    visibility: existingEventData.visibility || "",
     opportunityTitle: existingEventData.opportunityTitle || "",
     organization: existingEventData.organization || "",
     websiteUrl: existingEventData.websiteUrl || "https://",
     festival: existingEventData.festival || "",
     eventMode: existingEventData.eventMode || "",
     aboutOpportunity: existingEventData.aboutOpportunity || "",
-    numberOfRooms: 0,
-    roomNames: [],
   });
 
   const urlInputRef = useRef(null);
@@ -59,6 +56,16 @@ const CreateEvents = () => {
     setIsEditable(true);
   };
 
+  const isFormValid = () => {
+    return (
+      formData.opportunityType !== "" &&
+      formData.opportunityTitle.trim() !== "" &&
+      formData.organization.trim() !== "" &&
+      formData.eventMode !== "" &&
+      formData.aboutOpportunity.trim() !== ""
+    );
+  };
+
   const handleNextStep = () => {
     console.log("Final formData before dispatch:", formData);
     dispatch(
@@ -81,7 +88,7 @@ const CreateEvents = () => {
         <div className="ce-progress-bar">
           <div className="ce-back-button">
             <img src="/back-btn.svg" className="ce-bbtn" alt="Back" />
-            <button className="ce-black">Back</button>
+            <button className="ce-black" onClick={() => navigate("/home-host")}>Back</button>
           </div>
           <div className="steps">
             <div className="step active">
@@ -137,45 +144,7 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Visibility*</label>
-            <div className="ce-button-group">
-              <button
-                className={`option-button ${
-                  formData.visibility === "public" ? "active" : ""
-                }`}
-                onClick={() =>
-                  setFormData((prev) => ({ ...prev, visibility: "public" }))
-                }
-              >
-                <img src="Globe.svg" alt="Public" />
-                <div>
-                  <div className="button-title">Open publicly</div>
-                  <div className="button-subtitle">
-                    Will be visible to all webgrow users
-                  </div>
-                </div>
-              </button>
-              <button
-                className={`option-button ${
-                  formData.visibility === "private" ? "active" : ""
-                }`}
-                onClick={() =>
-                  setFormData((prev) => ({ ...prev, visibility: "private" }))
-                }
-              >
-                <img src="Globe.svg" alt="Private" />
-                <div>
-                  <div className="button-title">Invite Only</div>
-                  <div className="button-subtitle">
-                    Will be accessible only via link
-                  </div>
-                </div>
-              </button>
-            </div>
-          </div>
-
-          <div className="ce-form-group">
-            <label>Opportunity Title*</label>
+            <label>Opportunity Title</label>
             <input
               type="text"
               name="opportunityTitle"
@@ -186,7 +155,7 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Enter Your Organisation*</label>
+            <label>Enter Your Organisation</label>
             <input
               type="text"
               name="organization"
@@ -212,7 +181,7 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Festival (optional)</label>
+            <label>Festival</label>
             <input
               type="text"
               name="festival"
@@ -223,7 +192,7 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Mode of Event*</label>
+            <label>Mode of Event</label>
             <div className="ce-button-group">
               <button
                 className={`option-button ${
@@ -250,7 +219,7 @@ const CreateEvents = () => {
             </div>
           </div>
           <div className="ce-form-group">
-            <label>About Opportunity*</label>
+            <label>About Opportunity</label>
             <textarea
               className="ce-guidelines pr-[6rem]"
               name="aboutOpportunity"
@@ -270,10 +239,10 @@ const CreateEvents = () => {
           </div>
 
           <div className="ce-form-actions">
-            <button
+          <button
               className="ce-next-button"
               onClick={handleNextStep}
-              disabled={loading}
+              disabled={!isFormValid() || loading}
             >
               Next
             </button>
