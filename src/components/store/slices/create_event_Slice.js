@@ -76,7 +76,7 @@ export const createEventApi = createAsyncThunk(
       });
 
       const response = await fetch(
-        "http://www.arthkambhoj.me:8080/api/events/create",
+        "https://arthkambhoj.me/api/events/create",
         {
           method: "POST",
           headers: {
