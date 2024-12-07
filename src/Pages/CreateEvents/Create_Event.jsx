@@ -448,7 +448,7 @@ const Create_Events = () => {
           </div>
 
           <div className="ce-form-group">
-            <label>Number of Registrations allowed (optional)</label>
+            <label>Number of Registrations allowed</label>
             <input
               type="number"
               placeholder="Enter count"

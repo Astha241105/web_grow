@@ -192,8 +192,7 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
                 onClick={handleProfile}
                 className="text-[#008080] font-semibold flex items-center"
               >
-                <img src="Prof.svg" className="w-7 h-7 mr-2" alt="profile" />
-                My Profile
+                Logout
               </a>
             </nav>
           </div>
