@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchEventDetails } from "../../components/store/slices/eventDetailSlice";
+import { fetchEventAdministrators } from "../../components/store/slices/administratorsSlice";
 import NavHost from "../Host/NavHost";
 import EventCard from "./components/EventCard";
 import InfoCard from "./components/InfoCard";
@@ -17,6 +18,20 @@ const Details = () => {
   const handleToggle = () => {
     setIsClicked((prev) => !prev);
   };
+
+  const {
+    administrators,
+    loading: administratorsLoading,
+    error: administratorsError,
+  } = useSelector((state) => state.administrators);
+
+  useEffect(() => {
+    if (eventId) {
+      dispatch(fetchEventDetails(eventId));
+      // Fetch administrators for the event
+      dispatch(fetchEventAdministrators(eventId));
+    }
+  }, [dispatch, eventId]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "Loading...";
@@ -47,12 +62,6 @@ const Details = () => {
   const deadlinesData = {
     title: "Registration deadline",
     date: formatDate(event?.registerEnd),
-  };
-
-  const contactData = {
-    name: "Anshika Gupta",
-    email: "an@gmail.com",
-    phone: "+91 9565656565",
   };
 
   useEffect(() => {
@@ -103,7 +112,11 @@ const Details = () => {
             eventId={eventId}
           />
           <TimelineCard type="Deadlines" data={deadlinesData} />
-          <TimelineCard type="Contact the organiser" data={contactData} />
+          <TimelineCard
+            type="Contact the organiser"
+            data={administrators}
+            eventId={eventId}
+          />
         </section>
       </section>
     </div>

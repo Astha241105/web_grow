@@ -6,6 +6,7 @@ import {
   deleteEvent,
 } from "../../components/store/slices/eventmanageSlice";
 import NavHost from "../Host/NavHost";
+import Loader from "./Loader";
 
 const Event_Manage = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ const Event_Manage = () => {
       },
     });
   };
+
+  const isLoading = loading || deleteStatus === "loading";
 
   const metrics = [
     {
@@ -324,7 +327,6 @@ const Event_Manage = () => {
                     e.stopPropagation();
                     if (!isPastEvent) handleDelete();
                   }}
-                  disabled={isPastEvent}
                 >
                   <img src="delete.svg" alt="Delete" />
                 </button>
@@ -353,29 +355,33 @@ const Event_Manage = () => {
           </h1>
         </div>
 
-        <div className="flex md:flex-row flex-col gap-2  mb-8">
+        <div className="flex md:flex-row flex-col gap-2 mb-8">
           {metrics.map((metric, index) => (
             <MetricCard key={index} {...metric} />
           ))}
         </div>
 
         <div className="space-y-4">
-          {loading && <p>Loading events...</p>}
-          {error && <p className="text-red-500">Error: {error}</p>}
-          {deleteStatus === "loading" && <p>Deleting event...</p>}
-          {deleteError && (
-            <p className="text-red-500">Delete Error: {deleteError}</p>
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <p className="text-red-500">Error: {error}</p>
+          ) : (
+            <>
+              {deleteStatus === "loading" && <p>Deleting event...</p>}
+              {deleteError && (
+                <p className="text-red-500">Delete Error: {deleteError}</p>
+              )}
+              {events.map((event) => (
+                <EventCard
+                  key={event.id}
+                  {...event}
+                  endTime={event.endTime}
+                  mode={event.mode}
+                />
+              ))}
+            </>
           )}
-          {!loading &&
-            !error &&
-            events.map((event) => (
-              <EventCard
-                key={event.id}
-                {...event}
-                endTime={event.endTime}
-                mode={event.mode}
-              />
-            ))}
         </div>
       </main>
     </div>

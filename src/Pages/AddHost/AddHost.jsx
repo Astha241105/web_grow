@@ -23,17 +23,7 @@ const TeamManagement = () => {
 
   const [loadingHostId, setLoadingHostId] = useState(null);
   const [localHosts, setLocalHosts] = useState([]);
-  const [collaborators, setCollaborators] = useState([
-    {
-      id: 1,
-      name: "Ansh Gupta",
-      role: "Assistant Professor",
-      institution: "IIT Delhi",
-      status: "connected",
-    },
-  ]);
-
-  // Initialize local hosts when hosts are fetched
+  const [collaborators, setCollaborators] = useState([]);
   useEffect(() => {
     dispatch(fetchHosts());
   }, [dispatch]);
