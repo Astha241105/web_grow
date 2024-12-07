@@ -142,7 +142,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/team",
-    element: <Teampage />,
+    element: (
+              <>
+              <Navregister></Navregister>
+              <Teampage /></>),
   },
   {
     path: "/",
