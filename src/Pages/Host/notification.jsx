@@ -7,19 +7,18 @@ import {
 
 const NotificationsDropdown = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
-  const { notifications, status } = useSelector(
-    (state) => state.eventNotifications
-  );
   const dropdownRef = useRef(null);
 
+  const { notifications = [], status } = useSelector(
+    (state) => state.eventNotifications
+  );
+
   useEffect(() => {
-    // Fetch notifications when dropdown opens
     if (isOpen) {
       dispatch(fetchEventNotifications({ page: 0, size: 5 }));
     }
   }, [isOpen, dispatch]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -63,9 +62,9 @@ const NotificationsDropdown = ({ isOpen, onClose }) => {
             <div
               key={notification.id}
               className={`
-                p-3 border-b hover:bg-gray-50 
-                ${notification.isRead ? "bg-gray-100" : "bg-white"}
-              `}
+          p-3 border-b hover:bg-gray-50 
+          ${notification.isRead ? "bg-gray-100" : "bg-white"}
+        `}
             >
               <div className="flex justify-between items-start">
                 <div>
