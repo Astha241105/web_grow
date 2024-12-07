@@ -126,7 +126,7 @@ const handleNextStep = () => {
 
   const handleResetAndClose = () => {
     dispatch(resetState());
-    dispatch(resetRoomState());
+  
     setShowSuccessModal(false);
     navigate("/event-manage");
   };
