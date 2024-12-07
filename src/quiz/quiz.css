@@ -117,6 +117,7 @@
   .selected1 {
     background: none;;
     background-color: #C8FAC8;
+    border:2px solid teal;
     
   }
   #quiz-previous-button{

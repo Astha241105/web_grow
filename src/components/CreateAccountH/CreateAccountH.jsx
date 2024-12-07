@@ -93,7 +93,7 @@ const CreateAccountH = () => {
         <div className="image-section">
           <img src="/create_account.svg" alt="logo" className="logo" />
           <a href="#" onClick={() => navigate("/")}>
-            <img src="home.svg" className="cn-home hidden md:block" alt="home" />
+            <img src="home.svg" className="cn-home hidden md:block" alt="home" onClick={() => navigate('/')}/>
           </a>
         </div>
         <div className="form-sec">

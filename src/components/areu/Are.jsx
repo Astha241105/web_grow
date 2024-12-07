@@ -29,7 +29,7 @@ const Areu = () => {
         alt="background"
       />
 
-      <img src="/home.svg" alt="cross" className="cross hidden md:block" />
+      <img src="/home.svg" alt="cross" className="cross hidden md:block"   onClick={() => navigate('/')}/>
       <img
         src="/bgMobile.png"
         className="block md:hidden white-bgMobile"
