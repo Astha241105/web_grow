@@ -5,10 +5,7 @@ import {
   createEventApi,
   resetState,
 } from "../../components/store/slices/create_event_Slice";
-import {
-  createEventRooms,
-  resetRoomState,
-} from "../../components/store/slices/createroomSlice";
+
 
 const Create_Events = () => {
   const dispatch = useDispatch();
@@ -33,8 +30,6 @@ const Create_Events = () => {
     registrationEndTime: eventData.registrationEndTime || "",
     capacityMin: 0,
     maxRegistrations: eventData.maxRegistrations || "",
-    roomCount: 0,
-    roomNames: [],
   });
 
   const [hostSelected, setHostSelected] = useState(false);
@@ -318,33 +313,7 @@ const Create_Events = () => {
               </>
             )}
           </div>
-          <div className="ce-form-group">
-            <label>Number of Rooms Available</label>
-            <input
-              type="number"
-              placeholder="Enter number of rooms"
-              name="roomsAvailable"
-              value={formData.roomsAvailable}
-              onChange={handleInputChange}
-              min="0"
-            />
-          </div>
 
-          {formData.roomsAvailable > 0 && (
-            <div className="ce-form-group">
-              <label>Room Names</label>
-              {formData.roomNames.map((roomName, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  placeholder={`Room ${index + 1} Name`}
-                  value={roomName}
-                  onChange={(e) => handleRoomNameChange(index, e.target.value)}
-                  className="mb-2"
-                />
-              ))}
-            </div>
-          )}
           <div className="ce-form-group">
             <label>Registration Start Date and Time</label>
             <div style={styles.inputContainer}>
