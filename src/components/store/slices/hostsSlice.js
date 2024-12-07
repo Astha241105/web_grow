@@ -22,7 +22,7 @@ export const fetchHosts = createAsyncThunk(
       const data = await response.json();
       return data.map((host) => ({
         id: host.id,
-        name: `${host.firstName} ${host.lastName}`,
+        name: `${host.firstname} ${host.lastname}`,
         role: host.designation,
         institution: host.organization || "N/A",
         imageUrl: host.imageUrl,

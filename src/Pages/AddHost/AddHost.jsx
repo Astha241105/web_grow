@@ -10,7 +10,6 @@ const TeamManagement = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  // Extract eventId from location state
   const { eventId, eventData } = location.state || {};
 
   const {
@@ -18,14 +17,12 @@ const TeamManagement = () => {
     loading: hostsLoading,
     error: hostsError,
   } = useSelector((state) => state.hosts);
-  const { loading: collaboratorLoading, error: collaboratorError } =
-    useSelector((state) => state.addCollaborator);
+  const { error: collaboratorError } = useSelector(
+    (state) => state.addCollaborator
+  );
 
-  useEffect(() => {
-    dispatch(fetchHosts());
-  }, [dispatch]);
-
-  // Existing collaborators (you may want to replace this with actual collaborators from API)
+  const [loadingHostId, setLoadingHostId] = useState(null);
+  const [localHosts, setLocalHosts] = useState([]);
   const [collaborators, setCollaborators] = useState([
     {
       id: 1,
@@ -34,36 +31,57 @@ const TeamManagement = () => {
       institution: "IIT Delhi",
       status: "connected",
     },
-    // ... other existing collaborators
   ]);
 
-  // Handler to add host as collaborator
+  // Initialize local hosts when hosts are fetched
+  useEffect(() => {
+    dispatch(fetchHosts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (hosts.length > 0) {
+      setLocalHosts(hosts);
+    }
+  }, [hosts]);
+
   const handleAddCollaborator = (hostId) => {
     if (eventId && hostId) {
+      // Set loading state for this specific host
+      setLoadingHostId(hostId);
+
       dispatch(addHostAsCollaborator({ eventId, hostId }))
         .then((response) => {
           if (
             response.type === "collaborators/addHostAsCollaborator/fulfilled"
           ) {
-            // Remove host from hosts list and add to collaborators
-            const hostToAdd = hosts.find(
+            const hostToAdd = localHosts.find(
               (host) => String(host.id) === String(hostId)
             );
+
             if (hostToAdd) {
+              // Add to collaborators
               setCollaborators((prev) => [
                 ...prev,
                 { ...hostToAdd, status: "connected" },
               ]);
+
+              // Remove from local hosts
+              setLocalHosts((prev) =>
+                prev.filter((host) => String(host.id) !== String(hostId))
+              );
             }
           }
         })
         .catch((error) => {
           console.error("Add collaborator error:", error);
+        })
+        .finally(() => {
+          // Remove loading state
+          setLoadingHostId(null);
         });
     }
   };
 
-  // Filter functions (remain the same)
   const filteredCollaborators = useMemo(() => {
     const searchLower = searchQuery.toLowerCase().trim();
     return collaborators.filter(
@@ -76,15 +94,14 @@ const TeamManagement = () => {
 
   const filteredHosts = useMemo(() => {
     const searchLower = searchQuery.toLowerCase().trim();
-    return hosts.filter(
+    return localHosts.filter(
       (host) =>
         host.name.toLowerCase().includes(searchLower) ||
         host.role.toLowerCase().includes(searchLower) ||
         host.institution.toLowerCase().includes(searchLower)
     );
-  }, [hosts, searchQuery]);
+  }, [localHosts, searchQuery]);
 
-  // Collaborator Card component (remains the same)
   const CollaboratorCard = ({ name, role, institution, status }) => (
     <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#000] mb-3">
       <div className="flex items-center">
@@ -98,7 +115,6 @@ const TeamManagement = () => {
     </div>
   );
 
-  // Host Card component
   const HostCard = ({ id, name, role, institution, imageUrl }) => (
     <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#000] mb-3">
       <div className="flex items-center">
@@ -119,22 +135,20 @@ const TeamManagement = () => {
       </div>
       <button
         onClick={() => handleAddCollaborator(id)}
-        disabled={collaboratorLoading}
+        disabled={loadingHostId === id}
         className="px-4 py-1 rounded-full text-sm border border-[#008080] text-[#008080] disabled:opacity-50"
       >
-        {collaboratorLoading ? "Adding..." : "Add Collaborator"}
+        {loadingHostId === id ? "Adding..." : "Add Collaborator"}
       </button>
     </div>
   );
 
-  // Render the component (remains the same)
   return (
     <div className="min-h-screen bg-white">
       <NavHost />
       <hr className="absolute w-[153%] left-0 top-[60px] border-b border-black border-[0px]" />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
-        {/* Event title display */}
         {eventData && (
           <div className="mb-4 text-xl font-semibold">
             Event: {eventData.title}
@@ -164,7 +178,6 @@ const TeamManagement = () => {
           </div>
         </div>
 
-        {/* Error handling for collaborator addition */}
         {collaboratorError && (
           <div className="text-red-500 mt-4">
             Error adding collaborator: {collaboratorError}

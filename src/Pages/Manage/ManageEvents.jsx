@@ -50,12 +50,25 @@ const Event_Manage = () => {
     </div>
   );
 
-  const handleParticipants = (id) => {
-    navigate("/view-participants", {
-      state: {
-        eventId: id,
-      },
-    });
+  const handleParticipants = (id, endTime, mode, tag) => {
+    console.log(
+      `Event Details - ID: ${id}, EndTime: ${endTime}, Mode: ${mode}, Tag: ${tag}`
+    );
+
+    const isPastEvent = endTime ? new Date(endTime) < new Date() : false;
+    if (isPastEvent && mode === "online" && tag === "Quiz") {
+      navigate("/quiz-scores", {
+        state: {
+          eventId: id,
+        },
+      });
+    } else {
+      navigate("/view-participants", {
+        state: {
+          eventId: id,
+        },
+      });
+    }
   };
 
   const EventCard = ({
@@ -133,6 +146,7 @@ const Event_Manage = () => {
             college,
             tag,
             date,
+            endTime,
             mode,
             imageUrl,
             ...event,
@@ -144,7 +158,6 @@ const Event_Manage = () => {
       ? "border border-gray-400 rounded-lg p-4 mb-4 bg-gray-100 text-gray-600"
       : "border border-[#000] rounded-lg p-4 mb-4 bg-white";
 
-    // Modify image styling for past events
     const imageClasses = isPastEvent
       ? "w-12 h-12 bg-gray-300 rounded overflow-hidden grayscale"
       : "w-12 h-12 bg-gray-200 rounded overflow-hidden";
@@ -228,7 +241,7 @@ const Event_Manage = () => {
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleParticipants(id);
+                  handleParticipants(id, endTime, mode, tag);
                 }}
               >
                 <img src="teams.svg" alt="View Participants" />
@@ -308,7 +321,12 @@ const Event_Manage = () => {
           {!loading &&
             !error &&
             events.map((event) => (
-              <EventCard key={event.id} {...event} mode={event.mode} />
+              <EventCard
+                key={event.id}
+                {...event}
+                endTime={event.endTime}
+                mode={event.mode}
+              />
             ))}
         </div>
       </main>
