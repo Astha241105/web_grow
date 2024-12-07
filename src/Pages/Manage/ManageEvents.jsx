@@ -101,6 +101,7 @@ const Event_Manage = () => {
         dispatch(deleteEvent(id));
       }
     };
+
     const handleCreateQuiz = (e) => {
       e.stopPropagation();
       navigate("/create-quiz", {
@@ -154,6 +155,17 @@ const Event_Manage = () => {
         },
       });
     };
+
+    // Tooltip component for hover text
+    const Tooltip = ({ text, children }) => (
+      <div className="relative group">
+        {children}
+        <div className="absolute z-10 p-2 -mt-2 text-sm text-white bg-black rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -left-10 top-full whitespace-nowrap">
+          {text}
+        </div>
+      </div>
+    );
+
     const cardClasses = isPastEvent
       ? "border border-gray-400 rounded-lg p-4 mb-4 bg-gray-100 text-gray-600"
       : "border border-[#000] rounded-lg p-4 mb-4 bg-white";
@@ -162,8 +174,16 @@ const Event_Manage = () => {
       ? "w-12 h-12 bg-gray-300 rounded overflow-hidden grayscale"
       : "w-12 h-12 bg-gray-200 rounded overflow-hidden";
 
+    const buttonClasses = (baseClasses) =>
+      isPastEvent
+        ? `${baseClasses} opacity-50 cursor-not-allowed`
+        : baseClasses;
+
     return (
-      <div className={cardClasses} onClick={handleCardClick}>
+      <div
+        className={cardClasses}
+        onClick={!isPastEvent ? handleCardClick : undefined}
+      >
         <div className="flex items-start justify-between">
           <div className="flex space-x-4">
             <div className={imageClasses}>
@@ -228,59 +248,87 @@ const Event_Manage = () => {
               </span>
             </div>
             <div className="flex space-x-2">
-              <button
-                className="p-1 hover:bg-gray-100 rounded"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleHost();
-                }}
-              >
-                <img src="addHost.svg" alt="Delete" />
-              </button>
-              <button
-                className="p-1 hover:bg-gray-100 rounded"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleParticipants(id, endTime, mode, tag);
-                }}
-              >
-                <img src="teams.svg" alt="View Participants" />
-              </button>
-              {mode === "online" && tag === "Quiz" && (
+              <Tooltip text="Manage Hosts">
                 <button
-                  className="p-1 hover:bg-gray-100 rounded"
-                  onClick={handleCreateQuiz}
+                  className={buttonClasses("p-1 hover:bg-gray-100 rounded")}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!isPastEvent) handleHost();
+                  }}
+                  disabled={isPastEvent}
                 >
-                  <img src="Quiz.svg" alt="Create Quiz" />
+                  <img src="addHost.svg" alt="Manage Hosts" />
                 </button>
+              </Tooltip>
+
+              <Tooltip
+                text={
+                  isPastEvent && mode === "online" && tag === "Quiz"
+                    ? "View Quiz Scores"
+                    : "View Participants"
+                }
+              >
+                <button
+                  className={buttonClasses("p-1 hover:bg-gray-100 rounded")}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleParticipants(id, endTime, mode, tag);
+                  }}
+                  disabled={
+                    isPastEvent && (mode !== "online" || tag !== "Quiz")
+                  }
+                >
+                  <img src="teams.svg" alt="Participants" />
+                </button>
+              </Tooltip>
+
+              {mode === "online" && tag === "Quiz" && (
+                <Tooltip text="Create Quiz">
+                  <button
+                    className={buttonClasses("p-1 hover:bg-gray-100 rounded")}
+                    onClick={!isPastEvent ? handleCreateQuiz : undefined}
+                    disabled={isPastEvent}
+                  >
+                    <img src="Quiz.svg" alt="Create Quiz" />
+                  </button>
+                </Tooltip>
               )}
-              <button
-                className="p-1 hover:bg-gray-100 rounded"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleEdit({
-                    id,
-                    title,
-                    college,
-                    tag,
-                    date,
-                    mode,
-                    imageUrl,
-                    ...event,
-                  });
-                }}
-              >
-                <img src="Pencil.svg" alt="Edit" />
-              </button>
-              <button
-                className="p-1 hover:bg-gray-100 rounded"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDelete();
-                }}
-              >
-                <img src="delete.svg" alt="Delete" />
-              </button>
+
+              <Tooltip text="Edit Event">
+                <button
+                  className={buttonClasses("p-1 hover:bg-gray-100 rounded")}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!isPastEvent)
+                      handleEdit({
+                        id,
+                        title,
+                        college,
+                        tag,
+                        date,
+                        mode,
+                        imageUrl,
+                        ...event,
+                      });
+                  }}
+                  disabled={isPastEvent}
+                >
+                  <img src="Pencil.svg" alt="Edit" />
+                </button>
+              </Tooltip>
+
+              <Tooltip text="Delete Event">
+                <button
+                  className={buttonClasses("p-1 hover:bg-gray-100 rounded")}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!isPastEvent) handleDelete();
+                  }}
+                  disabled={isPastEvent}
+                >
+                  <img src="delete.svg" alt="Delete" />
+                </button>
+              </Tooltip>
             </div>
           </div>
         </div>
