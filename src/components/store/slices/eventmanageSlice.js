@@ -4,14 +4,11 @@ export const fetchEvents = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     const token = localStorage.getItem("authToken");
     try {
-      const response = await fetch(
-        "https://arthkambhoj.me/api/events/list",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch("https://arthkambhoj.me/api/events/list", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || "Failed to fetch events");
@@ -26,6 +23,7 @@ export const fetchEvents = createAsyncThunk(
         impressions: item.data.impressions || 0,
         registrations: item.data.registrations || 0,
         imageUrl: item.data.imageUrl || "",
+        endTime: item.data.endTime,
       }));
     } catch (error) {
       return rejectWithValue(error.message);
