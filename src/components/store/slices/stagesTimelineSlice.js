@@ -3,18 +3,11 @@ export const postStagesData = createAsyncThunk(
   "stagesTimeline/postStagesData",
   async ({ eventId, stages }, { rejectWithValue }) => {
     try {
-      const transformedStages = stages.map((stage, index) => ({
-        day:
-          typeof stage.day === "string"
-            ? stage.day.replace("Day ", "") || index + 1
-            : stage.day || index + 1,
+      const entries = stages.map((stage, index) => ({
+        day: index + 1,
         description: stage.description,
       }));
-
-      console.log("Sending Stages Data:", {
-        eventId,
-        stages: transformedStages,
-      });
+      const token = localStorage.getItem("authToken");
 
       const response = await fetch(
         `https://arthkambhoj.me/api/events/${eventId}/timeline/bulk`,
@@ -22,24 +15,15 @@ export const postStagesData = createAsyncThunk(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: token ? `Bearer ${token}` : undefined,
           },
-          body: JSON.stringify({
-            entries: transformedStages,
-          }),
+          body: JSON.stringify({ entries }),
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to send data");
-      }
-
-      const data = await response.json();
-
-      console.log("API Response:", data);
-
-      return data;
+      console.log("API Response:", response);
     } catch (error) {
-      console.log("Error:", error.message);
+      console.log("Error:", error);
       return rejectWithValue(error.message);
     }
   }

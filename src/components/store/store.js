@@ -40,6 +40,8 @@ import stagesTimelineReducer from "./slices/stagesTimelineSlice";
 import recentViewsReducer from "./slices/recentview.js";
 import teamDetailsReducer from './slices/teamdetails';
 import hostsReducer from "./slices/hostsSlice";
+import addCollaboratorReducer from "./slices/addCollaboratorSlice";
+
 export const store = configureStore({
   reducer: {
     account: accountReducer,
@@ -82,7 +84,6 @@ export const store = configureStore({
     stagesTimeline: stagesTimelineReducer,
     recentViews: recentViewsReducer,
     hosts: hostsReducer,
-    teamDetails: teamDetailsReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
 });

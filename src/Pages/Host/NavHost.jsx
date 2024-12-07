@@ -48,7 +48,10 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
               <img src="down_arrow.svg" alt="down arrow" className="ml-1" />
             </a>
             {isMyEventsDropdownOpen && (
-              <div className="absolute bg-white shadow-lg p-4 mt-2 w-40">
+              <div
+                className="absolute bg-white shadow-lg p-4 mt-8 w-40 z-50"
+                style={{ top: "40%", right: "20%" }}
+              >
                 <a
                   href="#"
                   className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
@@ -132,58 +135,70 @@ const NavHost = ({ className = "", cameFromProfile = false }) => {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50">
             <nav className="flex flex-col p-4 space-y-4">
-              <a
-                href="#"
-                className="text-[#008080] font-semibold flex items-center"
-                onClick={toggleMyEventsDropdown}
-              >
-                <span className="flex-grow">My Events</span>
-                <img src="down_arrow.svg" alt="down arrow" className="ml-1" />
-              </a>
-              {isMyEventsDropdownOpen && (
-                <div className="absolute bg-white shadow-lg p-4 mt-2 w-40">
-                  <a
-                    href="#"
-                    className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
-                    onClick={handleCreateEvent}
-                  >
-                    Create Event
-                  </a>
-                  <a
-                    href="#"
-                    className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
-                    onClick={handleManageEvent}
-                  >
-                    Manage Events
-                  </a>
-                </div>
-              )}
-              <a
-                href="#"
-                className="text-[#008080] font-semibold flex items-center"
-              >
-                <span className="flex-grow">Manage</span>
-                <img src="down_arrow.svg" alt="down arrow" className="ml-1" />
-              </a>
-              <div className="relative">
+              {/* My Events Dropdown */}
+              <div>
+                <button
+                  className="text-[#008080] font-semibold flex justify-between items-center w-full"
+                  onClick={toggleMyEventsDropdown}
+                >
+                  <span>My Events</span>
+                  <img
+                    src="down_arrow.svg"
+                    alt="down arrow"
+                    className={`ml-2 transition-transform ${
+                      isMyEventsDropdownOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
+                </button>
+                {isMyEventsDropdownOpen && (
+                  <div className="ml-4 mt-2 space-y-2">
+                    <a
+                      href="#"
+                      className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
+                      onClick={handleCreateEvent}
+                    >
+                      Create Event
+                    </a>
+                    <a
+                      href="#"
+                      className="text-[#008080] block font-semibold hover:bg-gray-100 px-2 py-1"
+                      onClick={handleManageEvent}
+                    >
+                      Manage Events
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              {/* Notifications */}
+              <div>
                 <button
                   onClick={toggleNotifications}
-                  className="flex items-center"
+                  className="flex items-center justify-between w-full"
                 >
+                  <span className="text-[#008080] font-semibold">
+                    Notifications
+                  </span>
                   <img src="Notify.svg" alt="notifications" />
                 </button>
-                <NotificationsDropdown
-                  isOpen={isNotificationsOpen}
-                  onClose={() => setIsNotificationsOpen(false)}
-                />
+                {isNotificationsOpen && (
+                  <div className="ml-4 mt-2">
+                    <NotificationsDropdown
+                      isOpen={isNotificationsOpen}
+                      onClose={() => setIsNotificationsOpen(false)}
+                    />
+                  </div>
+                )}
               </div>
+
+              {/* Profile */}
               <a
                 href="#"
                 onClick={handleProfile}
                 className="text-[#008080] font-semibold flex items-center"
               >
                 <img src="Prof.svg" className="w-7 h-7 mr-2" alt="profile" />
-                <span>My Profile</span>
+                My Profile
               </a>
             </nav>
           </div>

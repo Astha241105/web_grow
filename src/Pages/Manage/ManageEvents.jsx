@@ -34,22 +34,6 @@ const Event_Manage = () => {
       bgColor: "bg-[#B72A7E]",
       textColor: "text-white",
     },
-    {
-      label: "Total Impressions",
-      value: events
-        .reduce((total, event) => total + (event.impressions || 0), 0)
-        .toString(),
-      bgColor: "bg-[#26A69A]",
-      textColor: "text-white",
-    },
-    {
-      label: "Total Registrations",
-      value: events
-        .reduce((total, event) => total + (event.registrations || 0), 0)
-        .toString(),
-      bgColor: "bg-[#7E57C2]",
-      textColor: "text-white",
-    },
   ];
 
   const MetricCard = ({ label, value, bgColor, textColor }) => (
@@ -58,12 +42,6 @@ const Event_Manage = () => {
     >
       <div className="w-6 h-6 flex">
         {label === "Total Events" && <img src="GG.svg" alt="Events" />}
-        {label === "Total Impressions" && (
-          <img src="star.svg" alt="Impressions" />
-        )}
-        {label === "Total Registrations" && (
-          <img src="notes.svg" alt="Registrations" />
-        )}
       </div>
       <div className="flex gap-[10px]">
         <div className="text-lg font-semibold">{label}</div>
@@ -72,8 +50,12 @@ const Event_Manage = () => {
     </div>
   );
 
-  const handleRoom = () => {
-    navigate("/room-allocate");
+  const handleParticipants = (id) => {
+    navigate("/view-participants", {
+      state: {
+        eventId: id,
+      },
+    });
   };
 
   const EventCard = ({
@@ -81,6 +63,7 @@ const Event_Manage = () => {
     title,
     college,
     tag,
+    endTime,
     date,
     mode,
     imageUrl,
@@ -94,6 +77,8 @@ const Event_Manage = () => {
       year: "numeric",
     });
 
+    const isPastEvent = endTime ? new Date(endTime) < new Date() : false;
+
     const handleDelete = () => {
       console.log("Event ID to delete:", id);
       const confirmDelete = window.confirm(
@@ -106,6 +91,23 @@ const Event_Manage = () => {
     const handleCreateQuiz = (e) => {
       e.stopPropagation();
       navigate("/create-quiz", {
+        state: {
+          eventId: id,
+          eventData: {
+            id,
+            title,
+            college,
+            tag,
+            date,
+            mode,
+            ...event,
+          },
+        },
+      });
+    };
+
+    const handleHost = () => {
+      navigate("/host-manage", {
         state: {
           eventId: id,
           eventData: {
@@ -138,15 +140,20 @@ const Event_Manage = () => {
         },
       });
     };
+    const cardClasses = isPastEvent
+      ? "border border-gray-400 rounded-lg p-4 mb-4 bg-gray-100 text-gray-600"
+      : "border border-[#000] rounded-lg p-4 mb-4 bg-white";
+
+    // Modify image styling for past events
+    const imageClasses = isPastEvent
+      ? "w-12 h-12 bg-gray-300 rounded overflow-hidden grayscale"
+      : "w-12 h-12 bg-gray-200 rounded overflow-hidden";
 
     return (
-      <div
-        className="border border-[#000] rounded-lg p-4 mb-4 bg-white"
-        onClick={handleCardClick}
-      >
+      <div className={cardClasses} onClick={handleCardClick}>
         <div className="flex items-start justify-between">
           <div className="flex space-x-4">
-            <div className="w-12 h-12 bg-gray-200 rounded overflow-hidden">
+            <div className={imageClasses}>
               {imageUrl ? (
                 <img
                   src={imageUrl}
@@ -158,19 +165,52 @@ const Event_Manage = () => {
               )}
             </div>
             <div>
-              <h3 className="font-semibold">{title}</h3>
-              <p className="text-sm text-[#000] font-medium">{college}</p>
-              <span className="inline-block px-3 py-1 text-sm bg-white border border-black rounded-full mt-1 font-medium">
+              <h3
+                className={`font-semibold ${
+                  isPastEvent ? "text-gray-500" : ""
+                }`}
+              >
+                {title}
+                {isPastEvent && (
+                  <span className="ml-2 text-xs text-gray-400">
+                    (Past Event)
+                  </span>
+                )}
+              </h3>
+              <p
+                className={`text-sm font-medium ${
+                  isPastEvent ? "text-gray-500" : "text-[#000]"
+                }`}
+              >
+                {college}
+              </p>
+              <span
+                className={`inline-block px-3 py-1 text-sm border rounded-full mt-1 font-medium ${
+                  isPastEvent
+                    ? "bg-gray-200 border-gray-300 text-gray-500"
+                    : "bg-white border-black"
+                }`}
+              >
                 {tag}
               </span>
             </div>
           </div>
           <div className="flex flex-col items-end space-y-2">
             <div className="flex items-center space-x-2">
-              <div className="px-2 py-1 rounded-full text-xs font-medium bg-white border border-black">
+              <div
+                className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  isPastEvent
+                    ? "bg-gray-200 border-gray-300 text-gray-500"
+                    : "bg-white border-black"
+                }`}
+              >
                 {mode || "Not Available"}
               </div>
-              <span className="text-sm text-[#000] font-medium">
+              <span
+                className={`text-sm font-medium ${
+                  isPastEvent ? "text-gray-500" : "text-[#000]"
+                }`}
+              >
                 {formattedDate}
               </span>
             </div>
@@ -179,17 +219,26 @@ const Event_Manage = () => {
                 className="p-1 hover:bg-gray-100 rounded"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleRoom();
+                  handleHost();
                 }}
               >
-                <img src="door.svg" alt="Edit" />
+                <img src="addHost.svg" alt="Delete" />
+              </button>
+              <button
+                className="p-1 hover:bg-gray-100 rounded"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleParticipants(id);
+                }}
+              >
+                <img src="teams.svg" alt="View Participants" />
               </button>
               {mode === "online" && tag === "Quiz" && (
                 <button
                   className="p-1 hover:bg-gray-100 rounded"
                   onClick={handleCreateQuiz}
                 >
-                  <img src="pen.svg" alt="Create Quiz" />
+                  <img src="Quiz.svg" alt="Create Quiz" />
                 </button>
               )}
               <button
