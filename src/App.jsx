@@ -37,6 +37,7 @@ import Leaderboard from "./quiz/leaderboard/leaderboard.jsx";
 import NavbarSwitcher from "./component-2/navswitch.jsx";
 import Pastevents from "./participant-profile/pastevents/past.jsx";
 import Registered1 from "./participant-profile/pastevents/register1.jsx";
+import EditHostProfile from "./Pages/Profile/updatehostprofile.jsx"
 import "./index.css";
 import "./App.css";
 import {
@@ -146,6 +147,13 @@ const router = createBrowserRouter([
               <>
               <Navregister></Navregister>
               <Teampage /></>),
+  },
+  {
+    path: "/host-edit-profile",
+    element: (
+              <>
+              <ResponsiveNav2/>
+              <EditHostProfile/></>),
   },
   {
     path: "/",

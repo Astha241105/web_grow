@@ -41,6 +41,7 @@ import recentViewsReducer from "./slices/recentview.js";
 import teamDetailsReducer from './slices/teamdetails';
 import hostsReducer from "./slices/hostsSlice";
 import addCollaboratorReducer from "./slices/addCollaboratorSlice";
+import hostProfileReducer from "./slices/updatehostprofile.js"
 
 export const store = configureStore({
   reducer: {
@@ -86,6 +87,7 @@ export const store = configureStore({
     hosts: hostsReducer,
     teamDetails: teamDetailsReducer,
     addCollaborator: addCollaboratorReducer,
+    hostProfile: hostProfileReducer,
 
   },
   devTools: process.env.NODE_ENV !== "production",

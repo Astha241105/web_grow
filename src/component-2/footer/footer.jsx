@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-4">
-            <img src="Web.svg" alt="WebGrow Logo" className="h-8 md:h-10" />
+            <img src="/logo.svg" alt="WebGrow Logo" style={{height:"100px",width:"300px"}}className="h-8 md:h-10" />
           </div>
 
           <div className="md:col-span-4">
