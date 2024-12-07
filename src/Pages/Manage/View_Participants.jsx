@@ -84,9 +84,7 @@ const View_participants = () => {
         )}
 
         {status === "failed" && (
-          <div className="text-center text-red-500">
-            Error loading participants: {error?.message || "Unknown error"}
-          </div>
+          <div className="text-center text-red-500">No Participant</div>
         )}
 
         {status === "succeeded" && (
