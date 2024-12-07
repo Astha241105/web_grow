@@ -66,21 +66,9 @@ const CreatePassP = () => {
         role,
       })
     )
-      .then((response) => {
-       
-        if (response?.status === "SUCCESS") {
-          navigate("/otpWithMail"); 
-        } else {
-     
-          const errorMessage = response?.data?.message || "Failed to register. Try again.";
-          toast.error(errorMessage);
-        }
-      })
-      .catch((error) => {
-   
-        const errorMessage = error.response?.data?.message || "Failed to register. Try again.";
-        toast.error(errorMessage);
-      });
+    .then(() => {
+      navigate("/otpWithMail");
+        } );
     
   };
 

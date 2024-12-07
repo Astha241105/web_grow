@@ -80,25 +80,15 @@ const CreatePass = () => {
     };
 
     dispatch(updateHostDetails(updatedHostDetails));
-
-    try {
-    
-      const response = dispatch(registerHost(updatedHostDetails)).unwrap();
-
-      if (response?.status !== 'SUCCESS') {
-        toast.error(`Error: ${response?.message || 'Registration failed'}`);
-        setIsSubmitting(false); 
-        return; 
-      }
-
+    dispatch(registerHost(updatedHostDetails))
+    .then(() => {
       navigate("/otp-host");
-  
-    } catch (error) {
-      
-      const errorMessage = error?.message || 'Something went wrong';
-      toast.error(`Error: ${errorMessage}`);
-
-      setIsSubmitting(false);}
+    })
+    .catch((error) => {
+      // Handle errors from the API call
+      toast.error(`Error: ${error.response?.data?.message || "Something went wrong"}`);
+      setIsSubmitting(false);
+    });
   };
 
   return (
